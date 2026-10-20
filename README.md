@@ -191,6 +191,14 @@ Both household flows and full cash movements must reconcile before outputs pass.
 - `comparison.csv` / `comparison.json`: scenario KPIs and shared input hash.
 - `discussion.md`: computed comparisons and limitations, without forced improvement.
 - `charts/*.png` / `*.svg`: P2P, grid/aggregator, costs, fund, storage/surplus and SOC.
+  Additional views show hourly PV/demand and P2P, surplus destinations, household
+  cost distributions, regulation differences, battery flows and transaction prices.
+  `charts/data/*.csv` contains the exact data behind these additional charts.
+  Surplus destinations include deferred battery charging for E/F; their stacked
+  totals equal the surplus offered before P2P. Regulation differences are shown
+  only when both members of a scenario pair were run. Household box plots show
+  medians/quartiles with 1.5-IQR whiskers. Transaction prices exclude rewards.
+  Regenerate every chart with `python main.py --include-priority`.
 - Each scenario folder contains `summary.json`, `household_hourly.csv`,
   `household_costs.csv`, `community_hourly.csv`, `transactions.csv`,
   `cash_ledger.csv`, `regulator_hourly.csv`, `reward_reservations.json`, and

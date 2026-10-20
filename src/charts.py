@@ -133,3 +133,6 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
         axis.set_xticks(sorted({0, len(hours) - 1, *range(4, len(hours), 4)}))
         fig.colorbar(image, ax=axis, label="SOC (fraction of nominal capacity)")
         save(fig, "battery_soc")
+
+    from src.result_charts import generate_additional_charts
+    generate_additional_charts(results, directory, plt, save, COLORS)

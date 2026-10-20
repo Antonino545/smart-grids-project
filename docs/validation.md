@@ -40,3 +40,13 @@ The six PNG chart sets were rendered and visually inspected. Aggregator volumes 
 The project was exercised on Python 3.14.7. Python 3.11+ compatibility follows the language features and dependency ranges, but other Python versions were not executed here. Synthetic profiles are illustrative and are not calibrated to a real community.
 
 The presentation and ZIP packaging are deferred at the user's request. No archive is included and no files have been submitted.
+
+## Additional result charts
+
+The extended suite passed **55 tests in 8.64 seconds** after adding six further
+chart types: hourly profiles, surplus destinations, household cost distributions,
+regulation differences, battery energy flows and internal transaction prices.
+All six were rendered and visually inspected. Their source data is exported under
+`results/charts/data/`. Checks reconcile plotted surplus components with available
+surplus, household cost totals with the ledger and battery flows with inventory
+changes. A new six-scenario execution preserved the original numerical outcomes.
