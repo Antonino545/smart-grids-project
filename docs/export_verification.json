@@ -1,0 +1,38 @@
+{
+  "A": {
+    "hours": 24,
+    "internal_trades": 57,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+  },
+  "B": {
+    "hours": 24,
+    "internal_trades": 86,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+  },
+  "C": {
+    "hours": 24,
+    "internal_trades": 82,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+  },
+  "D": {
+    "hours": 24,
+    "internal_trades": 132,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+  },
+  "E": {
+    "hours": 24,
+    "internal_trades": 68,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+  },
+  "F": {
+    "hours": 24,
+    "internal_trades": 111,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+  }
+}

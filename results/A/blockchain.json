@@ -1,0 +1,825 @@
+{
+  "blocks": [
+    {
+      "hash": "000d54b025b18a83aec05d22df8065d36c4cfd5b768a7dce3dc29b0331d24fb8",
+      "hour": 0,
+      "miner_id": "miner-07",
+      "nonce": 2196,
+      "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "timestamp": "2026-06-15T00:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000d611d6329c62caecad488efb14eb0b7a8045e05adbd1f3677d3a797c6475e",
+      "hour": 1,
+      "miner_id": "miner-06",
+      "nonce": 515,
+      "previous_hash": "000d54b025b18a83aec05d22df8065d36c4cfd5b768a7dce3dc29b0331d24fb8",
+      "timestamp": "2026-06-15T01:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000abf81a773f7438a942f6d26f3d578b1254fb641094cfd13fc67a7724a6b4f",
+      "hour": 2,
+      "miner_id": "miner-02",
+      "nonce": 3781,
+      "previous_hash": "000d611d6329c62caecad488efb14eb0b7a8045e05adbd1f3677d3a797c6475e",
+      "timestamp": "2026-06-15T02:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000dac0b63e2bb990212d3e4ebb50913bed55cc86e52a91e5ca2e41215623c28",
+      "hour": 3,
+      "miner_id": "miner-10",
+      "nonce": 1799,
+      "previous_hash": "000abf81a773f7438a942f6d26f3d578b1254fb641094cfd13fc67a7724a6b4f",
+      "timestamp": "2026-06-15T03:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "0004db527249b2d7388baefee2b4a75bd72907fec7eda573c81bdf194ca8a8a6",
+      "hour": 4,
+      "miner_id": "miner-09",
+      "nonce": 5828,
+      "previous_hash": "000dac0b63e2bb990212d3e4ebb50913bed55cc86e52a91e5ca2e41215623c28",
+      "timestamp": "2026-06-15T04:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000861d6945e0d686fa20e4bf86b62d8682885abdcbdc8b4afbe5cbc7a0ffb76",
+      "hour": 5,
+      "miner_id": "miner-06",
+      "nonce": 145,
+      "previous_hash": "0004db527249b2d7388baefee2b4a75bd72907fec7eda573c81bdf194ca8a8a6",
+      "timestamp": "2026-06-15T05:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "0009eccff4eeec47aa8091f5df80be40a61bd741698e33db94cb14ea08951daa",
+      "hour": 6,
+      "miner_id": "miner-02",
+      "nonce": 5621,
+      "previous_hash": "000861d6945e0d686fa20e4bf86b62d8682885abdcbdc8b4afbe5cbc7a0ffb76",
+      "timestamp": "2026-06-15T06:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000aa2feb1779cee9fc0a2afad99aefb8b89545b906a75d9f9a3702851ce23a8",
+      "hour": 7,
+      "miner_id": "miner-01",
+      "nonce": 3610,
+      "previous_hash": "0009eccff4eeec47aa8091f5df80be40a61bd741698e33db94cb14ea08951daa",
+      "timestamp": "2026-06-15T07:00:00+02:00",
+      "transactions": [
+        {
+          "buyer_id": "H022",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.12623524158509875,
+          "quantity_kwh": 0.37054661863765437,
+          "reward_eur": 0.0,
+          "seller_id": "H028",
+          "transaction_id": "p2p-007-00000"
+        },
+        {
+          "buyer_id": "H054",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.1279727895581393,
+          "quantity_kwh": 0.39427873813152725,
+          "reward_eur": 0.0,
+          "seller_id": "H058",
+          "transaction_id": "p2p-007-00001"
+        },
+        {
+          "buyer_id": "H059",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.1279727895581393,
+          "quantity_kwh": 0.03957878449098812,
+          "reward_eur": 0.0,
+          "seller_id": "H058",
+          "transaction_id": "p2p-007-00002"
+        },
+        {
+          "buyer_id": "H059",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.13525971358988811,
+          "quantity_kwh": 0.07672632496842663,
+          "reward_eur": 0.0,
+          "seller_id": "H060",
+          "transaction_id": "p2p-007-00003"
+        },
+        {
+          "buyer_id": "H072",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.12300797716373452,
+          "quantity_kwh": 0.12642025683084468,
+          "reward_eur": 0.0,
+          "seller_id": "H077",
+          "transaction_id": "p2p-007-00004"
+        },
+        {
+          "buyer_id": "H085",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.12159824336213397,
+          "quantity_kwh": 0.17431014119214328,
+          "reward_eur": 0.0,
+          "seller_id": "H090",
+          "transaction_id": "p2p-007-00005"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 7,
+          "market": "aggregator",
+          "price_eur_kwh": 0.13935385926997418,
+          "quantity_kwh": 0.06848490376626853,
+          "reward_eur": 0.0,
+          "seller_id": "H060",
+          "transaction_id": "agg-007-00000"
+        }
+      ]
+    },
+    {
+      "hash": "0002ae007635bc64bed8a2095ac7b45253ea206457f074820136dd5b1a570f4e",
+      "hour": 8,
+      "miner_id": "miner-08",
+      "nonce": 2727,
+      "previous_hash": "000aa2feb1779cee9fc0a2afad99aefb8b89545b906a75d9f9a3702851ce23a8",
+      "timestamp": "2026-06-15T08:00:00+02:00",
+      "transactions": [
+        {
+          "buyer_id": "H005",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12684034026425753,
+          "quantity_kwh": 0.12878912215439597,
+          "reward_eur": 0.0,
+          "seller_id": "H007",
+          "transaction_id": "p2p-008-00000"
+        },
+        {
+          "buyer_id": "H005",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12613350352441094,
+          "quantity_kwh": 0.251913900173654,
+          "reward_eur": 0.0,
+          "seller_id": "H010",
+          "transaction_id": "p2p-008-00001"
+        },
+        {
+          "buyer_id": "H014",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.1251444166376259,
+          "quantity_kwh": 0.04338301421891044,
+          "reward_eur": 0.0,
+          "seller_id": "H020",
+          "transaction_id": "p2p-008-00002"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.1251444166376259,
+          "quantity_kwh": 0.21094906119579981,
+          "reward_eur": 0.0,
+          "seller_id": "H020",
+          "transaction_id": "p2p-008-00003"
+        },
+        {
+          "buyer_id": "H017",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.1251444166376259,
+          "quantity_kwh": 0.2420827449080606,
+          "reward_eur": 0.0,
+          "seller_id": "H020",
+          "transaction_id": "p2p-008-00004"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12836995706774007,
+          "quantity_kwh": 0.29199363678212953,
+          "reward_eur": 0.0,
+          "seller_id": "H025",
+          "transaction_id": "p2p-008-00005"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12538186447128186,
+          "quantity_kwh": 0.29840200922557225,
+          "reward_eur": 0.0,
+          "seller_id": "H028",
+          "transaction_id": "p2p-008-00006"
+        },
+        {
+          "buyer_id": "H032",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.13715974870815015,
+          "quantity_kwh": 0.17880024739327127,
+          "reward_eur": 0.0,
+          "seller_id": "H033",
+          "transaction_id": "p2p-008-00007"
+        },
+        {
+          "buyer_id": "H062",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.11629363892793414,
+          "quantity_kwh": 0.037172387995758394,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "p2p-008-00008"
+        },
+        {
+          "buyer_id": "H072",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12085828326556197,
+          "quantity_kwh": 0.01647695263416704,
+          "reward_eur": 0.0,
+          "seller_id": "H078",
+          "transaction_id": "p2p-008-00009"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 8,
+          "market": "aggregator",
+          "price_eur_kwh": 0.12098836032524457,
+          "quantity_kwh": 0.09910723551903511,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
+          "transaction_id": "agg-008-00000"
+        },
+        {
+          "buyer_id": "H012",
+          "hour": 8,
+          "market": "aggregator",
+          "price_eur_kwh": 0.11973625422684098,
+          "quantity_kwh": 0.307819068270865,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
+          "transaction_id": "agg-008-00001"
+        },
+        {
+          "buyer_id": "H012",
+          "hour": 8,
+          "market": "aggregator",
+          "price_eur_kwh": 0.12043701437483113,
+          "quantity_kwh": 0.0002616250062800196,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "agg-008-00002"
+        },
+        {
+          "buyer_id": "H057",
+          "hour": 8,
+          "market": "aggregator",
+          "price_eur_kwh": 0.11868467224121365,
+          "quantity_kwh": 0.3310409689253955,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "agg-008-00003"
+        },
+        {
+          "buyer_id": "H098",
+          "hour": 8,
+          "market": "aggregator",
+          "price_eur_kwh": 0.11853468669385263,
+          "quantity_kwh": 0.06012876904086206,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "agg-008-00004"
+        },
+        {
+          "buyer_id": "H074",
+          "hour": 8,
+          "market": "aggregator",
+          "price_eur_kwh": 0.11694820679182542,
+          "quantity_kwh": 0.05404117005156617,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "agg-008-00005"
+        }
+      ]
+    },
+    {
+      "hash": "0009347d5c349de31d88d2af60a02168475f817381b0045d49860d275bd4cb35",
+      "hour": 9,
+      "miner_id": "miner-09",
+      "nonce": 1098,
+      "previous_hash": "0002ae007635bc64bed8a2095ac7b45253ea206457f074820136dd5b1a570f4e",
+      "timestamp": "2026-06-15T09:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "00052af2a9a5a8b1e76bade77bb39f0ce581d0d9d13376bdc2c27ca4d449d586",
+      "hour": 10,
+      "miner_id": "miner-09",
+      "nonce": 3338,
+      "previous_hash": "0009347d5c349de31d88d2af60a02168475f817381b0045d49860d275bd4cb35",
+      "timestamp": "2026-06-15T10:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000c9e87c193e8842b5faed728e790b9a9687da25fe7e79f9b7f32d692d55f39",
+      "hour": 11,
+      "miner_id": "miner-07",
+      "nonce": 13596,
+      "previous_hash": "00052af2a9a5a8b1e76bade77bb39f0ce581d0d9d13376bdc2c27ca4d449d586",
+      "timestamp": "2026-06-15T11:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000b4fd95a838198deb9072e6944711a91ae3e03a368db21ea4cfbb1a4a40c32",
+      "hour": 12,
+      "miner_id": "miner-08",
+      "nonce": 287,
+      "previous_hash": "000c9e87c193e8842b5faed728e790b9a9687da25fe7e79f9b7f32d692d55f39",
+      "timestamp": "2026-06-15T12:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "0006619d3a1e2c56542d8cbd3c4e2d4bdc68cf8ada3d16bae9d1a82cd24c356c",
+      "hour": 13,
+      "miner_id": "miner-02",
+      "nonce": 6561,
+      "previous_hash": "000b4fd95a838198deb9072e6944711a91ae3e03a368db21ea4cfbb1a4a40c32",
+      "timestamp": "2026-06-15T13:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000bf9b8349b5a773ddf5b3c9d19947ff6ae14ffa5ab83803274fb1932083412",
+      "hour": 14,
+      "miner_id": "miner-01",
+      "nonce": 530,
+      "previous_hash": "0006619d3a1e2c56542d8cbd3c4e2d4bdc68cf8ada3d16bae9d1a82cd24c356c",
+      "timestamp": "2026-06-15T14:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000ac8fce4a98b957733e0a90c183b5b0996ed877f07916775572e4dae40576f",
+      "hour": 15,
+      "miner_id": "miner-01",
+      "nonce": 990,
+      "previous_hash": "000bf9b8349b5a773ddf5b3c9d19947ff6ae14ffa5ab83803274fb1932083412",
+      "timestamp": "2026-06-15T15:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "000fd8072ac3b1740124311e480235114c720e96136105ace81b774b910d601a",
+      "hour": 16,
+      "miner_id": "miner-01",
+      "nonce": 3660,
+      "previous_hash": "000ac8fce4a98b957733e0a90c183b5b0996ed877f07916775572e4dae40576f",
+      "timestamp": "2026-06-15T16:00:00+02:00",
+      "transactions": [
+        {
+          "buyer_id": "H013",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.1944127727052367,
+          "quantity_kwh": 0.07097597279998391,
+          "reward_eur": 0.0,
+          "seller_id": "H020",
+          "transaction_id": "p2p-016-00000"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.1779096508691632,
+          "quantity_kwh": 0.09797042911999676,
+          "reward_eur": 0.0,
+          "seller_id": "H054",
+          "transaction_id": "p2p-016-00001"
+        }
+      ]
+    },
+    {
+      "hash": "000b50fd5d44e8ed57e16a7fb5c025496e7e1b40068a6747bfffcbd442f2dc6a",
+      "hour": 17,
+      "miner_id": "miner-01",
+      "nonce": 4990,
+      "previous_hash": "000fd8072ac3b1740124311e480235114c720e96136105ace81b774b910d601a",
+      "timestamp": "2026-06-15T17:00:00+02:00",
+      "transactions": [
+        {
+          "buyer_id": "H013",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.2017036202389814,
+          "quantity_kwh": 0.7017853343817415,
+          "reward_eur": 0.0,
+          "seller_id": "H020",
+          "transaction_id": "p2p-017-00000"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.20208633078215318,
+          "quantity_kwh": 1.0347308684683123,
+          "reward_eur": 0.0,
+          "seller_id": "H028",
+          "transaction_id": "p2p-017-00001"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.1845816000483226,
+          "quantity_kwh": 0.4471836323204812,
+          "reward_eur": 0.0,
+          "seller_id": "H054",
+          "transaction_id": "p2p-017-00002"
+        },
+        {
+          "buyer_id": "H098",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.19183927549329516,
+          "quantity_kwh": 0.01499883840894567,
+          "reward_eur": 0.0,
+          "seller_id": "H096",
+          "transaction_id": "p2p-017-00003"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 17,
+          "market": "aggregator",
+          "price_eur_kwh": 0.19315242714531045,
+          "quantity_kwh": 0.57020181472902,
+          "reward_eur": 0.0,
+          "seller_id": "H063",
+          "transaction_id": "agg-017-00000"
+        }
+      ]
+    },
+    {
+      "hash": "000a41aeb68203c8cc9a88952f55a480b087ac28fbf3d5b3890a14400279ce4b",
+      "hour": 18,
+      "miner_id": "miner-05",
+      "nonce": 10864,
+      "previous_hash": "000b50fd5d44e8ed57e16a7fb5c025496e7e1b40068a6747bfffcbd442f2dc6a",
+      "timestamp": "2026-06-15T18:00:00+02:00",
+      "transactions": [
+        {
+          "buyer_id": "H006",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.19625701783788735,
+          "quantity_kwh": 0.12106263703970754,
+          "reward_eur": 0.0,
+          "seller_id": "H001",
+          "transaction_id": "p2p-018-00000"
+        },
+        {
+          "buyer_id": "H008",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.19625701783788735,
+          "quantity_kwh": 0.11098486890490211,
+          "reward_eur": 0.0,
+          "seller_id": "H001",
+          "transaction_id": "p2p-018-00001"
+        },
+        {
+          "buyer_id": "H008",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.21354226677547544,
+          "quantity_kwh": 0.24863058965682583,
+          "reward_eur": 0.0,
+          "seller_id": "H010",
+          "transaction_id": "p2p-018-00002"
+        },
+        {
+          "buyer_id": "H017",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2362800425007567,
+          "quantity_kwh": 0.14724406154312575,
+          "reward_eur": 0.0,
+          "seller_id": "H019",
+          "transaction_id": "p2p-018-00003"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2362800425007567,
+          "quantity_kwh": 0.5209986167334447,
+          "reward_eur": 0.0,
+          "seller_id": "H019",
+          "transaction_id": "p2p-018-00004"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.21186775643571393,
+          "quantity_kwh": 0.03141228095797932,
+          "reward_eur": 0.0,
+          "seller_id": "H020",
+          "transaction_id": "p2p-018-00005"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2122697523148659,
+          "quantity_kwh": 0.6153716919569803,
+          "reward_eur": 0.0,
+          "seller_id": "H028",
+          "transaction_id": "p2p-018-00006"
+        },
+        {
+          "buyer_id": "H047",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.19451075853574518,
+          "quantity_kwh": 0.24761583339610826,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
+          "transaction_id": "p2p-018-00007"
+        },
+        {
+          "buyer_id": "H047",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2042533074555331,
+          "quantity_kwh": 0.4302126788294731,
+          "reward_eur": 0.0,
+          "seller_id": "H043",
+          "transaction_id": "p2p-018-00008"
+        },
+        {
+          "buyer_id": "H050",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2042533074555331,
+          "quantity_kwh": 0.41207230340728174,
+          "reward_eur": 0.0,
+          "seller_id": "H043",
+          "transaction_id": "p2p-018-00009"
+        },
+        {
+          "buyer_id": "H065",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.19688351289975559,
+          "quantity_kwh": 0.1333771797082881,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "p2p-018-00010"
+        },
+        {
+          "buyer_id": "H072",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.20684297441373792,
+          "quantity_kwh": 0.4960928245061458,
+          "reward_eur": 0.0,
+          "seller_id": "H077",
+          "transaction_id": "p2p-018-00011"
+        },
+        {
+          "buyer_id": "H073",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.20684297441373792,
+          "quantity_kwh": 0.0673923054668284,
+          "reward_eur": 0.0,
+          "seller_id": "H077",
+          "transaction_id": "p2p-018-00012"
+        },
+        {
+          "buyer_id": "H088",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.20642480568104954,
+          "quantity_kwh": 0.0017014464090721049,
+          "reward_eur": 0.0,
+          "seller_id": "H082",
+          "transaction_id": "p2p-018-00013"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21591628578890487,
+          "quantity_kwh": 0.14277597589513702,
+          "reward_eur": 0.0,
+          "seller_id": "H063",
+          "transaction_id": "agg-018-00000"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21904861749146723,
+          "quantity_kwh": 0.09928181078437515,
+          "reward_eur": 0.0,
+          "seller_id": "H069",
+          "transaction_id": "agg-018-00001"
+        },
+        {
+          "buyer_id": "H013",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.22100391515071716,
+          "quantity_kwh": 0.09609803434869235,
+          "reward_eur": 0.0,
+          "seller_id": "H081",
+          "transaction_id": "agg-018-00002"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21049862052998905,
+          "quantity_kwh": 0.36474230825506704,
+          "reward_eur": 0.0,
+          "seller_id": "H081",
+          "transaction_id": "agg-018-00003"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.2122282201486279,
+          "quantity_kwh": 0.1952243094674706,
+          "reward_eur": 0.0,
+          "seller_id": "H043",
+          "transaction_id": "agg-018-00004"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21233779093429334,
+          "quantity_kwh": 0.08181514365258591,
+          "reward_eur": 0.0,
+          "seller_id": "H090",
+          "transaction_id": "agg-018-00005"
+        },
+        {
+          "buyer_id": "H030",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21150358713990153,
+          "quantity_kwh": 0.29732602340734093,
+          "reward_eur": 0.0,
+          "seller_id": "H090",
+          "transaction_id": "agg-018-00006"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.20981245616089872,
+          "quantity_kwh": 0.24098921388817662,
+          "reward_eur": 0.0,
+          "seller_id": "H090",
+          "transaction_id": "agg-018-00007"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21006229686407346,
+          "quantity_kwh": 1.1011043310596342,
+          "reward_eur": 0.0,
+          "seller_id": "H061",
+          "transaction_id": "agg-018-00008"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.2107886344879915,
+          "quantity_kwh": 0.39166084543575286,
+          "reward_eur": 0.0,
+          "seller_id": "H082",
+          "transaction_id": "agg-018-00009"
+        },
+        {
+          "buyer_id": "H052",
+          "hour": 18,
+          "market": "aggregator",
+          "price_eur_kwh": 0.21434736503520446,
+          "quantity_kwh": 0.06759133334597256,
+          "reward_eur": 0.0,
+          "seller_id": "H010",
+          "transaction_id": "agg-018-00010"
+        }
+      ]
+    },
+    {
+      "hash": "0003d0c44a583f07cae2b4cfe4a0dc3b4bd86dc7c49aadf820cf39a84ba49b9a",
+      "hour": 19,
+      "miner_id": "miner-10",
+      "nonce": 5049,
+      "previous_hash": "000a41aeb68203c8cc9a88952f55a480b087ac28fbf3d5b3890a14400279ce4b",
+      "timestamp": "2026-06-15T19:00:00+02:00",
+      "transactions": [
+        {
+          "buyer_id": "H049",
+          "hour": 19,
+          "market": "p2p",
+          "price_eur_kwh": 0.22179420799840036,
+          "quantity_kwh": 0.08943145591642654,
+          "reward_eur": 0.0,
+          "seller_id": "H044",
+          "transaction_id": "p2p-019-00000"
+        },
+        {
+          "buyer_id": "H060",
+          "hour": 19,
+          "market": "p2p",
+          "price_eur_kwh": 0.2188706584561249,
+          "quantity_kwh": 0.011717406970928601,
+          "reward_eur": 0.0,
+          "seller_id": "H058",
+          "transaction_id": "p2p-019-00001"
+        }
+      ]
+    },
+    {
+      "hash": "0008e7deb2550adf80f8dc8796600bf4a366f331b77d7b354998a2a54e3a39db",
+      "hour": 20,
+      "miner_id": "miner-06",
+      "nonce": 1395,
+      "previous_hash": "0003d0c44a583f07cae2b4cfe4a0dc3b4bd86dc7c49aadf820cf39a84ba49b9a",
+      "timestamp": "2026-06-15T20:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "00082758756c944522d49500ceeef05de6cb68010032244593edb793e42a9625",
+      "hour": 21,
+      "miner_id": "miner-01",
+      "nonce": 7040,
+      "previous_hash": "0008e7deb2550adf80f8dc8796600bf4a366f331b77d7b354998a2a54e3a39db",
+      "timestamp": "2026-06-15T21:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "0007b523c81c50c84f6c27413e2a57f9b6bc5527f0d9ba873831ab9904e55683",
+      "hour": 22,
+      "miner_id": "miner-02",
+      "nonce": 891,
+      "previous_hash": "00082758756c944522d49500ceeef05de6cb68010032244593edb793e42a9625",
+      "timestamp": "2026-06-15T22:00:00+02:00",
+      "transactions": []
+    },
+    {
+      "hash": "0004cc77f025d94b1d2017078bffcfb3b68ebcb776bd2f0029bfd9c60dfed230",
+      "hour": 23,
+      "miner_id": "miner-10",
+      "nonce": 8779,
+      "previous_hash": "0007b523c81c50c84f6c27413e2a57f9b6bc5527f0d9ba873831ab9904e55683",
+      "timestamp": "2026-06-15T23:00:00+02:00",
+      "transactions": []
+    }
+  ],
+  "miner_attempts": {
+    "miner-01": 9543,
+    "miner-02": 9537,
+    "miner-03": 9533,
+    "miner-04": 9533,
+    "miner-05": 9533,
+    "miner-06": 9532,
+    "miner-07": 9529,
+    "miner-08": 9527,
+    "miner-09": 9525,
+    "miner-10": 9522
+  },
+  "miner_ids": [
+    "miner-01",
+    "miner-02",
+    "miner-03",
+    "miner-04",
+    "miner-05",
+    "miner-06",
+    "miner-07",
+    "miner-08",
+    "miner-09",
+    "miner-10"
+  ],
+  "settings": {
+    "hash_prefix": "000",
+    "max_nonce_attempts": 5000000,
+    "miner_count": 10
+  }
+}

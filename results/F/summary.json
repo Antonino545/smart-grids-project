@@ -1,0 +1,131 @@
+{
+  "battery_strategy": "p2p_priority",
+  "configuration": {
+    "blockchain": {
+      "hash_prefix": "000",
+      "max_nonce_attempts": 5000000,
+      "miner_count": 10
+    },
+    "experiment": {
+      "batteries_enabled": true,
+      "battery_strategy": "p2p_priority",
+      "regulation_enabled": true
+    },
+    "forecast": {
+      "cloud_factor_max": 1.0,
+      "cloud_factor_min": 0.65,
+      "demand_csv": null,
+      "historical_days": 14,
+      "historical_price_noise_eur_kwh": 0.01,
+      "historical_prices_csv": null,
+      "peak_irradiance_w_m2": 900.0,
+      "performance_factor": 0.85,
+      "price_amplitude_eur_kwh": 0.045,
+      "price_base_eur_kwh": 0.17,
+      "start_timestamp": "2026-06-15T00:00:00+02:00",
+      "sunrise_hour": 6.0,
+      "sunset_hour": 20.0,
+      "weather_csv": null
+    },
+    "households": {
+      "ask_multiplier_max": 1.35,
+      "ask_multiplier_min": 0.9,
+      "base_demand_weight": 0.25,
+      "bid_multiplier_max": 1.15,
+      "bid_multiplier_min": 0.7,
+      "daily_demand_max_kwh": 24.0,
+      "daily_demand_min_kwh": 8.0,
+      "evening_peak_hour": 19.0,
+      "evening_peak_weight": 1.1,
+      "evening_peak_width_hours": 3.0,
+      "morning_peak_hour": 7.0,
+      "morning_peak_weight": 0.65,
+      "morning_peak_width_hours": 2.0,
+      "profile_noise_fraction": 0.25,
+      "profile_shift_max_hours": 1.0,
+      "pv_capacity_max_kw": 8.0,
+      "pv_capacity_min_kw": 2.0
+    },
+    "market": {
+      "grid_export_tariff_eur_kwh": 0.06,
+      "grid_import_tariff_eur_kwh": 0.3,
+      "maximum_offer_eur_kwh": 0.3,
+      "minimum_offer_eur_kwh": 0.06
+    },
+    "regulator": {
+      "grid_fee_eur_kwh": 0.01,
+      "guidance_strength": 0.65,
+      "guided_ask_multiplier": 0.96,
+      "guided_bid_multiplier": 1.04,
+      "initial_budget_eur": 0.0,
+      "lower_reward_eur_kwh": 0.01,
+      "lower_tier_budget_eur": 1.0,
+      "reward_discount_fraction": 0.5,
+      "upper_reward_eur_kwh": 0.02,
+      "upper_tier_budget_eur": 5.0
+    },
+    "simulation": {
+      "battery": {
+        "capacity_kwh": 10.0,
+        "charge_efficiency": 0.95,
+        "discharge_efficiency": 0.95,
+        "initial_soc": 0.2,
+        "max_charge_power_kw": 3.0,
+        "max_discharge_power_kw": 3.0,
+        "max_soc": 0.9,
+        "min_soc": 0.1,
+        "strategy": "self_consumption_first"
+      },
+      "battery_household_count": 55,
+      "group_count": 10,
+      "hours": 24,
+      "household_count": 100,
+      "log_level": "INFO",
+      "random_seed": 42,
+      "timestep_hours": 1.0
+    }
+  },
+  "input_sha256": "c5537f8e26fb4e01d9157db48b5ae8dc03c5f5faa4cb6efb72e44bc493c71d31",
+  "input_sources": {
+    "demand_source": [
+      "synthetic_household_profile"
+    ],
+    "price_source": [
+      "synthetic_history_hourly_mean"
+    ],
+    "weather_source": [
+      "synthetic_weather_forecast"
+    ]
+  },
+  "metrics": {
+    "active_battery_count": 55,
+    "aggregator_energy_kwh": 1.3338931642968115,
+    "battery_charge_kwh": 451.87784485428404,
+    "battery_discharge_kwh": 330.2735174632705,
+    "battery_final_stored_kwh": 191.6276184397061,
+    "battery_initial_stored_kwh": 110.0,
+    "battery_loss_kwh": 39.97670895130739,
+    "block_count": 24,
+    "blockchain_valid": true,
+    "community_including_regulator_net_cost_eur": 66.89037797480067,
+    "demand_kwh": 1634.3701055522388,
+    "energy_reconciliation_error_kwh": -1.1368683772161603e-13,
+    "external_grid_net_cost_eur": 66.89037797480066,
+    "financial_reconciliation_error_eur": 1.4210854715202004e-14,
+    "grid_exports_kwh": 1403.051935678595,
+    "grid_imports_kwh": 503.5783137183879,
+    "household_net_cost_eur": 85.61534120245484,
+    "p2p_energy_kwh": 21.80091286130371,
+    "p2p_share_pct": 1.16081805798029,
+    "p2p_to_grid_exports_ratio": 0.015538208035584627,
+    "p2p_transaction_count": 104,
+    "pv_generation_kwh": 2655.4480549034593,
+    "pv_surplus_before_battery_charging_kwh": 1878.0645865584795,
+    "regulator_fee_revenue_eur": 19.06630249396983,
+    "regulator_initial_funds_eur": 0.0,
+    "regulator_remaining_funds_eur": 18.724963227654168,
+    "regulator_reward_expenditure_eur": 0.34133926631565265,
+    "surplus_available_after_self_balancing_kwh": 1878.0645865584797
+  },
+  "scenario": "F"
+}

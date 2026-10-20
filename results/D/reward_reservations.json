@@ -1,0 +1,2010 @@
+[
+  {
+    "amount_eur": 0.00027788152422555723,
+    "hour": 7,
+    "reservation_id": "reward-000000",
+    "seller_id": "H018",
+    "status": "paid",
+    "transaction_id": "p2p-007-00000"
+  },
+  {
+    "amount_eur": 0.00034699825075147796,
+    "hour": 7,
+    "reservation_id": "reward-000001",
+    "seller_id": "H015",
+    "status": "paid",
+    "transaction_id": "p2p-007-00001"
+  },
+  {
+    "amount_eur": 0.0023449390764142676,
+    "hour": 7,
+    "reservation_id": "reward-000002",
+    "seller_id": "H019",
+    "status": "paid",
+    "transaction_id": "p2p-007-00002"
+  },
+  {
+    "amount_eur": 0.0016553535385325612,
+    "hour": 7,
+    "reservation_id": "reward-000003",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0023061018510207552,
+    "hour": 7,
+    "reservation_id": "reward-000004",
+    "seller_id": "H028",
+    "status": "paid",
+    "transaction_id": "p2p-007-00003"
+  },
+  {
+    "amount_eur": 0.0016553535385325612,
+    "hour": 7,
+    "reservation_id": "reward-000005",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0013993643353557882,
+    "hour": 7,
+    "reservation_id": "reward-000006",
+    "seller_id": "H028",
+    "status": "paid",
+    "transaction_id": "p2p-007-00004"
+  },
+  {
+    "amount_eur": 0.0016553535385325612,
+    "hour": 7,
+    "reservation_id": "reward-000007",
+    "seller_id": "H023",
+    "status": "paid",
+    "transaction_id": "p2p-007-00005"
+  },
+  {
+    "amount_eur": 0.0016608133778994848,
+    "hour": 7,
+    "reservation_id": "reward-000008",
+    "seller_id": "H034",
+    "status": "paid",
+    "transaction_id": "p2p-007-00006"
+  },
+  {
+    "amount_eur": 0.003651272302268588,
+    "hour": 7,
+    "reservation_id": "reward-000009",
+    "seller_id": "H039",
+    "status": "paid",
+    "transaction_id": "p2p-007-00007"
+  },
+  {
+    "amount_eur": 0.0003933544700747216,
+    "hour": 7,
+    "reservation_id": "reward-000010",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002633091112487731,
+    "hour": 7,
+    "reservation_id": "reward-000011",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002633091112487731,
+    "hour": 7,
+    "reservation_id": "reward-000012",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002633091112487731,
+    "hour": 7,
+    "reservation_id": "reward-000013",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002633091112487731,
+    "hour": 7,
+    "reservation_id": "reward-000014",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002633091112487731,
+    "hour": 7,
+    "reservation_id": "reward-000015",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0016777543190647116,
+    "hour": 7,
+    "reservation_id": "reward-000016",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002107963837726533,
+    "hour": 7,
+    "reservation_id": "reward-000017",
+    "seller_id": "H044",
+    "status": "paid",
+    "transaction_id": "p2p-007-00008"
+  },
+  {
+    "amount_eur": 0.0014871962145430817,
+    "hour": 7,
+    "reservation_id": "reward-000018",
+    "seller_id": "H044",
+    "status": "paid",
+    "transaction_id": "p2p-007-00009"
+  },
+  {
+    "amount_eur": 0.0025138095148350094,
+    "hour": 7,
+    "reservation_id": "reward-000019",
+    "seller_id": "H044",
+    "status": "paid",
+    "transaction_id": "p2p-007-00010"
+  },
+  {
+    "amount_eur": 0.0007681996434561023,
+    "hour": 7,
+    "reservation_id": "reward-000020",
+    "seller_id": "H045",
+    "status": "paid",
+    "transaction_id": "p2p-007-00011"
+  },
+  {
+    "amount_eur": 0.0020617045985078988,
+    "hour": 7,
+    "reservation_id": "reward-000021",
+    "seller_id": "H043",
+    "status": "paid",
+    "transaction_id": "p2p-007-00012"
+  },
+  {
+    "amount_eur": 0.0014521122873469518,
+    "hour": 7,
+    "reservation_id": "reward-000022",
+    "seller_id": "H060",
+    "status": "paid",
+    "transaction_id": "p2p-007-00013"
+  },
+  {
+    "amount_eur": 0.002490675093968321,
+    "hour": 7,
+    "reservation_id": "reward-000023",
+    "seller_id": "H058",
+    "status": "paid",
+    "transaction_id": "p2p-007-00014"
+  },
+  {
+    "amount_eur": 0.0036352662214978273,
+    "hour": 7,
+    "reservation_id": "reward-000024",
+    "seller_id": "H053",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0018479001322568328,
+    "hour": 7,
+    "reservation_id": "reward-000025",
+    "seller_id": "H058",
+    "status": "paid",
+    "transaction_id": "p2p-007-00015"
+  },
+  {
+    "amount_eur": 0.0036352662214978273,
+    "hour": 7,
+    "reservation_id": "reward-000026",
+    "seller_id": "H053",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0036352662214978273,
+    "hour": 7,
+    "reservation_id": "reward-000027",
+    "seller_id": "H053",
+    "status": "paid",
+    "transaction_id": "p2p-007-00016"
+  },
+  {
+    "amount_eur": 0.000103229170642406,
+    "hour": 7,
+    "reservation_id": "reward-000028",
+    "seller_id": "H067",
+    "status": "paid",
+    "transaction_id": "p2p-007-00017"
+  },
+  {
+    "amount_eur": 0.0004974698784648579,
+    "hour": 7,
+    "reservation_id": "reward-000029",
+    "seller_id": "H061",
+    "status": "paid",
+    "transaction_id": "p2p-007-00018"
+  },
+  {
+    "amount_eur": 0.0011313029004659592,
+    "hour": 7,
+    "reservation_id": "reward-000030",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00555533818663675,
+    "hour": 7,
+    "reservation_id": "reward-000031",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0039128321306093825,
+    "hour": 7,
+    "reservation_id": "reward-000032",
+    "seller_id": "H061",
+    "status": "paid",
+    "transaction_id": "p2p-007-00019"
+  },
+  {
+    "amount_eur": 0.0011313029004659592,
+    "hour": 7,
+    "reservation_id": "reward-000033",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.002638548939592131,
+    "hour": 7,
+    "reservation_id": "reward-000034",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.005702749757563328,
+    "hour": 7,
+    "reservation_id": "reward-000035",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0011313029004659592,
+    "hour": 7,
+    "reservation_id": "reward-000036",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.004223030206048487,
+    "hour": 7,
+    "reservation_id": "reward-000037",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0011313029004659592,
+    "hour": 7,
+    "reservation_id": "reward-000038",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.000920428351391267,
+    "hour": 7,
+    "reservation_id": "reward-000039",
+    "seller_id": "H066",
+    "status": "paid",
+    "transaction_id": "p2p-007-00020"
+  },
+  {
+    "amount_eur": 0.0005082724739354206,
+    "hour": 7,
+    "reservation_id": "reward-000040",
+    "seller_id": "H077",
+    "status": "paid",
+    "transaction_id": "p2p-007-00021"
+  },
+  {
+    "amount_eur": 0.0007559300943730262,
+    "hour": 7,
+    "reservation_id": "reward-000041",
+    "seller_id": "H077",
+    "status": "paid",
+    "transaction_id": "p2p-007-00022"
+  },
+  {
+    "amount_eur": 0.0009544380376441669,
+    "hour": 7,
+    "reservation_id": "reward-000042",
+    "seller_id": "H086",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0009544380376441669,
+    "hour": 7,
+    "reservation_id": "reward-000043",
+    "seller_id": "H083",
+    "status": "paid",
+    "transaction_id": "p2p-007-00023"
+  },
+  {
+    "amount_eur": 0.0001840836298577242,
+    "hour": 7,
+    "reservation_id": "reward-000044",
+    "seller_id": "H084",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.004817149880896102,
+    "hour": 7,
+    "reservation_id": "reward-000045",
+    "seller_id": "H086",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0001862103836556789,
+    "hour": 7,
+    "reservation_id": "reward-000046",
+    "seller_id": "H083",
+    "status": "paid",
+    "transaction_id": "p2p-007-00024"
+  },
+  {
+    "amount_eur": 0.0017431014119214329,
+    "hour": 7,
+    "reservation_id": "reward-000047",
+    "seller_id": "H090",
+    "status": "paid",
+    "transaction_id": "p2p-007-00025"
+  },
+  {
+    "amount_eur": 0.0011482145387260246,
+    "hour": 7,
+    "reservation_id": "reward-000048",
+    "seller_id": "H082",
+    "status": "paid",
+    "transaction_id": "p2p-007-00026"
+  },
+  {
+    "amount_eur": 0.0027883122137899964,
+    "hour": 7,
+    "reservation_id": "reward-000049",
+    "seller_id": "H086",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0001840836298577242,
+    "hour": 7,
+    "reservation_id": "reward-000050",
+    "seller_id": "H084",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0001840836298577242,
+    "hour": 7,
+    "reservation_id": "reward-000051",
+    "seller_id": "H084",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0052559032272719835,
+    "hour": 7,
+    "reservation_id": "reward-000052",
+    "seller_id": "H086",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00021145404388358323,
+    "hour": 7,
+    "reservation_id": "reward-000053",
+    "seller_id": "H086",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0001840836298577242,
+    "hour": 7,
+    "reservation_id": "reward-000054",
+    "seller_id": "H084",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0003986800286150949,
+    "hour": 7,
+    "reservation_id": "reward-000055",
+    "seller_id": "H091",
+    "status": "paid",
+    "transaction_id": "p2p-007-00027"
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000056",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000057",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000058",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000059",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000060",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000061",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0004761492569571924,
+    "hour": 7,
+    "reservation_id": "reward-000062",
+    "seller_id": "H097",
+    "status": "paid",
+    "transaction_id": "p2p-007-00028"
+  },
+  {
+    "amount_eur": 0.0038070302232805,
+    "hour": 8,
+    "reservation_id": "reward-000063",
+    "seller_id": "H001",
+    "status": "paid",
+    "transaction_id": "p2p-008-00000"
+  },
+  {
+    "amount_eur": 0.0025093632875237805,
+    "hour": 8,
+    "reservation_id": "reward-000064",
+    "seller_id": "H006",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0025093632875237805,
+    "hour": 8,
+    "reservation_id": "reward-000065",
+    "seller_id": "H009",
+    "status": "paid",
+    "transaction_id": "p2p-008-00001"
+  },
+  {
+    "amount_eur": 0.0007550793234216458,
+    "hour": 8,
+    "reservation_id": "reward-000066",
+    "seller_id": "H009",
+    "status": "paid",
+    "transaction_id": "p2p-008-00002"
+  },
+  {
+    "amount_eur": 0.0027591890223867188,
+    "hour": 8,
+    "reservation_id": "reward-000067",
+    "seller_id": "H010",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0027591890223867188,
+    "hour": 8,
+    "reservation_id": "reward-000068",
+    "seller_id": "H006",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0027591890223867188,
+    "hour": 8,
+    "reservation_id": "reward-000069",
+    "seller_id": "H008",
+    "status": "paid",
+    "transaction_id": "p2p-008-00003"
+  },
+  {
+    "amount_eur": 0.00021336047168926453,
+    "hour": 8,
+    "reservation_id": "reward-000070",
+    "seller_id": "H011",
+    "status": "paid",
+    "transaction_id": "p2p-008-00004"
+  },
+  {
+    "amount_eur": 0.002867446461082186,
+    "hour": 8,
+    "reservation_id": "reward-000071",
+    "seller_id": "H019",
+    "status": "paid",
+    "transaction_id": "p2p-008-00005"
+  },
+  {
+    "amount_eur": 0.0004338301421891044,
+    "hour": 8,
+    "reservation_id": "reward-000072",
+    "seller_id": "H020",
+    "status": "paid",
+    "transaction_id": "p2p-008-00006"
+  },
+  {
+    "amount_eur": 0.002109490611957998,
+    "hour": 8,
+    "reservation_id": "reward-000073",
+    "seller_id": "H016",
+    "status": "paid",
+    "transaction_id": "p2p-008-00007"
+  },
+  {
+    "amount_eur": 0.002420827449080606,
+    "hour": 8,
+    "reservation_id": "reward-000074",
+    "seller_id": "H015",
+    "status": "paid",
+    "transaction_id": "p2p-008-00008"
+  },
+  {
+    "amount_eur": 0.00015104037557085894,
+    "hour": 8,
+    "reservation_id": "reward-000075",
+    "seller_id": "H024",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00015104037557085894,
+    "hour": 8,
+    "reservation_id": "reward-000076",
+    "seller_id": "H027",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00015104037557085894,
+    "hour": 8,
+    "reservation_id": "reward-000077",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00015104037557085894,
+    "hour": 8,
+    "reservation_id": "reward-000078",
+    "seller_id": "H025",
+    "status": "paid",
+    "transaction_id": "p2p-008-00009"
+  },
+  {
+    "amount_eur": 0.007112367182185965,
+    "hour": 8,
+    "reservation_id": "reward-000079",
+    "seller_id": "H027",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.007112367182185965,
+    "hour": 8,
+    "reservation_id": "reward-000080",
+    "seller_id": "H030",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0027688959922504363,
+    "hour": 8,
+    "reservation_id": "reward-000081",
+    "seller_id": "H025",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.003559505448322813,
+    "hour": 8,
+    "reservation_id": "reward-000082",
+    "seller_id": "H024",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.007112367182185965,
+    "hour": 8,
+    "reservation_id": "reward-000083",
+    "seller_id": "H028",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.007112367182185965,
+    "hour": 8,
+    "reservation_id": "reward-000084",
+    "seller_id": "H029",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.007112367182185965,
+    "hour": 8,
+    "reservation_id": "reward-000085",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.005903956460077018,
+    "hour": 8,
+    "reservation_id": "reward-000086",
+    "seller_id": "H030",
+    "status": "paid",
+    "transaction_id": "p2p-008-00010"
+  },
+  {
+    "amount_eur": 0.0016583952131519297,
+    "hour": 8,
+    "reservation_id": "reward-000087",
+    "seller_id": "H037",
+    "status": "paid",
+    "transaction_id": "p2p-008-00011"
+  },
+  {
+    "amount_eur": 0.000129607260780783,
+    "hour": 8,
+    "reservation_id": "reward-000088",
+    "seller_id": "H036",
+    "status": "paid",
+    "transaction_id": "p2p-008-00012"
+  },
+  {
+    "amount_eur": 0.0023349496734818708,
+    "hour": 8,
+    "reservation_id": "reward-000089",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0023349496734818708,
+    "hour": 8,
+    "reservation_id": "reward-000090",
+    "seller_id": "H038",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0023349496734818708,
+    "hour": 8,
+    "reservation_id": "reward-000091",
+    "seller_id": "H035",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0023349496734818708,
+    "hour": 8,
+    "reservation_id": "reward-000092",
+    "seller_id": "H033",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0023349496734818708,
+    "hour": 8,
+    "reservation_id": "reward-000093",
+    "seller_id": "H034",
+    "status": "paid",
+    "transaction_id": "p2p-008-00013"
+  },
+  {
+    "amount_eur": 2.1816076250846806e-07,
+    "hour": 8,
+    "reservation_id": "reward-000094",
+    "seller_id": "H045",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 2.1816076250846806e-07,
+    "hour": 8,
+    "reservation_id": "reward-000095",
+    "seller_id": "H047",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 2.1816076250846806e-07,
+    "hour": 8,
+    "reservation_id": "reward-000096",
+    "seller_id": "H050",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 2.1816076250846806e-07,
+    "hour": 8,
+    "reservation_id": "reward-000097",
+    "seller_id": "H043",
+    "status": "paid",
+    "transaction_id": "p2p-008-00014"
+  },
+  {
+    "amount_eur": 0.000991072355190351,
+    "hour": 8,
+    "reservation_id": "reward-000098",
+    "seller_id": "H051",
+    "status": "paid",
+    "transaction_id": "p2p-008-00015"
+  },
+  {
+    "amount_eur": 0.001737894438560421,
+    "hour": 8,
+    "reservation_id": "reward-000099",
+    "seller_id": "H051",
+    "status": "paid",
+    "transaction_id": "p2p-008-00016"
+  },
+  {
+    "amount_eur": 0.0018092354332019489,
+    "hour": 8,
+    "reservation_id": "reward-000100",
+    "seller_id": "H055",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00048420633447191386,
+    "hour": 8,
+    "reservation_id": "reward-000101",
+    "seller_id": "H051",
+    "status": "paid",
+    "transaction_id": "p2p-008-00017"
+  },
+  {
+    "amount_eur": 0.0028262033547820408,
+    "hour": 8,
+    "reservation_id": "reward-000102",
+    "seller_id": "H060",
+    "status": "paid",
+    "transaction_id": "p2p-008-00018"
+  },
+  {
+    "amount_eur": 0.0003717238799575839,
+    "hour": 8,
+    "reservation_id": "reward-000103",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0003717238799575839,
+    "hour": 8,
+    "reservation_id": "reward-000104",
+    "seller_id": "H070",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0003717238799575839,
+    "hour": 8,
+    "reservation_id": "reward-000105",
+    "seller_id": "H063",
+    "status": "paid",
+    "transaction_id": "p2p-008-00019"
+  },
+  {
+    "amount_eur": 0.0018672948057833717,
+    "hour": 8,
+    "reservation_id": "reward-000106",
+    "seller_id": "H078",
+    "status": "paid",
+    "transaction_id": "p2p-008-00020"
+  },
+  {
+    "amount_eur": 0.0052930397122097385,
+    "hour": 8,
+    "reservation_id": "reward-000107",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.004627002199568091,
+    "hour": 8,
+    "reservation_id": "reward-000108",
+    "seller_id": "H080",
+    "status": "paid",
+    "transaction_id": "p2p-008-00021"
+  },
+  {
+    "amount_eur": 0.0006660375126416473,
+    "hour": 8,
+    "reservation_id": "reward-000109",
+    "seller_id": "H073",
+    "status": "paid",
+    "transaction_id": "p2p-008-00022"
+  },
+  {
+    "amount_eur": 0.0001647695263416704,
+    "hour": 8,
+    "reservation_id": "reward-000110",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0001647695263416704,
+    "hour": 8,
+    "reservation_id": "reward-000111",
+    "seller_id": "H077",
+    "status": "paid",
+    "transaction_id": "p2p-008-00023"
+  },
+  {
+    "amount_eur": 0.0005404117005156617,
+    "hour": 8,
+    "reservation_id": "reward-000112",
+    "seller_id": "H076",
+    "status": "paid",
+    "transaction_id": "p2p-008-00024"
+  },
+  {
+    "amount_eur": 0.0018878223444996256,
+    "hour": 8,
+    "reservation_id": "reward-000113",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0018878223444996256,
+    "hour": 8,
+    "reservation_id": "reward-000114",
+    "seller_id": "H077",
+    "status": "paid",
+    "transaction_id": "p2p-008-00025"
+  },
+  {
+    "amount_eur": 0.00248925418786213,
+    "hour": 8,
+    "reservation_id": "reward-000115",
+    "seller_id": "H088",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00248925418786213,
+    "hour": 8,
+    "reservation_id": "reward-000116",
+    "seller_id": "H083",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00248925418786213,
+    "hour": 8,
+    "reservation_id": "reward-000117",
+    "seller_id": "H081",
+    "status": "paid",
+    "transaction_id": "p2p-008-00026"
+  },
+  {
+    "amount_eur": 0.002275930323616627,
+    "hour": 8,
+    "reservation_id": "reward-000118",
+    "seller_id": "H093",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0029686541995553473,
+    "hour": 8,
+    "reservation_id": "reward-000119",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0029686541995553473,
+    "hour": 8,
+    "reservation_id": "reward-000120",
+    "seller_id": "H099",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0017232228751651946,
+    "hour": 8,
+    "reservation_id": "reward-000121",
+    "seller_id": "H096",
+    "status": "paid",
+    "transaction_id": "p2p-008-00027"
+  },
+  {
+    "amount_eur": 0.00011334983863522496,
+    "hour": 8,
+    "reservation_id": "reward-000122",
+    "seller_id": "H092",
+    "status": "paid",
+    "transaction_id": "p2p-008-00028"
+  },
+  {
+    "amount_eur": 0.0011320814857549277,
+    "hour": 8,
+    "reservation_id": "reward-000123",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0007950573654455906,
+    "hour": 8,
+    "reservation_id": "reward-000124",
+    "seller_id": "H100",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0011218902878287007,
+    "hour": 8,
+    "reservation_id": "reward-000125",
+    "seller_id": "H093",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0011218902878287007,
+    "hour": 8,
+    "reservation_id": "reward-000126",
+    "seller_id": "H099",
+    "status": "paid",
+    "transaction_id": "p2p-008-00029"
+  },
+  {
+    "amount_eur": 0.0006012876904086206,
+    "hour": 8,
+    "reservation_id": "reward-000127",
+    "seller_id": "H093",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0006012876904086206,
+    "hour": 8,
+    "reservation_id": "reward-000128",
+    "seller_id": "H099",
+    "status": "paid",
+    "transaction_id": "p2p-008-00030"
+  },
+  {
+    "amount_eur": 0.0007992558842295617,
+    "hour": 9,
+    "reservation_id": "reward-000129",
+    "seller_id": "H072",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0007992558842295617,
+    "hour": 9,
+    "reservation_id": "reward-000130",
+    "seller_id": "H079",
+    "status": "paid",
+    "transaction_id": "p2p-009-00000"
+  },
+  {
+    "amount_eur": 0.0014195194559996783,
+    "hour": 16,
+    "reservation_id": "reward-000131",
+    "seller_id": "H020",
+    "status": "paid",
+    "transaction_id": "p2p-016-00000"
+  },
+  {
+    "amount_eur": 0.0019594085823999353,
+    "hour": 16,
+    "reservation_id": "reward-000132",
+    "seller_id": "H058",
+    "status": "paid",
+    "transaction_id": "p2p-016-00001"
+  },
+  {
+    "amount_eur": 0.003090895590938003,
+    "hour": 17,
+    "reservation_id": "reward-000133",
+    "seller_id": "H009",
+    "status": "paid",
+    "transaction_id": "p2p-017-00000"
+  },
+  {
+    "amount_eur": 0.014035706687634831,
+    "hour": 17,
+    "reservation_id": "reward-000134",
+    "seller_id": "H015",
+    "status": "paid",
+    "transaction_id": "p2p-017-00001"
+  },
+  {
+    "amount_eur": 0.006181283532119619,
+    "hour": 17,
+    "reservation_id": "reward-000135",
+    "seller_id": "H030",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.006181283532119619,
+    "hour": 17,
+    "reservation_id": "reward-000136",
+    "seller_id": "H027",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.006181283532119619,
+    "hour": 17,
+    "reservation_id": "reward-000137",
+    "seller_id": "H021",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.006181283532119619,
+    "hour": 17,
+    "reservation_id": "reward-000138",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.006181283532119619,
+    "hour": 17,
+    "reservation_id": "reward-000139",
+    "seller_id": "H028",
+    "status": "paid",
+    "transaction_id": "p2p-017-00002"
+  },
+  {
+    "amount_eur": 0.020694617369366248,
+    "hour": 17,
+    "reservation_id": "reward-000140",
+    "seller_id": "H023",
+    "status": "paid",
+    "transaction_id": "p2p-017-00003"
+  },
+  {
+    "amount_eur": 0.0038861475710230175,
+    "hour": 17,
+    "reservation_id": "reward-000141",
+    "seller_id": "H054",
+    "status": "paid",
+    "transaction_id": "p2p-017-00004"
+  },
+  {
+    "amount_eur": 4.190320271588277e-05,
+    "hour": 17,
+    "reservation_id": "reward-000142",
+    "seller_id": "H054",
+    "status": "paid",
+    "transaction_id": "p2p-017-00005"
+  },
+  {
+    "amount_eur": 0.0050156218726707235,
+    "hour": 17,
+    "reservation_id": "reward-000143",
+    "seller_id": "H054",
+    "status": "paid",
+    "transaction_id": "p2p-017-00006"
+  },
+  {
+    "amount_eur": 0.006565107946705831,
+    "hour": 17,
+    "reservation_id": "reward-000144",
+    "seller_id": "H051",
+    "status": "paid",
+    "transaction_id": "p2p-017-00007"
+  },
+  {
+    "amount_eur": 0.020347708940990025,
+    "hour": 17,
+    "reservation_id": "reward-000145",
+    "seller_id": "H059",
+    "status": "paid",
+    "transaction_id": "p2p-017-00008"
+  },
+  {
+    "amount_eur": 0.014291914974361988,
+    "hour": 17,
+    "reservation_id": "reward-000146",
+    "seller_id": "H082",
+    "status": "paid",
+    "transaction_id": "p2p-017-00009"
+  },
+  {
+    "amount_eur": 0.0002999767681789134,
+    "hour": 17,
+    "reservation_id": "reward-000147",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0002999767681789134,
+    "hour": 17,
+    "reservation_id": "reward-000148",
+    "seller_id": "H100",
+    "status": "paid",
+    "transaction_id": "p2p-017-00010"
+  },
+  {
+    "amount_eur": 0.008607299148724183,
+    "hour": 17,
+    "reservation_id": "reward-000149",
+    "seller_id": "H099",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.008607299148724183,
+    "hour": 17,
+    "reservation_id": "reward-000150",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.006542296309960434,
+    "hour": 17,
+    "reservation_id": "reward-000151",
+    "seller_id": "H096",
+    "status": "paid",
+    "transaction_id": "p2p-017-00011"
+  },
+  {
+    "amount_eur": 0.0020650028387637497,
+    "hour": 17,
+    "reservation_id": "reward-000152",
+    "seller_id": "H100",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0020650028387637497,
+    "hour": 17,
+    "reservation_id": "reward-000153",
+    "seller_id": "H095",
+    "status": "paid",
+    "transaction_id": "p2p-017-00012"
+  },
+  {
+    "amount_eur": 0.0016109990358750647,
+    "hour": 17,
+    "reservation_id": "reward-000154",
+    "seller_id": "H099",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0016109990358750647,
+    "hour": 17,
+    "reservation_id": "reward-000155",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0016109990358750647,
+    "hour": 17,
+    "reservation_id": "reward-000156",
+    "seller_id": "H100",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0016109990358750647,
+    "hour": 17,
+    "reservation_id": "reward-000157",
+    "seller_id": "H095",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0016109990358750647,
+    "hour": 17,
+    "reservation_id": "reward-000158",
+    "seller_id": "H093",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0016109990358750647,
+    "hour": 17,
+    "reservation_id": "reward-000159",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.008538181310028304,
+    "hour": 18,
+    "reservation_id": "reward-000160",
+    "seller_id": "H010",
+    "status": "paid",
+    "transaction_id": "p2p-018-00000"
+  },
+  {
+    "amount_eur": 0.0015861773776194665,
+    "hour": 18,
+    "reservation_id": "reward-000161",
+    "seller_id": "H001",
+    "status": "paid",
+    "transaction_id": "p2p-018-00001"
+  },
+  {
+    "amount_eur": 0.0030547727412727267,
+    "hour": 18,
+    "reservation_id": "reward-000162",
+    "seller_id": "H001",
+    "status": "paid",
+    "transaction_id": "p2p-018-00002"
+  },
+  {
+    "amount_eur": 0.003343510458794801,
+    "hour": 18,
+    "reservation_id": "reward-000163",
+    "seller_id": "H010",
+    "status": "paid",
+    "transaction_id": "p2p-018-00003"
+  },
+  {
+    "amount_eur": 0.0037216623036704834,
+    "hour": 18,
+    "reservation_id": "reward-000164",
+    "seller_id": "H018",
+    "status": "paid",
+    "transaction_id": "p2p-018-00004"
+  },
+  {
+    "amount_eur": 0.005032855776459331,
+    "hour": 18,
+    "reservation_id": "reward-000165",
+    "seller_id": "H018",
+    "status": "paid",
+    "transaction_id": "p2p-018-00005"
+  },
+  {
+    "amount_eur": 0.01277847859793324,
+    "hour": 18,
+    "reservation_id": "reward-000166",
+    "seller_id": "H015",
+    "status": "paid",
+    "transaction_id": "p2p-018-00006"
+  },
+  {
+    "amount_eur": 0.0006282456191595865,
+    "hour": 18,
+    "reservation_id": "reward-000167",
+    "seller_id": "H020",
+    "status": "paid",
+    "transaction_id": "p2p-018-00007"
+  },
+  {
+    "amount_eur": 0.003658727990693178,
+    "hour": 18,
+    "reservation_id": "reward-000168",
+    "seller_id": "H019",
+    "status": "paid",
+    "transaction_id": "p2p-018-00008"
+  },
+  {
+    "amount_eur": 0.00542375619271823,
+    "hour": 18,
+    "reservation_id": "reward-000169",
+    "seller_id": "H015",
+    "status": "paid",
+    "transaction_id": "p2p-018-00009"
+  },
+  {
+    "amount_eur": 0.009706125574838232,
+    "hour": 18,
+    "reservation_id": "reward-000170",
+    "seller_id": "H019",
+    "status": "paid",
+    "transaction_id": "p2p-018-00010"
+  },
+  {
+    "amount_eur": 0.003509331839984451,
+    "hour": 18,
+    "reservation_id": "reward-000171",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.003509331839984451,
+    "hour": 18,
+    "reservation_id": "reward-000172",
+    "seller_id": "H028",
+    "status": "paid",
+    "transaction_id": "p2p-018-00011"
+  },
+  {
+    "amount_eur": 0.0032529633387248505,
+    "hour": 18,
+    "reservation_id": "reward-000173",
+    "seller_id": "H028",
+    "status": "paid",
+    "transaction_id": "p2p-018-00012"
+  },
+  {
+    "amount_eur": 0.005545138660430305,
+    "hour": 18,
+    "reservation_id": "reward-000174",
+    "seller_id": "H028",
+    "status": "paid",
+    "transaction_id": "p2p-018-00013"
+  },
+  {
+    "amount_eur": 0.0072000699591467645,
+    "hour": 18,
+    "reservation_id": "reward-000175",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.007254902859684815,
+    "hour": 18,
+    "reservation_id": "reward-000176",
+    "seller_id": "H023",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0059465204681468185,
+    "hour": 18,
+    "reservation_id": "reward-000177",
+    "seller_id": "H023",
+    "status": "paid",
+    "transaction_id": "p2p-018-00014"
+  },
+  {
+    "amount_eur": 0.0013083823915379965,
+    "hour": 18,
+    "reservation_id": "reward-000178",
+    "seller_id": "H023",
+    "status": "paid",
+    "transaction_id": "p2p-018-00015"
+  },
+  {
+    "amount_eur": 0.0007759542074541904,
+    "hour": 18,
+    "reservation_id": "reward-000179",
+    "seller_id": "H034",
+    "status": "paid",
+    "transaction_id": "p2p-018-00016"
+  },
+  {
+    "amount_eur": 0.008037082978678865,
+    "hour": 18,
+    "reservation_id": "reward-000180",
+    "seller_id": "H038",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.011241308188704844,
+    "hour": 18,
+    "reservation_id": "reward-000181",
+    "seller_id": "H034",
+    "status": "paid",
+    "transaction_id": "p2p-018-00017"
+  },
+  {
+    "amount_eur": 0.0025034534787049755,
+    "hour": 18,
+    "reservation_id": "reward-000182",
+    "seller_id": "H035",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.001663267581115937,
+    "hour": 18,
+    "reservation_id": "reward-000183",
+    "seller_id": "H032",
+    "status": "paid",
+    "transaction_id": "p2p-018-00018"
+  },
+  {
+    "amount_eur": 0.0018559264853348178,
+    "hour": 18,
+    "reservation_id": "reward-000184",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010114835717908877,
+    "hour": 18,
+    "reservation_id": "reward-000185",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010114835717908877,
+    "hour": 18,
+    "reservation_id": "reward-000186",
+    "seller_id": "H035",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010114835717908877,
+    "hour": 18,
+    "reservation_id": "reward-000187",
+    "seller_id": "H038",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.008037082978678865,
+    "hour": 18,
+    "reservation_id": "reward-000188",
+    "seller_id": "H038",
+    "status": "paid",
+    "transaction_id": "p2p-018-00019"
+  },
+  {
+    "amount_eur": 0.0060819471711380585,
+    "hour": 18,
+    "reservation_id": "reward-000189",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0025034534787049755,
+    "hour": 18,
+    "reservation_id": "reward-000190",
+    "seller_id": "H035",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0025034534787049755,
+    "hour": 18,
+    "reservation_id": "reward-000191",
+    "seller_id": "H035",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.007762647242275729,
+    "hour": 18,
+    "reservation_id": "reward-000192",
+    "seller_id": "H039",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.005192807666083082,
+    "hour": 18,
+    "reservation_id": "reward-000193",
+    "seller_id": "H042",
+    "status": "paid",
+    "transaction_id": "p2p-018-00020"
+  },
+  {
+    "amount_eur": 0.00014258588634913583,
+    "hour": 18,
+    "reservation_id": "reward-000194",
+    "seller_id": "H045",
+    "status": "paid",
+    "transaction_id": "p2p-018-00021"
+  },
+  {
+    "amount_eur": 0.008221176692079411,
+    "hour": 18,
+    "reservation_id": "reward-000195",
+    "seller_id": "H043",
+    "status": "paid",
+    "transaction_id": "p2p-018-00022"
+  },
+  {
+    "amount_eur": 0.008241446068145634,
+    "hour": 18,
+    "reservation_id": "reward-000196",
+    "seller_id": "H044",
+    "status": "paid",
+    "transaction_id": "p2p-018-00023"
+  },
+  {
+    "amount_eur": 0.0021242704628036124,
+    "hour": 18,
+    "reservation_id": "reward-000197",
+    "seller_id": "H043",
+    "status": "paid",
+    "transaction_id": "p2p-018-00024"
+  },
+  {
+    "amount_eur": 0.003983198452413803,
+    "hour": 18,
+    "reservation_id": "reward-000198",
+    "seller_id": "H043",
+    "status": "paid",
+    "transaction_id": "p2p-018-00025"
+  },
+  {
+    "amount_eur": 0.001990306385067786,
+    "hour": 18,
+    "reservation_id": "reward-000199",
+    "seller_id": "H059",
+    "status": "paid",
+    "transaction_id": "p2p-018-00026"
+  },
+  {
+    "amount_eur": 0.017737590109898407,
+    "hour": 18,
+    "reservation_id": "reward-000200",
+    "seller_id": "H053",
+    "status": "paid",
+    "transaction_id": "p2p-018-00027"
+  },
+  {
+    "amount_eur": 0.009317062463886677,
+    "hour": 18,
+    "reservation_id": "reward-000201",
+    "seller_id": "H060",
+    "status": "paid",
+    "transaction_id": "p2p-018-00028"
+  },
+  {
+    "amount_eur": 0.006130216630949823,
+    "hour": 18,
+    "reservation_id": "reward-000202",
+    "seller_id": "H058",
+    "status": "paid",
+    "transaction_id": "p2p-018-00029"
+  },
+  {
+    "amount_eur": 0.008898247446929639,
+    "hour": 18,
+    "reservation_id": "reward-000203",
+    "seller_id": "H058",
+    "status": "paid",
+    "transaction_id": "p2p-018-00030"
+  },
+  {
+    "amount_eur": 0.002523682319694607,
+    "hour": 18,
+    "reservation_id": "reward-000204",
+    "seller_id": "H053",
+    "status": "paid",
+    "transaction_id": "p2p-018-00031"
+  },
+  {
+    "amount_eur": 0.0011035086330193568,
+    "hour": 18,
+    "reservation_id": "reward-000205",
+    "seller_id": "H070",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0028555195179027406,
+    "hour": 18,
+    "reservation_id": "reward-000206",
+    "seller_id": "H063",
+    "status": "paid",
+    "transaction_id": "p2p-018-00032"
+  },
+  {
+    "amount_eur": 0.0046531798098532655,
+    "hour": 18,
+    "reservation_id": "reward-000207",
+    "seller_id": "H069",
+    "status": "paid",
+    "transaction_id": "p2p-018-00033"
+  },
+  {
+    "amount_eur": 0.0031040846080927034,
+    "hour": 18,
+    "reservation_id": "reward-000208",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0031040846080927034,
+    "hour": 18,
+    "reservation_id": "reward-000209",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0031040846080927034,
+    "hour": 18,
+    "reservation_id": "reward-000210",
+    "seller_id": "H061",
+    "status": "paid",
+    "transaction_id": "p2p-018-00034"
+  },
+  {
+    "amount_eur": 0.0026675435941657622,
+    "hour": 18,
+    "reservation_id": "reward-000211",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0026675435941657622,
+    "hour": 18,
+    "reservation_id": "reward-000212",
+    "seller_id": "H066",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0011035086330193568,
+    "hour": 18,
+    "reservation_id": "reward-000213",
+    "seller_id": "H070",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0026675435941657622,
+    "hour": 18,
+    "reservation_id": "reward-000214",
+    "seller_id": "H061",
+    "status": "paid",
+    "transaction_id": "p2p-018-00035"
+  },
+  {
+    "amount_eur": 0.010402748980004688,
+    "hour": 18,
+    "reservation_id": "reward-000215",
+    "seller_id": "H067",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.010402748980004688,
+    "hour": 18,
+    "reservation_id": "reward-000216",
+    "seller_id": "H064",
+    "status": "paid",
+    "transaction_id": "p2p-018-00036"
+  },
+  {
+    "amount_eur": 0.011269702599459483,
+    "hour": 18,
+    "reservation_id": "reward-000217",
+    "seller_id": "H077",
+    "status": "paid",
+    "transaction_id": "p2p-018-00037"
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000218",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008631151489037637,
+    "hour": 18,
+    "reservation_id": "reward-000219",
+    "seller_id": "H080",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000220",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008631151489037637,
+    "hour": 18,
+    "reservation_id": "reward-000221",
+    "seller_id": "H080",
+    "status": "paid",
+    "transaction_id": "p2p-018-00038"
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000222",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000223",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000224",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000225",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0010663150554521472,
+    "hour": 18,
+    "reservation_id": "reward-000226",
+    "seller_id": "H071",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 3.40289281814421e-05,
+    "hour": 18,
+    "reservation_id": "reward-000227",
+    "seller_id": "H089",
+    "status": "paid",
+    "transaction_id": "p2p-018-00039"
+  },
+  {
+    "amount_eur": 0.009216806852075187,
+    "hour": 18,
+    "reservation_id": "reward-000228",
+    "seller_id": "H081",
+    "status": "paid",
+    "transaction_id": "p2p-018-00040"
+  },
+  {
+    "amount_eur": 0.01794446823669559,
+    "hour": 18,
+    "reservation_id": "reward-000229",
+    "seller_id": "H086",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008627475667846652,
+    "hour": 18,
+    "reservation_id": "reward-000230",
+    "seller_id": "H085",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0078672458368965,
+    "hour": 18,
+    "reservation_id": "reward-000231",
+    "seller_id": "H082",
+    "status": "paid",
+    "transaction_id": "p2p-018-00041"
+  },
+  {
+    "amount_eur": 0.00854502571027281,
+    "hour": 18,
+    "reservation_id": "reward-000232",
+    "seller_id": "H089",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.010077222399799088,
+    "hour": 18,
+    "reservation_id": "reward-000233",
+    "seller_id": "H090",
+    "status": "paid",
+    "transaction_id": "p2p-018-00042"
+  },
+  {
+    "amount_eur": 0.013577175479491813,
+    "hour": 18,
+    "reservation_id": "reward-000234",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0017944253690832634,
+    "hour": 18,
+    "reservation_id": "reward-000235",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 7.638492553984966e-05,
+    "hour": 18,
+    "reservation_id": "reward-000236",
+    "seller_id": "H100",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00021114353873085356,
+    "hour": 18,
+    "reservation_id": "reward-000237",
+    "seller_id": "H099",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0009397840865895236,
+    "hour": 18,
+    "reservation_id": "reward-000238",
+    "seller_id": "H091",
+    "status": "paid",
+    "transaction_id": "p2p-018-00043"
+  },
+  {
+    "amount_eur": 0.010614786912608738,
+    "hour": 18,
+    "reservation_id": "reward-000239",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008546412824937399,
+    "hour": 18,
+    "reservation_id": "reward-000240",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.00021114353873085356,
+    "hour": 18,
+    "reservation_id": "reward-000241",
+    "seller_id": "H099",
+    "status": "paid",
+    "transaction_id": "p2p-018-00044"
+  },
+  {
+    "amount_eur": 7.638492553984966e-05,
+    "hour": 18,
+    "reservation_id": "reward-000242",
+    "seller_id": "H100",
+    "status": "paid",
+    "transaction_id": "p2p-018-00045"
+  },
+  {
+    "amount_eur": 0.013577175479491813,
+    "hour": 18,
+    "reservation_id": "reward-000243",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008546412824937399,
+    "hour": 18,
+    "reservation_id": "reward-000244",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0033405749117266102,
+    "hour": 18,
+    "reservation_id": "reward-000245",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008546412824937399,
+    "hour": 18,
+    "reservation_id": "reward-000246",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.013577175479491813,
+    "hour": 18,
+    "reservation_id": "reward-000247",
+    "seller_id": "H097",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.0008546412824937399,
+    "hour": 18,
+    "reservation_id": "reward-000248",
+    "seller_id": "H091",
+    "status": "released",
+    "transaction_id": ""
+  },
+  {
+    "amount_eur": 0.001788629118328531,
+    "hour": 19,
+    "reservation_id": "reward-000249",
+    "seller_id": "H044",
+    "status": "paid",
+    "transaction_id": "p2p-019-00000"
+  },
+  {
+    "amount_eur": 0.00023434813941857204,
+    "hour": 19,
+    "reservation_id": "reward-000250",
+    "seller_id": "H058",
+    "status": "paid",
+    "transaction_id": "p2p-019-00001"
+  }
+]
