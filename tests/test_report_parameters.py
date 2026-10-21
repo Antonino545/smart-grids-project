@@ -14,7 +14,7 @@ def configuration():
 
 def test_reference_covers_every_default_parameter():
     paths = parameter_paths(configuration())
-    assert len(paths) == 155
+    assert len(paths) == 166
     assert "buildings.types.school.weekend_multiplier" in paths
     assert "simulation.battery.charge_efficiency" in paths
 
@@ -38,4 +38,4 @@ def test_values_follow_supplied_configuration_and_ignore_experiment_metadata():
     config["simulation"]["hours"] = 168
     config["experiment"] = {"scenario": "A", "batteries_enabled": True}
     assert get_value(config, "simulation.hours") == 168
-    assert len(parameter_paths(config)) == 155
+    assert len(parameter_paths(config)) == 166

@@ -106,7 +106,20 @@ LEGACY_AND_CHAIN = [
     ("households.daily_demand_max_kwh", "kWh/day; legacy only", "Upper daily demand draw in the old model. No effect on mixed-building daily energy."),
     ("households.base_demand_weight", "weight; legacy only", "Base hourly profile weight in the old model. Mixed profiles use buildings.types.<type>.base_load_weight instead."),
 ]
-SCALAR_GROUPS = [COMMUNITY, BATTERY, FORECAST, BEHAVIOR, ECONOMICS, LEGACY_AND_CHAIN]
+RESPONSE = [
+    ("demand_response.enabled", "boolean", "Enable day-ahead load shifting for PV prosumers without battery ownership. false preserves fixed demand; --compare-demand-response runs both conditions separately."),
+    ("demand_response.max_shift_hours", "hours", "Maximum absolute distance between source and receiving hour. Loads may advance or delay within one complete local day, using forecasts only."),
+    ("demand_response.max_hourly_increase_fraction", "fraction of original load", "Limits added load in any receiving hour. 0.5 permits at most a 50% increase over original demand; own forecast PV surplus also caps it."),
+    ("demand_response.flexible_fraction_by_type.small_house", "fraction", "Maximum share removable from each original house demand hour. The rest remains fixed. This is an illustrative appliance-flexibility assumption."),
+    ("demand_response.flexible_fraction_by_type.apartment_block", "fraction", "Flexible share of the block's aggregate hourly load, not per-flat independent scheduling. Original total daily energy is preserved."),
+    ("demand_response.flexible_fraction_by_type.supermarket", "fraction", "Small flexible share; most demand, including refrigeration base load, remains fixed. This model does not implement equipment thermal dynamics."),
+    ("demand_response.flexible_fraction_by_type.school", "fraction", "Flexible share within the permitted school schedule. Closed weekends are excluded according to the building-type settings."),
+    ("demand_response.operating_window_by_type.small_house", "[start,end) hours", "Both source and target must be inside this local-hour window. No load moves across dates or from absent hours in an incomplete day."),
+    ("demand_response.operating_window_by_type.apartment_block", "[start,end) hours", "Permitted movement window for aggregate residential block demand. End is exclusive; daily load is neither created nor removed."),
+    ("demand_response.operating_window_by_type.supermarket", "[start,end) hours", "Intersected with the type's actual opening/closing hours. Only the configured flexible share can move; no closed-hour scheduling."),
+    ("demand_response.operating_window_by_type.school", "[start,end) hours", "Intersected with the school's configured opening schedule. Weekend-open settings still apply; partial days are left unchanged."),
+]
+SCALAR_GROUPS = [COMMUNITY, BATTERY, FORECAST, BEHAVIOR, ECONOMICS, LEGACY_AND_CHAIN, RESPONSE]
 TYPE_KEYS = GEOMETRY + TYPE_LOAD
 
 
@@ -165,7 +178,7 @@ def append_parameter_guide(config, p, title, sub, table, page):
     p(f"The next pages explain <b>all {len(paths)} configurable values</b> in the recorded experiment. Values come from scenario A's saved configuration in results/comparison.json, not from a possibly edited live JSON file. Other scenarios reuse the same base inputs and differ in their recorded storage/regulation switches.")
     table([["Read first", "Purpose"], ["Pages 1-5", "Community, building types, physical models and trading rules."],
            ["Pages 6-10", "Actual outcomes and numerical verification."],
-           ["Pages 12-20", "Exact parameter names, values, units and implemented effects."],
+           ["Pages 12-20 and 22", "Exact parameter names, values, units and implemented effects."],
            ["Page 21", "Worked shared-roof example and steps for a controlled team experiment."]],[125,382])
     sub("Units and terms")
     table([["Term", "What it means in this simulator"],
@@ -263,4 +276,9 @@ def append_parameter_guide(config, p, title, sub, table, page):
     p("Illustration: one block has a 250 m2 roof, usable share 0.50 and density 0.20 kW/m2. PV capacity is 25 kW if its type limit permits. At 4 floors and 3 flats per floor it has 12 flats; at 8 floors it has 24. At an illustrative 10 kWh per flat/day, baseline demand rises from 120 to 240 kWh/day while PV remains 25 kW. These are example values, not extra measurements.")
     sub("4. Read the outputs before drawing conclusions")
     p("Check comparison.csv for P2P kWh, its surplus denominator, imports/exports, costs at both boundaries, fees, rewards, closing funds and final storage. Join household_hourly.csv with inputs/households.csv by meter ID for type-specific behavior. Keep the exact saved configuration and input hash; a new community is not a pure policy comparison.")
-    return 21
+    page()
+    title(22,"Parameters: shifting demand toward own PV")
+    p("Teaching defaults, not calibrated device capabilities. Battery owners and consumer-only meters do not shift, including C/D where battery operation is disabled. This preserves the same eligibility across A-F. Fixed and shifted conditions share PV, buildings and daily demand totals, but intentionally have different hourly demand inputs.")
+    table(scalar_rows(RESPONSE),[145,105,257])
+    p("Heuristic: remove a bounded share only from hours with a forecast PV deficit; place it into nearby hours with unused own PV, within rebound and schedule limits. Unplaceable load stays at its original hour. The inputs/demand_shifts.csv journal records each movement; hourly_inputs_baseline.csv preserves the original forecasts.")
+    return 22

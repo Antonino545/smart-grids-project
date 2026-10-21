@@ -10,6 +10,8 @@ from src.forecasting import export_inputs, generate_inputs
 from src.households import export_households, generate_households
 from src.output import export_result, write_csv, write_json
 from src.simulator import run_simulation
+from config.demand_response import DemandResponseSettings
+from src.demand_response import shift_demand
 
 SCENARIOS = {
     "A": (True, False, "self_consumption_first"),
@@ -25,6 +27,19 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
     settings = config["simulation"]
     households = generate_households(settings, config["households"], config.get("buildings"))
     inputs = generate_inputs(households, settings, config["forecast"])
+    response = config.get("demand_response", DemandResponseSettings())
+    baseline_inputs = inputs
+    inputs, shifts = shift_demand(households, inputs, response, config.get("buildings"))
+    if response.enabled:
+        export_inputs(baseline_inputs, output / "inputs" / "hourly_inputs_baseline.csv")
+        # Always write a header, including a valid zero-shift experiment.
+        import csv
+        path = output / "inputs" / "demand_shifts.csv"
+        with path.open("w", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=["household_id", "building_type", "source_hour", "target_hour",
+                                                       "source_timestamp", "target_timestamp", "quantity_kwh"])
+            writer.writeheader()
+            writer.writerows(shifts)
     export_households(households, output / "inputs" / "households.csv")
     export_inputs(inputs, output / "inputs" / "hourly_inputs.csv")
     results, summaries = [], []
@@ -50,6 +65,9 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
     community["prosumer_count"] = sum(h.participant_role == "prosumer" for h in households)
     community["consumer_count"] = sum(h.participant_role == "consumer" for h in households)
     comparison = {"community": community, "input_sha256": summaries[0]["input_sha256"], "scenarios": summaries,
+                  "demand_response": {"enabled": response.enabled, "shifted_energy_kwh": sum(s["quantity_kwh"] for s in shifts),
+                                      "shifted_meter_count": len({s["household_id"] for s in shifts}),
+                                      "eligibility": "PV prosumers without battery ownership, unchanged across A-F"},
                   "notes": ["Default weather, demand and price history are synthetic, not measurements.",
                             "Building archetypes and parameter ranges are illustrative engineering assumptions.",
                             "C and D retain ownership metadata but disable all battery operations.",

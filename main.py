@@ -3,9 +3,11 @@
 import argparse
 import json
 import logging
+from dataclasses import replace
 from pathlib import Path
 
 from config.buildings import load_building_settings
+from config.demand_response import DemandResponseSettings
 from config.settings import (
     BatterySettings, BlockchainSettings, ForecastSettings, HouseholdSettings,
     MarketSettings, RegulatorSettings, SimulationSettings,
@@ -31,7 +33,8 @@ def load_configuration(path: Path | None) -> dict:
         merge(raw, overrides)
     constructors = {"simulation": SimulationSettings, "households": HouseholdSettings,
                     "forecast": ForecastSettings, "market": MarketSettings,
-                    "regulator": RegulatorSettings, "blockchain": BlockchainSettings, "buildings": load_building_settings}
+                    "regulator": RegulatorSettings, "blockchain": BlockchainSettings, "buildings": load_building_settings,
+                    "demand_response": DemandResponseSettings}
     if not isinstance(raw, dict) or set(raw) - set(constructors):
         raise ValueError("Configuration must be an object with known section names.")
     if any(not isinstance(section, dict) for section in raw.values()):
@@ -49,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--scenario", choices=["all", "A", "B", "C", "D", "E", "F"], default="all")
     parser.add_argument("--include-priority", action="store_true", help="Add E/F P2P-priority comparisons to all scenarios")
     parser.add_argument("--no-charts", action="store_true", help="Skip image generation")
+    parser.add_argument("--compare-demand-response", action="store_true", help="Compare fixed demand with PV-aware shifting in a separate subfolder")
     args = parser.parse_args(argv)
     try:
         config = load_configuration(args.config)
@@ -57,7 +61,17 @@ def main(argv: list[str] | None = None) -> int:
         names = (["A", "B", "C", "D"] + (["E", "F"] if args.include_priority else [])) if args.scenario == "all" else [args.scenario]
         if args.include_priority and args.scenario != "all":
             raise ValueError("--include-priority is used with --scenario all.")
+        if args.compare_demand_response:
+            config["demand_response"] = replace(config["demand_response"], enabled=False)
         comparison = run_experiments(config, args.output, names, charts=not args.no_charts)
+        if args.compare_demand_response:
+            from src.demand_response_charts import compare_demand_response
+            flexible = {**config, "demand_response": replace(config["demand_response"], enabled=True)}
+            shifted = run_experiments(flexible, args.output / "demand_response", names, charts=not args.no_charts)
+            compare_demand_response(comparison, shifted, args.output, charts=not args.no_charts)
+            LOGGER.info("Demand response moved %.3f kWh across %d meters; results: %s",
+                        shifted["demand_response"]["shifted_energy_kwh"], shifted["demand_response"]["shifted_meter_count"],
+                        args.output / "demand_response")
         for summary in comparison["scenarios"]:
             LOGGER.info("Simulation %s complete: %d buildings/meters, %d hours; P2P %.3f kWh; blockchain valid=%s.",
                         summary["scenario"], comparison["community"]["participant_count"], settings.hours,

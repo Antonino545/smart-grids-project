@@ -47,6 +47,7 @@ def calculate_metrics(result: SimulationResult) -> dict:
         "battery_final_stored_kwh": final_storage,
         "active_battery_count": len({b.household_id for b in result.balances if b.soc is not None}),
         "pv_generation_kwh": pv, "demand_kwh": demand,
+        "pv_direct_self_consumption_kwh": sum(min(b.pv_kwh, b.demand_kwh) for b in result.balances),
         "energy_reconciliation_error_kwh": energy_error,
         "financial_reconciliation_error_eur": money_error,
         "block_count": len(result.blockchain.blocks) if result.blockchain else 0,

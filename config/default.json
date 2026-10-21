@@ -107,6 +107,35 @@
       }
     }
   },
+  "demand_response": {
+    "enabled": false,
+    "flexible_fraction_by_type": {
+      "apartment_block": 0.15,
+      "school": 0.1,
+      "small_house": 0.2,
+      "supermarket": 0.05
+    },
+    "max_hourly_increase_fraction": 0.5,
+    "max_shift_hours": 6,
+    "operating_window_by_type": {
+      "apartment_block": [
+        6,
+        23
+      ],
+      "school": [
+        8,
+        17
+      ],
+      "small_house": [
+        6,
+        23
+      ],
+      "supermarket": [
+        7,
+        22
+      ]
+    }
+  },
   "forecast": {
     "cloud_factor_max": 1.0,
     "cloud_factor_min": 0.65,
