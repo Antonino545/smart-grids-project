@@ -7,6 +7,7 @@
       "miner_count": 10
     },
     "buildings": {
+      "consumer_count": 50,
       "enabled": true,
       "pv_density_kw_m2": 0.2,
       "types": {
@@ -108,6 +109,35 @@
         }
       }
     },
+    "demand_response": {
+      "enabled": false,
+      "flexible_fraction_by_type": {
+        "apartment_block": 0.15,
+        "school": 0.1,
+        "small_house": 0.2,
+        "supermarket": 0.05
+      },
+      "max_hourly_increase_fraction": 0.5,
+      "max_shift_hours": 6,
+      "operating_window_by_type": {
+        "apartment_block": [
+          6,
+          23
+        ],
+        "school": [
+          8,
+          17
+        ],
+        "small_house": [
+          6,
+          23
+        ],
+        "supermarket": [
+          7,
+          22
+        ]
+      }
+    },
     "experiment": {
       "batteries_enabled": true,
       "battery_strategy": "self_consumption_first",
@@ -187,7 +217,7 @@
       "timestep_hours": 1.0
     }
   },
-  "input_sha256": "0d448af457d23a1206abf773826bbc61158501c6f65811dd56a36db7ef192d38",
+  "input_sha256": "c42ebb8f3997ab181b6835907386d76365d642c4798b3b5b5a3752dd80e04e9b",
   "input_sources": {
     "demand_source": [
       "synthetic_building_profile"
@@ -201,7 +231,7 @@
   },
   "metrics": {
     "active_battery_count": 55,
-    "aggregator_energy_kwh": 214.5829151240415,
+    "aggregator_energy_kwh": 818.7444642109773,
     "battery_charge_kwh": 1201.9036526989187,
     "battery_discharge_kwh": 1018.1341742798628,
     "battery_final_stored_kwh": 394.08828661148544,
@@ -209,18 +239,19 @@
     "battery_loss_kwh": 113.68119180757029,
     "block_count": 24,
     "blockchain_valid": true,
-    "community_including_regulator_net_cost_eur": 1978.2499371930016,
-    "demand_kwh": 19704.7442066664,
-    "energy_reconciliation_error_kwh": 4.121147867408581e-12,
-    "external_grid_net_cost_eur": 1978.2499371930016,
+    "community_including_regulator_net_cost_eur": 5210.777075840872,
+    "demand_kwh": 31450.70637041995,
+    "energy_reconciliation_error_kwh": 1.3926637620897964e-12,
+    "external_grid_net_cost_eur": 5210.777075840872,
     "financial_reconciliation_error_eur": 0.0,
-    "grid_exports_kwh": 5708.807613636557,
-    "grid_imports_kwh": 7735.927980037317,
-    "household_net_cost_eur": 1978.2499371930016,
-    "p2p_energy_kwh": 254.55355990869847,
-    "p2p_share_pct": 4.120360369974281,
-    "p2p_to_grid_exports_ratio": 0.04458961960824351,
-    "p2p_transaction_count": 82,
+    "grid_exports_kwh": 4495.217986644086,
+    "grid_imports_kwh": 18268.300516798394,
+    "household_net_cost_eur": 5210.777075840872,
+    "p2p_energy_kwh": 863.9816378142348,
+    "p2p_share_pct": 13.984937795063999,
+    "p2p_to_grid_exports_ratio": 0.19220016479317437,
+    "p2p_transaction_count": 269,
+    "pv_direct_self_consumption_kwh": 10481.545577316483,
     "pv_generation_kwh": 17861.3933186847,
     "pv_surplus_before_battery_charging_kwh": 7379.847741368216,
     "regulator_fee_revenue_eur": 0,

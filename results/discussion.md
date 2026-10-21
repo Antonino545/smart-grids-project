@@ -4,17 +4,17 @@ These are model outputs for the recorded inputs and assumptions, not evidence of
 
 | Scenario | P2P kWh | P2P share % | Imports kWh | Exports kWh | Household net cost EUR |
 |---|---:|---:|---:|---:|---:|
-| A | 254.554 | 4.120 | 7735.928 | 5708.808 | 1978.250 |
-| B | 706.991 | 11.444 | 7421.821 | 5394.701 | 2016.890 |
-| C | 362.877 | 4.917 | 8656.509 | 6813.158 | 2188.163 |
-| D | 1051.853 | 14.253 | 8091.691 | 6248.340 | 2174.970 |
-| E | 334.444 | 4.532 | 7727.116 | 5726.260 | 1974.559 |
-| F | 903.547 | 12.243 | 7287.775 | 5289.487 | 1976.665 |
+| A | 863.982 | 13.985 | 18268.301 | 4495.218 | 5210.777 |
+| B | 2858.451 | 46.269 | 16721.153 | 2948.070 | 4978.985 |
+| C | 1047.066 | 14.188 | 19029.806 | 5440.493 | 5382.512 |
+| D | 3523.217 | 47.741 | 17074.078 | 3484.765 | 5048.262 |
+| E | 1030.768 | 13.967 | 18215.841 | 4481.092 | 5195.887 |
+| F | 3473.971 | 47.074 | 16447.048 | 2846.534 | 4886.779 |
 
 ## Regulation comparisons
-- B versus A: regulation increased P2P energy (difference +452.438 kWh).
-- D versus C: regulation increased P2P energy (difference +688.976 kWh).
-- F versus E: regulation increased P2P energy (difference +569.103 kWh).
+- B versus A: regulation increased P2P energy (difference +1994.469 kWh).
+- D versus C: regulation increased P2P energy (difference +2476.151 kWh).
+- F versus E: regulation increased P2P energy (difference +2443.203 kWh).
 
 Price guidance and funded discounts can make more offers compatible. A reward cannot create PV surplus or demand, and does not guarantee improvement for other seeds or inputs.
 
