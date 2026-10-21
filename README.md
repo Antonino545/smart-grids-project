@@ -1,7 +1,8 @@
 # Smart Grids — Prosumer Community Simulator
 
-A reproducible Python simulator for 100 PV-equipped buildings with aggregate meters in 10 neighborhoods,
-including 55 battery owners. It implements self-balancing, neighborhood P2P trading,
+A reproducible Python simulator for 150 aggregate building meters: 100 PV-equipped
+prosumers (55 battery owners) plus 50 consumer-only buildings. Each of 10 mixed
+neighborhoods contains 10 prosumers and 5 consumers. It implements self-balancing, neighborhood P2P trading,
 a community aggregator, external-grid settlement, funded regulation and an hourly
 Proof-of-Work blockchain. Implementation follows the supplied plan in tested stages.
 Presentation preparation and ZIP packaging are deferred at the user's request.
@@ -28,12 +29,18 @@ No network service, GPU, blockchain account, or web interface is required.
 # Include the optional alternative battery strategy, scenarios E and F:
 python main.py --include-priority
 
+# Compare fixed demand against PV-aware demand shifting:
+python main.py --include-priority --compare-demand-response
+
 # Run one regulated scenario, or skip charts:
 python main.py --scenario B --output results/single_B
 python main.py --scenario all --no-charts --output results/numerical_run
 
 # Override defaults using a JSON configuration:
 python main.py --config config/default.json --include-priority
+
+# Reproduce the original 100-prosumer community, without the 50 additions:
+python main.py --config config/mixed_100_baseline.json --include-priority --output results/baseline_100
 ```
 
 Use a separate output directory for each different configuration. The selected
@@ -68,9 +75,12 @@ journal and block hashes. Stochastic results can change with another seed.
 
 ## Building types and dynamic loads
 
-The accepted design is **100 buildings, not 100 families**: 50 small houses,
-30 apartment blocks, 10 supermarkets and 10 schools. Each group contains 5/3/1/1
-buildings by default, shuffled within its neighborhood. Every block has one roof
+The original **100 prosumer buildings** remain: 50 small houses,
+30 apartment blocks, 10 supermarkets and 10 schools. The 50 new consumers add
+25 houses, 15 blocks, 5 supermarkets and 5 schools, with zero PV and no batteries.
+Every group retains its original 5/3/1/1 prosumers and receives five consumers.
+Consumer types are shuffled across groups; every neighborhood contains both roles.
+Every block has one roof
 and aggregates the consumption of all its flats. Roof area limits PV; floors and
 flat count increase residential demand without multiplying roof area.
 
@@ -82,17 +92,23 @@ owners. These are **synthetic, configurable engineering defaults**. See
 [the building model](docs/building_model.md) for values, equations and limitations.
 
 Technical CSV/config names such as `household_id` and `household_count` remain for
-compatibility but now identify/count aggregate building meters. `comparison.json`
+compatibility. `simulation.household_count` counts the original prosumers;
+`buildings.consumer_count` counts additions. Total meters are their sum.
+The default JSON is loaded first, then partial overrides are merged recursively.
+The library generator alone retains a zero-addition default unless supplied building settings.
+`comparison.json`
 explicitly records this unit and the number of actual residential dwelling units.
 
 ## Community map
 
 `results/charts/community_map.png` (also SVG) shows the actual community as a
-10 x 10 square schematic by default. Each row is one neighborhood: H001-H010
-belong to G1, H011-H020 to G2, and so on. Blue buildings have PV plus a battery
-(with a B badge); gold buildings have PV only. HOUSE/BLOCK/SHOP/SCHOOL markers
+10-row x 15-column schematic by default. Each row is one neighborhood: H001-H010
+belong to G1, H011-H020 to G2, and so on, with H101-H150 distributed five per group.
+Display columns are shuffled, mixing both roles within each row.
+Blue buildings have PV plus a battery (B badge); gold buildings have PV only;
+pale green buildings labeled CONSUMER have neither PV nor batteries. HOUSE/BLOCK/SHOP/SCHOOL markers
 show the type, meter ID, PV capacity and block floor count. Seeded battery assignment gives
-five or six owners per neighborhood, totaling 55 owners and 45 without batteries.
+five or six owners per neighborhood, totaling 55 owners, 45 PV-only prosumers and 50 consumers.
 The map is generated from the same household objects used by the simulation.
 `charts/data/community_layout.csv` exports cell assignments and attributes;
 `charts/data/neighborhood_distribution.csv` exports group totals.
@@ -156,8 +172,8 @@ calendars are not inferred automatically.
 
 ## Battery and market assumptions
 
-The original brief described 100 households. The accepted revision uses 100
-aggregate building meters while retaining 10 equal groups, 55 battery owners,
+The original brief described 100 households. The accepted extension uses 100
+prosumer meters plus 50 consumer meters while retaining 10 equal groups, 55 battery owners,
 24 hourly steps, funded P2P rewards and 10 miners with `000` hashes. Building-type
 composition and sizing are modeling assumptions, configurable for sensitivity tests.
 Suggested battery values and the following behavioral defaults are engineering
@@ -272,11 +288,19 @@ explicitly flagged. The report builder targets the mixed-building six-scenario
 experiment. Other compositions require reviewing any illustrative narrative
 alongside the exported configuration.
 
-The PDF includes a team parameter guide on pages 11–21: all 154 configuration
+The PDF includes a team parameter guide on pages 11–22: all 166 configuration
 values, units, effects, building-type comparisons, worked examples and a partial
 JSON experiment workflow. Values are read from the saved run configuration.
 `scripts/report_parameters.py` checks that every configuration field is documented;
 the report build fails if fields are added or removed without updating the guide.
+
+Optional demand response shifts a bounded share of load toward each owner's PV
+forecast, only for prosumers without batteries. Daily energy remains unchanged;
+consumer-only meters and battery owners retain their loads. The default remains
+fixed demand. Paired results go to `results/demand_response/`, with comparison
+graphs and CSV/JSON in the parent output folder. When present, PDF pages 23–25
+explain the behavior, hourly curves, results, a worked example and limitations.
+See [the demand-response model](docs/demand_response.md) for settings and audits.
 
 ## Tests and project structure
 

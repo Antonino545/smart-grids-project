@@ -77,8 +77,8 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
     p("SMART GRIDS / MIXED BUILDING COMMUNITY","Sub")
     p("Prosumer community simulator<br/>with heterogeneous buildings","Title")
     p(datetime.now(ZoneInfo("Europe/Rome")).strftime("%d %B %Y"),"Caption")
-    p(f'The accepted design contains <b>{community["participant_count"]} buildings with aggregate meters</b> in ten neighborhoods: 50 small houses, 30 apartment blocks, 10 supermarkets and 10 schools. Exactly 55 buildings own batteries. In the seeded realization, residential buildings contain <b>{community["dwelling_count"]} dwelling units</b>. One apartment block is one meter with one shared roof, not one roof per flat.')
-    p("<b>For the team:</b> pages 11-21 explain every parameter, its units and effect, with worked examples and a configuration workflow.","Caption")
+    p(f'The design contains <b>{community["participant_count"]} aggregate building meters: {community["prosumer_count"]} prosumers and {community["consumer_count"]} consumers</b>. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are 75 small houses, 45 blocks, 15 supermarkets and 15 schools, including <b>{community["dwelling_count"]} residential dwelling units</b>. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.')
+    p("<b>For the team:</b> pages 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on pages 23-25 when that experiment is present.","Caption")
     sub("Objective and experiment")
     p("Encourage neighborhood P2P electricity trading using price guidance and funded seller rewards, then evaluate storage priority and financial outcomes. Self-balancing, P2P, aggregator and grid settlement preserve energy and cash. Every completed internal trade appears in an hourly Proof-of-Work block.")
     table([["Scenario","Storage","Regulation","Charging priority"],
@@ -91,21 +91,21 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
     page()
 
     title(2,"Neighborhood layout and building types")
-    p("Each row is one P2P neighborhood: five small houses, three apartment blocks, one supermarket and one school. Type positions are shuffled independently of battery assignment. H001-H100 identify whole-building meters; historical CSV field names retain the word household for compatibility.")
-    fig("community_map","Figure 1. Actual seeded layout. HOUSE, BLOCK, SHOP and SCHOOL show type; F denotes floors. Blue buildings and B badges indicate a battery. Positions and marker dimensions are schematic, not geography or feeder geometry.",width=465)
+    p("Every row contains 10 original prosumers and 5 new consumers: all ten neighborhoods are mixed. H001-H100 retain their original groups, PV, profiles and battery ownership; H101-H150 are consumer-only meters. The additions comprise 25 houses, 15 blocks, 5 supermarkets and 5 schools, shuffled across groups with five consumers per group.")
+    fig("community_map","Figure 1. Seeded community schematic: blue = PV + battery, gold = PV only, pale green and CONSUMER label = no PV/storage. Shapes show building type; F denotes floors. Display columns are shuffled independently of trading order. These are not geographic coordinates or feeder connections.",width=507)
     p("Every neighborhood has five or six battery owners. IDs, types and ownership stay fixed in all scenarios, including C/D where operation is disabled. The map is generated automatically by simulation runs with charts enabled, together with exact cell and group CSV exports.")
     page()
 
     title(3,"Building geometry and physical sizing")
     p("Type ranges are configurable in <b>config/buildings.py</b> and the buildings section of JSON. The following are proposed engineering defaults, not professor requirements or calibrated building-stock data.")
     table([["Type","Count","Single roof m2","Floors","Daily energy basis"],
-           ["Small house",50,"70-150","1-2","8-24 kWh per dwelling"],
-           ["Apartment block",30,"180-360","4-10","8-20 kWh per dwelling"],
-           ["Supermarket",10,"600-1400","1","0.5-1.1 kWh per m2"],
-           ["School",10,"700-1600","2-3","0.08-0.18 kWh per m2"]],[105,42,100,60,200])
+           ["Small house",75,"70-150","1-2","8-24 kWh per dwelling"],
+           ["Apartment block",45,"180-360","4-10","8-20 kWh per dwelling"],
+           ["Supermarket",15,"600-1400","1","0.5-1.1 kWh per m2"],
+           ["School",15,"700-1600","2-3","0.08-0.18 kWh per m2"]],[105,42,100,60,200])
     sub("One roof, regardless of height")
     p("Total floor area = roof footprint x floors. Blocks contain 2-4 dwelling units per floor. Their demand basis scales with the total number of units. Commercial/school demand scales with total floor area. Small houses represent one dwelling even when they have two floors.")
-    p("PV installed kW = min(single roof m2 x usable roof fraction x PV density, type PV limit)","Code")
+    p("Prosumers: PV kW = min(roof m2 x usable share x density, type PV limit). Consumers: PV = 0; battery = none.","Code")
     p("Usable roof fraction is 35-65% and PV density is 0.20 kW/m2. Installed limits are 12 kW for houses, 100 kW for blocks, and 300 kW for supermarkets/schools. Floors and flats do not appear in the PV formula. Adding floors increases the demand basis without creating extra roof area.")
     sub("Actual seeded attributes, averaged per building")
     table([["Type","Battery owners","Dwellings","Mean roof m2","Mean PV kW"]]+[
@@ -115,7 +115,7 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
     page()
 
     title(4,"Dynamic demand and solar forecasts")
-    fig("building_type_profiles","Figure 2. Mean energy per building of each type, per hourly step. Counts differ between types; these are not type totals. All scenarios reuse these same inputs.")
+    fig("building_type_profiles","Figure 2. Mean hourly energy per building type, including prosumers and consumers (whose PV is zero). These are not type totals. All scenarios reuse the same inputs; a lower mean PV than the old community does not mean original panels were removed.")
     sub("Hourly activity and weekday/weekend behavior")
     p("Houses and blocks have morning/evening peaks with building-specific timing and hourly variation. Supermarkets retain a base load overnight and add operating load during 07:00-22:00. Schools operate during 08:00-17:00 on weekdays. Weekend daily energy is 105% of weekday baseline for residential types, 90% for supermarkets and 15% for schools; school operating load is disabled on weekends.")
     p("Each building receives a seeded daily multiplier within +/-8%. Geometry stays fixed during the experiment; consumption changes by hour and date. A supplied aggregate demand CSV replaces this synthetic model. Weekends are modeled, but school terms, public holidays and weather-sensitive HVAC loads are not. Weekday school operation in June is an explicit simplification.")
@@ -125,7 +125,7 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
 
     title(5,"Trading, regulation and transaction record")
     sub("Settlement sequence")
-    p("<b>Self-balancing:</b> owner PV serves current demand, with eligible battery operations.<br/><b>P2P:</b> seeded random buyer/seller encounters within each ten-member group, using the seller ask.<br/><b>Aggregator:</b> lowest asks and highest bids across groups, at midpoint prices.<br/><b>External grid:</b> remaining demand imports at EUR 0.30/kWh and surplus exports at EUR 0.06/kWh. Quantities update after each trade to prevent double selling.")
+    p("<b>Self-balancing:</b> owner PV serves demand, with eligible battery operations. Consumers have demand only.<br/><b>P2P:</b> seeded buyer/seller encounters within each 15-member mixed group, at the seller ask.<br/><b>Aggregator:</b> lowest asks and highest bids across groups, at midpoint prices.<br/><b>External grid:</b> remaining demand imports at EUR 0.30/kWh and surplus exports at EUR 0.06/kWh. Consumers can buy but never supply electricity. Each trade updates remaining energy.")
     sub("Guidance and funded rewards")
     table([["Opening regulator funds","P2P seller reward"],["Below EUR 1","EUR 0/kWh"],
            ["EUR 1 to below EUR 5","EUR 0.01/kWh"],["EUR 5 or above","EUR 0.02/kWh"]],[280,227])
@@ -190,6 +190,54 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
         table(rows, widths, padding=5)
 
     expected_pages = append_parameter_guide(config, p, title, sub, parameter_table, page)
+    response_path = results / "demand_response_comparison.json"
+    if response_path.exists():
+        paired = json.loads(response_path.read_text())
+        if paired["fixed_input_sha256"] != comparison["input_sha256"]:
+            raise ValueError("Demand-response comparison does not match the fixed-demand report inputs.")
+        page()
+        title(23,"Fixed demand versus PV-aware flexibility")
+        p("Only the original 45 PV prosumers without batteries are eligible. Consumers and battery owners retain their hourly loads. C/D keep the ownership-based eligibility even with storage disabled. This is a day-ahead forecast heuristic, not an appliance-level optimizer or a measured behavioral response.")
+        fig("demand_response_comparison","Figure 9. Paired scenarios hold PV, buildings, daily energy and market seeds fixed. Load timing changes only. Direct self-consumption excludes battery flows; meter cost includes fees/rewards. Synthetic simulation outputs.",width=380)
+        p(f'Shifted energy: <b>{paired["demand_response"]["shifted_energy_kwh"]:.3f} kWh</b> across {paired["demand_response"]["shifted_meter_count"]} meters. All daily demand is retained; unused flexibility stays at its original time.')
+        pairs = {(r["scenario"],r["condition"]):r for r in paired["rows"]}
+        table([["Scenario", "P2P fixed kWh", "P2P shifted kWh", "Change kWh"]]+[
+            [n,f(pairs[n,"Fixed demand"]["p2p_energy_kwh"]),f(pairs[n,"Shifted demand"]["p2p_energy_kwh"]),
+             f(pairs[n,"Shifted demand"]["p2p_energy_kwh"]-pairs[n,"Fixed demand"]["p2p_energy_kwh"])]
+            for n in summaries],[65,145,145,152])
+        decreases = sum(pairs[n,"Shifted demand"]["p2p_energy_kwh"] < pairs[n,"Fixed demand"]["p2p_energy_kwh"]-1e-9 for n in summaries)
+        p(f"P2P volume falls in {decreases} of {len(summaries)} recorded pairs. Direct own-PV use rises by the shifted energy. Better self-consumption and maximum P2P are different objectives. Run: python main.py --include-priority --compare-demand-response", "Caption")
+        expected_pages += 1
+        page()
+        title(24,"Team guide: what changes in daily behavior")
+        p("Fixed demand follows building use, regardless of sunshine. With demand response, an eligible prosumer plans a limited part of its electricity use around its own PV forecast. Examples might include flexible laundry or controllable cooling, but these are interpretations: the code moves divisible energy rather than scheduling identified appliances.")
+        fig("demand_response_hourly","Figure 10. Aggregated forecasts for the 45 eligible prosumers. Both demand curves have the same daily area. The blue curve is unchanged PV. Matching is performed separately for each owner, so surplus in one building cannot justify shifting load in another.")
+        sub("How the day-ahead rule works")
+        p("<b>1. Select eligible meters.</b> Only PV-equipped prosumers with no battery ownership participate. The 50 consumer-only meters and all 55 battery owners retain their demand. The same 45-meter eligibility applies to every A-F scenario; disabling storage in C/D does not silently add eligible meters.")
+        p("<b>2. Find flexible demand and own surplus.</b> For each complete local day, rank permitted source hours by forecast PV deficit. At a source hour, removable energy is the smaller of flexible_fraction x original demand and original demand minus PV. This protects fixed demand and electricity already covered by PV.")
+        p("<b>3. Find a receiving hour.</b> Search hours no more than six hours earlier or later, on the same date and inside the allowed schedule. Prefer the largest remaining own-PV surplus. A receiving hour is limited by both unused PV and a maximum 50% increase over its original demand.")
+        p("<b>4. Move what fits.</b> Record the source, target and quantity. Subtract and add exactly the same kWh. Any portion without a feasible destination stays at its original time. No cross-day transfers, electricity storage, grid charging or demand cancellation are introduced.")
+        expected_pages += 1
+        page()
+        title(25,"Team guide: worked example and interpretation")
+        sub("Example: a house without a battery")
+        table([["Quantity", "Illustrative value", "Consequence"],
+               ["19:00 demand / PV", "10 / 0 kWh", "At 20% flexibility, at most 2 kWh can leave this hour."],
+               ["13:00 demand / PV", "2 / 10 kWh", "Own surplus is 8 kWh, but the 50% rebound limit permits only 1 extra kWh."],
+               ["Time distance", "6 hours", "The target is permitted, provided both hours lie inside the configured window."],
+               ["Actual transfer", "1 kWh", "Demand becomes 9 kWh at 19:00 and 3 kWh at 13:00; daily energy is unchanged."]],[135,110,262])
+        p("The other 1 kWh of potential flexibility stays at 19:00 if no other destination is feasible. Direct own-PV use rises by 1 kWh; available PV surplus falls by 1 kWh. This example explains the algorithm and is not a measurement from a particular simulated building.")
+        sub("Building-type assumptions")
+        table([["Type", "Flexible fraction", "Allowed hours", "Meaning"],
+               ["Small house", "20%", "06:00-23:00", "Most load stays fixed; a bounded share can move."],
+               ["Apartment block", "15%", "06:00-23:00", "Aggregate flexibility across flats; no individual appliance model."],
+               ["Supermarket", "5%", "07:00-22:00", "Most load remains fixed; refrigeration is not freely rescheduled."],
+               ["School", "10%", "08:00-17:00", "Only permitted operating periods; closed weekends do not shift."]],[120,90,110,187])
+        p("All percentages are proposed engineering defaults. Actual building-type opening/closing times further constrain nonresidential windows. They require calibration before making claims about real users; comfort, thermal dynamics, task deadlines, occupant consent and device-level minimum run times are not modeled.")
+        sub("How to interpret and audit the result")
+        p("Higher direct self-consumption can leave less PV for neighbors, reducing P2P kWh even when household imports fall. Always compare absolute P2P volume, its changing surplus denominator, direct own-PV use, grid flows and both cost boundaries. Do not compare a shifted regulated run with an unshifted unregulated run and attribute both changes to regulation.")
+        p("Fixed outputs remain in results/; shifted outputs are in results/demand_response/. The paired CSV/JSON is demand_response_comparison. Inspect inputs/demand_shifts.csv and hourly_inputs_baseline.csv in the shifted folder to trace each transfer. The model uses supplied forecasts, not future actual measurements; incomplete calendar days remain unchanged.")
+        expected_pages += 1
 
     def frame(canvas,doc):
         canvas.setStrokeColor(colors.HexColor("#D6DEE5"));canvas.setLineWidth(.5)

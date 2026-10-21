@@ -1,4 +1,56 @@
-# Current mixed-building validation
+# Current validation: 100 prosumers plus 50 consumers
+
+## Optional PV-aware demand response
+
+The command `python main.py --include-priority --compare-demand-response` completed
+12 runs: six with fixed demand and six with shifting for PV prosumers without
+batteries. The full suite passed **85 tests in 25.18 seconds**. All 12 exported
+runs passed independent cash, energy and blockchain verification. Transfer-journal
+checks confirmed eligible roles, no battery ownership, same-date movements,
+positive quantities and distances no greater than six hours.
+
+The selected day moved **353.804 kWh across 43 of 45 eligible meters**. Daily
+demand and PV totals are unchanged. Direct own-PV use rises from 10,481.546 to
+10,835.350 kWh. P2P volume decreases in all six pairs; for B it changes from
+2,858.451 to 2,699.393 kWh, while grid imports fall from 16,721.153 to 16,529.847
+kWh. These outcomes are synthetic and depend on the configured heuristic.
+
+The fixed-demand baseline remains the default. Shifted outputs and their
+original forecast/transfer audit are in `results/demand_response/`. Comparison
+CSV/JSON and two PNG/SVG figures live in the parent results directory. The report
+documents 166 parameters, with detailed team behavior explanations on pages
+22–25. The standalone chart rebuild initially encountered an unavailable native
+backend; the chart module now explicitly uses the writable cache and headless
+renderer, and its rebuild completed successfully.
+
+## Fixed-demand population extension
+
+On 21 October 2026, all six 24-hour scenarios completed with 150 meters: 100
+unchanged PV-equipped prosumers and 50 added demand-only buildings. Every group
+contains 10 prosumers and 5 consumers. Added types are 25 houses, 15 blocks,
+5 supermarkets and 5 schools. The original 55 battery-owning IDs remain fixed.
+
+The full suite passed **75 tests in 23.62 seconds**. New checks cover exact mixed
+group counts, unchanged original building attributes and multi-day inputs,
+consumer PV/storage exclusions, consumer buying without selling, conservation,
+invalid consumer counts, and export/parameter-reference coverage.
+
+All six saved scenarios passed independent energy, cash and blockchain
+verification. The original 2,400 hourly input rows also matched the preserved
+100-prosumer baseline exactly. The updated map and all 21 PDF pages were rendered
+and visually inspected. The report now documents 155 configuration values.
+
+With storage first, A/B P2P energy is 863.982/2,858.451 kWh and share is
+13.985%/46.269%. These are synthetic results for the selected day. Adding demand
+changes community size and total costs, so the 150-meter cost cannot be interpreted
+as a like-for-like policy effect against 100 meters. Use paired policies within
+the same population. See `current_validation.json` for the current input hash.
+
+The former mixed-building comparison, input tables and report are preserved in
+`docs/baseline/mixed_100/` and `output/pdf/`. The sections below record earlier
+validation history rather than the current population.
+
+# Previous mixed-building validation (100 prosumers)
 
 On 21 October 2026 the accepted model changed from 100 individual households to
 100 aggregate building meters: 50 small houses, 30 blocks, 10 supermarkets and
