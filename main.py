@@ -5,6 +5,7 @@ import json
 import logging
 from pathlib import Path
 
+from config.buildings import load_building_settings
 from config.settings import (
     BatterySettings, BlockchainSettings, ForecastSettings, HouseholdSettings,
     MarketSettings, RegulatorSettings, SimulationSettings,
@@ -19,14 +20,15 @@ def load_configuration(path: Path | None) -> dict:
     raw = json.loads(path.read_text()) if path else {}
     constructors = {"simulation": SimulationSettings, "households": HouseholdSettings,
                     "forecast": ForecastSettings, "market": MarketSettings,
-                    "regulator": RegulatorSettings, "blockchain": BlockchainSettings}
+                    "regulator": RegulatorSettings, "blockchain": BlockchainSettings, "buildings": load_building_settings}
     if not isinstance(raw, dict) or set(raw) - set(constructors):
         raise ValueError("Configuration must be an object with known section names.")
     if any(not isinstance(section, dict) for section in raw.values()):
         raise ValueError("Configuration sections must be JSON objects.")
     if "battery" in raw.get("simulation", {}):
         raw["simulation"]["battery"] = BatterySettings(**raw["simulation"]["battery"])
-    return {section: constructor(**raw.get(section, {})) for section, constructor in constructors.items()}
+    return {section: (constructor(raw.get(section, {})) if section == "buildings" else constructor(**raw.get(section, {})))
+            for section, constructor in constructors.items()}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -46,7 +48,7 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("--include-priority is used with --scenario all.")
         comparison = run_experiments(config, args.output, names, charts=not args.no_charts)
         for summary in comparison["scenarios"]:
-            LOGGER.info("Simulation %s complete: %d households, %d hours; P2P %.3f kWh; blockchain valid=%s.",
+            LOGGER.info("Simulation %s complete: %d buildings/meters, %d hours; P2P %.3f kWh; blockchain valid=%s.",
                         summary["scenario"], settings.household_count, settings.hours,
                         summary["metrics"]["p2p_energy_kwh"], summary["metrics"]["blockchain_valid"])
         LOGGER.info("Results: %s", args.output.resolve())

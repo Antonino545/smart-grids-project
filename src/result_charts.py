@@ -112,7 +112,7 @@ def generate_additional_charts(results: list[SimulationResult], directory: Path,
         box.set_facecolor(colors[name])
         box.set_alpha(.55)
     axis.axhline(0, color="#777777", linewidth=.8)
-    axis.set(title="Household net cost distribution", xlabel="Scenario", ylabel="EUR per household (negative = net revenue)")
+    axis.set(title="Building meter net cost distribution", xlabel="Scenario", ylabel="EUR per building meter (negative = net revenue)")
     axis.text(.01, .98, "Median and quartiles; whiskers at 1.5 x IQR; dots are observations beyond whiskers.",
               transform=axis.transAxes, va="top", fontsize=9)
     axis.margins(y=.2)
@@ -127,8 +127,8 @@ def generate_additional_charts(results: list[SimulationResult], directory: Path,
         axes[0].set(title="Regulation: change in P2P volume", ylabel="kWh difference")
         positions = list(range(len(rows)))
         for offset, key, label, color in (
-            (-.18, "household_cost_change_eur", "Households", "#315A86"),
-            (.18, "community_cost_change_eur", "Households + regulator", "#BD7F23"),
+            (-.18, "household_cost_change_eur", "Building meters", "#315A86"),
+            (.18, "community_cost_change_eur", "Meters + regulator", "#BD7F23"),
         ):
             bars = axes[1].bar([p + offset for p in positions], [r[key] for r in rows], width=.35, label=label, color=color)
             axes[1].bar_label(bars, fmt="%+.2f", padding=4, fontsize=9)

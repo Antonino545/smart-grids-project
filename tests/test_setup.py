@@ -61,7 +61,7 @@ def test_entry_point_runs_successfully(tmp_path):
     )
     assert result.returncode == 0, result.stderr
     assert "Simulation A complete" in result.stderr
-    assert "100 households" in result.stderr
+    assert "100 buildings/meters" in result.stderr
 
 
 @pytest.mark.parametrize("value", [float("nan"), float("inf"), -float("inf")])

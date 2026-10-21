@@ -40,7 +40,8 @@ def test_complete_day_self_balancing_conserves_energy():
         if battery:
             assert result.stored_start_kwh == pytest.approx(previous[record.household_id])
             assert 0.1 - 1e-10 <= result.soc <= 0.9 + 1e-10
-            assert result.charge_kwh <= 3 and result.discharge_kwh <= 3
+            assert result.charge_kwh <= battery.specifications.max_charge_power_kw + 1e-9
+            assert result.discharge_kwh <= battery.specifications.max_discharge_power_kw + 1e-9
             previous[record.household_id] = result.stored_end_kwh
         else:
             assert result.charge_kwh == result.discharge_kwh == result.battery_loss_kwh == 0

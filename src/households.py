@@ -4,6 +4,10 @@ import csv
 import json
 from dataclasses import asdict, dataclass
 from math import exp
+from random import Random
+
+from config.buildings import BuildingSettings
+from src.building_profiles import assign_building_types, building_attributes
 from pathlib import Path
 
 from config.settings import BatterySettings, HouseholdSettings, SimulationSettings
@@ -18,6 +22,14 @@ class Household:
     demand_profile_kwh: tuple[float, ...]
     bid_multiplier: float
     ask_multiplier: float
+    building_type: str = "legacy_house"
+    roof_area_m2: float = 0.0
+    floors: int = 1
+    floor_area_m2: float = 0.0
+    dwelling_units: int = 1
+    usable_roof_fraction: float = 0.0
+    weekend_demand_profile_kwh: tuple[float, ...] | None = None
+    daily_variation_fraction: float = 0.0
 
     @property
     def has_battery(self) -> bool:
@@ -26,8 +38,10 @@ class Household:
 
 def generate_households(
     settings: SimulationSettings, parameters: HouseholdSettings | None = None,
+    buildings: BuildingSettings | None = None,
 ) -> list[Household]:
     parameters = parameters or HouseholdSettings()
+    buildings = buildings or BuildingSettings()
     rng = settings.create_random_generator()
     per_group, remainder = divmod(settings.battery_household_count, settings.group_count)
     extra_groups = set(rng.sample(range(settings.group_count), remainder))
@@ -35,6 +49,17 @@ def generate_households(
     for group in range(settings.group_count):
         indices = range(group * settings.households_per_group, (group + 1) * settings.households_per_group)
         owners.update(rng.sample(list(indices), per_group + (group in extra_groups)))
+    if buildings.enabled:
+        kinds = assign_building_types(settings, buildings)
+        attribute_rng = Random(settings.random_seed + 4000)
+        households = []
+        for index, kind in enumerate(kinds):
+            attrs = building_attributes(kind, buildings, parameters, settings.battery if index in owners else None, attribute_rng)
+            households.append(Household(
+                household_id=f"H{index + 1:03d}", group_id=index // settings.households_per_group + 1,
+                bid_multiplier=attribute_rng.uniform(parameters.bid_multiplier_min, parameters.bid_multiplier_max),
+                ask_multiplier=attribute_rng.uniform(parameters.ask_multiplier_min, parameters.ask_multiplier_max), **attrs))
+        return households
     households = []
     for index in range(settings.household_count):
         daily_demand = rng.uniform(parameters.daily_demand_min_kwh, parameters.daily_demand_max_kwh)
@@ -67,6 +92,11 @@ def export_households(households: list[Household], path: Path) -> None:
     for household in households:
         row = {
             "household_id": household.household_id, "group_id": household.group_id,
+            "building_type": household.building_type, "roof_area_m2": household.roof_area_m2,
+            "floors": household.floors, "floor_area_m2": household.floor_area_m2,
+            "dwelling_units": household.dwelling_units, "usable_roof_fraction": household.usable_roof_fraction,
+            "daily_variation_fraction": household.daily_variation_fraction,
+            "weekend_demand_profile_kwh": json.dumps(household.weekend_demand_profile_kwh),
             "pv_capacity_kw": household.pv_capacity_kw, "has_battery": household.has_battery,
             "bid_multiplier": household.bid_multiplier, "ask_multiplier": household.ask_multiplier,
             "demand_profile_kwh": json.dumps(household.demand_profile_kwh),

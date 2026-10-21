@@ -15,6 +15,6 @@ def test_exported_artifacts_verify_and_detect_altered_inputs(tmp_path):
     run_experiments(config, results, ["A", "B"], charts=False)
     assert set(verify_results(results)) == {"A", "B"}
     path = results / "inputs" / "hourly_inputs.csv"
-    path.write_text(path.read_text().replace("synthetic_household_profile", "altered", 1))
+    path.write_text(path.read_text().replace("synthetic_building_profile", "altered", 1))
     with pytest.raises(ValueError, match="recorded hash"):
         verify_results(results)

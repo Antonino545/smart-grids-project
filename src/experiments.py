@@ -4,6 +4,8 @@ from dataclasses import asdict
 from pathlib import Path
 
 from src.charts import generate_charts
+from src.community_map import generate_community_map
+from src.building_charts import generate_building_charts
 from src.forecasting import export_inputs, generate_inputs
 from src.households import export_households, generate_households
 from src.output import export_result, write_csv, write_json
@@ -21,7 +23,7 @@ SCENARIOS = {
 
 def run_experiments(config: dict, output: Path, scenario_names: list[str], charts: bool = True) -> dict:
     settings = config["simulation"]
-    households = generate_households(settings, config["households"])
+    households = generate_households(settings, config["households"], config.get("buildings"))
     inputs = generate_inputs(households, settings, config["forecast"])
     export_households(households, output / "inputs" / "households.csv")
     export_inputs(inputs, output / "inputs" / "hourly_inputs.csv")
@@ -40,8 +42,14 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
         results.append(result)
     if len({s["input_sha256"] for s in summaries}) != 1:
         raise ValueError("Scenarios do not share identical hourly inputs.")
-    comparison = {"input_sha256": summaries[0]["input_sha256"], "scenarios": summaries,
+    from collections import Counter
+    community = {"participant_unit": "aggregated_building_meter" if config["buildings"].enabled else "household",
+                 "participant_count": len(households), "dwelling_count": sum(h.dwelling_units for h in households),
+                 "building_type_counts": dict(Counter(h.building_type for h in households)),
+                 "battery_owner_count": sum(h.has_battery for h in households)}
+    comparison = {"community": community, "input_sha256": summaries[0]["input_sha256"], "scenarios": summaries,
                   "notes": ["Default weather, demand and price history are synthetic, not measurements.",
+                            "Building archetypes and parameter ranges are illustrative engineering assumptions.",
                             "C and D retain ownership metadata but disable all battery operations.",
                             "E and F sell PV via P2P before charging remaining owner PV.",
                             "P2P-priority denominator is surplus available before P2P, before deferred charging.",
@@ -51,6 +59,8 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
                                           **s["metrics"]} for s in summaries])
     if charts:
         generate_charts(results, output / "charts")
+        generate_community_map(households, output / "charts")
+        generate_building_charts(households, inputs, output / "charts")
     write_discussion(comparison, output / "discussion.md")
     return comparison
 

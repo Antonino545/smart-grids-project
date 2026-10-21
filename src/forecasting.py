@@ -111,6 +111,8 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
         _read_csv(forecast.demand_csv),
         lambda r: (parse_timestamp(r["timestamp"]), r["household_id"]), "demand_kwh")
     records = []
+    demand_rng = Random(settings.random_seed + 5000)
+    daily_factors = {}
     for hour in range(settings.hours):
         # Advance absolute time so DST transitions do not duplicate/miss instants.
         timestamp = (start.astimezone(timezone.utc) + timedelta(hours=hour)).astimezone(start.tzinfo)
@@ -129,7 +131,14 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
                 raise ValueError("Nonzero nighttime irradiance: check timezone/daylight settings.")
         for household in households:
             if demands is None:
-                demand = household.demand_profile_kwh[clock_hour]
+                profile = (household.weekend_demand_profile_kwh
+                           if timestamp.weekday() >= 5 and household.weekend_demand_profile_kwh is not None
+                           else household.demand_profile_kwh)
+                key = (household.household_id, timestamp.date())
+                if key not in daily_factors:
+                    variation = household.daily_variation_fraction
+                    daily_factors[key] = demand_rng.uniform(1 - variation, 1 + variation)
+                demand = profile[clock_hour] * daily_factors[key]
             else:
                 key = (timestamp, household.household_id)
                 if key not in demands:
@@ -140,7 +149,8 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
                 pv_forecast(household.pv_capacity_kw, irradiance, forecast.performance_factor, 1),
                 demand, prices[clock_hour],
                 "synthetic_weather_forecast" if weather is None else "weather_csv_forecast",
-                "synthetic_household_profile" if demands is None else "demand_csv_forecast",
+                ("synthetic_household_profile" if household.building_type == "legacy_house" else "synthetic_building_profile")
+                if demands is None else "demand_csv_forecast",
                 price_source,
             ))
     return records

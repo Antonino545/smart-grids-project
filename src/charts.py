@@ -64,8 +64,8 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     for offset, key, label, color in (
-        (-.18, "household_net_cost_eur", "Households", "#315A86"),
-        (.18, "community_including_regulator_net_cost_eur", "Households + regulator", "#D48B25"),
+        (-.18, "household_net_cost_eur", "Building meters", "#315A86"),
+        (.18, "community_including_regulator_net_cost_eur", "Meters + regulator", "#D48B25"),
     ):
         axes[0].bar(x + offset, [m[key] for m in metrics], width=.35, label=label, color=color)
     axes[0].set(xticks=x, xticklabels=names, ylabel="EUR (net payment)", title="Electricity costs by accounting boundary")
