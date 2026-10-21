@@ -1,0 +1,47 @@
+{
+  "automated_tests": {
+    "duration_seconds": 16.25,
+    "passed": 69
+  },
+  "input_sha256": "0d448af457d23a1206abf773826bbc61158501c6f65811dd56a36db7ef192d38",
+  "model": "100 aggregate building meters",
+  "recorded_on": "21 October 2026",
+  "scenarios": {
+    "A": {
+      "blockchain_valid": true,
+      "cash_and_energy_valid": true,
+      "hours": 24,
+      "internal_trades": 140
+    },
+    "B": {
+      "blockchain_valid": true,
+      "cash_and_energy_valid": true,
+      "hours": 24,
+      "internal_trades": 288
+    },
+    "C": {
+      "blockchain_valid": true,
+      "cash_and_energy_valid": true,
+      "hours": 24,
+      "internal_trades": 184
+    },
+    "D": {
+      "blockchain_valid": true,
+      "cash_and_energy_valid": true,
+      "hours": 24,
+      "internal_trades": 393
+    },
+    "E": {
+      "blockchain_valid": true,
+      "cash_and_energy_valid": true,
+      "hours": 24,
+      "internal_trades": 154
+    },
+    "F": {
+      "blockchain_valid": true,
+      "cash_and_energy_valid": true,
+      "hours": 24,
+      "internal_trades": 353
+    }
+  }
+}

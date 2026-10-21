@@ -1,0 +1,3 @@
+# Optional dependencies for scripts/create_report.py; simulator dependencies stay unchanged.
+reportlab>=4,<5
+pypdf>=5,<7

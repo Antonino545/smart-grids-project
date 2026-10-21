@@ -1,3 +1,24 @@
+# Current mixed-building validation
+
+On 21 October 2026 the accepted model changed from 100 individual households to
+100 aggregate building meters: 50 small houses, 30 blocks, 10 supermarkets and
+10 schools. There are 55 battery owners and 619 residential dwelling units in
+the seeded realization. A block has one roof and one meter aggregating its flats.
+
+The full suite passed **65 tests in 14.93 seconds**. Tests verify the type mix,
+single-roof PV sizing, higher demand with more floors, school weekend reduction,
+commercial night base load, type-dependent storage, reproducibility, chart-data
+reconciliation and all original energy, money, reward and blockchain rules.
+The optional residential-baseline configuration reproduces the original P2P and
+PV energy volumes. All six mixed-building scenarios completed real runs and
+passed independent exported-artifact verification. See `current_validation.json`.
+
+Earlier results below are historical evidence for the old residential model.
+They are not the current mixed-building outputs. Baseline comparisons and report
+are preserved under `docs/baseline/` and `output/pdf/`.
+
+---
+
 # Recorded validation
 
 Verified on 20 October 2026. Presentation preparation and ZIP packaging are deferred.
@@ -50,3 +71,35 @@ All six were rendered and visually inspected. Their source data is exported unde
 `results/charts/data/`. Checks reconcile plotted surplus components with available
 surplus, household cost totals with the ledger and battery flows with inventory
 changes. A new six-scenario execution preserved the original numerical outcomes.
+
+## Community distribution schematic
+
+The square community map displays one neighborhood per row, one marker per
+household, ownership type and installed PV capacity. The 100 cells were checked
+against the saved experiment household table, including exact group, ownership
+and PV attributes. Neighborhood battery counts are 6, 6, 5, 5, 6, 5, 6, 5, 5, 6.
+Map coordinates are display positions only and do not change trading eligibility,
+energy flows or ownership. PNG/SVG renderings were visually inspected. The full
+suite passed **58 tests in 9.24 seconds** on 21 October 2026.
+
+## Automatic map generation and PDF inclusion
+
+A fresh `python main.py --include-priority --output /tmp/smartgrid-map-pdf-run`
+completed all six scenarios and generated the community map and its CSV data.
+The comparison JSON remained identical to the recorded experiment. An end-to-end
+command-line test checks PNG/SVG generation and every mapped household against
+the run's own exported community. The full suite passed **59 tests in 12.38 seconds**.
+The PDF report now includes a dedicated community-layout page.
+
+## Team parameter guide
+
+The current mixed-building PDF has 21 pages. Pages 11–21 document all 154
+configuration values from the saved run, including units, effects, type-specific
+settings, inactive legacy fields, worked examples and commands for controlled
+experiments. The reference builder checks coverage against every configuration
+leaf and rejects undocumented or removed fields.
+
+On 21 October 2026, the full suite passed **69 tests in 16.25 seconds**, including
+four new parameter-reference checks. The PDF was generated successfully, all 21
+pages were rendered, and their layout was visually inspected. This documentation
+change does not alter simulation logic, inputs or numerical results.

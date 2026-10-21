@@ -1,6 +1,6 @@
 # Smart Grids — Prosumer Community Simulator
 
-A reproducible Python simulator for 100 PV-equipped households in 10 neighborhoods,
+A reproducible Python simulator for 100 PV-equipped buildings with aggregate meters in 10 neighborhoods,
 including 55 battery owners. It implements self-balancing, neighborhood P2P trading,
 a community aggregator, external-grid settlement, funded regulation and an hourly
 Proof-of-Work blockchain. Implementation follows the supplied plan in tested stages.
@@ -66,8 +66,47 @@ Each hour has a deterministic matching stream, separate from community and data
 generation. Same inputs, seed, code and environment reproduce the transaction
 journal and block hashes. Stochastic results can change with another seed.
 
+## Building types and dynamic loads
+
+The accepted design is **100 buildings, not 100 families**: 50 small houses,
+30 apartment blocks, 10 supermarkets and 10 schools. Each group contains 5/3/1/1
+buildings by default, shuffled within its neighborhood. Every block has one roof
+and aggregates the consumption of all its flats. Roof area limits PV; floors and
+flat count increase residential demand without multiplying roof area.
+
+Houses/blocks have morning and evening peaks. Supermarkets have a persistent base
+load plus opening-hour activity. Schools have weekday daytime loads and reduced
+weekend operation. All types have seeded building-specific values and daily
+variation. Battery capacity/power is also configurable by type, with exactly 55
+owners. These are **synthetic, configurable engineering defaults**. See
+[the building model](docs/building_model.md) for values, equations and limitations.
+
+Technical CSV/config names such as `household_id` and `household_count` remain for
+compatibility but now identify/count aggregate building meters. `comparison.json`
+explicitly records this unit and the number of actual residential dwelling units.
+
+## Community map
+
+`results/charts/community_map.png` (also SVG) shows the actual community as a
+10 x 10 square schematic by default. Each row is one neighborhood: H001-H010
+belong to G1, H011-H020 to G2, and so on. Blue buildings have PV plus a battery
+(with a B badge); gold buildings have PV only. HOUSE/BLOCK/SHOP/SCHOOL markers
+show the type, meter ID, PV capacity and block floor count. Seeded battery assignment gives
+five or six owners per neighborhood, totaling 55 owners and 45 without batteries.
+The map is generated from the same household objects used by the simulation.
+`charts/data/community_layout.csv` exports cell assignments and attributes;
+`charts/data/neighborhood_distribution.csv` exports group totals.
+
+The row/column positions are for display only. There are no geographic coordinates,
+road distances, electrical feeder geometry or distance-based restrictions in this
+model. Membership defines eligible P2P partners, regardless of positions on this
+schematic. The layout does not change ownership or the simulation results. Other
+configured group sizes render as one row per group and may not form a square.
+Regenerate with `python main.py --include-priority` (unless `--no-charts` is used).
+
 ## Configuration
 
+`config/buildings.py` configures type shares, geometry and load archetypes.
 `config/settings.py` contains frozen, validated dataclasses. `config/default.json`
 contains their complete default values. Supply a partial JSON object to override
 only the fields needed:
@@ -75,14 +114,14 @@ only the fields needed:
 ```json
 {
   "simulation": {"random_seed": 123, "hours": 24},
-  "households": {"pv_capacity_min_kw": 2.0, "pv_capacity_max_kw": 6.0},
+  "buildings": {"types": {"school": {"weekend_multiplier": 0.1}}},
   "market": {"grid_import_tariff_eur_kwh": 0.30},
   "regulator": {"guidance_strength": 0.65}
 }
 ```
 
 Supported sections are `simulation`, `households`, `forecast`, `market`,
-`regulator`, and `blockchain`. Unknown fields/sections and invalid values fail
+`regulator`, `blockchain`, and `buildings`. Unknown fields/sections and invalid values fail
 with an error. `simulation.battery` holds nested battery specifications. Equal
 neighborhood sizes are required. Duration is configurable in hourly steps;
 non-hourly time steps are explicitly rejected by this first hourly input model.
@@ -99,8 +138,9 @@ a sunny summer profile; it is not a weather claim about that date or location.
 PV energy = installed kW × irradiance / 1000 × performance factor × step hours,
 capped at installed capacity × step hours. Synthetic irradiance follows a daylight
 curve with seeded cloud factors. Configured sunrise/sunset determine nighttime.
-Demand combines a base load with morning/evening peaks, household shifts and
-seeded profile variation. The same daily profile repeats on longer runs.
+Demand depends on building type, size, residential units or floor area, opening
+hours, weekdays/weekends and seeded daily variation. See the building-model guide.
+School holidays and weather-sensitive HVAC demand are not modeled.
 Reference prices are averages of **only pre-start historical observations** for
 each hour of day. The default 14-day price history is synthetic. At least one
 pre-start observation for every hour of day is required; future observations
@@ -116,14 +156,16 @@ calendars are not inferred automatically.
 
 ## Battery and market assumptions
 
-Confirmed design values from the supplied brief are 100 households, 10 equal
-groups, 55 battery owners, 24 initial hourly steps, funded P2P rewards and 10
-simulated miners with `000` hashes. They are configurable for sensitivity tests.
+The original brief described 100 households. The accepted revision uses 100
+aggregate building meters while retaining 10 equal groups, 55 battery owners,
+24 hourly steps, funded P2P rewards and 10 miners with `000` hashes. Building-type
+composition and sizing are modeling assumptions, configurable for sensitivity tests.
 Suggested battery values and the following behavioral defaults are engineering
 choices, not separately verified professor requirements.
 
 - Battery defaults: 10 kWh, 3 kW charge/discharge, 95% efficiency each way,
-  initial SOC 20%, allowed SOC 10–90%. Owners receive specifications individually.
+  initial SOC 20%, allowed SOC 10–90%. Type scales of 1/4/10/6 for house/block/shop/school
+  multiply both base capacity and power; these are engineering defaults.
 - Stored energy changes by `charge × efficiency − discharge / efficiency`.
   Charge/discharge columns are measured on the household AC side. Losses are
   exported separately. Charging uses only the owner's remaining PV; discharge
@@ -185,9 +227,12 @@ Both household flows and full cash movements must reconcile before outputs pass.
 
 ## Output files
 
-- `inputs/households.csv`: fixed identities, groups, PV, ownership, individual
-  battery specs, demand profiles and offer parameters.
-- `inputs/hourly_inputs.csv`: all household-hour records and source labels.
+- `inputs/households.csv`: aggregate meter identities, building types, roof/floor
+  geometry, dwelling counts, groups, PV, ownership, type-specific battery specs,
+  weekday/weekend profiles and offer parameters.
+- `inputs/hourly_inputs.csv`: all building-hour records and source labels.
+- `charts/building_type_profiles.png/.svg`: mean hourly demand and PV per building
+  type, backed by `charts/data/building_type_hourly.csv` and `building_type_summary.csv`.
 - `comparison.csv` / `comparison.json`: scenario KPIs and shared input hash.
 - `discussion.md`: computed comparisons and limitations, without forced improvement.
 - `charts/*.png` / `*.svg`: P2P, grid/aggregator, costs, fund, storage/surplus and SOC.
@@ -207,6 +252,31 @@ Both household flows and full cash movements must reconcile before outputs pass.
   block references 64 zero characters, without an extra genesis block. Miners
   take turns trying nonces; this is not a physical concurrent network or a
   cryptocurrency. A configurable attempt limit raises an error if mining fails.
+
+## PDF report
+
+`output/pdf/smart_grids_project_report.pdf` describes the current mixed-building
+model and its actual six-scenario results. The previous residential-only report
+is preserved separately as `smart_grids_residential_baseline_report.pdf`.
+After generating all six scenarios and charts, rebuild the current report with:
+
+```bash
+python -m pip install -r requirements-report.txt
+python scripts/create_report.py
+```
+
+PDF dependencies are optional and do not affect running the simulator. The report
+reads `results/comparison.json`, type summaries, chart images and the dated
+validation record in `docs/current_validation.json`; a mismatching input hash is
+explicitly flagged. The report builder targets the mixed-building six-scenario
+experiment. Other compositions require reviewing any illustrative narrative
+alongside the exported configuration.
+
+The PDF includes a team parameter guide on pages 11–21: all 154 configuration
+values, units, effects, building-type comparisons, worked examples and a partial
+JSON experiment workflow. Values are read from the saved run configuration.
+`scripts/report_parameters.py` checks that every configuration field is documented;
+the report build fails if fields are added or removed without updating the guide.
 
 ## Tests and project structure
 
