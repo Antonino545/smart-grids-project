@@ -1,0 +1,7 @@
+INFO | __main__ | Simulation A complete: 100 buildings/meters, 24 hours; P2P 254.554 kWh; blockchain valid=True.
+INFO | __main__ | Simulation B complete: 100 buildings/meters, 24 hours; P2P 706.991 kWh; blockchain valid=True.
+INFO | __main__ | Simulation C complete: 100 buildings/meters, 24 hours; P2P 362.877 kWh; blockchain valid=True.
+INFO | __main__ | Simulation D complete: 100 buildings/meters, 24 hours; P2P 1051.853 kWh; blockchain valid=True.
+INFO | __main__ | Simulation E complete: 100 buildings/meters, 24 hours; P2P 334.444 kWh; blockchain valid=True.
+INFO | __main__ | Simulation F complete: 100 buildings/meters, 24 hours; P2P 903.547 kWh; blockchain valid=True.
+INFO | __main__ | Results: /private/tmp/smartgrid-building-config-check
