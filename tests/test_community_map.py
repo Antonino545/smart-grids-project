@@ -64,7 +64,7 @@ def test_simulation_command_generates_map_from_its_own_households(tmp_path):
         households = {row["household_id"]: row for row in csv.DictReader(handle)}
     with (tmp_path / "charts" / "data" / "community_layout.csv").open() as handle:
         cells = list(csv.DictReader(handle))
-    assert len(cells) == len(households) == 100
+    assert len(cells) == len(households) == 150
     for cell in cells:
         household = households[cell["household_id"]]
         assert cell["group_id"] == household["group_id"]

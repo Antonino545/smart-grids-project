@@ -1,17 +1,23 @@
 # Mixed building community
 
-The current design, accepted on 21 October 2026, contains **100 buildings with
-aggregate electricity meters**, not 100 individual households. Apartment blocks
+The extended design contains **150 aggregate building meters: 100 original
+prosumers and 50 added consumer-only buildings**, not 150 individual households. Apartment blocks
 represent all their dwelling units at one meter. Commercial buildings and schools
-also have one meter each. The historical identifier `household_id` and H001-H100
-are retained in code/CSV files for compatibility; they now identify building meters.
+also have one meter each. The identifier `household_id` remains for compatibility.
+H001-H100 identify unchanged prosumers; H101-H150 identify consumers.
 
 ## Initial composition
 
-Each of ten neighborhoods contains five small houses, three apartment blocks,
-one supermarket and one school. Positions within the row are shuffled with a
+Each of ten neighborhoods retains five small houses, three apartment blocks,
+one supermarket and one school as prosumers, plus five added consumers. The added
+pool contains 25 houses, 15 blocks, 5 supermarkets and 5 schools. Type counts use
+largest-remainder rounding across the consumer pool; a separate seeded shuffle
+distributes them round-robin, giving every group exactly five consumers.
+Consumers have the same geometry/load rules for their type, but zero installed PV
+and no batteries. They can only buy energy through P2P, aggregator or grid.
+No group is consumer-only or prosumer-only. Positions within each row are shuffled with a
 fixed seed, independently of battery assignment. The defaults give 50/30/10/10
-buildings. The existing 55 battery-owning IDs remain unchanged: each neighborhood
+original prosumers, plus the new 25/15/5/5 consumers. The existing 55 battery-owning IDs remain unchanged: each neighborhood
 has five or six owners. Counterfactual C/D disable storage without changing type,
 roof, identity, dwelling count, demand inputs or battery ownership metadata.
 
@@ -28,10 +34,18 @@ allow a heterogeneous teaching simulation and must be calibrated for real use.
 
 | Type | Count | Single roof m2 | Floors | Demand basis | Base energy range | Battery capacity / power |
 |---|---:|---:|---:|---|---|---|
-| Small house | 50 | 70-150 | 1-2 | One dwelling | 8-24 kWh/dwelling/day | 10 kWh / 3 kW |
-| Apartment block | 30 | 180-360 | 4-10 | 2-4 dwellings per floor | 8-20 kWh/dwelling/day | 40 kWh / 12 kW |
-| Supermarket | 10 | 600-1400 | 1 | Total floor area | 0.5-1.1 kWh/m2/day | 100 kWh / 30 kW |
-| School | 10 | 700-1600 | 2-3 | Total floor area | 0.08-0.18 kWh/m2/day | 60 kWh / 18 kW |
+| Small house | 75 | 70-150 | 1-2 | One dwelling | 8-24 kWh/dwelling/day | 10 kWh / 3 kW |
+| Apartment block | 45 | 180-360 | 4-10 | 2-4 dwellings per floor | 8-20 kWh/dwelling/day | 40 kWh / 12 kW |
+| Supermarket | 15 | 600-1400 | 1 | Total floor area | 0.5-1.1 kWh/m2/day | 100 kWh / 30 kW |
+| School | 15 | 700-1600 | 2-3 | Total floor area | 0.08-0.18 kWh/m2/day | 60 kWh / 18 kW |
+
+Battery sizes apply only to the original selected owners; new consumers have no
+storage. Configure additions with `buildings.consumer_count` (default JSON: 50),
+which must be a nonnegative multiple of the group count. The old 100-prosumer
+experiment can be rerun with `config/mixed_100_baseline.json`. Its saved input
+tables/comparison are in `docs/baseline/mixed_100/`; its report is preserved in
+`output/pdf/smart_grids_100_prosumer_baseline_report.pdf`. Separate random streams
+preserve all original geometry and multi-day demand inputs when additions change.
 
 The roof is an approximate building footprint. Total floor area = roof area x
 floors. For blocks, dwelling count = floors x dwellings per floor. For small

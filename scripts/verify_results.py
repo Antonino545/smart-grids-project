@@ -76,6 +76,7 @@ def verify_results(directory: Path) -> dict:
         with (folder / "household_hourly.csv").open() as handle:
             rows = list(csv.DictReader(handle))
         count = summary["configuration"]["simulation"]["household_count"]
+        count += summary["configuration"].get("buildings", {}).get("consumer_count", 0)
         if len(rows) != hours * count:
             raise ValueError(f"Incomplete exported household data: {name}")
         for row in rows:

@@ -2,18 +2,19 @@
 
 # Each tuple contains the exact JSON key, its units and its implemented meaning.
 COMMUNITY = [
-    ("simulation.household_count", "building meters", "Number of aggregate participants, not flats. More meters enlarge the community. Must divide evenly into group_count."),
-    ("simulation.group_count", "groups", "Number of P2P neighborhoods. Group size = meter count / group count. Changes which meters can trade directly."),
+    ("simulation.household_count", "prosumer meters", "Number of original PV-equipped aggregate meters, not flats. Consumer-only additions are configured separately. Must divide evenly into group_count."),
+    ("simulation.group_count", "groups", "Number of P2P neighborhoods. Group size = (prosumers + consumers) / group count. Changes which meters can trade directly."),
     ("simulation.battery_household_count", "owners", "Exact number of battery-owning meters. IDs are selected with the seed and spread evenly across groups. C/D disable operation, not ownership."),
     ("simulation.hours", "one-hour steps", "Length of the run. 24 covers one day; 168 covers a week and exposes weekend effects. Longer runs do not add holiday logic."),
     ("simulation.timestep_hours", "hours per step", "This implementation supports exactly 1. Do not change it to 0.5: the hourly input generator rejects other durations."),
     ("simulation.random_seed", "integer", "Controls randomized ownership, type positions, building attributes, cloud factors, demand variation and encounter order through separate seeded streams."),
     ("simulation.log_level", "logging level", "Console verbosity: DEBUG, INFO, WARNING, ERROR or CRITICAL. Does not change energy or prices."),
     ("buildings.enabled", "boolean", "true selects the mixed-building model. false selects the original individual-house model; type geometry and type battery scales are then unused."),
+    ("buildings.consumer_count", "additional meters", "Extra consumer-only buildings with zero PV and no battery. Types follow the same shares; additions split equally across groups. Total meters = household_count + consumer_count."),
     ("buildings.pv_density_kw_m2", "kW per usable m2", "Installed PV power per usable roof area. Higher density raises capacity until the type PV limit is reached. It does not multiply roof area by floors."),
 ]
 GEOMETRY = [
-    ("share", "fraction", "Requested type fraction. All four shares must sum to 1. Counts use largest-remainder rounding separately in each neighborhood."),
+    ("share", "fraction", "Type fraction; four shares sum to 1. Prosumers round within each group; consumers round across their full pool, then shuffle into equal group additions."),
     ("roof_min_m2", "m2", "Lower bound of the sampled single roof footprint; higher area permits more PV and increases the area-based commercial/school load basis."),
     ("roof_max_m2", "m2", "Upper bound of that roof draw. One roof per building, regardless of floor count."),
     ("floors_min", "floors", "Lower bound of the integer floor draw. Raises block dwelling counts and school floor area, without adding PV roofs."),
@@ -187,7 +188,7 @@ def append_parameter_guide(config, p, title, sub, table, page):
 
     page()
     title(13,"Parameters: building geometry and composition")
-    p("Prefix: buildings.types.&lt;type&gt;., where type is small_house, apartment_block, supermarket or school. The four value columns show the actual settings used; H001-H100 are the resulting seeded realizations, not these range endpoints.")
+    p("Prefix: buildings.types.&lt;type&gt;., where type is small_house, apartment_block, supermarket or school. Values apply to both roles. H001-H100 are original prosumers; H101-H150 are added consumers with no PV or battery, regardless of roof potential.")
     table(type_rows(GEOMETRY),[116,38,38,45,43,227])
     p("Roof and floor area are different quantities. Type PV limits constrain the single roof; floors never create duplicate roofs. Battery scale changes equipment sizes only for existing owners, preserving the selected 55 owner IDs in this run.")
 

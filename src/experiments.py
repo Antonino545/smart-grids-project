@@ -1,6 +1,6 @@
 """Controlled scenario comparison using one immutable community and one input dataset."""
 
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 
 from src.charts import generate_charts
@@ -31,7 +31,7 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
     for name in scenario_names:
         battery, regulated, strategy = SCENARIOS[name]
         result = run_simulation(
-            households, inputs, settings, config["market"], name,
+            households, inputs, replace(settings, household_count=len(households)), config["market"], name,
             batteries_enabled=battery, regulation_enabled=regulated,
             regulator_settings=config["regulator"], blockchain_settings=config["blockchain"],
             battery_strategy=strategy)
@@ -47,6 +47,8 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
                  "participant_count": len(households), "dwelling_count": sum(h.dwelling_units for h in households),
                  "building_type_counts": dict(Counter(h.building_type for h in households)),
                  "battery_owner_count": sum(h.has_battery for h in households)}
+    community["prosumer_count"] = sum(h.participant_role == "prosumer" for h in households)
+    community["consumer_count"] = sum(h.participant_role == "consumer" for h in households)
     comparison = {"community": community, "input_sha256": summaries[0]["input_sha256"], "scenarios": summaries,
                   "notes": ["Default weather, demand and price history are synthetic, not measurements.",
                             "Building archetypes and parameter ranges are illustrative engineering assumptions.",

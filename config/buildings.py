@@ -81,10 +81,15 @@ def default_types() -> dict[str, BuildingTypeSettings]:
 @dataclass(frozen=True)
 class BuildingSettings:
     enabled: bool = True
+    consumer_count: int = 0
     pv_density_kw_m2: float = 0.20
     types: dict[str, BuildingTypeSettings] = field(default_factory=default_types)
 
     def __post_init__(self) -> None:
+        if type(self.consumer_count) is not int or self.consumer_count < 0:
+            raise ValueError("Consumer count must be a nonnegative integer.")
+        if not self.enabled and self.consumer_count:
+            raise ValueError("Consumer additions require the mixed-building model.")
         if type(self.enabled) is not bool or not isfinite(self.pv_density_kw_m2) or self.pv_density_kw_m2 <= 0:
             raise ValueError("Invalid building model switch or PV density.")
         if set(self.types) != set(default_types()):

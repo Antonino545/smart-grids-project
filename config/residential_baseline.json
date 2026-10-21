@@ -1,5 +1,6 @@
 {
   "buildings": {
-    "enabled": false
+    "enabled": false,
+    "consumer_count": 0
   }
 }

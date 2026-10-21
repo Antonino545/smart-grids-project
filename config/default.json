@@ -5,6 +5,7 @@
     "miner_count": 10
   },
   "buildings": {
+    "consumer_count": 50,
     "enabled": true,
     "pv_density_kw_m2": 0.2,
     "types": {

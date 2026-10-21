@@ -35,7 +35,7 @@ timestamp,household_id,demand_kwh
 ```
 
 Supply every `(timestamp, household_id)` combination, with IDs matching the
-exported meter table (H001 through H100 by default). Each ID now represents an
+exported meter table (H001 through H150 by default). Each ID now represents an
 aggregate building meter, including all flats for a block; provide whole-building
 demand rather than per-flat demand. Demand must be finite and
 nonnegative. Missing combinations and duplicates fail. Prepare demand forecasts

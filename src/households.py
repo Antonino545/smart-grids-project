@@ -30,6 +30,7 @@ class Household:
     usable_roof_fraction: float = 0.0
     weekend_demand_profile_kwh: tuple[float, ...] | None = None
     daily_variation_fraction: float = 0.0
+    participant_role: str = "prosumer"
 
     @property
     def has_battery(self) -> bool:
@@ -59,7 +60,7 @@ def generate_households(
                 household_id=f"H{index + 1:03d}", group_id=index // settings.households_per_group + 1,
                 bid_multiplier=attribute_rng.uniform(parameters.bid_multiplier_min, parameters.bid_multiplier_max),
                 ask_multiplier=attribute_rng.uniform(parameters.ask_multiplier_min, parameters.ask_multiplier_max), **attrs))
-        return households
+        return households + generate_consumers(settings, parameters, buildings)
     households = []
     for index in range(settings.household_count):
         daily_demand = rng.uniform(parameters.daily_demand_min_kwh, parameters.daily_demand_max_kwh)
@@ -86,12 +87,39 @@ def generate_households(
     return households
 
 
+def generate_consumers(settings, parameters, buildings) -> list[Household]:
+    """Append demand-only meters without redrawing any original prosumer property."""
+    count = buildings.consumer_count
+    if count % settings.group_count:
+        raise ValueError("Consumer count must divide evenly among neighborhoods.")
+    exact = {kind: spec.share * count for kind, spec in buildings.types.items()}
+    counts = {kind: int(value) for kind, value in exact.items()}
+    order = sorted(exact, key=lambda kind: (-(exact[kind] - counts[kind]), kind))
+    for kind in order[:count - sum(counts.values())]:
+        counts[kind] += 1
+    kinds = [kind for kind in buildings.types for _ in range(counts[kind])]
+    rng = Random(settings.random_seed + 6000)
+    rng.shuffle(kinds)
+    consumers = []
+    for index, kind in enumerate(kinds):
+        attrs = building_attributes(kind, buildings, parameters, None, rng)
+        attrs["pv_capacity_kw"] = 0.0
+        consumers.append(Household(
+            household_id=f"H{settings.household_count + index + 1:03d}",
+            group_id=index % settings.group_count + 1,
+            bid_multiplier=rng.uniform(parameters.bid_multiplier_min, parameters.bid_multiplier_max),
+            ask_multiplier=rng.uniform(parameters.ask_multiplier_min, parameters.ask_multiplier_max),
+            participant_role="consumer", **attrs))
+    return consumers
+
+
 def export_households(households: list[Household], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     rows = []
     for household in households:
         row = {
             "household_id": household.household_id, "group_id": household.group_id,
+            "participant_role": household.participant_role,
             "building_type": household.building_type, "roof_area_m2": household.roof_area_m2,
             "floors": household.floors, "floor_area_m2": household.floor_area_m2,
             "dwelling_units": household.dwelling_units, "usable_roof_fraction": household.usable_roof_fraction,

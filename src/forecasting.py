@@ -112,6 +112,7 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
         lambda r: (parse_timestamp(r["timestamp"]), r["household_id"]), "demand_kwh")
     records = []
     demand_rng = Random(settings.random_seed + 5000)
+    consumer_demand_rng = Random(settings.random_seed + 5001)
     daily_factors = {}
     for hour in range(settings.hours):
         # Advance absolute time so DST transitions do not duplicate/miss instants.
@@ -137,7 +138,8 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
                 key = (household.household_id, timestamp.date())
                 if key not in daily_factors:
                     variation = household.daily_variation_fraction
-                    daily_factors[key] = demand_rng.uniform(1 - variation, 1 + variation)
+                    role_rng = consumer_demand_rng if household.participant_role == "consumer" else demand_rng
+                    daily_factors[key] = role_rng.uniform(1 - variation, 1 + variation)
                 demand = profile[clock_hour] * daily_factors[key]
             else:
                 key = (timestamp, household.household_id)

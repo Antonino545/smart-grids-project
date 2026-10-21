@@ -17,7 +17,18 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 
 
 def load_configuration(path: Path | None) -> dict:
-    raw = json.loads(path.read_text()) if path else {}
+    raw = json.loads((PROJECT_ROOT / "config/default.json").read_text())
+    if path:
+        overrides = json.loads(path.read_text())
+        if not isinstance(overrides, dict):
+            raise ValueError("Configuration must be a JSON object.")
+        def merge(base, extra):
+            for key, value in extra.items():
+                if isinstance(value, dict) and isinstance(base.get(key), dict):
+                    merge(base[key], value)
+                else:
+                    base[key] = value
+        merge(raw, overrides)
     constructors = {"simulation": SimulationSettings, "households": HouseholdSettings,
                     "forecast": ForecastSettings, "market": MarketSettings,
                     "regulator": RegulatorSettings, "blockchain": BlockchainSettings, "buildings": load_building_settings}
@@ -49,7 +60,7 @@ def main(argv: list[str] | None = None) -> int:
         comparison = run_experiments(config, args.output, names, charts=not args.no_charts)
         for summary in comparison["scenarios"]:
             LOGGER.info("Simulation %s complete: %d buildings/meters, %d hours; P2P %.3f kWh; blockchain valid=%s.",
-                        summary["scenario"], settings.household_count, settings.hours,
+                        summary["scenario"], comparison["community"]["participant_count"], settings.hours,
                         summary["metrics"]["p2p_energy_kwh"], summary["metrics"]["blockchain_valid"])
         LOGGER.info("Results: %s", args.output.resolve())
         return 0

@@ -24,6 +24,8 @@ def building_chart_data(households, inputs):
     for kind in sorted({h.building_type for h in households}):
         members = [h for h in households if h.building_type == kind]
         types.append({"building_type": kind, "count": len(members),
+                      "prosumer_count": sum(h.participant_role == "prosumer" for h in members),
+                      "consumer_count": sum(h.participant_role == "consumer" for h in members),
                       "battery_count": sum(h.has_battery for h in members),
                       "dwelling_units": sum(h.dwelling_units for h in members),
                       "mean_roof_m2": sum(h.roof_area_m2 for h in members) / len(members),
@@ -51,7 +53,7 @@ def generate_building_charts(households, inputs, directory: Path):
     for axis, title in zip(axes, ("Demand by building type", "PV generation by building type")):
         axis.set(title=title, xlabel="Simulation hour", ylabel="Mean kWh per building per hourly step", ylim=(0,None))
         axis.legend(frameon=False, fontsize=9)
-    fig.text(.02,.015,"Synthetic archetypes. Mean per building, not type totals. The same inputs are used in every scenario.",fontsize=9,color="#555555")
+    fig.text(.02,.015,"Synthetic inputs. Type means include both roles (consumer PV = 0); not type totals. Shared across scenarios.",fontsize=9,color="#555555")
     fig.tight_layout(rect=(0,.05,1,1))
     for extension in ("png","svg"):
         fig.savefig(directory / f"building_type_profiles.{extension}",dpi=180,
