@@ -5,3 +5,4 @@ __pycache__/
 .coverage
 htmlcov/
 .DS_Store
+docs/smart_grids_team_guide/images/

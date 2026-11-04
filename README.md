@@ -271,6 +271,21 @@ Both household flows and full cash movements must reconcile before outputs pass.
 
 ## PDF report
 
+The full team document is available as an editable LaTeX project:
+[Smart Grids team guide](docs/smart_grids_team_guide/main.tex). Edit `main.tex`
+directly in Codex, a LaTeX editor or Overleaf. Keep its `images/` folder with it.
+The project opens in Codex with source editing and a live PDF preview.
+
+To regenerate the source and figure copies from saved results (replaces manual edits):
+
+```bash
+python scripts/create_report.py --format latex
+```
+
+LaTeX export uses the same optional Python report dependencies as the PDF builder.
+Compile with Codex's built-in LaTeX editor or `pdflatex main.tex` from the project
+folder. Normal simulator runs do not overwrite your LaTeX edits.
+
 `output/pdf/smart_grids_project_report.pdf` describes the current mixed-building
 model and its actual six-scenario results. The previous residential-only report
 is preserved separately as `smart_grids_residential_baseline_report.pdf`.

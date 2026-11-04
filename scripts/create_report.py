@@ -1,4 +1,4 @@
-"""Build the mixed-building PDF from saved simulation outputs (optional report dependencies)."""
+"""Build the PDF or editable LaTeX report from saved simulation outputs."""
 
 import argparse
 import csv
@@ -10,8 +10,10 @@ from zoneinfo import ZoneInfo
 
 try:
     from scripts.report_parameters import append_parameter_guide
+    from scripts.latex_report import LatexReport
 except ModuleNotFoundError:
     from report_parameters import append_parameter_guide
+    from latex_report import LatexReport
 
 from pypdf import PdfReader
 from reportlab.lib import colors
@@ -23,7 +25,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 LABELS = {"small_house":"Small house", "apartment_block":"Apartment block", "school":"School", "supermarket":"Supermarket"}
 
 
-def create_report(results: Path, output: Path, validation_path: Path) -> None:
+def create_report(results: Path, output: Path, validation_path: Path, output_format="pdf") -> None:
+    if output_format not in {"pdf", "latex"}:
+        raise ValueError("Report format must be pdf or latex.")
     comparison = json.loads((results / "comparison.json").read_text())
     if comparison.get("community", {}).get("participant_unit") != "aggregated_building_meter":
         raise ValueError("This report describes the mixed-building model; run that experiment first.")
@@ -50,13 +54,18 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
     ):
         styles.add(ParagraphStyle(name="Report"+name,fontName=font,fontSize=size,leading=leading,textColor=color,spaceAfter=after))
     content = []
+    latex = LatexReport(output) if output_format == "latex" else None
     def p(text, style="Body"):
         content.append(Paragraph(text,styles["Report"+style]))
+        if latex:
+            latex.paragraph(text, style)
     def title(number,text): p(f"{number:02d}  {text}","Heading")
     def sub(text):
         content.append(Spacer(1,5))
         p(text,"Sub")
     def table(rows,widths,padding=7):
+        if latex:
+            latex.table(rows, widths)
         cells = [[Paragraph(escape(str(v)),styles["ReportCell"]) for v in row] for row in rows]
         t = Table(cells,colWidths=widths,repeatRows=1,hAlign="LEFT")
         t.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,0),colors.HexColor("#EEF2F5")),
@@ -68,10 +77,15 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
     def fig(name,caption,width=507):
         from PIL import Image as PILImage
         path=results/"charts"/f"{name}.png"
+        if latex:
+            latex.figure(path, caption)
         w,h=PILImage.open(path).size
         content.append(Image(str(path),width=width,height=width*h/w))
         p(caption,"Caption")
-    def page(): content.append(PageBreak())
+    def page():
+        content.append(PageBreak())
+        if latex:
+            latex.page()
     def f(value): return f"{value:,.3f}"
 
     p("SMART GRIDS / MIXED BUILDING COMMUNITY","Sub")
@@ -239,6 +253,11 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
         p("Fixed outputs remain in results/; shifted outputs are in results/demand_response/. The paired CSV/JSON is demand_response_comparison. Inspect inputs/demand_shifts.csv and hourly_inputs_baseline.csv in the shifted folder to trace each transfer. The model uses supplied forecasts, not future actual measurements; incomplete calendar days remain unchanged.")
         expected_pages += 1
 
+    if latex:
+        latex.write()
+        print(f"Editable LaTeX report written: {output}")
+        return
+
     def frame(canvas,doc):
         canvas.setStrokeColor(colors.HexColor("#D6DEE5"));canvas.setLineWidth(.5)
         canvas.line(44,45,A4[0]-44,45)
@@ -261,7 +280,10 @@ def create_report(results: Path, output: Path, validation_path: Path) -> None:
 if __name__=="__main__":
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results",type=Path,default=PROJECT_ROOT/"results")
-    parser.add_argument("--output",type=Path,default=PROJECT_ROOT/"output/pdf/smart_grids_project_report.pdf")
+    parser.add_argument("--format",choices=["pdf","latex"],default="pdf")
+    parser.add_argument("--output",type=Path)
     parser.add_argument("--validation",type=Path,default=PROJECT_ROOT/"docs/current_validation.json")
     args=parser.parse_args()
-    create_report(args.results,args.output,args.validation)
+    output = args.output or (PROJECT_ROOT / ("docs/smart_grids_team_guide/main.tex" if args.format == "latex"
+                                             else "output/pdf/smart_grids_project_report.pdf"))
+    create_report(args.results,output,args.validation,args.format)
