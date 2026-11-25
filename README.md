@@ -146,7 +146,10 @@ L clearly beats K, because F's battery order leaves more PV for neighbours. L do
 ordering the morning offers so much PV that the fund is empty before the midday peak,
 where L then pays less than F's fixed EUR 0.02/kWh. L's lower meter cost is the larger
 reward moved from the regulator to the meters, not a community saving. Report pages
-27-30 explain this and list the best scenario for each objective.
+27-31 explain this and list the best scenario for each objective. Pages 32-33 are a
+presentation summary: a headline chart and table for A, B, F and L, the average daily
+cost per participant group (battery owners, PV-only prosumers, consumers) with the
+share of meters paying less than in A, and five key messages for the slides.
 
 Each hour has a deterministic matching stream, separate from community and data
 generation. Same inputs, seed, code and environment reproduce the transaction

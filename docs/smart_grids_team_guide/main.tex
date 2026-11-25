@@ -27,7 +27,7 @@
 The design contains \textbf{150 aggregate building meters: 100 prosumers and 50 consumers}. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are 84 small houses, 45 blocks, 15 supermarkets and 6 schools, including \textbf{1005 homes}. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.
 \par\medskip
 
-{\small \textbf{For the team:} sections 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on sections 23-25 when that experiment is present. section 26 compares the regulator policy variants G-K; sections 27-31 cover the combined scenario L, the multi-seed robustness check and the best scenario per objective, when they were run.\par}
+{\small \textbf{For the team:} sections 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on sections 23-25 when that experiment is present. section 26 compares the regulator policy variants G-K; sections 27-31 cover the combined scenario L, the multi-seed robustness check and the best scenario per objective; sections 32-33 summarize the key scenarios and the cost per participant for the presentation, when they were run.\par}
 \par\medskip
 
 \subsection*{Objective and experiment}
@@ -1243,5 +1243,89 @@ Lowest storage-adjusted cost & F (4,805.3) & L (4,765.6) & L / L \\ \addlinespac
 \par\medskip
 
 Present \textbf{F} as the final proposed solution, with L as a tested extension. F and L trade almost the same energy and cost almost the same at the community boundary, on the recorded day and across seeds; L's extra rewards mainly redistribute the regulator's fund to the meters. F's fixed tier is simpler to explain and audit and does not drain the fund before the midday PV peak. If the goal is to lower what participants pay rather than community-wide cost, L (or a day-end refund such as J) passes more of the fees back to traders.
+\par\medskip
+
+\clearpage
+
+\section*{32  Presentation summary: the key scenarios}
+\par\medskip
+
+One page for the slides: A is the starting point (batteries, no regulator), B adds the regulator, F also sells PV before charging (recommended), and L adds K's fund-sized reward to F. D (no storage) and K are shown in the chart for context.
+\par\medskip
+
+\begin{center}\includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{images/presentation_summary.png}\end{center}
+
+{\small Figure 12. Headline outcomes for A, B, D, F, K and L on the recorded day. Bottom right: change in average daily cost per participant group compared with A (negative = participants pay less).\par}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.297830\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.175542\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.175542\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.175542\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.175542\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{KPI (change vs A)} & \textbf{A} & \textbf{B} & \textbf{F} & \textbf{L} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{KPI (change vs A)} & \textbf{A} & \textbf{B} & \textbf{F} & \textbf{L} \\ \midrule
+\endhead
+P2P energy, kWh & 740 & 2,350 (+1,610) & 2,941 (+2,201) & 2,943 (+2,203) \\ \addlinespace[3pt]
+P2P share of PV, \% & 5.4 & 17.0 & 21.3 & 21.3 \\ \addlinespace[3pt]
+Grid imports, kWh & 17,786 & 16,705 (-1,081) & 16,263 (-1,522) & 16,268 (-1,517) \\ \addlinespace[3pt]
+Grid exports, kWh & 2,443 & 1,362 (-1,081) & 1,085 (-1,358) & 1,090 (-1,353) \\ \addlinespace[3pt]
+Participants pay, EUR/day & 5,189 & 5,063 (-126) & 4,929 (-261) & 4,879 (-310) \\ \addlinespace[3pt]
+Community, storage-adj., EUR/day & 5,142 & 4,882 (-259) & 4,805 (-336) & 4,807 (-335) \\ \addlinespace[3pt]
+Meters paying less than in A & - & 99 of 150 & 106 of 150 & 111 of 150 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+\clearpage
+
+\section*{33  Cost per participant and key messages}
+\par\medskip
+
+\subsection*{Average daily net cost per meter (EUR, change vs A)}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.181460\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.078895\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.128205\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Group} & \textbf{Meters} & \textbf{A} & \textbf{B} & \textbf{D} & \textbf{F} & \textbf{K} & \textbf{L} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Group} & \textbf{Meters} & \textbf{A} & \textbf{B} & \textbf{D} & \textbf{F} & \textbf{K} & \textbf{L} \\ \midrule
+\endhead
+Prosumer + battery & 55 & 11.33 & 10.67 (-5.9\%) & 12.83 (+13.2\%) & 10.61 (-6.4\%) & 10.11 (-10.8\%) & 10.08 (-11.0\%) \\ \addlinespace[3pt]
+Prosumer, PV only & 45 & 35.58 & 34.01 (-4.4\%) & 33.58 (-5.6\%) & 33.43 (-6.1\%) & 32.95 (-7.4\%) & 33.07 (-7.1\%) \\ \addlinespace[3pt]
+Consumer & 50 & 58.34 & 57.97 (-0.6\%) & 56.28 (-3.5\%) & 56.64 (-2.9\%) & 57.33 (-1.7\%) & 56.56 (-3.0\%) \\ \addlinespace[3pt]
+All & 150 & 34.28 & 33.44 (-2.4\%) & 33.54 (-2.2\%) & 32.80 (-4.3\%) & 32.71 (-4.6\%) & 32.47 (-5.3\%) \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+{\small Net cost = purchases - sales + regulator fees - rewards, for one simulated June day. Battery owners are storage-adjusted (energy left in their battery is credited at the value above). A meter is an aggregate building: a school or supermarket has a far larger bill than a house, so compare percentages across groups rather than euros. Do not multiply one synthetic day into an annual saving.\par}
+\par\medskip
+
+\subsection*{Share of meters that pay less than in A}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.236686\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.151874\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.151874\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.151874\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.151874\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.155819\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Group} & \textbf{B} & \textbf{D} & \textbf{F} & \textbf{K} & \textbf{L} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Group} & \textbf{B} & \textbf{D} & \textbf{F} & \textbf{K} & \textbf{L} \\ \midrule
+\endhead
+Prosumer + battery & 34/55 & 16/55 & 34/55 & 42/55 & 36/55 \\ \addlinespace[3pt]
+Prosumer, PV only & 32/45 & 32/45 & 32/45 & 41/45 & 38/45 \\ \addlinespace[3pt]
+Consumer & 33/50 & 41/50 & 40/50 & 32/50 & 37/50 \\ \addlinespace[3pt]
+All & 99/150 & 89/150 & 106/150 & 115/150 & 111/150 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection*{Key messages for the presentation}
+\par\medskip
+
+\textbf{1. Regulation is what makes P2P happen.} A trades 740 kWh; B trades 2,350 kWh on identical inputs, because guided prices and rewards make bids and asks compatible.\newline{}\textbf{2. Selling PV before charging adds more.} F trades 2,941 kWh and, with L, has the fewest imports (16,263 kWh against 17,786 in A).\newline{}\textbf{3. Every group gains on average.} In F, the average cost falls for all three groups; the lowest-cost scenario is L for battery owners, K for PV-only prosumers and D for consumers. Some individual meters still pay more than in A (F: 44 of 150).\newline{}\textbf{4. Bigger rewards redistribute rather than save.} L lowers what participants pay compared with F, but the community cost is the same within noise across 20 seeds; the difference is regulator money handed back.\newline{}\textbf{5. Every trade is auditable.} Energy and cash reconcile to numerical precision and each internal trade is in one hourly block.
 \par\medskip
 \end{document}

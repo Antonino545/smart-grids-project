@@ -188,7 +188,156 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
       "uses own PV that would otherwise be sold, so P2P falls.")
     sub("Recommendation")
     p(RECOMMENDATION)
+    pages += _append_presentation(results, m, value, p, title, sub, table, fig, page)
     return pages
+
+
+GROUPS = ["Prosumer + battery", "Prosumer, PV only", "Consumer"]
+KEY = ["A", "B", "F", "L"]
+
+
+def participant_costs(results: Path, value: float) -> dict:
+    """Average daily net cost per meter and participant group, plus share of meters cheaper than in A.
+
+    Battery owners' cost is storage-adjusted: the change in their own stored energy is valued at
+    ``value`` EUR/kWh, so ending the day with less energy in the battery is not counted as a saving.
+    """
+    with (results / "inputs" / "households.csv").open() as handle:
+        meters = {r["household_id"]: (GROUPS[2] if r["participant_role"] == "consumer"
+                                      else GROUPS[0] if r["has_battery"] == "True" else GROUPS[1])
+                  for r in csv.DictReader(handle)}
+    adjusted = {}
+    for name in COMPARED:
+        with (results / name / "household_costs.csv").open() as handle:
+            cost = {r["household_id"]: float(r["net_cost_eur"]) for r in csv.DictReader(handle)}
+        start, end = {}, {}
+        with (results / name / "household_hourly.csv").open() as handle:
+            rows = list(csv.DictReader(handle))
+        last = max(int(r["hour"]) for r in rows)
+        for r in rows:
+            if int(r["hour"]) == 0:
+                start[r["household_id"]] = float(r["stored_start_kwh"] or 0)
+            if int(r["hour"]) == last:
+                end[r["household_id"]] = float(r["stored_end_kwh"] or 0)
+        adjusted[name] = {k: c - value * (end[k] - start[k]) for k, c in cost.items()}
+    out = {}
+    for name in COMPARED:
+        for group in GROUPS:
+            ids = [k for k, g in meters.items() if g == group]
+            out[name, group] = {"count": len(ids), "mean": sum(adjusted[name][k] for k in ids) / len(ids),
+                                "cheaper_than_a": sum(adjusted[name][k] < adjusted["A"][k] - 1e-9 for k in ids)}
+        out[name, "All"] = {"count": len(meters), "mean": sum(adjusted[name].values()) / len(meters),
+                            "cheaper_than_a": sum(adjusted[name][k] < adjusted["A"][k] - 1e-9 for k in meters)}
+    return out
+
+
+def presentation_chart(results: Path, m: dict, value: float, costs: dict) -> None:
+    import os
+    import tempfile
+    os.environ.setdefault("MPLCONFIGDIR", str(Path(tempfile.gettempdir()) / "smartgrid-matplotlib"))
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from src.charts import COLORS
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11, "axes.spines.top": False,
+                         "axes.spines.right": False, "axes.titleweight": "bold", "figure.facecolor": "white"})
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8.4))
+    colors = [COLORS[n] for n in COMPARED]
+    panels = ((axes[0, 0], "P2P energy traded (kWh)", [m[n]["p2p_energy_kwh"] for n in COMPARED], "{:,.0f}"),
+              (axes[0, 1], "Grid imports (kWh)", [m[n]["grid_imports_kwh"] for n in COMPARED], "{:,.0f}"),
+              (axes[1, 0], "Community cost, storage-adjusted (EUR)", [_adjusted(m[n], value) for n in COMPARED], "{:,.0f}"))
+    for axis, label, values, fmt in panels:
+        bars = axis.bar(COMPARED, values, color=colors)
+        axis.set_title(label, fontsize=11)
+        low = min(values)
+        if "kWh" in label and "import" not in label:
+            low = 0
+        else:
+            axis.set_ylim(low * .97, max(values) * 1.01)
+        for bar, v in zip(bars, values):
+            axis.text(bar.get_x() + bar.get_width() / 2, v, fmt.format(v), ha="center", va="bottom", fontsize=8)
+    axis = axes[1, 1]
+    width = .8 / len(GROUPS)
+    shades = ["#315A86", "#D48B25", "#758A35"]
+    for index, group in enumerate(GROUPS):
+        changes = [100 * (costs[n, group]["mean"] / costs["A", group]["mean"] - 1) for n in COMPARED]
+        positions = [i + (index - 1) * width for i in range(len(COMPARED))]
+        axis.bar(positions, changes, width, label=group, color=shades[index])
+    axis.axhline(0, color="#555555", linewidth=1)
+    axis.set_xticks(range(len(COMPARED)), COMPARED)
+    axis.set_title("Average cost per participant vs A (%)", fontsize=11)
+    axis.legend(fontsize=8, frameon=False)
+    fig.text(.02, .015, "Default Turin day, seed 42, fixed demand. A: storage, no regulation. B: regulated. D: no storage. "
+             "F: P2P before charging. K: fund-sized reward. L: F + K. Costs include fees and rewards; storage valued at EUR "
+             f"{value:.3f}/kWh.", fontsize=8, color="#555555")
+    fig.tight_layout(rect=(0, .04, 1, 1))
+    directory = results / "charts"
+    fig.savefig(directory / "presentation_summary.png", dpi=180)
+    fig.savefig(directory / "presentation_summary.svg")
+    plt.close(fig)
+
+
+def _append_presentation(results: Path, m: dict, value: float, p, title, sub, table, fig, page) -> int:
+    costs = participant_costs(results, value)
+    presentation_chart(results, m, value, costs)
+    a = m["A"]
+
+    def delta(n, key, unit, digits=0):
+        d = m[n][key] - a[key]
+        return f"{m[n][key]:,.{digits}f} ({d:+,.{digits}f})" if n != "A" else f"{m[n][key]:,.{digits}f}"
+
+    page()
+    title(32, "Presentation summary: the key scenarios")
+    p("One page for the slides: A is the starting point (batteries, no regulator), B adds the regulator, F also sells PV "
+      "before charging (recommended), and L adds K's fund-sized reward to F. D (no storage) and K are shown in the chart for context.")
+    fig("presentation_summary", "Figure 12. Headline outcomes for A, B, D, F, K and L on the recorded day. Bottom right: change in "
+        "average daily cost per participant group compared with A (negative = participants pay less).", width=430)
+    adj = {n: _adjusted(m[n], value) for n in KEY}
+    rows = [["KPI (change vs A)", *KEY],
+            ["P2P energy, kWh", *(delta(n, "p2p_energy_kwh", "kWh") for n in KEY)],
+            ["P2P share of PV, %", *(f'{100 * m[n]["p2p_energy_kwh"] / m[n]["pv_generation_kwh"]:.1f}' for n in KEY)],
+            ["Grid imports, kWh", *(delta(n, "grid_imports_kwh", "kWh") for n in KEY)],
+            ["Grid exports, kWh", *(delta(n, "grid_exports_kwh", "kWh") for n in KEY)],
+            ["Participants pay, EUR/day", *(delta(n, "household_net_cost_eur", "EUR") for n in KEY)],
+            ["Community, storage-adj., EUR/day", *(f"{adj[n]:,.0f}" + ("" if n == "A" else f" ({adj[n] - adj['A']:+,.0f})") for n in KEY)],
+            ["Meters paying less than in A", *(("-" if n == "A" else f'{costs[n, "All"]["cheaper_than_a"]} of {costs[n, "All"]["count"]}') for n in KEY)]]
+    table(rows, [151, 89, 89, 89, 89], padding=4)
+
+    page()
+    title(33, "Cost per participant and key messages")
+    sub("Average daily net cost per meter (EUR, change vs A)")
+    rows = [["Group", "Meters", *COMPARED]]
+    for group in [*GROUPS, "All"]:
+        base = costs["A", group]["mean"]
+        rows.append([group, str(costs["A", group]["count"]),
+                     *(f'{costs[n, group]["mean"]:.2f}' + ("" if n == "A" else f' ({100 * (costs[n, group]["mean"] / base - 1):+.1f}%)')
+                       for n in COMPARED)])
+    table(rows, [92, 40, 62, 62, 62, 62, 62, 65], padding=4)
+    p("Net cost = purchases - sales + regulator fees - rewards, for one simulated June day. Battery owners are storage-adjusted "
+      "(energy left in their battery is credited at the value above). A meter is an aggregate building: a school or supermarket "
+      "has a far larger bill than a house, so compare percentages across groups rather than euros. Do not multiply one synthetic "
+      "day into an annual saving.", "Caption")
+    sub("Share of meters that pay less than in A")
+    table([["Group", *COMPARED[1:]]] + [[group, *(f'{costs[n, group]["cheaper_than_a"]}/{costs[n, group]["count"]}' for n in COMPARED[1:])]
+                                         for group in [*GROUPS, "All"]], [120, 77, 77, 77, 77, 79], padding=4)
+    best_group = {g: min(COMPARED, key=lambda n: costs[n, g]["mean"]) for g in GROUPS}
+    sub("Key messages for the presentation")
+    p(f'<b>1. Regulation is what makes P2P happen.</b> A trades {a["p2p_energy_kwh"]:,.0f} kWh; B trades {m["B"]["p2p_energy_kwh"]:,.0f} kWh '
+      f'on identical inputs, because guided prices and rewards make bids and asks compatible.<br/>'
+      f'<b>2. Selling PV before charging adds more.</b> F trades {m["F"]["p2p_energy_kwh"]:,.0f} kWh and, with L, has the fewest imports '
+      f'({m["F"]["grid_imports_kwh"]:,.0f} kWh against {a["grid_imports_kwh"]:,.0f} in A).<br/>'
+      + (f'<b>3. Every group gains on average.</b> In F, the average cost falls for all three groups; '
+         if all(costs["F", g]["mean"] < costs["A", g]["mean"] for g in GROUPS) else
+         '<b>3. Gains are not shared by every group.</b> In F, at least one group pays more on average than in A; ') +
+      f'the lowest-cost scenario is '
+      f'{best_group[GROUPS[0]]} for battery owners, {best_group[GROUPS[1]]} for PV-only prosumers and {best_group[GROUPS[2]]} for consumers. '
+      f'Some individual meters still pay more than in A (F: {costs["F", "All"]["count"] - costs["F", "All"]["cheaper_than_a"]} of {costs["F", "All"]["count"]}).<br/>'
+      f'<b>4. Bigger rewards redistribute rather than save.</b> L lowers what participants pay compared with F, but the community '
+      f'cost is the same within noise across 20 seeds; the difference is regulator money handed back.<br/>'
+      f'<b>5. Every trade is auditable.</b> Energy and cash reconcile to numerical precision and each internal trade is in one hourly block.')
+    return 2
 
 
 RECOMMENDATION = ("Present <b>F</b> as the final proposed solution, with L as a tested extension. F and L trade almost the same "
