@@ -44,41 +44,57 @@ def community_layout(households: list[Household]) -> list[dict]:
 
 
 def draw_building(axis, kind: str, x: float, y: float, fill: str, text_color: str, label: str, floors: int) -> None:
-    """Draw one building with a silhouette unique to its type (cell spans x..x+1, y..y+1)."""
+    """Draw one building with a silhouette and details unique to its type (cell spans x..x+1, y..y+1).
+
+    House: pitched roof and chimney. Block: tall flat-roofed tower with one balcony per floor on
+    each side, a door and a roof antenna. Shop: wide hall under a red-and-white striped awning. School: classical pediment,
+    edge columns and a bell tower with a flag. The middle of each body stays free for ID and PV text.
+    """
     from matplotlib.patches import Circle, Polygon, Rectangle
     edge = {"facecolor": fill, "edgecolor": INK_COLOR, "linewidth": .7}
+    detail = {"facecolor": "white", "edgecolor": INK_COLOR, "linewidth": .4}
     if kind == "apartment_block":
-        # Tall narrow tower with a stepped roof; height grows with floors.
-        height = min(.70, .48 + .025 * floors)
+        height = min(.74, .50 + .025 * floors)
+        top = y + .10 + height
         axis.add_patch(Rectangle((x + .20, y + .10), .60, height, **edge))
-        axis.add_patch(Rectangle((x + .30, y + .10 + height), .40, .07, **edge))
-        axis.text(x + .5, y + .10 + height - .07, f"BLOCK {floors}F", ha="center", va="center",
+        axis.add_patch(Rectangle((x + .17, top), .66, .035, **edge))  # flat roof parapet
+        # One balcony per floor sticking out on both sides (outside the text), a door and a roof antenna.
+        shown = max(1, min(floors, 8))
+        for floor in range(shown):
+            level = y + .13 + floor * (height - .06) / shown
+            for left in (x + .14, x + .80):
+                axis.add_patch(Rectangle((left, level), .06, .018, **detail))
+        axis.add_patch(Rectangle((x + .45, y + .10), .10, .08, **detail))
+        axis.plot([x + .70, x + .70], [top + .035, top + .13], color=INK_COLOR, linewidth=.8)
+        axis.plot([x + .66, x + .74], [top + .10, top + .10], color=INK_COLOR, linewidth=.8)
+        axis.text(x + .5, top - .07, f"BLOCK {floors}F", ha="center", va="center",
                   color=text_color, fontsize=6.6, fontweight="bold")
     elif kind == "supermarket":
-        # Wide low hall with a flat roof sign and a sawtooth awning over the front.
-        axis.add_patch(Rectangle((x + .04, y + .10), .92, .50, **edge))
-        teeth = [(x + .04, y + .60)]
-        for step in range(6):
-            left = x + .04 + step * .92 / 6
-            teeth += [(left + .92 / 12, y + .55), (left + .92 / 6, y + .60)]
-        axis.add_patch(Polygon(teeth + [(x + .96, y + .66), (x + .04, y + .66)], closed=True, **edge))
-        axis.add_patch(Rectangle((x + .22, y + .66), .56, .14, **edge))
-        axis.text(x + .5, y + .73, label, ha="center", va="center", color=text_color, fontsize=6.8, fontweight="bold")
+        axis.add_patch(Rectangle((x + .03, y + .10), .94, .46, **edge))
+        stripes = 8
+        for index in range(stripes):
+            left = x + .01 + index * .98 / stripes
+            axis.add_patch(Polygon([(left, y + .66), (left + .98 / stripes, y + .66),
+                                    (left + .98 / stripes, y + .56), (left, y + .56)], closed=True,
+                                   facecolor="#C0392B" if index % 2 == 0 else "white", edgecolor=INK_COLOR, linewidth=.4))
+        axis.add_patch(Rectangle((x + .20, y + .66), .60, .15, **edge))  # roof sign
+        axis.text(x + .5, y + .735, label, ha="center", va="center", color=text_color, fontsize=6.8, fontweight="bold")
     elif kind == "school":
-        # Two low wings, a central pedimented tower with a clock, and a flag on top.
-        axis.add_patch(Rectangle((x + .04, y + .10), .92, .50, **edge))
-        axis.add_patch(Rectangle((x + .34, y + .60), .32, .14, **edge))
-        axis.add_patch(Polygon([(x + .30, y + .74), (x + .50, y + .85), (x + .70, y + .74)], **edge))
-        axis.plot([x + .50, x + .50], [y + .85, y + .97], color=INK_COLOR, linewidth=.8)
-        axis.add_patch(Polygon([(x + .50, y + .97), (x + .62, y + .94), (x + .50, y + .91)],
+        axis.add_patch(Rectangle((x + .04, y + .10), .92, .46, **edge))
+        for left in (x + .07, x + .15, x + .80, x + .88):  # columns at both ends
+            axis.add_patch(Rectangle((left, y + .12), .05, .40, **detail))
+        axis.add_patch(Polygon([(x + .01, y + .56), (x + .50, y + .78), (x + .99, y + .56)], closed=True, **edge))
+        axis.add_patch(Rectangle((x + .44, y + .78), .12, .08, **edge))  # bell tower
+        axis.add_patch(Circle((x + .50, y + .82), .022, facecolor="white", edgecolor=INK_COLOR, linewidth=.4))
+        axis.plot([x + .50, x + .50], [y + .86, y + .98], color=INK_COLOR, linewidth=.8)
+        axis.add_patch(Polygon([(x + .50, y + .98), (x + .62, y + .955), (x + .50, y + .93)],
                                facecolor="#C0392B", edgecolor=INK_COLOR, linewidth=.4))
-        axis.add_patch(Circle((x + .50, y + .67), .035, facecolor="white", edgecolor=INK_COLOR, linewidth=.5))
-        axis.text(x + .5, y + .085, label, ha="center", va="top", color=INK_COLOR, fontsize=6.0, fontweight="bold")
+        axis.text(x + .5, y + .625, label, ha="center", va="center", color=text_color, fontsize=6.2, fontweight="bold")
     else:
-        # Small house: square body with a pitched triangular roof.
-        axis.add_patch(Rectangle((x + .14, y + .10), .72, .52, **edge))
-        axis.add_patch(Polygon([(x + .08, y + .62), (x + .50, y + .90), (x + .92, y + .62)], **edge))
-        axis.text(x + .5, y + .71, label, ha="center", va="center", color=text_color, fontsize=6.6, fontweight="bold")
+        axis.add_patch(Rectangle((x + .66, y + .66), .08, .20, **edge))  # chimney behind the roof
+        axis.add_patch(Rectangle((x + .16, y + .10), .68, .52, **edge))
+        axis.add_patch(Polygon([(x + .08, y + .62), (x + .50, y + .92), (x + .92, y + .62)], **edge))
+        axis.text(x + .5, y + .72, label, ha="center", va="center", color=text_color, fontsize=6.6, fontweight="bold")
 
 
 def generate_community_map(households: list[Household], directory: Path) -> None:
@@ -145,8 +161,8 @@ def generate_community_map(households: list[Household], directory: Path) -> None
                      label=f"PV only: {len(cells) - owner_count - consumer_count} buildings"),
                Patch(facecolor=CONSUMER_COLOR, edgecolor=INK_COLOR,
                      label=f"Consumer only: {consumer_count} buildings (no PV/storage)")]
-    fig.text(.5, .09, "Shapes: HOUSE = pitched roof   BLOCK = tall tower with stepped top (F = floors)   "
-             "SHOP = wide hall with sawtooth awning   SCHOOL = wings + central bell tower and flag",
+    fig.text(.5, .09, "Shapes: HOUSE = pitched roof + chimney   BLOCK = tall tower, balconies + antenna (F = floors)   "
+             "SHOP = wide hall + red/white striped awning   SCHOOL = columns, pediment, bell tower and flag",
              ha="center", fontsize=9, color=INK_COLOR)
     fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.52, .055), ncol=3,
                frameon=False, fontsize=11)

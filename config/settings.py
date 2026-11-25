@@ -129,6 +129,8 @@ class ForecastSettings:
     historical_days: int = 14
     cloud_factor_min: float = 0.65
     cloud_factor_max: float = 1.0
+    # One cloud factor per day, plus at most this much hour-to-hour change (still within min/max).
+    cloud_hourly_variation: float = 0.05
     historical_price_noise_eur_kwh: float = 0.01
     price_base_eur_kwh: float = 0.17
     price_amplitude_eur_kwh: float = 0.045
@@ -141,10 +143,10 @@ class ForecastSettings:
         from math import isfinite
         numeric = (self.latitude_deg, self.longitude_deg, self.site_altitude_m,
                    self.clear_sky_transmittance, self.ground_albedo, self.performance_factor, self.cloud_factor_min, self.cloud_factor_max,
-                   self.historical_price_noise_eur_kwh)
+                   self.historical_price_noise_eur_kwh, self.cloud_hourly_variation)
         if not all(isfinite(value) for value in numeric):
             raise ValueError("Forecast parameters must be finite.")
-        if not 0 <= self.cloud_factor_min <= self.cloud_factor_max <= 1 or self.historical_price_noise_eur_kwh < 0:
+        if not 0 <= self.cloud_factor_min <= self.cloud_factor_max <= 1 or self.historical_price_noise_eur_kwh < 0 or self.cloud_hourly_variation < 0:
             raise ValueError("Invalid cloud factors or price noise.")
         start = datetime.fromisoformat(self.start_timestamp)
         if start.tzinfo is None or start.minute or start.second or start.microsecond:

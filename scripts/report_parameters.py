@@ -60,8 +60,9 @@ FORECAST = [
     ("forecast.clear_sky_transmittance", "fraction", "Air clearness on a cloudless day; 0.66 matches PVGIS clear June days in Turin."),
     ("forecast.ground_albedo", "fraction", "Ground reflection onto tilted panels; 0.20 is typical for cities."),
     ("forecast.performance_factor", "fraction", "Panel light to AC output after all losses; 0.75 = PVGIS June ratio for Turin."),
-    ("forecast.cloud_factor_min", "fraction", "Lowest hourly multiplier on clear-sky light. Unused with weather_csv."),
+    ("forecast.cloud_factor_min", "fraction", "Lowest daily multiplier on clear-sky light. Unused with weather_csv."),
     ("forecast.cloud_factor_max", "fraction", "Highest multiplier. Mean 0.825 matches PVGIS average/clear June ratio (0.83)."),
+    ("forecast.cloud_hourly_variation", "fraction", "Daily cloud factor; each hour changes it by at most +/- this."),
     ("forecast.historical_days", "days", "Number of synthetic pre-start price days. Unused when a historical price CSV is supplied; not a rolling actual-data update during simulation."),
     ("forecast.price_base_eur_kwh", "EUR per kWh", "Level of synthetic historical prices before the hourly sine component and random noise. Unused with a price CSV."),
     ("forecast.price_amplitude_eur_kwh", "EUR per kWh", "Amplitude of the synthetic hourly price pattern around its base. The forecast then averages earlier observations by clock hour."),
@@ -234,7 +235,6 @@ def append_parameter_guide(config, p, title, sub, table, page):
     title(16,"Parameters: weather, prices and input files")
     p("Prefix: forecast. CSV paths replace only the corresponding synthetic input. null means use the fallback. All input types remain explicitly labeled in hourly_inputs.csv.")
     table(scalar_rows(FORECAST),[145,105,257])
-    p("Past-price forecasting needs earlier observations for every clock hour. Do not put future measured data in a weather/demand file and call it a forecast.")
 
     page()
     title(17,"Parameters: offers and residential profile shape")

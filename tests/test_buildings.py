@@ -109,9 +109,11 @@ def test_legacy_configuration_reproduces_original_energy_volumes():
     buildings = generate_households(settings, buildings=BuildingSettings(enabled=False))
     result = run_simulation(buildings, generate_inputs(buildings, settings), settings, blockchain_enabled=False)
     metrics = calculate_metrics(result)
-    # Regression anchor for the Turin solar model (488.4 kW -> about 4.9 kWh/kW, as PVGIS June).
-    assert metrics["p2p_energy_kwh"] == pytest.approx(8.547948531950478)
-    assert metrics["pv_generation_kwh"] == pytest.approx(2414.621985007958)
+    # Regression anchor for the Turin solar model with one cloud factor per day: seed 42 draws a
+    # fairly sunny day (488.4 kW -> about 5.3 kWh/kW); the expected June mean, 4.9 kWh/kW as in
+    # PVGIS, is checked in test_solar.py.
+    assert metrics["p2p_energy_kwh"] == pytest.approx(8.091567749523422)
+    assert metrics["pv_generation_kwh"] == pytest.approx(2601.022218326499)
 
 
 def test_default_pv_limits_are_caps_that_roof_geometry_never_reaches():

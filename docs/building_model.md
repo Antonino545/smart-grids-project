@@ -45,7 +45,7 @@ behind one meter.
 
 | Type | Count | Roof m2 | Floors | Homes | Base energy | Panel tilt | Roof covered | PV kW (roof-based) | PV limit | Battery |
 |---|---:|---:|---:|---|---|---:|---:|---:|---:|---|
-| Small house | 84 | 80-140 | 1-2 | 1 | 7-12 kWh/home/day | 20 deg | 22-35% | 3.5-9.8 | 10 kW | 10 kWh / 3 kW |
+| Small house | 84 | 80-140 | 1-2 | 1 | 7-12 kWh/home/day | 20 deg | 16-21% | 2.6-5.9 (mean about 4) | 6 kW | 10 kWh / 3 kW |
 | Apartment block | 45 | 250-500 | 4-8 | 80% of footprint / 70-110 m2, per floor | 5-8 kWh/home/day | 15 deg | 30-45% | 15-45 | 50 kW | 40 kWh / 12 kW |
 | Supermarket | 15 | 800-1600 | 1 | 0 | 0.8-1.3 kWh/m2/day | 10 deg | 40-55% | 64-176 | 200 kW | 100 kWh / 30 kW |
 | School | 6 | 700-1600 | 2-4 | 0 | 0.08-0.15 kWh/m2/day | 15 deg | 30-45% | 42-144 | 150 kW | 60 kWh / 18 kW |
@@ -88,8 +88,8 @@ the clear-sky light (Meinel beam model with air mass and altitude, Liu-Jordan
 diffuse) and the light reaching each panel from its tilt and direction (beam +
 sky diffuse + ground reflection, albedo 0.20), averaged over 5-minute steps.
 `forecast.clear_sky_transmittance = 0.66` makes the clear June day match PVGIS
-within about 1% at 10-30 deg. One seeded cloud factor per hour (0.65-1.0, mean
-0.825) is shared by all buildings and reproduces the PVGIS average/clear June
+within about 1% at 10-30 deg. One seeded cloud factor per day (0.65-1.0, mean
+0.825), plus at most +/-0.05 hour-to-hour change, is shared by all buildings and reproduces the PVGIS average/clear June
 ratio (0.83). PV kWh = kW x panel light / 1000 x 0.75, capped at the installed kW;
 0.75 is the PVGIS June output/light ratio for Turin. The expected June yield is
 about 4.9 kWh per installed kW per day, as in PVGIS. On 15 June the sun rises at
@@ -170,8 +170,7 @@ The earlier homogeneous-house model remains runnable with:
 python main.py --config config/residential_baseline.json --include-priority --output results/legacy_run
 ```
 
-Historical residential comparison values are preserved under `docs/baseline/`,
-and its PDF is preserved as `output/pdf/smart_grids_residential_baseline_report.pdf`.
+Historical residential comparison values are preserved under `docs/baseline/`.
 Mixed-building outcomes are a new experiment, not a like-for-like improvement
 over the old community. Historical filenames containing `household` remain stable,
 but current charts and documentation describe building meter costs.

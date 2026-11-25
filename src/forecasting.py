@@ -115,13 +115,19 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
     demand_rng = Random(settings.random_seed + 5000)
     consumer_demand_rng = Random(settings.random_seed + 5001)
     daily_factors = {}
+    daily_sky = {}
     for hour in range(settings.hours):
         # Advance absolute time so DST transitions do not duplicate/miss instants.
         timestamp = (start.astimezone(timezone.utc) + timedelta(hours=hour)).astimezone(start.tzinfo)
         clock_hour = timestamp.hour
         # One shared sky per hour: cloud factor (synthetic) or measured horizontal irradiance (CSV).
+        # Synthetic skies draw one factor per day and add a small hourly change, so a sunny
+        # day does not jump between clear and cloudy from one hour to the next.
         if weather is None:
-            sky = rng.uniform(forecast.cloud_factor_min, forecast.cloud_factor_max)
+            if timestamp.date() not in daily_sky:
+                daily_sky[timestamp.date()] = rng.uniform(forecast.cloud_factor_min, forecast.cloud_factor_max)
+            sky = min(forecast.cloud_factor_max, max(forecast.cloud_factor_min, daily_sky[timestamp.date()]
+                      + rng.uniform(-forecast.cloud_hourly_variation, forecast.cloud_hourly_variation)))
         else:
             if timestamp not in weather:
                 raise ValueError(f"Missing weather for {timestamp.isoformat()}")

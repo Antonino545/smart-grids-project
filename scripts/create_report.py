@@ -99,11 +99,18 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     p("<b>For the team:</b> pages 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on pages 23-25 when that experiment is present. Page 26 compares the regulator policy variants G-K; pages 27-31 cover the combined scenario L, the multi-seed robustness check and the best scenario per objective; pages 32-33 summarize the key scenarios and the cost per participant for the presentation, when they were run.","Caption")
     sub("Objective and experiment")
     p("Encourage neighborhood P2P electricity trading using price guidance and funded seller rewards, then evaluate storage priority and financial outcomes. Self-balancing, P2P, aggregator and grid settlement preserve energy and cash. Every completed internal trade appears in an hourly Proof-of-Work block.")
-    table([["Scenario","Storage","Regulation","Charging priority"],
-           ["A","55 owners","Off","Self-consumption first"],["B","55 owners","On","Self-consumption first"],
-           ["C","Disabled","Off","Counterfactual"],["D","Disabled","On","Counterfactual"],
-           ["E","55 owners","Off","P2P before charging"],["F","55 owners","On","P2P before charging"]]
-          +([["L","55 owners","On, fund-sized reward (K)","P2P before charging (F)"]] if "L" in summaries else []),[55,100,140,212])
+    scenario_rows = {
+        "A":["55 owners","Off","Self-consumption first"],"B":["55 owners","On","Self-consumption first"],
+        "C":["Disabled","Off","Counterfactual"],"D":["Disabled","On","Counterfactual"],
+        "E":["55 owners","Off","P2P before charging"],"F":["55 owners","On","P2P before charging"],
+        "G":["55 owners","On, lower fee EUR 0.0025/kWh","Self-consumption first"],
+        "H":["55 owners","On, bigger reward EUR 0.075/kWh","Self-consumption first"],
+        "I":["55 owners","On, fee only on missed local trades","Self-consumption first"],
+        "J":["55 owners","On, fund refunded to traders at day end","Self-consumption first"],
+        "K":["55 owners","On, reward sized to the fund","Self-consumption first"],
+        "L":["55 owners","On, reward sized to the fund (K)","P2P before charging (F)"]}
+    table([["Scenario","Storage","Regulation","Charging priority"]]+[[n,*scenario_rows[n]] for n in scenario_rows if n in summaries],
+          [55,85,212,155],padding=3)
     sub("Actual result for the new community")
     p(f'With storage, regulation changes P2P energy from <b>{f(m["A"]["p2p_energy_kwh"])} to {f(m["B"]["p2p_energy_kwh"])} kWh</b>, and its share from {m["A"]["p2p_share_pct"]:.3f}% to {m["B"]["p2p_share_pct"]:.3f}%. Cost effects differ by scenario and accounting boundary; all values below come from the recorded execution.')
     p("<b>Evidence boundary:</b> geometry, demand profiles, weather and price history are synthetic engineering assumptions. They are not measured building data. This mixed community is a new experiment and cannot be treated as a like-for-like improvement over the previous residential-only community.")
@@ -283,20 +290,20 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     if policy:
         page()
         title(26,"Regulator policy variants G-K")
-        p("Each variant is scenario B (55 batteries, regulated, self-consumption first) with one regulator rule changed, on identical inputs. In B, the EUR 0.01/kWh fee applies to all 18,000+ grid kWh, day and night, while the EUR 0.02/kWh reward only reaches the roughly 2,350 P2P kWh, so most fees stay in the fund.")
+        p(f'Each variant is scenario B (55 batteries, regulated, self-consumption first) with one regulator rule changed, on identical inputs. In B, the EUR 0.01/kWh fee applies to all {m["B"]["grid_imports_kwh"]+m["B"]["grid_exports_kwh"]:,.0f} grid kWh, day and night, while the EUR 0.02/kWh reward only reaches the {m["B"]["p2p_energy_kwh"]:,.0f} P2P kWh, so most fees stay in the fund.')
         b = m["B"]
         table([["Scenario","Change from B","P2P kWh","Fees","Rewards","Refunds","Fund left","Meter cost vs B"]]+[
             [n, {"B":"reference","G":"fee 0.0025","H":"reward 0.075","I":"fee on missed local","J":"day-end refund","K":"reward sized to fund"}[n],
              f'{m[n]["p2p_energy_kwh"]:,.0f}', f'{m[n]["regulator_fee_revenue_eur"]:.2f}', f'{m[n]["regulator_reward_expenditure_eur"]:.2f}',
              f'{m[n]["regulator_refund_eur"]:.2f}', f'{m[n]["regulator_remaining_funds_eur"]:.2f}',
              f'{m[n]["household_net_cost_eur"]-b["household_net_cost_eur"]:+.2f}'] for n in ["B", *policy]],[52,98,52,48,52,52,52,101])
-        p("Amounts in EUR. <b>G</b> lowers the fee to EUR 0.0025/kWh and <b>H</b> raises the reward to EUR 0.075/kWh (0.0375 lower tier); both values would balance fees and rewards on this day. <b>I</b> charges the fee only on grid energy that a neighbour in the same group could have traded in the same hour: min(group imports, group exports), shared pro rata. <b>J</b> returns the whole fund at the end of the day to meters in proportion to the P2P kWh each bought or sold. <b>K</b> sets each hour's reward rate to fund / possible P2P energy (capped at EUR 0.10/kWh).")
+        p("Amounts in EUR. <b>G</b> lowers the fee to EUR 0.0025/kWh and <b>H</b> raises the reward to EUR 0.075/kWh (0.0375 lower tier); both values were sized to roughly balance fees and rewards on the original default day. <b>I</b> charges the fee only on grid energy that a neighbour in the same group could have traded in the same hour: min(group imports, group exports), shared pro rata. <b>J</b> returns the whole fund at the end of the day to meters in proportion to the P2P kWh each bought or sold. <b>K</b> sets each hour's reward rate to fund / possible P2P energy (capped at EUR 0.10/kWh).")
         if {"G","H","K"} <= set(policy):
             def vs_b(n):
                 d = m[n]["p2p_energy_kwh"] - b["p2p_energy_kwh"]
                 return f'{f(m[n]["p2p_energy_kwh"])} kWh ({d:+,.0f} vs B)'
             best = min(["B", *policy], key=lambda n: m[n]["community_including_regulator_net_cost_eur"])
-            p(f'<b>What drives P2P is money available when the sun shines.</b> A reward lowers the seller ask by half its rate, so more bids meet asks. G collects a quarter of B\'s fees, so its fund runs empty in the afternoon and those trades lose the discount: G trades {vs_b("G")}. H pays a larger discount while its fund lasts: {vs_b("H")}. K spends the fund evenly over the day: {vs_b("K")}. Lowest meters-plus-regulator cost: {best} (EUR {m[best]["community_including_regulator_net_cost_eur"]:.2f}). When a reward cannot be funded, the trade keeps the guided prices and only loses the reward.')
+            p(f'<b>What drives P2P is money available when the sun shines.</b> A reward lowers the seller ask by half its rate, so more bids meet asks. G collects a quarter of B\'s fees, so its fund runs empty in the afternoon and those trades lose the discount: G trades {vs_b("G")}. H pays a larger discount while its fund lasts: {vs_b("H")}. K sizes the reward of each hour to the money in the fund: {vs_b("K")}. Lowest meters-plus-regulator cost: {best} (EUR {m[best]["community_including_regulator_net_cost_eur"]:.2f}). When a reward cannot be funded, the trade keeps the guided prices and only loses the reward.')
         if {"I","J"} <= set(policy):
             missed = m["I"]["regulator_fee_revenue_eur"] / summaries["I"]["configuration"]["regulator"]["grid_fee_eur_kwh"] / 2
             p(f'Only {missed:,.0f} kWh per side (export and import) was a missed local trade, so I raises little money and P2P falls. J trades exactly like B (the refund comes after trading) but returns EUR {m["J"]["regulator_refund_eur"]:.2f} to traders, so meter cost falls by the same amount.')

@@ -87,8 +87,8 @@ first), each with **one** regulator rule changed. Their settings are in
 | J | Whole fund returned at day end, split by each meter's P2P kWh | `refund_leftover: true` |
 | K | Hourly reward = fund / possible P2P kWh, capped at EUR 0.10/kWh | `reward_mode: "budget_sized"` |
 
-Why: in B the fee hits every grid kWh, day and night (about 18,000 kWh), while
-the reward only reaches P2P kWh (about 2,350), so most fees stay in the fund.
+Why: in B the fee hits every grid kWh, day and night (about 17,700 kWh), while
+the reward only reaches P2P kWh (about 2,130), so most fees stay in the fund.
 On the default day, G's smaller fee leaves too little money for afternoon
 rewards, so it trades less than B; H and K trade more, and K, which sizes each
 hour's reward to the money in the fund (high in the morning, lower after the fund
@@ -129,27 +129,34 @@ and scenario), `summary.csv` (mean, sample standard deviation, min, max),
 "Storage-adjusted" cost subtracts the change in stored energy valued at
 import tariff x discharge efficiency (EUR 0.285/kWh).
 
-Recorded result (default day, seed 42, fixed demand): L trades 2,943 kWh P2P against
-F's 2,941 and K's 2,471; meters + regulator cost EUR 4,815.08 (F 4,813.87, K 4,891.65).
-With demand response L trades 2,830 kWh against F's 2,845. Over 20 seeds (paired
-differences, mean ± sd across seeds):
+Recorded result (default day, seed 42, fixed demand): L trades 2,758 kWh P2P against
+F's 2,739 and K's 2,297; meters + regulator cost EUR 4,731.02 (F 4,735.46, K 4,777.87).
+With demand response L trades 2,665 kWh against F's 2,646. Over 20 seeds (paired
+differences, mean ± sd across seeds, share of seeds in which L is better):
 
 | L minus | Condition | P2P kWh | Meter cost EUR | Storage-adjusted meters + regulator EUR |
 |---|---|---:|---:|---:|
-| F | fixed | -40 ± 92 (L better in 30%) | -51.8 ± 25.6 (100%) | -0.8 ± 18.3 (50%) |
-| F | demand response | -24 ± 88 (45%) | -56.4 ± 26.7 (100%) | -3.8 ± 19.0 (75%) |
-| K | fixed | +457 ± 116 (100%) | -56.0 ± 19.3 (100%) | -19.3 ± 15.0 (100%) |
-| K | demand response | +472 ± 109 (100%) | -58.7 ± 16.5 (100%) | -21.4 ± 12.3 (100%) |
+| F | fixed | +14 ± 93 (60%) | -69.0 ± 29.3 (100%) | -9.6 ± 19.4 (75%) |
+| F | demand response | +28 ± 82 (70%) | -73.3 ± 26.7 (100%) | -11.8 ± 16.8 (85%) |
+| K | fixed | +497 ± 74 (100%) | -56.5 ± 15.6 (100%) | -10.8 ± 13.2 (75%) |
+| K | demand response | +500 ± 86 (100%) | -56.9 ± 17.4 (100%) | -10.5 ± 13.4 (80%) |
 
-L clearly beats K, because F's battery order leaves more PV for neighbours. L does
-**not** beat F: K's rule spends the whole fund in the current hour, and under P2P-first
-ordering the morning offers so much PV that the fund is empty before the midday peak,
-where L then pays less than F's fixed EUR 0.02/kWh. L's lower meter cost is the larger
-reward moved from the regulator to the meters, not a community saving. Report pages
-27-31 explain this and list the best scenario for each objective. Pages 32-33 are a
-presentation summary: a headline chart and table for A, B, F and L, the average daily
-cost per participant group (battery owners, PV-only prosumers, consumers) with the
-share of meters paying less than in A, and five key messages for the slides.
+L clearly beats K in P2P, because F's battery order leaves more PV for neighbours.
+Against F, L is slightly cheaper for the community (about EUR 10/day, 0.2% of the
+bill, beyond two standard errors of the paired mean) and trades about as much P2P.
+The gain is small because K's rule spends the whole fund in the current hour: under
+P2P-first ordering the fund runs low before the midday peak, where L pays less than
+F's fixed EUR 0.02/kWh; L wins it back in the morning and late afternoon. Most of L's
+lower meter cost is reward money moved from the regulator to the meters. The report
+therefore recommends L, with F as a simpler fallback. Pages 27-31 explain this and
+list the best scenario for each objective. Pages 32-33 are a presentation summary: a
+headline chart and table for A, B, F and L, the average daily cost per building type
+and per participant group, the share of meters paying less than in A, and five key
+messages for the slides.
+
+These results changed when house PV was resized to typical Italian systems (mean about
+4 kWp instead of 6.3) and synthetic clouds were made daily instead of hourly: with
+the earlier, larger house PV, L and F were economically indistinguishable.
 
 Each hour has a deterministic matching stream, separate from community and data
 generation. Same inputs, seed, code and environment reproduce the transaction
@@ -236,7 +243,7 @@ data for Turin; it is not a forecast for that specific date.
 
 Each hour, the sun position over Turin and the clear-sky light on every panel are
 computed from the panel tilt (houses 20°, blocks/schools 15°, supermarkets 10°,
-all facing south). A seeded cloud factor (0.65–1.0) scales the light. PV energy =
+all facing south). A seeded cloud factor (one per day, 0.65–1.0, with at most ±0.05 change from hour to hour) scales the light. PV energy =
 installed kW × panel light / 1000 × 0.75 × step hours, capped at installed
 capacity. This gives about 4.9 kWh per kW per day in June, as PVGIS does for
 Turin. See `docs/building_model.md` for sources.
@@ -357,25 +364,12 @@ Both household flows and full cash movements must reconcile before outputs pass.
 
 ## PDF report
 
-The full team document is available as an editable LaTeX project:
-[Smart Grids team guide](docs/smart_grids_team_guide/main.tex). Edit `main.tex`
-directly in Codex, a LaTeX editor or Overleaf. Keep its `images/` folder with it.
-The project opens in Codex with source editing and a live PDF preview.
-
-To regenerate the source and figure copies from saved results (replaces manual edits):
-
-```bash
-python scripts/create_report.py --format latex
-```
-
-LaTeX export uses the same optional Python report dependencies as the PDF builder.
-Compile with Codex's built-in LaTeX editor or `pdflatex main.tex` from the project
-folder. Normal simulator runs do not overwrite your LaTeX edits.
-
-`output/pdf/smart_grids_project_report.pdf` describes the current mixed-building
-model and its actual six-scenario results. The previous residential-only report
-is preserved separately as `smart_grids_residential_baseline_report.pdf`.
-After generating all six scenarios and charts, rebuild the current report with:
+`output/pdf/smart_grids_project_report.pdf` is the single project report. It
+describes the mixed-building model and the actual results of scenarios A-L,
+including the robustness analysis and the presentation summary (pages 32-33).
+An editable LaTeX version can be exported on demand with
+`python scripts/create_report.py --format latex --output <folder>/main.tex`.
+After running the full report command and `python scripts/robustness.py`, rebuild the report with:
 
 ```bash
 python -m pip install -r requirements-report.txt
@@ -389,7 +383,7 @@ explicitly flagged. The report builder targets the mixed-building six-scenario
 experiment. Other compositions require reviewing any illustrative narrative
 alongside the exported configuration.
 
-The PDF includes a team parameter guide on pages 11–22: all 180 configuration
+The PDF includes a team parameter guide on pages 11–22: all 181 configuration
 values, units, effects, building-type comparisons, worked examples and a partial
 JSON experiment workflow. Values are read from the saved run configuration.
 `scripts/report_parameters.py` checks that every configuration field is documented;

@@ -92,7 +92,7 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
         table(_money_rows(shifted, value), [52, 74, 92, 92, 62, 62, 73], padding=4)
 
     page(); pages += 1
-    title(29, "Why combining F and K does not beat F")
+    title(29, "L versus F hour by hour: where the reward helps")
     rate_f, p2p_f = _hourly(results, "F")
     rate_l, p2p_l = _hourly(results, "L")
     sunny = [h for h in sorted(rate_l) if p2p_f[h] > 1 or p2p_l[h] > 1]
@@ -109,8 +109,8 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
     p(f"Rates in euro cents/kWh. L's rule spends the whole available fund on the current hour. Before batteries charge, many "
       f"owners offer PV in the morning, so the fund collected overnight is used up by the morning trades. In hours where L pays at least F's rate, L trades {gain:+.0f} kWh; "
       f"in the following peak-PV hours its rate falls below F's fixed EUR 0.02 and it trades {loss:+.0f} kWh. "
-      f"Net: {l['p2p_energy_kwh'] - fm['p2p_energy_kwh']:+.1f} kWh against F. K gains against B ({k['p2p_energy_kwh'] - m['B']['p2p_energy_kwh']:+.0f} kWh) "
-      "because B offers less PV in the morning, so the same fund lasts until about midday.")
+      f"Net: {l['p2p_energy_kwh'] - fm['p2p_energy_kwh']:+.1f} kWh against F. The same rule gains more on B's order "
+      f"(K minus B: {k['p2p_energy_kwh'] - m['B']['p2p_energy_kwh']:+.0f} kWh), because B's batteries absorb morning PV, so less P2P is possible early and the fund lasts longer.")
     p(f"L pays EUR {l['regulator_reward_expenditure_eur'] - fm['regulator_reward_expenditure_eur']:+.2f} more rewards than F, so meter cost moves by "
       f"EUR {l['household_net_cost_eur'] - fm['household_net_cost_eur']:+.2f}. This is mostly a transfer from the regulator: meters plus regulator move by only "
       f"EUR {l['community_including_regulator_net_cost_eur'] - fm['community_including_regulator_net_cost_eur']:+.2f}, and L ends with "
@@ -149,10 +149,14 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
           'full tables are in results/robustness/.', "Caption")
         n = lfa["runs"]
         ldr = wins["demand_response", "L vs F", "community_cost_storage_adjusted_eur"]
-        p(f'<b>Reading.</b> L beats K on every seed: the gain comes from F\'s battery order. Against F the differences are small and change sign '
+        verdict = l_versus_f(wins)
+        outcome = {"better": "so L is cheaper than F beyond seed-to-seed noise, although the saving is small",
+                   "worse": "so L is more expensive than F beyond seed-to-seed noise",
+                   "tie": "so L and F cannot be told apart economically"}[verdict]
+        p(f'<b>Reading.</b> L beats K in P2P on every seed: that gain comes from F\'s battery order. Against F the differences are small and change sign '
           f'between seeds. The mean cost difference ({lfa["mean_difference"]:+.2f} EUR fixed, {ldr["mean_difference"]:+.2f} EUR with demand response) '
-          f'is smaller than about two standard errors of the paired mean ({2 * lfa["std_difference"] / n ** .5:.1f} and '
-          f'{2 * ldr["std_difference"] / n ** .5:.1f} EUR), so L and F cannot be told apart economically; L trades less P2P on average.')
+          f'compares with two standard errors of the paired mean ({2 * lfa["std_difference"] / n ** .5:.1f} and '
+          f'{2 * ldr["std_difference"] / n ** .5:.1f} EUR), {outcome}. L minus F in P2P is {lf["mean_difference"]:+.0f} kWh on average.')
 
     page(); pages += 1
     title(31, "Which scenario is best for which objective")
@@ -187,12 +191,13 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
       "corrected for energy left in storage, is the fair economic comparison. Demand response lowers cost in every scenario but "
       "uses own PV that would otherwise be sold, so P2P falls.")
     sub("Recommendation")
-    p(RECOMMENDATION)
+    p(recommendation(json.loads(robust_path.read_text())["l_win_rates"] if robust_path.exists() else None, m))
     pages += _append_presentation(results, m, value, p, title, sub, table, fig, page)
     return pages
 
 
 GROUPS = ["Prosumer + battery", "Prosumer, PV only", "Consumer"]
+BUILDING_TYPES = {"small_house": "House", "apartment_block": "Apartment block", "supermarket": "Supermarket", "school": "School"}
 KEY = ["A", "B", "F", "L"]
 
 
@@ -203,9 +208,10 @@ def participant_costs(results: Path, value: float) -> dict:
     ``value`` EUR/kWh, so ending the day with less energy in the battery is not counted as a saving.
     """
     with (results / "inputs" / "households.csv").open() as handle:
-        meters = {r["household_id"]: (GROUPS[2] if r["participant_role"] == "consumer"
-                                      else GROUPS[0] if r["has_battery"] == "True" else GROUPS[1])
-                  for r in csv.DictReader(handle)}
+        records = list(csv.DictReader(handle))
+    meters = {r["household_id"]: (GROUPS[2] if r["participant_role"] == "consumer"
+                                  else GROUPS[0] if r["has_battery"] == "True" else GROUPS[1]) for r in records}
+    types = {r["household_id"]: r["building_type"] for r in records}
     adjusted = {}
     for name in COMPARED:
         with (results / name / "household_costs.csv").open() as handle:
@@ -226,6 +232,11 @@ def participant_costs(results: Path, value: float) -> dict:
             ids = [k for k, g in meters.items() if g == group]
             out[name, group] = {"count": len(ids), "mean": sum(adjusted[name][k] for k in ids) / len(ids),
                                 "cheaper_than_a": sum(adjusted[name][k] < adjusted["A"][k] - 1e-9 for k in ids)}
+        for kind in BUILDING_TYPES:
+            ids = [k for k, t in types.items() if t == kind]
+            if ids:
+                out[name, kind] = {"count": len(ids), "mean": sum(adjusted[name][k] for k in ids) / len(ids),
+                                   "cheaper_than_a": sum(adjusted[name][k] < adjusted["A"][k] - 1e-9 for k in ids)}
         out[name, "All"] = {"count": len(meters), "mean": sum(adjusted[name].values()) / len(meters),
                             "cheaper_than_a": sum(adjusted[name][k] < adjusted["A"][k] - 1e-9 for k in meters)}
     return out
@@ -304,44 +315,87 @@ def _append_presentation(results: Path, m: dict, value: float, p, title, sub, ta
             ["Community, storage-adj., EUR/day", *(f"{adj[n]:,.0f}" + ("" if n == "A" else f" ({adj[n] - adj['A']:+,.0f})") for n in KEY)],
             ["Meters paying less than in A", *(("-" if n == "A" else f'{costs[n, "All"]["cheaper_than_a"]} of {costs[n, "All"]["count"]}') for n in KEY)]]
     table(rows, [151, 89, 89, 89, 89], padding=4)
+    p("One synthetic June day (seed 42, fixed demand). Euro values are per day and are not annual savings.", "Caption")
 
     page()
     title(33, "Cost per participant and key messages")
-    sub("Average daily net cost per meter (EUR, change vs A)")
-    rows = [["Group", "Meters", *COMPARED]]
-    for group in [*GROUPS, "All"]:
-        base = costs["A", group]["mean"]
-        rows.append([group, str(costs["A", group]["count"]),
-                     *(f'{costs[n, group]["mean"]:.2f}' + ("" if n == "A" else f' ({100 * (costs[n, group]["mean"] / base - 1):+.1f}%)')
-                       for n in COMPARED)])
-    table(rows, [92, 40, 62, 62, 62, 62, 62, 65], padding=4)
-    p("Net cost = purchases - sales + regulator fees - rewards, for one simulated June day. Battery owners are storage-adjusted "
-      "(energy left in their battery is credited at the value above). A meter is an aggregate building: a school or supermarket "
-      "has a far larger bill than a house, so compare percentages across groups rather than euros. Do not multiply one synthetic "
-      "day into an annual saving.", "Caption")
-    sub("Share of meters that pay less than in A")
-    table([["Group", *COMPARED[1:]]] + [[group, *(f'{costs[n, group]["cheaper_than_a"]}/{costs[n, group]["count"]}' for n in COMPARED[1:])]
-                                         for group in [*GROUPS, "All"]], [120, 77, 77, 77, 77, 79], padding=4)
+    sub("Average daily net cost per building, by type (EUR/day in A; change vs A in EUR/day)")
+    rows = [["Building type", "Meters", "A, EUR/day", *COMPARED[1:]]]
+    for kind, label in BUILDING_TYPES.items():
+        if ("A", kind) in costs:
+            base = costs["A", kind]["mean"]
+            rows.append([label, str(costs["A", kind]["count"]), f"{base:,.2f}",
+                         *(f'{costs[n, kind]["mean"] - base:+,.2f}' for n in COMPARED[1:])])
+    table(rows, [100, 45, 72, 58, 58, 58, 58, 58], padding=4)
+    p("Compare a house with a house: one supermarket meter has a bill about a hundred times larger than a house, so averages over "
+      "all meters are dominated by the large buildings. Changes are in euros because a house with PV can be close to zero net cost, "
+      "where percentages are meaningless. Net cost = purchases - sales + regulator fees - rewards; battery owners are "
+      "storage-adjusted (energy left in their battery is credited at the value above). Values are for <b>one synthetic June day</b>: "
+      "do not multiply them by 365 to obtain an annual saving.", "Caption")
+    sub("By participant group: change in average cost vs A, and meters paying less than in A")
+    table([["Group", "Meters", *COMPARED[1:]]] + [
+        [group, str(costs["A", group]["count"]),
+         *(f'{100 * (costs[n, group]["mean"] / costs["A", group]["mean"] - 1):+.1f}%, {costs[n, group]["cheaper_than_a"]}/{costs[n, group]["count"]}'
+           for n in COMPARED[1:])] for group in [*GROUPS, "All"]], [102, 45, 72, 72, 72, 72, 72], padding=4)
+    fm_cost, l_cost = m["F"]["household_net_cost_eur"], m["L"]["household_net_cost_eur"]
+    fm_comm, l_comm = m["F"]["community_including_regulator_net_cost_eur"], m["L"]["community_including_regulator_net_cost_eur"]
     best_group = {g: min(COMPARED, key=lambda n: costs[n, g]["mean"]) for g in GROUPS}
     sub("Key messages for the presentation")
     p(f'<b>1. Regulation is what makes P2P happen.</b> A trades {a["p2p_energy_kwh"]:,.0f} kWh; B trades {m["B"]["p2p_energy_kwh"]:,.0f} kWh '
       f'on identical inputs, because guided prices and rewards make bids and asks compatible.<br/>'
-      f'<b>2. Selling PV before charging adds more.</b> F trades {m["F"]["p2p_energy_kwh"]:,.0f} kWh and, with L, has the fewest imports '
-      f'({m["F"]["grid_imports_kwh"]:,.0f} kWh against {a["grid_imports_kwh"]:,.0f} in A).<br/>'
+      f'<b>2. Selling PV before charging adds more.</b> F trades {m["F"]["p2p_energy_kwh"]:,.0f} kWh and imports '
+      f'{m["F"]["grid_imports_kwh"]:,.0f} kWh against {a["grid_imports_kwh"]:,.0f} in A.<br/>'
       + (f'<b>3. Every group gains on average.</b> In F, the average cost falls for all three groups; '
          if all(costs["F", g]["mean"] < costs["A", g]["mean"] for g in GROUPS) else
          '<b>3. Gains are not shared by every group.</b> In F, at least one group pays more on average than in A; ') +
       f'the lowest-cost scenario is '
       f'{best_group[GROUPS[0]]} for battery owners, {best_group[GROUPS[1]]} for PV-only prosumers and {best_group[GROUPS[2]]} for consumers. '
       f'Some individual meters still pay more than in A (F: {costs["F", "All"]["count"] - costs["F", "All"]["cheaper_than_a"]} of {costs["F", "All"]["count"]}).<br/>'
-      f'<b>4. Bigger rewards redistribute rather than save.</b> L lowers what participants pay compared with F, but the community '
-      f'cost is the same within noise across 20 seeds; the difference is regulator money handed back.<br/>'
+      f'<b>4. Bigger rewards mostly redistribute.</b> L lowers what participants pay compared with F by EUR '
+      f'{fm_cost - l_cost:,.0f}/day, but meters plus regulator change by only EUR {l_comm - fm_comm:+,.0f}/day: most of the difference is '
+      f'regulator money handed back to traders.<br/>'
       f'<b>5. Every trade is auditable.</b> Energy and cash reconcile to numerical precision and each internal trade is in one hourly block.')
     return 2
 
 
-RECOMMENDATION = ("Present <b>F</b> as the final proposed solution, with L as a tested extension. F and L trade almost the same "
-                  "energy and cost almost the same at the community boundary, on the recorded day and across seeds; L's extra "
-                  "rewards mainly redistribute the regulator's fund to the meters. F's fixed tier is simpler to explain and audit and "
-                  "does not drain the fund before the midday PV peak. If the goal is to lower what participants pay rather than "
-                  "community-wide cost, L (or a day-end refund such as J) passes more of the fees back to traders.")
+def l_versus_f(wins: dict | list) -> str:
+    """Compare L with F on storage-adjusted community cost across seeds, in both demand conditions.
+
+    "better"/"worse" needs the paired mean beyond two standard errors and L winning/losing in at
+    least 70% of seeds in both conditions; anything else is a tie.
+    """
+    if isinstance(wins, list):
+        wins = {(r["condition"], r["comparison"], r["kpi"]): r for r in wins}
+    rows = [wins[c, "L vs F", "community_cost_storage_adjusted_eur"] for c in ("fixed", "demand_response")]
+    def beyond(r, sign):
+        return sign * r["mean_difference"] > 2 * r["std_difference"] / r["runs"] ** .5
+    if all(beyond(r, -1) and r["l_better_pct"] >= 70 for r in rows):
+        return "better"
+    if all(beyond(r, 1) and r["l_worse_pct"] >= 70 for r in rows):
+        return "worse"
+    return "tie"
+
+
+def recommendation(wins: list | None, m: dict) -> str:
+    if wins is None:
+        return "Run scripts/robustness.py before choosing between F and L: one seed is not enough evidence."
+    w = {(r["condition"], r["comparison"], r["kpi"]): r for r in wins}
+    fixed = w["fixed", "L vs F", "community_cost_storage_adjusted_eur"]
+    shifted = w["demand_response", "L vs F", "community_cost_storage_adjusted_eur"]
+    p2p = w["fixed", "L vs F", "p2p_energy_kwh"]
+    share = 100 * -fixed["mean_difference"] / m["F"]["community_including_regulator_net_cost_eur"]
+    verdict = l_versus_f(w)
+    if verdict == "better":
+        return (f"Present <b>L</b> as the final proposed solution, with F as its simpler fallback. Across {fixed['runs']} seeds L lowers the "
+                f"storage-adjusted cost of meters plus regulator compared with F by EUR {-fixed['mean_difference']:.1f}/day with fixed demand "
+                f"and EUR {-shifted['mean_difference']:.1f}/day with demand response (L cheaper in {fixed['l_better_pct']:.0f}% and "
+                f"{shifted['l_better_pct']:.0f}% of seeds), and trades about as much P2P ({p2p['mean_difference']:+.0f} kWh). The saving is "
+                f"small, about {share:.1f}% of the daily bill, because the fund-sized reward still runs low around midday; L also passes more "
+                "of the fees back to participants. Choose F if a simpler fixed reward tier matters more than this saving.")
+    if verdict == "worse":
+        return (f"Present <b>F</b> as the final proposed solution. Across {fixed['runs']} seeds L costs the community more than F "
+                f"(EUR {fixed['mean_difference']:+.1f}/day with fixed demand, {shifted['mean_difference']:+.1f} with demand response), "
+                "because the fund-sized reward empties the fund before the midday PV peak.")
+    return ("Present <b>F</b> as the final proposed solution, with L as a tested extension. F and L trade almost the same "
+            "energy and cost almost the same at the community boundary across seeds; L's extra rewards mainly redistribute "
+            "the regulator's fund to the meters. F's fixed tier is simpler to explain and audit.")

@@ -79,10 +79,11 @@ class BuildingTypeSettings:
 def default_types() -> dict[str, BuildingTypeSettings]:
     return {
         # Detached house (villetta): one home, panels flush on the south pitch of a tiled roof.
-        # 80-140 m2 x 22-35 % coverage x 0.20 kW/m2 = 3.5-9.8 kW (Italian homes: mostly 3-6 kW).
+        # 80-140 m2 x 16-21 % coverage x 0.20 kW/m2 = 2.6-5.9 kW, mean about 4 kW: typical Italian
+        # residential systems are 3-6 kW, sized to the usual 3-6 kW household supply contract.
         "small_house": BuildingTypeSettings(
             .56, 80, 140, 1, 2, daily_energy_min=7, daily_energy_max=12,
-            roof_usable_fraction_min=.22, roof_usable_fraction_max=.35, pv_limit_kw=10,
+            roof_usable_fraction_min=.16, roof_usable_fraction_max=.21, pv_limit_kw=6,
             panel_tilt_deg=20),
         # Condominium: flat roof with lift room and vents; panels on 15 deg racks in rows.
         # 250-500 m2 x 30-45 % x 0.20 = 15-45 kW. Homes per floor = 80 % of footprint / home size.

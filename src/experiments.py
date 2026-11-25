@@ -32,9 +32,10 @@ SCENARIOS = {
 PRIORITY_SCENARIOS = ["E", "F"]
 POLICY_SCENARIOS = ["G", "H", "I", "J", "K"]
 COMBINED_SCENARIOS = ["L"]
-# Each policy scenario changes one regulator rule relative to B. G and H are sized so that,
-# on the default Turin day, fees and rewards would roughly balance (B: 18,067 grid kWh,
-# 2,350 P2P kWh): fee 0.01 x 18,067 / 2,350 / 0.02 -> fee 0.0025; or reward 0.075.
+# Each policy scenario changes one regulator rule relative to B. G and H were sized so that,
+# on the original default Turin day, fees and rewards would roughly balance (B: 18,067 grid kWh,
+# 2,350 P2P kWh): fee 0.01 x 18,067 / 2,350 / 0.02 -> fee 0.0025; or reward 0.075. They are kept
+# fixed so results stay comparable; with smaller house PV B now has 17,713 grid kWh and 2,130 P2P kWh.
 REGULATOR_OVERRIDES = {
     "G": {"grid_fee_eur_kwh": 0.0025},                                   # lower fee
     "H": {"lower_reward_eur_kwh": 0.0375, "upper_reward_eur_kwh": 0.075},  # bigger reward

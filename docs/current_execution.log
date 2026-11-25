@@ -1,14 +1,14 @@
-INFO | __main__ | Demand response moved 270.070 kWh across 42 meters; results: /Users/antonino54/Documents/Project/Polito/smart-grids-project/results/demand_response
-INFO | __main__ | Simulation A complete: 150 buildings/meters, 24 hours; P2P 740.067 kWh; blockchain valid=True.
-INFO | __main__ | Simulation B complete: 150 buildings/meters, 24 hours; P2P 2349.577 kWh; blockchain valid=True.
-INFO | __main__ | Simulation C complete: 150 buildings/meters, 24 hours; P2P 962.592 kWh; blockchain valid=True.
-INFO | __main__ | Simulation D complete: 150 buildings/meters, 24 hours; P2P 2958.634 kWh; blockchain valid=True.
-INFO | __main__ | Simulation E complete: 150 buildings/meters, 24 hours; P2P 953.911 kWh; blockchain valid=True.
-INFO | __main__ | Simulation F complete: 150 buildings/meters, 24 hours; P2P 2941.264 kWh; blockchain valid=True.
-INFO | __main__ | Simulation G complete: 150 buildings/meters, 24 hours; P2P 2189.921 kWh; blockchain valid=True.
-INFO | __main__ | Simulation H complete: 150 buildings/meters, 24 hours; P2P 2374.048 kWh; blockchain valid=True.
-INFO | __main__ | Simulation I complete: 150 buildings/meters, 24 hours; P2P 1998.394 kWh; blockchain valid=True.
-INFO | __main__ | Simulation J complete: 150 buildings/meters, 24 hours; P2P 2349.577 kWh; blockchain valid=True.
-INFO | __main__ | Simulation K complete: 150 buildings/meters, 24 hours; P2P 2470.890 kWh; blockchain valid=True.
-INFO | __main__ | Simulation L complete: 150 buildings/meters, 24 hours; P2P 2943.493 kWh; blockchain valid=True.
+INFO | __main__ | Demand response moved 270.195 kWh across 42 meters; results: /Users/antonino54/Documents/Project/Polito/smart-grids-project/results/demand_response
+INFO | __main__ | Simulation A complete: 150 buildings/meters, 24 hours; P2P 701.814 kWh; blockchain valid=True.
+INFO | __main__ | Simulation B complete: 150 buildings/meters, 24 hours; P2P 2129.838 kWh; blockchain valid=True.
+INFO | __main__ | Simulation C complete: 150 buildings/meters, 24 hours; P2P 932.997 kWh; blockchain valid=True.
+INFO | __main__ | Simulation D complete: 150 buildings/meters, 24 hours; P2P 2768.859 kWh; blockchain valid=True.
+INFO | __main__ | Simulation E complete: 150 buildings/meters, 24 hours; P2P 913.490 kWh; blockchain valid=True.
+INFO | __main__ | Simulation F complete: 150 buildings/meters, 24 hours; P2P 2738.552 kWh; blockchain valid=True.
+INFO | __main__ | Simulation G complete: 150 buildings/meters, 24 hours; P2P 2018.108 kWh; blockchain valid=True.
+INFO | __main__ | Simulation H complete: 150 buildings/meters, 24 hours; P2P 2212.267 kWh; blockchain valid=True.
+INFO | __main__ | Simulation I complete: 150 buildings/meters, 24 hours; P2P 1873.841 kWh; blockchain valid=True.
+INFO | __main__ | Simulation J complete: 150 buildings/meters, 24 hours; P2P 2129.838 kWh; blockchain valid=True.
+INFO | __main__ | Simulation K complete: 150 buildings/meters, 24 hours; P2P 2296.680 kWh; blockchain valid=True.
+INFO | __main__ | Simulation L complete: 150 buildings/meters, 24 hours; P2P 2758.094 kWh; blockchain valid=True.
 INFO | __main__ | Results: /Users/antonino54/Documents/Project/Polito/smart-grids-project/results
