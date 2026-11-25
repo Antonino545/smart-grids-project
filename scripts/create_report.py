@@ -10,9 +10,11 @@ from zoneinfo import ZoneInfo
 
 try:
     from scripts.report_parameters import append_parameter_guide
+    from scripts.report_scenario_l import append_scenario_l
     from scripts.latex_report import LatexReport
 except ModuleNotFoundError:
     from report_parameters import append_parameter_guide
+    from report_scenario_l import append_scenario_l
     from latex_report import LatexReport
 
 from pypdf import PdfReader
@@ -76,9 +78,9 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
                               ("TOPPADDING",(0,0),(-1,-1),padding),("BOTTOMPADDING",(0,0),(-1,-1),padding),
                               ("VALIGN",(0,0),(-1,-1),"TOP")]))
         content.extend([t,Spacer(1,9)])
-    def fig(name,caption,width=507):
+    def fig(name,caption,width=507,directory=None):
         from PIL import Image as PILImage
-        path=results/"charts"/f"{name}.png"
+        path=(directory or results/"charts")/f"{name}.png"
         if latex:
             latex.figure(path, caption)
         w,h=PILImage.open(path).size
@@ -94,13 +96,14 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     p("Prosumer community simulator<br/>with heterogeneous buildings","Title")
     p(datetime.now(ZoneInfo("Europe/Rome")).strftime("%d %B %Y"),"Caption")
     p(f'The design contains <b>{community["participant_count"]} aggregate building meters: {community["prosumer_count"]} prosumers and {community["consumer_count"]} consumers</b>. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are {type_counts["small_house"]} small houses, {type_counts["apartment_block"]} blocks, {type_counts["supermarket"]} supermarkets and {type_counts["school"]} schools, including <b>{community["home_count"]} homes</b>. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.')
-    p("<b>For the team:</b> pages 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on pages 23-25 when that experiment is present. Page 26 compares the regulator policy variants G-K when they were run.","Caption")
+    p("<b>For the team:</b> pages 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on pages 23-25 when that experiment is present. Page 26 compares the regulator policy variants G-K; pages 27-31 cover the combined scenario L, the multi-seed robustness check and the best scenario per objective, when they were run.","Caption")
     sub("Objective and experiment")
     p("Encourage neighborhood P2P electricity trading using price guidance and funded seller rewards, then evaluate storage priority and financial outcomes. Self-balancing, P2P, aggregator and grid settlement preserve energy and cash. Every completed internal trade appears in an hourly Proof-of-Work block.")
     table([["Scenario","Storage","Regulation","Charging priority"],
            ["A","55 owners","Off","Self-consumption first"],["B","55 owners","On","Self-consumption first"],
            ["C","Disabled","Off","Counterfactual"],["D","Disabled","On","Counterfactual"],
-           ["E","55 owners","Off","P2P before charging"],["F","55 owners","On","P2P before charging"]],[55,100,90,262])
+           ["E","55 owners","Off","P2P before charging"],["F","55 owners","On","P2P before charging"]]
+          +([["L","55 owners","On, fund-sized reward (K)","P2P before charging (F)"]] if "L" in summaries else []),[55,100,140,212])
     sub("Actual result for the new community")
     p(f'With storage, regulation changes P2P energy from <b>{f(m["A"]["p2p_energy_kwh"])} to {f(m["B"]["p2p_energy_kwh"])} kWh</b>, and its share from {m["A"]["p2p_share_pct"]:.3f}% to {m["B"]["p2p_share_pct"]:.3f}%. Cost effects differ by scenario and accounting boundary; all values below come from the recorded execution.')
     p("<b>Evidence boundary:</b> geometry, demand profiles, weather and price history are synthetic engineering assumptions. They are not measured building data. This mixed community is a new experiment and cannot be treated as a like-for-like improvement over the previous residential-only community.")
@@ -175,10 +178,10 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     page()
 
     title(6,"P2P results for the mixed community")
-    fig("p2p_comparison","Figure 3. Shared-input P2P outcomes. A/B use storage first; C/D disable it; E/F prioritize P2P before charging. B/D/F are regulated.")
+    fig("p2p_comparison","Figure 3. Shared-input P2P outcomes. A/B use storage first; C/D disable it; E/F prioritize P2P before charging. B/D/F are regulated; G-K vary B's regulator; L is F with K's reward.")
     table([["Scenario","P2P kWh","Share %","Available surplus kWh","P2P trades"]]+[
         [n,f(m[n]["p2p_energy_kwh"]),f(m[n]["p2p_share_pct"]),f(m[n]["surplus_available_after_self_balancing_kwh"]),m[n]["p2p_transaction_count"]]
-        for n in "ABCDEF"],[55,95,80,180,97])
+        for n in "ABCDEF"+"KL"*("L" in m and "K" in m)],[55,95,80,180,97])
     p("Primary KPI = 100 x P2P energy / surplus offered after self-balancing. In E/F the denominator includes PV subsequently stored after P2P, so compare absolute energy and raw PV surplus as well as shares. Zero denominators are undefined, not fabricated zeros.")
     for base,reg in (("A","B"),("C","D"),("E","F")):
         delta=m[reg]["p2p_energy_kwh"]-m[base]["p2p_energy_kwh"]
@@ -203,7 +206,7 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     title(9,"Regulator budget and accounting boundary")
     fig("regulator_budget","Figure 8. Closing funds across the day. An hour's opening balance selects the reward tier before that hour's new grid fees are collected.")
     table([["Scenario","Fees EUR","Rewards EUR","Closing fund EUR"]]+[
-        [n,f(m[n]["regulator_fee_revenue_eur"]),f(m[n]["regulator_reward_expenditure_eur"]),f(m[n]["regulator_remaining_funds_eur"])] for n in "BDF"],[65,140,140,162])
+        [n,f(m[n]["regulator_fee_revenue_eur"]),f(m[n]["regulator_reward_expenditure_eur"]),f(m[n]["regulator_remaining_funds_eur"])] for n in "BDF"+"KL"*("L" in m and "K" in m)],[65,140,140,162])
     p("Closing fund = opening fund + grid fees - eligible P2P rewards. Every movement has a payer and payee. Reservations, releases, reward payments and hourly fund histories are exported. The ledger reconciles with the regulator's fund after each hour.")
     p("Retained fees are a transfer from building meters to the regulator, not money destruction or an external resource cost. They can offset savings from better matching at the meter boundary. Accounts may pay for energy without a starting-cash restriction; only regulator guarantees are constrained by available funding.")
     p("B, D and F keep the fund at the end of the day; scenario J tests an end-of-day refund (page 26). Changes to fees, reward tiers or guidance require a separately recorded configuration and rerun. The mixed-building outcomes cannot be attributed solely to regulation by comparing them with the old, physically different residential community.")
@@ -217,7 +220,7 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
         p("The validation record does not match these inputs. Rerun tests and exported-result verification before relying on this new report.")
     p(f'Maximum absolute community energy residual: {max(abs(v["energy_reconciliation_error_kwh"]) for v in m.values()):.3g} kWh. Maximum financial residual: {max(abs(v["financial_reconciliation_error_eur"]) for v in m.values()):.3g} EUR. Numerical residuals are checked at explicit tolerances.')
     sub("Run and rebuild")
-    p("python -m pip install -r requirements.txt<br/>python -m pytest -q<br/>python main.py --include-priority --include-policy<br/>python scripts/verify_results.py<br/>python -m pip install -r requirements-report.txt<br/>python scripts/create_report.py","Code")
+    p("python -m pip install -r requirements.txt<br/>python -m pytest -q<br/>python main.py --include-priority --include-policy --include-combined --compare-demand-response<br/>python scripts/robustness.py<br/>python scripts/verify_results.py<br/>python -m pip install -r requirements-report.txt<br/>python scripts/create_report.py","Code")
     p("The simulator requires Python 3.11+ and was exercised on Python 3.14.7. PDF dependencies are optional. Use --config for JSON overrides, --output for separate experiment folders and --no-charts to skip visual exports. The historical residential model remains available through config/residential_baseline.json.")
     sub("Scope and evidence")
     p("The model has no physical feeder limits, voltage/power-flow equations, land parcels, weather-sensitive HVAC, holiday/term calendar, battery aging or investment analysis. Hourly energy settlement and aggregate building meters are simplifying choices. A single synthetic day supports a demonstration, not a statistical or real-world performance claim. Presentations and ZIP packaging remain deferred.")
@@ -299,6 +302,9 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
             p(f'Only {missed:,.0f} kWh per side (export and import) was a missed local trade, so I raises little money and P2P falls. J trades exactly like B (the refund comes after trading) but returns EUR {m["J"]["regulator_refund_eur"]:.2f} to traders, so meter cost falls by the same amount.')
         p("One synthetic day; results depend on the fund rules and are not a general policy claim. Configure the same rules for any run with regulator.fee_scope, reward_mode, max_reward_eur_kwh and refund_leftover.","Caption")
         expected_pages += 1
+
+    if "L" in m and {"B","D","K"} <= set(m):
+        expected_pages += append_scenario_l(results, m, config, p, title, sub, table, fig, page, f)
 
     if latex:
         latex.write()

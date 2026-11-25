@@ -1,10 +1,10 @@
 {
  "automated_tests": {
-  "passed": 102,
-  "duration_seconds": 40.63
+  "passed": 109,
+  "duration_seconds": 47.53
  },
  "input_sha256": "c62c1db5de5f6d96d26a6554518ac538fa8a9558d3772c0a35b12731a4ce8d10",
- "model": "100 prosumer + 50 consumer aggregate building meters in Turin; scenarios A-F plus regulator policy variants G-K",
+ "model": "100 prosumer + 50 consumer aggregate building meters in Turin; scenarios A-F, regulator policy variants G-K and combined scenario L",
  "recorded_on": "25 November 2026",
  "scenarios": {
   "A": {
@@ -70,6 +70,12 @@
   "K": {
    "hours": 24,
    "internal_trades": 947,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "L": {
+   "hours": 24,
+   "internal_trades": 1095,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   }
@@ -140,6 +146,12 @@
    "K": {
     "hours": 24,
     "internal_trades": 966,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "L": {
+    "hours": 24,
+    "internal_trades": 1094,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    }

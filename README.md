@@ -32,8 +32,8 @@ python main.py --include-priority
 # Add the regulator policy variants G-K (variants of B, see below):
 python main.py --include-priority --include-policy
 
-# Compare fixed demand against PV-aware demand shifting (the full report run):
-python main.py --include-priority --include-policy --compare-demand-response
+# Full report run: A-L, fixed demand versus PV-aware demand shifting:
+python main.py --include-priority --include-policy --include-combined --compare-demand-response
 
 # Run one regulated scenario, or skip charts:
 python main.py --scenario B --output results/single_B
@@ -90,10 +90,63 @@ first), each with **one** regulator rule changed. Their settings are in
 Why: in B the fee hits every grid kWh, day and night (about 18,000 kWh), while
 the reward only reaches P2P kWh (about 2,350), so most fees stay in the fund.
 On the default day, G's smaller fee leaves too little money for afternoon
-rewards, so it trades less than B; H and K trade more, and K, which spreads the
-fund over the day, trades the most. J trades like B but returns the fund. When a
+rewards, so it trades less than B; H and K trade more, and K, which sizes each
+hour's reward to the money in the fund (high in the morning, lower after the fund
+is spent around midday), trades the most. J trades like B but returns the fund. When a
 reward cannot be funded, the trade keeps the guided prices and only loses the
 reward. The same switches can be set for any run in the `regulator` section of a JSON config.
+
+### Combined scenario L (F + K)
+
+`--include-combined` adds **L**: F's settlement order (regulated, owner PV offered
+to neighbours before any battery charging) with K's reward rule
+(`reward_mode: "budget_sized"`). Nothing else changes, and no parameter was tuned.
+Each hour the reward rate is
+
+    r_h = min(r_max, A_h / P_h),   P_h = sum over groups of min(group surplus, group shortage)
+
+where `A_h` is the fund available at the start of the hour (fees from earlier hours
+minus rewards paid) and `r_max` is `max_reward_eur_kwh` (EUR 0.10/kWh). Sellers
+discount their ask by `r_h / 2` and receive `r_h` per kWh from the fund, only when
+the full reward is already held. Fees (EUR 0.01 per grid kWh) are added after the hour.
+
+```bash
+# Full comparison including L, with and without demand response:
+python main.py --include-priority --include-policy --include-combined --compare-demand-response
+
+# L alone:
+python main.py --scenario L --output results/single_L
+
+# Robustness: A, B, D, F, K, L on 20 seeds (42-61), fixed demand and demand response (~7 min):
+python scripts/robustness.py
+python scripts/robustness.py --seeds 1 2 3 4 5 6 7 8 9 10 --output results/robustness_alt
+```
+
+The robustness script writes `results/robustness/runs.csv` (one row per seed, condition
+and scenario), `summary.csv` (mean, sample standard deviation, min, max),
+`l_win_rates.csv` (share of seeds in which L beats F and K for each KPI) and
+`robustness.png/svg`. Inside each seed and condition all scenarios share one input hash.
+"Storage-adjusted" cost subtracts the change in stored energy valued at
+import tariff x discharge efficiency (EUR 0.285/kWh).
+
+Recorded result (default day, seed 42, fixed demand): L trades 2,943 kWh P2P against
+F's 2,941 and K's 2,471; meters + regulator cost EUR 4,815.08 (F 4,813.87, K 4,891.65).
+With demand response L trades 2,830 kWh against F's 2,845. Over 20 seeds (paired
+differences, mean ± sd across seeds):
+
+| L minus | Condition | P2P kWh | Meter cost EUR | Storage-adjusted meters + regulator EUR |
+|---|---|---:|---:|---:|
+| F | fixed | -40 ± 92 (L better in 30%) | -51.8 ± 25.6 (100%) | -0.8 ± 18.3 (50%) |
+| F | demand response | -24 ± 88 (45%) | -56.4 ± 26.7 (100%) | -3.8 ± 19.0 (75%) |
+| K | fixed | +457 ± 116 (100%) | -56.0 ± 19.3 (100%) | -19.3 ± 15.0 (100%) |
+| K | demand response | +472 ± 109 (100%) | -58.7 ± 16.5 (100%) | -21.4 ± 12.3 (100%) |
+
+L clearly beats K, because F's battery order leaves more PV for neighbours. L does
+**not** beat F: K's rule spends the whole fund in the current hour, and under P2P-first
+ordering the morning offers so much PV that the fund is empty before the midday peak,
+where L then pays less than F's fixed EUR 0.02/kWh. L's lower meter cost is the larger
+reward moved from the regulator to the meters, not a community saving. Report pages
+27-30 explain this and list the best scenario for each objective.
 
 Each hour has a deterministic matching stream, separate from community and data
 generation. Same inputs, seed, code and environment reproduce the transaction
@@ -144,7 +197,7 @@ road distances, electrical feeder geometry or distance-based restrictions in thi
 model. Membership defines eligible P2P partners, regardless of positions on this
 schematic. The layout does not change ownership or the simulation results. Other
 configured group sizes render as one row per group and may not form a square.
-Regenerate with `python main.py --include-priority --include-policy` (unless `--no-charts` is used).
+Regenerate with `python main.py --include-priority --include-policy --include-combined` (unless `--no-charts` is used).
 
 ## Configuration
 
@@ -289,7 +342,7 @@ Both household flows and full cash movements must reconcile before outputs pass.
   totals equal the surplus offered before P2P. Regulation differences are shown
   only when both members of a scenario pair were run. Household box plots show
   medians/quartiles with 1.5-IQR whiskers. Transaction prices exclude rewards.
-  Regenerate every chart with `python main.py --include-priority --include-policy`.
+  Regenerate every chart with `python main.py --include-priority --include-policy --include-combined`.
 - Each scenario folder contains `summary.json`, `household_hourly.csv`,
   `household_costs.csv`, `community_hourly.csv`, `transactions.csv`,
   `cash_ledger.csv`, `regulator_hourly.csv`, `reward_reservations.json`, and

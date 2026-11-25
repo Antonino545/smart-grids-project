@@ -12,7 +12,7 @@ from config.settings import (
     BatterySettings, BlockchainSettings, ForecastSettings, HouseholdSettings,
     MarketSettings, RegulatorSettings, SimulationSettings,
 )
-from src.experiments import POLICY_SCENARIOS, PRIORITY_SCENARIOS, SCENARIOS, run_experiments
+from src.experiments import COMBINED_SCENARIOS, POLICY_SCENARIOS, PRIORITY_SCENARIOS, SCENARIOS, run_experiments
 
 LOGGER = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent
@@ -53,6 +53,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--include-priority", action="store_true", help="Add E/F P2P-priority comparisons to all scenarios")
     parser.add_argument("--include-policy", action="store_true",
                         help="Add G-K regulator policy variants of B (lower fee, bigger reward, targeted fee, refund, sized reward)")
+    parser.add_argument("--include-combined", action="store_true",
+                        help="Add scenario L: F (P2P before charging, regulated) with K's fund-sized reward")
     parser.add_argument("--no-charts", action="store_true", help="Skip image generation")
     parser.add_argument("--compare-demand-response", action="store_true", help="Compare fixed demand with PV-aware shifting in a separate subfolder")
     args = parser.parse_args(argv)
@@ -61,9 +63,10 @@ def main(argv: list[str] | None = None) -> int:
         settings = config["simulation"]
         logging.basicConfig(level=settings.log_level, format="%(levelname)s | %(name)s | %(message)s")
         names = (["A", "B", "C", "D"] + (PRIORITY_SCENARIOS if args.include_priority else [])
-                 + (POLICY_SCENARIOS if args.include_policy else [])) if args.scenario == "all" else [args.scenario]
-        if (args.include_priority or args.include_policy) and args.scenario != "all":
-            raise ValueError("--include-priority and --include-policy are used with --scenario all.")
+                 + (POLICY_SCENARIOS if args.include_policy else [])
+                 + (COMBINED_SCENARIOS if args.include_combined else [])) if args.scenario == "all" else [args.scenario]
+        if (args.include_priority or args.include_policy or args.include_combined) and args.scenario != "all":
+            raise ValueError("--include-priority, --include-policy and --include-combined are used with --scenario all.")
         if args.compare_demand_response:
             config["demand_response"] = replace(config["demand_response"], enabled=False)
         comparison = run_experiments(config, args.output, names, charts=not args.no_charts)

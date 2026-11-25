@@ -1,0 +1,198 @@
+"""Report pages for the combined scenario L, its robustness check and the final comparison.
+
+All numbers are read from saved outputs: results/comparison.json, results/demand_response,
+results/<scenario>/regulator_hourly.csv and results/robustness/robustness.json.
+"""
+
+import csv
+import json
+from collections import defaultdict
+from pathlib import Path
+
+COMPARED = ["A", "B", "D", "F", "K", "L"]
+
+
+def _storage_value(config: dict) -> float:
+    return config["market"]["grid_import_tariff_eur_kwh"] * config["simulation"]["battery"]["discharge_efficiency"]
+
+
+def _adjusted(metric: dict, value: float) -> float:
+    return metric["community_including_regulator_net_cost_eur"] - value * (
+        metric["battery_final_stored_kwh"] - metric["battery_initial_stored_kwh"])
+
+
+def _energy_rows(m: dict) -> list[list[str]]:
+    return [["Scenario", "P2P kWh", "% of surplus", "% of PV", "Imports kWh", "Exports kWh", "Final stored kWh", "Losses kWh"]] + [
+        [n, f'{m[n]["p2p_energy_kwh"]:,.1f}', f'{m[n]["p2p_share_pct"]:.2f}',
+         f'{100 * m[n]["p2p_energy_kwh"] / m[n]["pv_generation_kwh"]:.2f}', f'{m[n]["grid_imports_kwh"]:,.1f}',
+         f'{m[n]["grid_exports_kwh"]:,.1f}', f'{m[n]["battery_final_stored_kwh"]:.1f}', f'{m[n]["battery_loss_kwh"]:.1f}']
+        for n in COMPARED]
+
+
+def _money_rows(m: dict, value: float) -> list[list[str]]:
+    return [["Scenario", "Meter cost", "Meters + regulator", "Storage-adjusted", "Fees", "Rewards", "Fund left"]] + [
+        [n, f'{m[n]["household_net_cost_eur"]:,.2f}', f'{m[n]["community_including_regulator_net_cost_eur"]:,.2f}',
+         f'{_adjusted(m[n], value):,.2f}', f'{m[n]["regulator_fee_revenue_eur"]:.2f}',
+         f'{m[n]["regulator_reward_expenditure_eur"]:.2f}', f'{m[n]["regulator_remaining_funds_eur"]:.2f}']
+        for n in COMPARED]
+
+
+def _hourly(results: Path, name: str) -> tuple[dict, dict]:
+    with (results / name / "regulator_hourly.csv").open() as handle:
+        rate = {int(r["hour"]): float(r["reward_rate_eur_kwh"]) for r in csv.DictReader(handle)}
+    p2p = defaultdict(float)
+    with (results / name / "transactions.csv").open() as handle:
+        for r in csv.DictReader(handle):
+            if r["market"] == "p2p":
+                p2p[int(r["hour"])] += float(r["quantity_kwh"])
+    return rate, p2p
+
+
+def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table, fig, page, f) -> int:
+    pages = 0
+    value = _storage_value(config)
+    shifted_path = results / "demand_response" / "comparison.json"
+    shifted = ({s["scenario"]: s["metrics"] for s in json.loads(shifted_path.read_text())["scenarios"]}
+               if shifted_path.exists() else {})
+    l, fm, k = m["L"], m["F"], m["K"]
+
+    page(); pages += 1
+    title(27, "Combined scenario L: model and regulation strategy")
+    p("L keeps the community, batteries, PV, demand, market, aggregator, grid tariffs and blockchain of every other scenario. "
+      "It combines two existing switches: <b>F's settlement order</b> (regulated; owner PV is offered to neighbours before charging) "
+      "and <b>K's reward rule</b> (each hour's reward rate is sized to the money in the fund). No new parameter was introduced or tuned.")
+    sub("Hourly model")
+    p("<b>1. Self-balance.</b> Own PV serves own demand; a battery may discharge to cover a deficit but does not yet charge. "
+      "Net position x_i = PV_i + discharge_i - demand_i.<br/>"
+      "<b>2. Size the reward.</b> Possible P2P energy P_h = sum over groups g of min(S_g, D_g), where S_g and D_g are the group's "
+      "offered surplus and shortage. With available fund A_h (fees collected up to the previous hour, minus rewards paid), "
+      f"r_h = min(r_max, A_h / P_h), r_max = EUR {config['regulator']['max_reward_eur_kwh']:.2f}/kWh; r_h = 0 when P_h = 0.<br/>"
+      "<b>3. Guide and match.</b> Bid b' = (1-g) b + g 1.04 pi_h; ask a' = max(p_min + r_h/2, (1-g) a + g 0.96 pi_h), g = 0.65, "
+      "pi_h = reference price. A buyer meets a seller in random order inside the group when b' >= a' - r_h/2. The buyer pays "
+      "a' - r_h/2; the seller also receives r_h x q from the fund, reserved before the trade and only if fully funded.<br/>"
+      "<b>4. Store what is left.</b> Unsold owner PV charges the battery: E_next = E + eta_c c, within SOC 10-90% and the power limit. "
+      "Then the aggregator and the grid clear the rest.<br/>"
+      f"<b>5. Collect fees.</b> Every grid kWh pays phi = EUR {config['regulator']['grid_fee_eur_kwh']:.2f}/kWh after trading: "
+      "A_(h+1) = A_h + phi (imports + exports) - rewards, which never becomes negative.")
+    p("F uses a fixed tier instead (EUR 0.02/kWh whenever the fund holds at least EUR 5). K applies the same sizing rule "
+      "as L, but on B's self-consumption-first order, where batteries absorb PV before trading.")
+    sub("Single-day energy result, fixed demand (seed 42)")
+    table(_energy_rows(m), [52, 62, 64, 52, 72, 72, 76, 57], padding=4)
+
+    page(); pages += 1
+    title(28, "Scenario L: costs, regulator and demand response")
+    sub("Fixed demand: costs and regulator fund (EUR)")
+    table(_money_rows(m, value), [52, 74, 92, 92, 62, 62, 73], padding=4)
+    p(f"Storage-adjusted cost subtracts the change in stored energy valued at EUR {value:.3f}/kWh "
+      "(import tariff x discharge efficiency: the import a stored kWh can later avoid). D has no active storage.", "Caption")
+    if shifted:
+        sub("With PV-aware demand response: energy")
+        table(_energy_rows(shifted), [52, 62, 64, 52, 72, 72, 76, 57], padding=4)
+        sub("With PV-aware demand response: costs and regulator fund (EUR)")
+        table(_money_rows(shifted, value), [52, 74, 92, 92, 62, 62, 73], padding=4)
+
+    page(); pages += 1
+    title(29, "Why combining F and K does not beat F")
+    rate_f, p2p_f = _hourly(results, "F")
+    rate_l, p2p_l = _hourly(results, "L")
+    sunny = [h for h in sorted(rate_l) if p2p_f[h] > 1 or p2p_l[h] > 1]
+    early = [h for h in sunny if rate_l[h] >= rate_f[h] - 1e-12]
+    late = [h for h in sunny if rate_l[h] < rate_f[h] - 1e-12]
+    gain = sum(p2p_l[h] - p2p_f[h] for h in early)
+    loss = sum(p2p_l[h] - p2p_f[h] for h in late)
+    sub("Mechanism, fixed demand")
+    table([["Hour"] + [str(h) for h in sunny],
+           ["F rate"] + [f"{100 * rate_f[h]:.1f}" for h in sunny],
+           ["L rate"] + [f"{100 * rate_l[h]:.1f}" for h in sunny],
+           ["L-F kWh"] + [f"{p2p_l[h] - p2p_f[h]:+.0f}" for h in sunny]],
+          [52] + [455 / len(sunny)] * len(sunny))
+    p(f"Rates in euro cents/kWh. L's rule spends the whole available fund on the current hour. Before batteries charge, many "
+      f"owners offer PV in the morning, so the fund collected overnight is used up by the morning trades. In hours where L pays at least F's rate, L trades {gain:+.0f} kWh; "
+      f"in the following peak-PV hours its rate falls below F's fixed EUR 0.02 and it trades {loss:+.0f} kWh. "
+      f"Net: {l['p2p_energy_kwh'] - fm['p2p_energy_kwh']:+.1f} kWh against F. K gains against B ({k['p2p_energy_kwh'] - m['B']['p2p_energy_kwh']:+.0f} kWh) "
+      "because B offers less PV in the morning, so the same fund lasts until about midday.")
+    p(f"L pays EUR {l['regulator_reward_expenditure_eur'] - fm['regulator_reward_expenditure_eur']:+.2f} more rewards than F, so meter cost moves by "
+      f"EUR {l['household_net_cost_eur'] - fm['household_net_cost_eur']:+.2f}. This is mostly a transfer from the regulator: meters plus regulator move by only "
+      f"EUR {l['community_including_regulator_net_cost_eur'] - fm['community_including_regulator_net_cost_eur']:+.2f}, and L ends with "
+      f"{l['battery_final_stored_kwh'] - fm['battery_final_stored_kwh']:+.2f} kWh of stored energy against F. Only grid payments leave the community; "
+      "rewards cannot create PV surplus or neighbour demand.")
+
+    robust_path = results / "robustness" / "robustness.json"
+    if robust_path.exists():
+        robust = json.loads(robust_path.read_text())
+        stats = {(r["condition"], r["scenario"], r["kpi"]): r for r in robust["summary"]}
+        wins = {(r["condition"], r["comparison"], r["kpi"]): r for r in robust["l_win_rates"]}
+        page(); pages += 1
+        title(30, "Robustness across seeded communities")
+        p(f"Scenarios {', '.join(robust['scenarios'])} were rerun on <b>{len(robust['seeds'])} seeds</b> ({robust['seeds'][0]}-{robust['seeds'][-1]}), "
+          "each with fixed demand and with demand response. A seed regenerates building attributes, weather, demand, prices and "
+          "matching order; inside one seed and condition every scenario uses the same input hash. Every run passed the energy, "
+          "cash, fund and blockchain checks.")
+        fig("robustness", "Figure 11. L minus F and L minus K for each seed. Above zero is better for L in P2P; below zero is better for L in cost.",
+            width=460, directory=results / "robustness")
+        rows = [["Condition", "KPI", "F mean (sd)", "K mean (sd)", "L mean (sd)", "L better than F", "L better than K"]]
+        for condition, short in (("fixed", "Fixed"), ("demand_response", "DR")):
+            for kpi, label in (("p2p_energy_kwh", "P2P kWh"), ("grid_imports_kwh", "Imports kWh"),
+                               ("household_net_cost_eur", "Meter cost EUR"),
+                               ("community_cost_storage_adjusted_eur", "Adj. meters+reg EUR")):
+                cell = lambda n: f'{stats[condition, n, kpi]["mean"]:,.1f} ({stats[condition, n, kpi]["std"]:,.1f})'
+                rows.append([short, label, cell("F"), cell("K"), cell("L"),
+                             f'{wins[condition, "L vs F", kpi]["l_better_pct"]:.0f}%',
+                             f'{wins[condition, "L vs K", kpi]["l_better_pct"]:.0f}%'])
+        table(rows, [52, 92, 75, 75, 75, 69, 69])
+        lf = wins["fixed", "L vs F", "p2p_energy_kwh"]
+        lfa = wins["fixed", "L vs F", "community_cost_storage_adjusted_eur"]
+        lk = wins["fixed", "L vs K", "p2p_energy_kwh"]
+        p(f'With fixed demand, L minus F is {lf["mean_difference"]:+.1f} kWh P2P on average (sd {lf["std_difference"]:.1f}) and '
+          f'{lfa["mean_difference"]:+.2f} EUR storage-adjusted meters-plus-regulator cost (sd {lfa["std_difference"]:.2f}). '
+          f'L minus K is {lk["mean_difference"]:+.0f} kWh P2P (sd {lk["std_difference"]:.0f}). Standard deviations are across seeds; '
+          'full tables are in results/robustness/.', "Caption")
+        n = lfa["runs"]
+        ldr = wins["demand_response", "L vs F", "community_cost_storage_adjusted_eur"]
+        p(f'<b>Reading.</b> L beats K on every seed: the gain comes from F\'s battery order. Against F the differences are small and change sign '
+          f'between seeds. The mean cost difference ({lfa["mean_difference"]:+.2f} EUR fixed, {ldr["mean_difference"]:+.2f} EUR with demand response) '
+          f'is smaller than about two standard errors of the paired mean ({2 * lfa["std_difference"] / n ** .5:.1f} and '
+          f'{2 * ldr["std_difference"] / n ** .5:.1f} EUR), so L and F cannot be told apart economically; L trades less P2P on average.')
+
+    page(); pages += 1
+    title(31, "Which scenario is best for which objective")
+    objectives = [("Most P2P energy", "p2p_energy_kwh", max), ("Highest P2P share of surplus", "p2p_share_pct", max),
+                  ("Fewest grid imports", "grid_imports_kwh", min), ("Fewest grid exports", "grid_exports_kwh", min),
+                  ("Lowest meter cost", "household_net_cost_eur", min),
+                  ("Lowest meters + regulator cost", "community_including_regulator_net_cost_eur", min),
+                  ("Most money kept by the regulator", "regulator_remaining_funds_eur", max)]
+    rows = [["Objective", "Best (fixed, seed 42)", "Best (DR, seed 42)", "Best mean over seeds (fixed / DR)"]]
+    for label, key, pick in objectives:
+        def best(metrics):
+            n = pick(COMPARED, key=lambda s: metrics[s][key])
+            return f"{n} ({metrics[n][key]:,.1f})"
+        seeds = "-"
+        if robust_path.exists():
+            rkey = {"p2p_share_pct": "p2p_share_of_surplus_pct"}.get(key, key)
+            if ("fixed", "A", rkey) in stats:
+                seeds = " / ".join(pick(COMPARED, key=lambda s: stats[c, s, rkey]["mean"]) for c in ("fixed", "demand_response"))
+        rows.append([label, best(m), best(shifted) if shifted else "-", seeds])
+    adjusted = {n: _adjusted(m[n], value) for n in COMPARED}
+    best_adj = min(adjusted, key=adjusted.get)
+    rows.append(["Lowest storage-adjusted cost", f"{best_adj} ({adjusted[best_adj]:,.1f})",
+                 (lambda a: f"{min(a, key=a.get)} ({min(a.values()):,.1f})")({n: _adjusted(shifted[n], value) for n in COMPARED}) if shifted else "-",
+                 " / ".join(min(COMPARED, key=lambda s: stats[c, s, "community_cost_storage_adjusted_eur"]["mean"])
+                            for c in ("fixed", "demand_response")) if robust_path.exists() else "-"])
+    table(rows, [150, 110, 110, 137])
+    sub("Trade-offs")
+    p("<b>D</b> (no storage, regulated) pushes the most PV to neighbours but wastes the storage the community owns: it exports "
+      "more and imports more than F or L. <b>F and L</b> trade almost as much as D while also storing unsold PV, so they import least. "
+      "<b>K</b> is the best variant of the self-consumption-first order, but storing PV before trading caps its P2P volume. "
+      "Lower meter cost under larger rewards is mainly money moved from the regulator to the meters; the meters-plus-regulator cost, "
+      "corrected for energy left in storage, is the fair economic comparison. Demand response lowers cost in every scenario but "
+      "uses own PV that would otherwise be sold, so P2P falls.")
+    sub("Recommendation")
+    p(RECOMMENDATION)
+    return pages
+
+
+RECOMMENDATION = ("Present <b>F</b> as the final proposed solution, with L as a tested extension. F and L trade almost the same "
+                  "energy and cost almost the same at the community boundary, on the recorded day and across seeds; L's extra "
+                  "rewards mainly redistribute the regulator's fund to the meters. F's fixed tier is simpler to explain and audit and "
+                  "does not drain the fund before the midday PV peak. If the goal is to lower what participants pay rather than "
+                  "community-wide cost, L (or a day-end refund such as J) passes more of the fees back to traders.")

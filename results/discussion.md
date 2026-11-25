@@ -15,6 +15,7 @@ These are model outputs for the recorded inputs and assumptions, not evidence of
 | I | 1998.394 | 49.356 | 16981.230 | 1638.820 | 4997.342 |
 | J | 2349.577 | 58.030 | 16704.619 | 1362.209 | 4929.653 |
 | K | 2470.890 | 61.026 | 16546.269 | 1203.858 | 4953.249 |
+| L | 2943.493 | 58.447 | 16268.337 | 1090.423 | 4879.013 |
 
 ## Regulation comparisons
 - B versus A: regulation increased P2P energy (difference +1609.510 kWh).
@@ -31,6 +32,13 @@ These are model outputs for the recorded inputs and assumptions, not evidence of
 | I | B, fee only on grid energy a neighbour could have traded | -351.183 | 16.46 | 15.16 | 0.00 | 1.30 | -65.99 |
 | J | B, leftover fund refunded to P2P traders at day end | +0.000 | 180.67 | 46.99 | 133.68 | 0.00 | -133.68 |
 | K | B, reward rate sized each hour to spend the fund | +121.313 | 177.50 | 115.90 | 0.00 | 61.60 | -110.08 |
+
+## Combined scenario L (F battery order + K fund-sized reward)
+
+| Compared with | P2P kWh change | Meter cost change EUR | Meters + regulator change EUR | Final storage change kWh |
+|---|---:|---:|---:|---:|
+| F | +2.229 | -49.52 | +1.20 | -1.926 |
+| K | +472.603 | -74.24 | -76.57 | -138.288 |
 
 Price guidance and funded discounts can make more offers compatible. A reward cannot create PV surplus or demand, and does not guarantee improvement for other seeds or inputs.
 

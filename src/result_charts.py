@@ -48,7 +48,7 @@ def prepare_chart_data(results: list[SimulationResult]) -> dict[str, list[dict]]
             "hour": t.hour, "market": t.market, "quantity_kwh": t.quantity_kwh,
             "price_eur_kwh": t.price_eur_kwh,
         } for t in result.transactions if t.market in {"p2p", "aggregator"})
-    for baseline, regulated in (("A", "B"), ("C", "D"), ("E", "F"), *(("B", n) for n in "GHIJK")):
+    for baseline, regulated in (("A", "B"), ("C", "D"), ("E", "F"), *(("B", n) for n in "GHIJK"), ("F", "L"), ("K", "L")):
         if baseline not in metrics or regulated not in metrics:
             continue
         base, reg = metrics[baseline], metrics[regulated]

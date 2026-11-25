@@ -27,7 +27,7 @@
 The design contains \textbf{150 aggregate building meters: 100 prosumers and 50 consumers}. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are 84 small houses, 45 blocks, 15 supermarkets and 6 schools, including \textbf{1005 homes}. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.
 \par\medskip
 
-{\small \textbf{For the team:} sections 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on sections 23-25 when that experiment is present. section 26 compares the regulator policy variants G-K when they were run.\par}
+{\small \textbf{For the team:} sections 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on sections 23-25 when that experiment is present. section 26 compares the regulator policy variants G-K; sections 27-31 cover the combined scenario L, the multi-seed robustness check and the best scenario per objective, when they were run.\par}
 \par\medskip
 
 \subsection*{Objective and experiment}
@@ -37,7 +37,7 @@ Encourage neighborhood P2P electricity trading using price guidance and funded s
 \par\medskip
 
 \begingroup\small
-\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.108481\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.197239\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.177515\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.516765\linewidth-2\tabcolsep\relax}}
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.108481\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.197239\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.276134\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.418146\linewidth-2\tabcolsep\relax}}
 \toprule
 \textbf{Scenario} & \textbf{Storage} & \textbf{Regulation} & \textbf{Charging priority} \\ \midrule
 \endfirsthead
@@ -50,6 +50,7 @@ C & Disabled & Off & Counterfactual \\ \addlinespace[3pt]
 D & Disabled & On & Counterfactual \\ \addlinespace[3pt]
 E & 55 owners & Off & P2P before charging \\ \addlinespace[3pt]
 F & 55 owners & On & P2P before charging \\ \addlinespace[3pt]
+L & 55 owners & On, fund-sized reward (K) & P2P before charging (F) \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -237,7 +238,7 @@ PV + discharge + purchases = demand + charge + sales.\newline{}Stored energy evo
 
 \begin{center}\includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{images/p2p_comparison.png}\end{center}
 
-{\small Figure 3. Shared-input P2P outcomes. A/B use storage first; C/D disable it; E/F prioritize P2P before charging. B/D/F are regulated.\par}
+{\small Figure 3. Shared-input P2P outcomes. A/B use storage first; C/D disable it; E/F prioritize P2P before charging. B/D/F are regulated; G-K vary B's regulator; L is F with K's reward.\par}
 \par\medskip
 
 \begingroup\small
@@ -254,6 +255,8 @@ C & 962.592 & 19.114 & 5,036.189 & 335 \\ \addlinespace[3pt]
 D & 2,958.634 & 58.747 & 5,036.189 & 1005 \\ \addlinespace[3pt]
 E & 953.911 & 18.941 & 5,036.189 & 329 \\ \addlinespace[3pt]
 F & 2,941.264 & 58.403 & 5,036.189 & 1012 \\ \addlinespace[3pt]
+K & 2,470.890 & 61.026 & 4,048.927 & 878 \\ \addlinespace[3pt]
+L & 2,943.493 & 58.447 & 5,036.189 & 1023 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -336,6 +339,8 @@ The global identity includes PV, demand, imports/exports, initial/final storage 
 B & 180.668 & 46.992 & 133.677 \\ \addlinespace[3pt]
 D & 182.616 & 59.173 & 123.444 \\ \addlinespace[3pt]
 F & 173.479 & 58.825 & 114.653 \\ \addlinespace[3pt]
+K & 177.501 & 115.901 & 61.600 \\ \addlinespace[3pt]
+L & 173.588 & 109.650 & 63.937 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -357,7 +362,7 @@ B, D and F keep the fund at the end of the day; scenario J tests an end-of-day r
 \subsection*{Recorded checks}
 \par\medskip
 
-The recorded full suite passed \textbf{102 tests} on 25 November 2026. All 11 saved scenarios passed independent energy, cash and blockchain verification. Tests include unchanged battery ownership, type allocation, one-roof sizing, increased block demand with floors, school weekend reduction, commercial night load, losses/SOC, rewards and forecast cutoff.
+The recorded full suite passed \textbf{109 tests} on 25 November 2026. All 12 saved scenarios passed independent energy, cash and blockchain verification. Tests include unchanged battery ownership, type allocation, one-roof sizing, increased block demand with floors, school weekend reduction, commercial night load, losses/SOC, rewards and forecast cutoff.
 \par\medskip
 
 Maximum absolute community energy residual: 4.43e-12 kWh. Maximum financial residual: 9.09e-13 EUR. Numerical residuals are checked at explicit tolerances.
@@ -369,7 +374,8 @@ Maximum absolute community energy residual: 4.43e-12 kWh. Maximum financial resi
 \begin{lstlisting}
 python -m pip install -r requirements.txt
 python -m pytest -q
-python main.py --include-priority --include-policy
+python main.py --include-priority --include-policy --include-combined --compare-demand-response
+python scripts/robustness.py
 python scripts/verify_results.py
 python -m pip install -r requirements-report.txt
 python scripts/create_report.py
@@ -1023,5 +1029,219 @@ Only 823 kWh per side (export and import) was a missed local trade, so I raises 
 \par\medskip
 
 {\small One synthetic day; results depend on the fund rules and are not a general policy claim. Configure the same rules for any run with regulator.fee\_scope, reward\_mode, max\_reward\_eur\_kwh and refund\_leftover.\par}
+\par\medskip
+
+\clearpage
+
+\section*{27  Combined scenario L: model and regulation strategy}
+\par\medskip
+
+L keeps the community, batteries, PV, demand, market, aggregator, grid tariffs and blockchain of every other scenario. It combines two existing switches: \textbf{F's settlement order} (regulated; owner PV is offered to neighbours before charging) and \textbf{K's reward rule} (each hour's reward rate is sized to the money in the fund). No new parameter was introduced or tuned.
+\par\medskip
+
+\subsection*{Hourly model}
+\par\medskip
+
+\textbf{1. Self-balance.} Own PV serves own demand; a battery may discharge to cover a deficit but does not yet charge. Net position x\_i = PV\_i + discharge\_i - demand\_i.\newline{}\textbf{2. Size the reward.} Possible P2P energy P\_h = sum over groups g of min(S\_g, D\_g), where S\_g and D\_g are the group's offered surplus and shortage. With available fund A\_h (fees collected up to the previous hour, minus rewards paid), r\_h = min(r\_max, A\_h / P\_h), r\_max = EUR 0.10/kWh; r\_h = 0 when P\_h = 0.\newline{}\textbf{3. Guide and match.} Bid b' = (1-g) b + g 1.04 pi\_h; ask a' = max(p\_min + r\_h/2, (1-g) a + g 0.96 pi\_h), g = 0.65, pi\_h = reference price. A buyer meets a seller in random order inside the group when b' >= a' - r\_h/2. The buyer pays a' - r\_h/2; the seller also receives r\_h x q from the fund, reserved before the trade and only if fully funded.\newline{}\textbf{4. Store what is left.} Unsold owner PV charges the battery: E\_next = E + eta\_c c, within SOC 10-90\% and the power limit. Then the aggregator and the grid clear the rest.\newline{}\textbf{5. Collect fees.} Every grid kWh pays phi = EUR 0.01/kWh after trading: A\_(h+1) = A\_h + phi (imports + exports) - rewards, which never becomes negative.
+\par\medskip
+
+F uses a fixed tier instead (EUR 0.02/kWh whenever the fund holds at least EUR 5). K applies the same sizing rule as L, but on B's self-consumption-first order, where batteries absorb PV before trading.
+\par\medskip
+
+\subsection*{Single-day energy result, fixed demand (seed 42)}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.126233\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.142012\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.142012\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.149901\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.112426\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Scenario} & \textbf{P2P kWh} & \textbf{\% of surplus} & \textbf{\% of PV} & \textbf{Imports kWh} & \textbf{Exports kWh} & \textbf{Final stored kWh} & \textbf{Losses kWh} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Scenario} & \textbf{P2P kWh} & \textbf{\% of surplus} & \textbf{\% of PV} & \textbf{Imports kWh} & \textbf{Exports kWh} & \textbf{Final stored kWh} & \textbf{Losses kWh} \\ \midrule
+\endhead
+A & 740.1 & 18.28 & 5.36 & 17,785.5 & 2,443.1 & 464.5 & 87.9 \\ \addlinespace[3pt]
+B & 2,349.6 & 58.03 & 17.03 & 16,704.6 & 1,362.2 & 464.5 & 87.9 \\ \addlinespace[3pt]
+D & 2,958.6 & 58.75 & 21.44 & 16,674.8 & 1,586.8 & 0.0 & 0.0 \\ \addlinespace[3pt]
+F & 2,941.3 & 58.40 & 21.32 & 16,263.2 & 1,084.7 & 328.2 & 60.4 \\ \addlinespace[3pt]
+K & 2,470.9 & 61.03 & 17.91 & 16,546.3 & 1,203.9 & 464.5 & 87.9 \\ \addlinespace[3pt]
+L & 2,943.5 & 58.45 & 21.33 & 16,268.3 & 1,090.4 & 326.2 & 61.7 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+\clearpage
+
+\section*{28  Scenario L: costs, regulator and demand response}
+\par\medskip
+
+\subsection*{Fixed demand: costs and regulator fund (EUR)}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.145957\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.181460\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.181460\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.143984\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Scenario} & \textbf{Meter cost} & \textbf{Meters + regulator} & \textbf{Storage-adjusted} & \textbf{Fees} & \textbf{Rewards} & \textbf{Fund left} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Scenario} & \textbf{Meter cost} & \textbf{Meters + regulator} & \textbf{Storage-adjusted} & \textbf{Fees} & \textbf{Rewards} & \textbf{Fund left} \\ \midrule
+\endhead
+A & 5,189.07 & 5,189.07 & 5,141.62 & 0.00 & 0.00 & 0.00 \\ \addlinespace[3pt]
+B & 5,063.33 & 4,929.65 & 4,882.20 & 180.67 & 46.99 & 133.68 \\ \addlinespace[3pt]
+D & 5,030.67 & 4,907.23 & 4,907.23 & 182.62 & 59.17 & 123.44 \\ \addlinespace[3pt]
+F & 4,928.53 & 4,813.87 & 4,805.28 & 173.48 & 58.83 & 114.65 \\ \addlinespace[3pt]
+K & 4,953.25 & 4,891.65 & 4,844.19 & 177.50 & 115.90 & 61.60 \\ \addlinespace[3pt]
+L & 4,879.01 & 4,815.08 & 4,807.03 & 173.59 & 109.65 & 63.94 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+{\small Storage-adjusted cost subtracts the change in stored energy valued at EUR 0.285/kWh (import tariff x discharge efficiency: the import a stored kWh can later avoid). D has no active storage.\par}
+\par\medskip
+
+\subsection*{With PV-aware demand response: energy}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.126233\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.142012\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.142012\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.149901\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.112426\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Scenario} & \textbf{P2P kWh} & \textbf{\% of surplus} & \textbf{\% of PV} & \textbf{Imports kWh} & \textbf{Exports kWh} & \textbf{Final stored kWh} & \textbf{Losses kWh} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Scenario} & \textbf{P2P kWh} & \textbf{\% of surplus} & \textbf{\% of PV} & \textbf{Imports kWh} & \textbf{Exports kWh} & \textbf{Final stored kWh} & \textbf{Losses kWh} \\ \midrule
+\endhead
+A & 717.1 & 18.98 & 5.20 & 17,556.0 & 2,213.6 & 464.5 & 87.9 \\ \addlinespace[3pt]
+B & 2,233.3 & 59.10 & 16.19 & 16,492.1 & 1,149.7 & 464.5 & 87.9 \\ \addlinespace[3pt]
+D & 2,855.9 & 59.92 & 20.70 & 16,519.8 & 1,431.8 & 0.0 & 0.0 \\ \addlinespace[3pt]
+F & 2,845.3 & 59.70 & 20.62 & 16,100.3 & 924.6 & 325.5 & 60.2 \\ \addlinespace[3pt]
+K & 2,359.0 & 62.43 & 17.10 & 16,340.2 & 997.8 & 464.5 & 87.9 \\ \addlinespace[3pt]
+L & 2,829.9 & 59.38 & 20.51 & 16,094.6 & 917.9 & 325.1 & 61.6 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection*{With PV-aware demand response: costs and regulator fund (EUR)}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.145957\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.181460\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.181460\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.143984\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Scenario} & \textbf{Meter cost} & \textbf{Meters + regulator} & \textbf{Storage-adjusted} & \textbf{Fees} & \textbf{Rewards} & \textbf{Fund left} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Scenario} & \textbf{Meter cost} & \textbf{Meters + regulator} & \textbf{Storage-adjusted} & \textbf{Fees} & \textbf{Rewards} & \textbf{Fund left} \\ \midrule
+\endhead
+A & 5,133.99 & 5,133.99 & 5,086.53 & 0.00 & 0.00 & 0.00 \\ \addlinespace[3pt]
+B & 5,010.40 & 4,878.65 & 4,831.19 & 176.42 & 44.67 & 131.75 \\ \addlinespace[3pt]
+D & 4,992.43 & 4,870.03 & 4,870.03 & 179.52 & 57.12 & 122.40 \\ \addlinespace[3pt]
+F & 4,887.96 & 4,774.62 & 4,766.77 & 170.25 & 56.91 & 113.34 \\ \addlinespace[3pt]
+K & 4,902.16 & 4,842.20 & 4,794.74 & 173.38 & 113.41 & 59.97 \\ \addlinespace[3pt]
+L & 4,834.42 & 4,773.29 & 4,765.57 & 170.12 & 108.99 & 61.13 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+\clearpage
+
+\section*{29  Why combining F and K does not beat F}
+\par\medskip
+
+\subsection*{Mechanism, fixed demand}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.069034\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Hour} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Hour} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} & \textbf{13} & \textbf{14} & \textbf{15} & \textbf{16} & \textbf{17} & \textbf{18} & \textbf{19} \\ \midrule
+\endhead
+F rate & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 & 2.0 \\ \addlinespace[3pt]
+L rate & 10.0 & 10.0 & 10.0 & 7.6 & 1.0 & 1.7 & 1.6 & 1.6 & 1.7 & 1.9 & 3.2 & 6.4 & 10.0 \\ \addlinespace[3pt]
+L-F kWh & -0 & +1 & +16 & +41 & -46 & -16 & -1 & -13 & -20 & -3 & +31 & +14 & +0 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+Rates in euro cents/kWh. L's rule spends the whole available fund on the current hour. Before batteries charge, many owners offer PV in the morning, so the fund collected overnight is used up by the morning trades. In hours where L pays at least F's rate, L trades +102 kWh; in the following peak-PV hours its rate falls below F's fixed EUR 0.02 and it trades -100 kWh. Net: +2.2 kWh against F. K gains against B (+121 kWh) because B offers less PV in the morning, so the same fund lasts until about midday.
+\par\medskip
+
+L pays EUR +50.82 more rewards than F, so meter cost moves by EUR -49.52. This is mostly a transfer from the regulator: meters plus regulator move by only EUR +1.20, and L ends with -1.93 kWh of stored energy against F. Only grid payments leave the community; rewards cannot create PV surplus or neighbour demand.
+\par\medskip
+
+\clearpage
+
+\section*{30  Robustness across seeded communities}
+\par\medskip
+
+Scenarios A, B, D, F, K, L were rerun on \textbf{20 seeds} (42-61), each with fixed demand and with demand response. A seed regenerates building attributes, weather, demand, prices and matching order; inside one seed and condition every scenario uses the same input hash. Every run passed the energy, cash, fund and blockchain checks.
+\par\medskip
+
+\begin{center}\includegraphics[width=\linewidth,height=0.45\textheight,keepaspectratio]{images/robustness.png}\end{center}
+
+{\small Figure 11. L minus F and L minus K for each seed. Above zero is better for L in P2P; below zero is better for L in cost.\par}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.181460\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.147929\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.147929\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.147929\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.136095\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.136095\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Condition} & \textbf{KPI} & \textbf{F mean (sd)} & \textbf{K mean (sd)} & \textbf{L mean (sd)} & \textbf{L better than F} & \textbf{L better than K} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Condition} & \textbf{KPI} & \textbf{F mean (sd)} & \textbf{K mean (sd)} & \textbf{L mean (sd)} & \textbf{L better than F} & \textbf{L better than K} \\ \midrule
+\endhead
+Fixed & P2P kWh & 2,762.5 (280.2) & 2,265.7 (153.9) & 2,722.6 (240.3) & 30\% & 100\% \\ \addlinespace[3pt]
+Fixed & Imports kWh & 16,226.5 (1,145.7) & 16,426.3 (1,195.6) & 16,229.8 (1,153.7) & 40\% & 100\% \\ \addlinespace[3pt]
+Fixed & Meter cost EUR & 4,922.7 (357.9) & 4,926.9 (368.0) & 4,870.9 (356.7) & 100\% & 100\% \\ \addlinespace[3pt]
+Fixed & Adj. meters+reg EUR & 4,811.4 (351.4) & 4,829.8 (361.0) & 4,810.6 (354.7) & 50\% & 100\% \\ \addlinespace[3pt]
+DR & P2P kWh & 2,659.7 (280.4) & 2,164.2 (159.3) & 2,635.9 (239.4) & 45\% & 100\% \\ \addlinespace[3pt]
+DR & Imports kWh & 16,101.2 (1,170.4) & 16,296.6 (1,207.3) & 16,089.9 (1,174.0) & 70\% & 100\% \\ \addlinespace[3pt]
+DR & Meter cost EUR & 4,892.2 (364.6) & 4,894.5 (370.9) & 4,835.8 (361.6) & 100\% & 100\% \\ \addlinespace[3pt]
+DR & Adj. meters+reg EUR & 4,781.1 (357.6) & 4,798.7 (364.1) & 4,777.3 (360.0) & 75\% & 100\% \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+{\small With fixed demand, L minus F is -40.0 kWh P2P on average (sd 92.3) and -0.79 EUR storage-adjusted meters-plus-regulator cost (sd 18.25). L minus K is +457 kWh P2P (sd 116). Standard deviations are across seeds; full tables are in results/robustness/.\par}
+\par\medskip
+
+\textbf{Reading.} L beats K on every seed: the gain comes from F's battery order. Against F the differences are small and change sign between seeds. The mean cost difference (-0.79 EUR fixed, -3.84 EUR with demand response) is smaller than about two standard errors of the paired mean (8.2 and 8.5 EUR), so L and F cannot be told apart economically; L trades less P2P on average.
+\par\medskip
+
+\clearpage
+
+\section*{31  Which scenario is best for which objective}
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.295858\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.216963\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.216963\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.270217\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Objective} & \textbf{Best (fixed, seed 42)} & \textbf{Best (DR, seed 42)} & \textbf{Best mean over seeds (fixed / DR)} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Objective} & \textbf{Best (fixed, seed 42)} & \textbf{Best (DR, seed 42)} & \textbf{Best mean over seeds (fixed / DR)} \\ \midrule
+\endhead
+Most P2P energy & D (2,958.6) & D (2,855.9) & D / D \\ \addlinespace[3pt]
+Highest P2P share of surplus & K (61.0) & K (62.4) & K / K \\ \addlinespace[3pt]
+Fewest grid imports & F (16,263.2) & L (16,094.6) & F / L \\ \addlinespace[3pt]
+Fewest grid exports & F (1,084.7) & L (917.9) & L / L \\ \addlinespace[3pt]
+Lowest meter cost & L (4,879.0) & L (4,834.4) & L / L \\ \addlinespace[3pt]
+Lowest meters + regulator cost & F (4,813.9) & L (4,773.3) & F / L \\ \addlinespace[3pt]
+Most money kept by the regulator & B (133.7) & B (131.8) & B / B \\ \addlinespace[3pt]
+Lowest storage-adjusted cost & F (4,805.3) & L (4,765.6) & L / L \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+\subsection*{Trade-offs}
+\par\medskip
+
+\textbf{D} (no storage, regulated) pushes the most PV to neighbours but wastes the storage the community owns: it exports more and imports more than F or L. \textbf{F and L} trade almost as much as D while also storing unsold PV, so they import least. \textbf{K} is the best variant of the self-consumption-first order, but storing PV before trading caps its P2P volume. Lower meter cost under larger rewards is mainly money moved from the regulator to the meters; the meters-plus-regulator cost, corrected for energy left in storage, is the fair economic comparison. Demand response lowers cost in every scenario but uses own PV that would otherwise be sold, so P2P falls.
+\par\medskip
+
+\subsection*{Recommendation}
+\par\medskip
+
+Present \textbf{F} as the final proposed solution, with L as a tested extension. F and L trade almost the same energy and cost almost the same at the community boundary, on the recorded day and across seeds; L's extra rewards mainly redistribute the regulator's fund to the meters. F's fixed tier is simpler to explain and audit and does not drain the fund before the midday PV peak. If the goal is to lower what participants pay rather than community-wide cost, L (or a day-end refund such as J) passes more of the fees back to traders.
 \par\medskip
 \end{document}

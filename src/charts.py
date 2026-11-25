@@ -11,7 +11,7 @@ from src.simulator import SimulationResult
 
 COLORS = {"A": "#315A86", "B": "#D48B25", "C": "#7C8792", "D": "#758A35",
           "E": "#4F8791", "F": "#A46483", "G": "#C4573A", "H": "#2E7D5B",
-          "I": "#8A6FB0", "J": "#B8A03A", "K": "#3D9FC4"}
+          "I": "#8A6FB0", "J": "#B8A03A", "K": "#3D9FC4", "L": "#1F2A44"}
 
 
 def generate_charts(results: list[SimulationResult], directory: Path) -> None:
@@ -28,7 +28,8 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
     x = np.arange(len(results))
     colors = [COLORS.get(name, "#315A86") for name in names]
     caption = ("Identical hourly inputs across scenarios. A/B: 55 batteries. C/D: none. E/F: P2P priority. B/D/F: regulated."
-               + (" G-K: B with one regulator rule changed." if any(n in names for n in "GHIJK") else ""))
+               + (" G-K: B with one regulator rule changed." if any(n in names for n in "GHIJK") else "")
+               + (" L: F with K's fund-sized reward." if "L" in names else ""))
 
     def save(fig, filename):
         fig.text(.02, .015, caption, fontsize=8, color="#555555")
@@ -91,7 +92,7 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
             axis.plot([0] + [h["hour"] + 1 for h in history],
                       [result.regulator.settings.initial_budget_eur] + [h["closing_funds_eur"] for h in history],
                       label=result.name, color=COLORS.get(result.name, "#315A86"), marker=".",
-                      linestyle="--" if result.name in {"F", "H", "J"} else "-")
+                      linestyle="--" if result.name in {"F", "H", "J", "L"} else "-")
     maximum_hour = max(b.hour for result in results for b in result.balances) + 1
     axis.set_xticks(sorted({0, maximum_hour, *range(4, maximum_hour, 4)}))
     axis.axhline(1, color="#999999", linewidth=.8, linestyle=":", label="EUR 1 tier")
