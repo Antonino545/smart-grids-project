@@ -75,10 +75,10 @@
       ]
     },
     {
-      "hash": "000ecfe2c43cd38ce045e94b622d83948dfd262da90870787ecf02f40a451add",
+      "hash": "000568cd37a67f4133efa619091dde34f1facc5ab9d74f15c419c81d4e474148",
       "hour": 7,
-      "miner_id": "miner-08",
-      "nonce": 6607,
+      "miner_id": "miner-05",
+      "nonce": 3244,
       "previous_hash": "000ca24002f97aebdc3fbd53ff4e72703e898b16c608581b6832d49aba1ec3e5",
       "timestamp": "2026-06-15T07:00:00+02:00",
       "transactions": [
@@ -93,7 +93,7 @@
           "transaction_id": "p2p-007-00000"
         },
         {
-          "buyer_id": "H148",
+          "buyer_id": "H078",
           "hour": 7,
           "market": "p2p",
           "price_eur_kwh": 0.1288405437140799,
@@ -103,21 +103,21 @@
           "transaction_id": "p2p-007-00001"
         },
         {
-          "buyer_id": "H148",
-          "hour": 7,
-          "market": "p2p",
-          "price_eur_kwh": 0.14079626302507695,
-          "quantity_kwh": 0.3430962881415877,
-          "reward_eur": 0.0,
-          "seller_id": "H079",
-          "transaction_id": "p2p-007-00002"
-        },
-        {
           "buyer_id": "H108",
           "hour": 7,
           "market": "p2p",
           "price_eur_kwh": 0.14079626302507695,
           "quantity_kwh": 0.5359008279941871,
+          "reward_eur": 0.0,
+          "seller_id": "H079",
+          "transaction_id": "p2p-007-00002"
+        },
+        {
+          "buyer_id": "H148",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.14079626302507695,
+          "quantity_kwh": 0.47914804265168714,
           "reward_eur": 0.0,
           "seller_id": "H079",
           "transaction_id": "p2p-007-00003"
@@ -126,41 +126,31 @@
           "buyer_id": "H110",
           "hour": 7,
           "market": "p2p",
-          "price_eur_kwh": 0.1333960969913588,
-          "quantity_kwh": 0.019166696880853096,
+          "price_eur_kwh": 0.13047229399824922,
+          "quantity_kwh": 0.4779303475624154,
           "reward_eur": 0.0,
-          "seller_id": "H094",
+          "seller_id": "H091",
           "transaction_id": "p2p-007-00004"
-        },
-        {
-          "buyer_id": "H110",
-          "hour": 7,
-          "market": "p2p",
-          "price_eur_kwh": 0.13047229399824922,
-          "quantity_kwh": 0.45876365068156233,
-          "reward_eur": 0.0,
-          "seller_id": "H091",
-          "transaction_id": "p2p-007-00005"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 7,
-          "market": "p2p",
-          "price_eur_kwh": 0.13047229399824922,
-          "quantity_kwh": 5.464933326703384,
-          "reward_eur": 0.0,
-          "seller_id": "H091",
-          "transaction_id": "p2p-007-00006"
         },
         {
           "buyer_id": "H120",
           "hour": 7,
           "market": "p2p",
           "price_eur_kwh": 0.13047229399824922,
-          "quantity_kwh": 4.3585213932617455,
+          "quantity_kwh": 9.804288023084277,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-007-00007"
+          "transaction_id": "p2p-007-00005"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 7,
+          "market": "p2p",
+          "price_eur_kwh": 0.1333960969913588,
+          "quantity_kwh": 0.019166696880853096,
+          "reward_eur": 0.0,
+          "seller_id": "H094",
+          "transaction_id": "p2p-007-00006"
         },
         {
           "buyer_id": "H126",
@@ -177,7 +167,7 @@
           "hour": 7,
           "market": "aggregator",
           "price_eur_kwh": 0.14214926418317747,
-          "quantity_kwh": 3.3857343700788736,
+          "quantity_kwh": 3.2496826155687746,
           "reward_eur": 0.0,
           "seller_id": "H079",
           "transaction_id": "agg-007-00001"
@@ -185,11 +175,11 @@
       ]
     },
     {
-      "hash": "00052f1861d9edaa6284bc194a5c0f9208e7f273ea205199b59d9db3e3b5c2b6",
+      "hash": "000b33b3671256ae9bd88b1a37d61127bd8fb69dae2b5ea50bf9bac2ccae5fb2",
       "hour": 8,
-      "miner_id": "miner-07",
-      "nonce": 526,
-      "previous_hash": "000ecfe2c43cd38ce045e94b622d83948dfd262da90870787ecf02f40a451add",
+      "miner_id": "miner-01",
+      "nonce": 740,
+      "previous_hash": "000568cd37a67f4133efa619091dde34f1facc5ab9d74f15c419c81d4e474148",
       "timestamp": "2026-06-15T08:00:00+02:00",
       "transactions": [
         {
@@ -206,24 +196,24 @@
           "buyer_id": "H010",
           "hour": 8,
           "market": "p2p",
-          "price_eur_kwh": 0.1296143368079885,
-          "quantity_kwh": 0.5114687652908454,
+          "price_eur_kwh": 0.12599660402481652,
+          "quantity_kwh": 1.4007093472464447,
           "reward_eur": 0.0,
-          "seller_id": "H002",
+          "seller_id": "H004",
           "transaction_id": "p2p-008-00001"
         },
         {
           "buyer_id": "H010",
           "hour": 8,
           "market": "p2p",
-          "price_eur_kwh": 0.12599660402481652,
-          "quantity_kwh": 1.4007093472464447,
+          "price_eur_kwh": 0.1296143368079885,
+          "quantity_kwh": 0.5114687652908454,
           "reward_eur": 0.0,
-          "seller_id": "H004",
+          "seller_id": "H002",
           "transaction_id": "p2p-008-00002"
         },
         {
-          "buyer_id": "H142",
+          "buyer_id": "H011",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.11780977572327875,
@@ -233,23 +223,23 @@
           "transaction_id": "p2p-008-00003"
         },
         {
-          "buyer_id": "H012",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.12595979217871184,
-          "quantity_kwh": 0.16063762387977043,
-          "reward_eur": 0.0,
-          "seller_id": "H014",
-          "transaction_id": "p2p-008-00004"
-        },
-        {
-          "buyer_id": "H012",
+          "buyer_id": "H011",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.12416416825545172,
           "quantity_kwh": 0.2328805767631268,
           "reward_eur": 0.0,
           "seller_id": "H018",
+          "transaction_id": "p2p-008-00004"
+        },
+        {
+          "buyer_id": "H011",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12595979217871184,
+          "quantity_kwh": 0.16063762387977043,
+          "reward_eur": 0.0,
+          "seller_id": "H014",
           "transaction_id": "p2p-008-00005"
         },
         {
@@ -263,7 +253,7 @@
           "transaction_id": "p2p-008-00006"
         },
         {
-          "buyer_id": "H133",
+          "buyer_id": "H113",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.1143056034189512,
@@ -273,7 +263,7 @@
           "transaction_id": "p2p-008-00007"
         },
         {
-          "buyer_id": "H133",
+          "buyer_id": "H113",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.11806772651916923,
@@ -283,7 +273,7 @@
           "transaction_id": "p2p-008-00008"
         },
         {
-          "buyer_id": "H104",
+          "buyer_id": "H134",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.1137750147560972,
@@ -306,21 +296,51 @@
           "buyer_id": "H105",
           "hour": 8,
           "market": "p2p",
-          "price_eur_kwh": 0.1377631152899825,
-          "quantity_kwh": 0.46035718320045255,
-          "reward_eur": 0.0,
-          "seller_id": "H050",
-          "transaction_id": "p2p-008-00011"
-        },
-        {
-          "buyer_id": "H135",
-          "hour": 8,
-          "market": "p2p",
           "price_eur_kwh": 0.12406560889468808,
           "quantity_kwh": 0.3463799551426163,
           "reward_eur": 0.0,
           "seller_id": "H049",
+          "transaction_id": "p2p-008-00011"
+        },
+        {
+          "buyer_id": "H105",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.13228295410582674,
+          "quantity_kwh": 0.043359959677907844,
+          "reward_eur": 0.0,
+          "seller_id": "H048",
           "transaction_id": "p2p-008-00012"
+        },
+        {
+          "buyer_id": "H105",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.1377631152899825,
+          "quantity_kwh": 0.07061726837992838,
+          "reward_eur": 0.0,
+          "seller_id": "H050",
+          "transaction_id": "p2p-008-00013"
+        },
+        {
+          "buyer_id": "H136",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12362472592821247,
+          "quantity_kwh": 0.32519767290931617,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-008-00014"
+        },
+        {
+          "buyer_id": "H057",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12362472592821247,
+          "quantity_kwh": 2.46490201685973,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-008-00015"
         },
         {
           "buyer_id": "H126",
@@ -330,7 +350,7 @@
           "quantity_kwh": 0.33975848482391324,
           "reward_eur": 0.0,
           "seller_id": "H053",
-          "transaction_id": "p2p-008-00013"
+          "transaction_id": "p2p-008-00016"
         },
         {
           "buyer_id": "H126",
@@ -340,47 +360,7 @@
           "quantity_kwh": 0.2969189666522357,
           "reward_eur": 0.0,
           "seller_id": "H054",
-          "transaction_id": "p2p-008-00014"
-        },
-        {
-          "buyer_id": "H057",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.12362472592821247,
-          "quantity_kwh": 2.790099689769046,
-          "reward_eur": 0.0,
-          "seller_id": "H051",
-          "transaction_id": "p2p-008-00015"
-        },
-        {
-          "buyer_id": "H136",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.1369365666777336,
-          "quantity_kwh": 0.16297608115527967,
-          "reward_eur": 0.0,
-          "seller_id": "H054",
-          "transaction_id": "p2p-008-00016"
-        },
-        {
-          "buyer_id": "H136",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.1386272300235909,
-          "quantity_kwh": 0.1622215917540365,
-          "reward_eur": 0.0,
-          "seller_id": "H060",
           "transaction_id": "p2p-008-00017"
-        },
-        {
-          "buyer_id": "H137",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.1271820110393301,
-          "quantity_kwh": 0.5228811280989788,
-          "reward_eur": 0.0,
-          "seller_id": "H063",
-          "transaction_id": "p2p-008-00018"
         },
         {
           "buyer_id": "H065",
@@ -390,7 +370,7 @@
           "quantity_kwh": 1.207104671918616,
           "reward_eur": 0.0,
           "seller_id": "H062",
-          "transaction_id": "p2p-008-00019"
+          "transaction_id": "p2p-008-00018"
         },
         {
           "buyer_id": "H064",
@@ -400,16 +380,26 @@
           "quantity_kwh": 0.4180264322725099,
           "reward_eur": 0.0,
           "seller_id": "H070",
-          "transaction_id": "p2p-008-00020"
+          "transaction_id": "p2p-008-00019"
         },
         {
-          "buyer_id": "H066",
+          "buyer_id": "H137",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.12700904277355152,
           "quantity_kwh": 0.35264089426362966,
           "reward_eur": 0.0,
           "seller_id": "H067",
+          "transaction_id": "p2p-008-00020"
+        },
+        {
+          "buyer_id": "H137",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.1271820110393301,
+          "quantity_kwh": 0.17024023383534914,
+          "reward_eur": 0.0,
+          "seller_id": "H063",
           "transaction_id": "p2p-008-00021"
         },
         {
@@ -417,7 +407,7 @@
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.1271820110393301,
-          "quantity_kwh": 0.08994128420513092,
+          "quantity_kwh": 0.4425821784687606,
           "reward_eur": 0.0,
           "seller_id": "H063",
           "transaction_id": "p2p-008-00022"
@@ -453,24 +443,54 @@
           "transaction_id": "p2p-008-00025"
         },
         {
-          "buyer_id": "H129",
+          "buyer_id": "H139",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.119940389879123,
+          "quantity_kwh": 0.5345255041609432,
+          "reward_eur": 0.0,
+          "seller_id": "H087",
+          "transaction_id": "p2p-008-00026"
+        },
+        {
+          "buyer_id": "H139",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12518877814297644,
+          "quantity_kwh": 0.05773658763720846,
+          "reward_eur": 0.0,
+          "seller_id": "H083",
+          "transaction_id": "p2p-008-00027"
+        },
+        {
+          "buyer_id": "H119",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.12518877814297644,
+          "quantity_kwh": 0.05366080098194537,
+          "reward_eur": 0.0,
+          "seller_id": "H083",
+          "transaction_id": "p2p-008-00028"
+        },
+        {
+          "buyer_id": "H119",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.13023407126847747,
-          "quantity_kwh": 0.9281785543759734,
+          "quantity_kwh": 0.25835267780306564,
           "reward_eur": 0.0,
           "seller_id": "H085",
-          "transaction_id": "p2p-008-00026"
+          "transaction_id": "p2p-008-00029"
         },
         {
           "buyer_id": "H129",
           "hour": 8,
           "market": "p2p",
-          "price_eur_kwh": 0.12518877814297644,
-          "quantity_kwh": 0.11139738861915383,
+          "price_eur_kwh": 0.13023407126847747,
+          "quantity_kwh": 0.6698258765729077,
           "reward_eur": 0.0,
-          "seller_id": "H083",
-          "transaction_id": "p2p-008-00027"
+          "seller_id": "H085",
+          "transaction_id": "p2p-008-00030"
         },
         {
           "buyer_id": "H129",
@@ -480,47 +500,27 @@
           "quantity_kwh": 0.7392586732406494,
           "reward_eur": 0.0,
           "seller_id": "H086",
-          "transaction_id": "p2p-008-00028"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.119940389879123,
-          "quantity_kwh": 0.5345255041609432,
-          "reward_eur": 0.0,
-          "seller_id": "H087",
-          "transaction_id": "p2p-008-00029"
-        },
-        {
-          "buyer_id": "H110",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.13249431097015343,
-          "quantity_kwh": 0.41400395763016024,
-          "reward_eur": 0.0,
-          "seller_id": "H094",
-          "transaction_id": "p2p-008-00030"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 8,
-          "market": "p2p",
-          "price_eur_kwh": 0.13249431097015343,
-          "quantity_kwh": 0.061132655083207144,
-          "reward_eur": 0.0,
-          "seller_id": "H094",
           "transaction_id": "p2p-008-00031"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
+          "hour": 8,
+          "market": "p2p",
+          "price_eur_kwh": 0.13249431097015343,
+          "quantity_kwh": 0.4751366127133674,
+          "reward_eur": 0.0,
+          "seller_id": "H094",
+          "transaction_id": "p2p-008-00032"
+        },
+        {
+          "buyer_id": "H120",
           "hour": 8,
           "market": "p2p",
           "price_eur_kwh": 0.13414663704515734,
           "quantity_kwh": 0.587093004096712,
           "reward_eur": 0.0,
           "seller_id": "H097",
-          "transaction_id": "p2p-008-00032"
+          "transaction_id": "p2p-008-00033"
         },
         {
           "buyer_id": "H148",
@@ -547,7 +547,7 @@
           "hour": 8,
           "market": "aggregator",
           "price_eur_kwh": 0.1401476373799943,
-          "quantity_kwh": 2.072441682440736,
+          "quantity_kwh": 2.46218159726126,
           "reward_eur": 0.0,
           "seller_id": "H050",
           "transaction_id": "agg-008-00002"
@@ -557,7 +557,7 @@
           "hour": 8,
           "market": "aggregator",
           "price_eur_kwh": 0.14057969474679852,
-          "quantity_kwh": 0.32658126300734885,
+          "quantity_kwh": 0.48880285476138535,
           "reward_eur": 0.0,
           "seller_id": "H060",
           "transaction_id": "agg-008-00003"
@@ -575,62 +575,42 @@
       ]
     },
     {
-      "hash": "0008fdeac36e65c25aba08622cb6428e8d70642568c3d71254c545f52a943235",
+      "hash": "000941d3179f10968abdfed2e048d530cd9548ed4dfbabe39e6f70495802cfaf",
       "hour": 9,
-      "miner_id": "miner-09",
-      "nonce": 568,
-      "previous_hash": "00052f1861d9edaa6284bc194a5c0f9208e7f273ea205199b59d9db3e3b5c2b6",
+      "miner_id": "miner-02",
+      "nonce": 1901,
+      "previous_hash": "000b33b3671256ae9bd88b1a37d61127bd8fb69dae2b5ea50bf9bac2ccae5fb2",
       "timestamp": "2026-06-15T09:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.13225842138146393,
+          "price_eur_kwh": 0.12856688818640455,
           "quantity_kwh": 0.273481023940074,
           "reward_eur": 0.0,
-          "seller_id": "H002",
+          "seller_id": "H004",
           "transaction_id": "p2p-009-00000"
         },
         {
           "buyer_id": "H112",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.12669707140449912,
+          "price_eur_kwh": 0.11691657443867934,
           "quantity_kwh": 0.250523932603195,
           "reward_eur": 0.0,
-          "seller_id": "H018",
+          "seller_id": "H019",
           "transaction_id": "p2p-009-00001"
         },
         {
-          "buyer_id": "H012",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.1285293253922427,
-          "quantity_kwh": 0.7374117469226953,
-          "reward_eur": 0.0,
-          "seller_id": "H014",
-          "transaction_id": "p2p-009-00002"
-        },
-        {
-          "buyer_id": "H012",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.12669707140449912,
-          "quantity_kwh": 3.6967099764672477,
-          "reward_eur": 0.0,
-          "seller_id": "H018",
-          "transaction_id": "p2p-009-00003"
-        },
-        {
-          "buyer_id": "H102",
+          "buyer_id": "H142",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.11691657443867934,
-          "quantity_kwh": 4.24707338451908,
+          "quantity_kwh": 3.996549451915885,
           "reward_eur": 0.0,
           "seller_id": "H019",
-          "transaction_id": "p2p-009-00004"
+          "transaction_id": "p2p-009-00002"
         },
         {
           "buyer_id": "H142",
@@ -640,6 +620,26 @@
           "quantity_kwh": 1.5336831586442599,
           "reward_eur": 0.0,
           "seller_id": "H015",
+          "transaction_id": "p2p-009-00003"
+        },
+        {
+          "buyer_id": "H012",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.12669707140449912,
+          "quantity_kwh": 4.434121723389943,
+          "reward_eur": 0.0,
+          "seller_id": "H018",
+          "transaction_id": "p2p-009-00004"
+        },
+        {
+          "buyer_id": "H133",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.11663739548844718,
+          "quantity_kwh": 0.20892702935306706,
+          "reward_eur": 0.0,
+          "seller_id": "H023",
           "transaction_id": "p2p-009-00005"
         },
         {
@@ -647,30 +647,20 @@
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.11663739548844718,
-          "quantity_kwh": 0.7947702208901095,
+          "quantity_kwh": 0.5858431915370425,
           "reward_eur": 0.0,
           "seller_id": "H023",
           "transaction_id": "p2p-009-00006"
-        },
-        {
-          "buyer_id": "H133",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.12047626450966264,
-          "quantity_kwh": 0.20892702935306706,
-          "reward_eur": 0.0,
-          "seller_id": "H021",
-          "transaction_id": "p2p-009-00007"
         },
         {
           "buyer_id": "H113",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.12047626450966264,
-          "quantity_kwh": 0.47824524939970237,
+          "quantity_kwh": 0.5794803690746629,
           "reward_eur": 0.0,
           "seller_id": "H021",
-          "transaction_id": "p2p-009-00008"
+          "transaction_id": "p2p-009-00007"
         },
         {
           "buyer_id": "H104",
@@ -680,6 +670,16 @@
           "quantity_kwh": 0.704413693553087,
           "reward_eur": 0.0,
           "seller_id": "H032",
+          "transaction_id": "p2p-009-00008"
+        },
+        {
+          "buyer_id": "H105",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.12659650146919735,
+          "quantity_kwh": 0.25197930366712207,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
           "transaction_id": "p2p-009-00009"
         },
         {
@@ -687,30 +687,40 @@
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.12659650146919735,
-          "quantity_kwh": 4.886376384358742,
+          "quantity_kwh": 4.63439708069162,
           "reward_eur": 0.0,
           "seller_id": "H049",
           "transaction_id": "p2p-009-00010"
         },
         {
-          "buyer_id": "H105",
+          "buyer_id": "H126",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.14057343193320823,
-          "quantity_kwh": 0.25197930366712207,
+          "price_eur_kwh": 0.12614662465312856,
+          "quantity_kwh": 0.32811507616805086,
           "reward_eur": 0.0,
-          "seller_id": "H050",
+          "seller_id": "H051",
           "transaction_id": "p2p-009-00011"
+        },
+        {
+          "buyer_id": "H136",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.12614662465312856,
+          "quantity_kwh": 0.29199942158772374,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-009-00012"
         },
         {
           "buyer_id": "H057",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.12614662465312856,
-          "quantity_kwh": 10.03540324035305,
+          "quantity_kwh": 9.415288742597276,
           "reward_eur": 0.0,
           "seller_id": "H051",
-          "transaction_id": "p2p-009-00012"
+          "transaction_id": "p2p-009-00013"
         },
         {
           "buyer_id": "H057",
@@ -720,27 +730,7 @@
           "quantity_kwh": 3.970590975005414,
           "reward_eur": 0.0,
           "seller_id": "H059",
-          "transaction_id": "p2p-009-00013"
-        },
-        {
-          "buyer_id": "H126",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.1397300220347105,
-          "quantity_kwh": 0.32811507616805086,
-          "reward_eur": 0.0,
-          "seller_id": "H054",
           "transaction_id": "p2p-009-00014"
-        },
-        {
-          "buyer_id": "H136",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.12992070414873097,
-          "quantity_kwh": 0.29199942158772374,
-          "reward_eur": 0.0,
-          "seller_id": "H053",
-          "transaction_id": "p2p-009-00015"
         },
         {
           "buyer_id": "H137",
@@ -750,6 +740,16 @@
           "quantity_kwh": 0.39593445266948013,
           "reward_eur": 0.0,
           "seller_id": "H062",
+          "transaction_id": "p2p-009-00015"
+        },
+        {
+          "buyer_id": "H065",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.12057240790041227,
+          "quantity_kwh": 6.6983574763024745,
+          "reward_eur": 0.0,
+          "seller_id": "H062",
           "transaction_id": "p2p-009-00016"
         },
         {
@@ -757,23 +757,23 @@
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.12384439400459249,
-          "quantity_kwh": 4.236405135501977,
+          "quantity_kwh": 1.5558685191148651,
           "reward_eur": 0.0,
           "seller_id": "H066",
           "transaction_id": "p2p-009-00017"
         },
         {
-          "buyer_id": "H065",
+          "buyer_id": "H079",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.12057240790041227,
-          "quantity_kwh": 4.017820859915362,
+          "price_eur_kwh": 0.13058008581923963,
+          "quantity_kwh": 9.684830401929991,
           "reward_eur": 0.0,
-          "seller_id": "H062",
+          "seller_id": "H071",
           "transaction_id": "p2p-009-00018"
         },
         {
-          "buyer_id": "H078",
+          "buyer_id": "H079",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.1307622247189581,
@@ -783,13 +783,13 @@
           "transaction_id": "p2p-009-00019"
         },
         {
-          "buyer_id": "H078",
+          "buyer_id": "H108",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.13058008581923963,
-          "quantity_kwh": 9.684830401929991,
+          "price_eur_kwh": 0.141631930066165,
+          "quantity_kwh": 0.2468531325430453,
           "reward_eur": 0.0,
-          "seller_id": "H071",
+          "seller_id": "H073",
           "transaction_id": "p2p-009-00020"
         },
         {
@@ -803,63 +803,63 @@
           "transaction_id": "p2p-009-00021"
         },
         {
-          "buyer_id": "H108",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.141631930066165,
-          "quantity_kwh": 0.2468531325430453,
-          "reward_eur": 0.0,
-          "seller_id": "H073",
-          "transaction_id": "p2p-009-00022"
-        },
-        {
-          "buyer_id": "H109",
+          "buyer_id": "H119",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.11566013979694735,
           "quantity_kwh": 0.17587934753011591,
           "reward_eur": 0.0,
           "seller_id": "H088",
-          "transaction_id": "p2p-009-00023"
+          "transaction_id": "p2p-009-00022"
         },
         {
           "buyer_id": "H119",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.1277425829550972,
-          "quantity_kwh": 0.27909594625354356,
+          "price_eur_kwh": 0.12238712951013943,
+          "quantity_kwh": 0.10321659872342764,
           "reward_eur": 0.0,
-          "seller_id": "H083",
-          "transaction_id": "p2p-009-00024"
-        },
-        {
-          "buyer_id": "H139",
-          "hour": 9,
-          "market": "p2p",
-          "price_eur_kwh": 0.1277425829550972,
-          "quantity_kwh": 0.22742461280653375,
-          "reward_eur": 0.0,
-          "seller_id": "H083",
-          "transaction_id": "p2p-009-00025"
+          "seller_id": "H087",
+          "transaction_id": "p2p-009-00023"
         },
         {
           "buyer_id": "H139",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.12238712951013943,
-          "quantity_kwh": 0.30950157836900655,
+          "quantity_kwh": 0.5369261911755403,
           "reward_eur": 0.0,
           "seller_id": "H087",
-          "transaction_id": "p2p-009-00026"
+          "transaction_id": "p2p-009-00024"
         },
         {
           "buyer_id": "H129",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.12238712951013943,
-          "quantity_kwh": 1.0353793025723592,
+          "quantity_kwh": 0.7047380910423977,
           "reward_eur": 0.0,
           "seller_id": "H087",
+          "transaction_id": "p2p-009-00025"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.1277425829550972,
+          "quantity_kwh": 0.5065205590600773,
+          "reward_eur": 0.0,
+          "seller_id": "H083",
+          "transaction_id": "p2p-009-00026"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 9,
+          "market": "p2p",
+          "price_eur_kwh": 0.13289079819593153,
+          "quantity_kwh": 1.9072140361450094,
+          "reward_eur": 0.0,
+          "seller_id": "H085",
           "transaction_id": "p2p-009-00027"
         },
         {
@@ -867,23 +867,23 @@
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.13711854597166367,
-          "quantity_kwh": 4.068862396221729,
+          "quantity_kwh": 1.985769012546604,
           "reward_eur": 0.0,
           "seller_id": "H086",
           "transaction_id": "p2p-009-00028"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.13688317886861437,
-          "quantity_kwh": 1.2439191010455093,
+          "price_eur_kwh": 0.13223386719892122,
+          "quantity_kwh": 14.442973032366389,
           "reward_eur": 0.0,
-          "seller_id": "H097",
+          "seller_id": "H091",
           "transaction_id": "p2p-009-00029"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 9,
           "market": "p2p",
           "price_eur_kwh": 0.13519714595227747,
@@ -893,13 +893,13 @@
           "transaction_id": "p2p-009-00030"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 9,
           "market": "p2p",
-          "price_eur_kwh": 0.13223386719892122,
-          "quantity_kwh": 14.442973032366389,
+          "price_eur_kwh": 0.13688317886861437,
+          "quantity_kwh": 1.2439191010455093,
           "reward_eur": 0.0,
-          "seller_id": "H091",
+          "seller_id": "H097",
           "transaction_id": "p2p-009-00031"
         },
         {
@@ -907,7 +907,7 @@
           "hour": 9,
           "market": "aggregator",
           "price_eur_kwh": 0.1360684171283305,
-          "quantity_kwh": 1.0593379524463558,
+          "quantity_kwh": 0.5724501381268556,
           "reward_eur": 0.0,
           "seller_id": "H018",
           "transaction_id": "agg-009-00000"
@@ -927,7 +927,7 @@
           "hour": 9,
           "market": "aggregator",
           "price_eur_kwh": 0.14127915441191277,
-          "quantity_kwh": 0.0658573470369701,
+          "quantity_kwh": 2.1489507307120954,
           "reward_eur": 0.0,
           "seller_id": "H086",
           "transaction_id": "agg-009-00002"
@@ -947,7 +947,7 @@
           "hour": 9,
           "market": "aggregator",
           "price_eur_kwh": 0.14300659739268506,
-          "quantity_kwh": 7.847710875933027,
+          "quantity_kwh": 8.099690179600149,
           "reward_eur": 0.0,
           "seller_id": "H050",
           "transaction_id": "agg-009-00004"
@@ -967,7 +967,7 @@
           "hour": 9,
           "market": "aggregator",
           "price_eur_kwh": 0.14353584645916345,
-          "quantity_kwh": 0.6669224537054466,
+          "quantity_kwh": 0.6669224537054464,
           "reward_eur": 0.0,
           "seller_id": "H073",
           "transaction_id": "agg-009-00006"
@@ -985,32 +985,22 @@
       ]
     },
     {
-      "hash": "000010fe5474b53a20fc3906db135567673d9d7a3a7f898011fe89d745c6217a",
+      "hash": "000723536b64c31e4dba396a88a68a61ba747ee2803d8b4f2ab2d89880b2038a",
       "hour": 10,
-      "miner_id": "miner-05",
-      "nonce": 1014,
-      "previous_hash": "0008fdeac36e65c25aba08622cb6428e8d70642568c3d71254c545f52a943235",
+      "miner_id": "miner-07",
+      "nonce": 3656,
+      "previous_hash": "000941d3179f10968abdfed2e048d530cd9548ed4dfbabe39e6f70495802cfaf",
       "timestamp": "2026-06-15T10:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 10,
           "market": "p2p",
-          "price_eur_kwh": 0.13793700063611175,
+          "price_eur_kwh": 0.13408696967886566,
           "quantity_kwh": 0.2452593049652811,
           "reward_eur": 0.0,
-          "seller_id": "H002",
+          "seller_id": "H004",
           "transaction_id": "p2p-010-00000"
-        },
-        {
-          "buyer_id": "H142",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.12537445709385853,
-          "quantity_kwh": 2.1222419443619875,
-          "reward_eur": 0.0,
-          "seller_id": "H015",
-          "transaction_id": "p2p-010-00001"
         },
         {
           "buyer_id": "H142",
@@ -1020,27 +1010,17 @@
           "quantity_kwh": 8.436064895530311,
           "reward_eur": 0.0,
           "seller_id": "H019",
+          "transaction_id": "p2p-010-00001"
+        },
+        {
+          "buyer_id": "H142",
+          "hour": 10,
+          "market": "p2p",
+          "price_eur_kwh": 0.12537445709385853,
+          "quantity_kwh": 2.1222419443619875,
+          "reward_eur": 0.0,
+          "seller_id": "H015",
           "transaction_id": "p2p-010-00002"
-        },
-        {
-          "buyer_id": "H012",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.13404779410797893,
-          "quantity_kwh": 1.2667553793919593,
-          "reward_eur": 0.0,
-          "seller_id": "H014",
-          "transaction_id": "p2p-010-00003"
-        },
-        {
-          "buyer_id": "H012",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.13213687140957506,
-          "quantity_kwh": 3.8373098850640517,
-          "reward_eur": 0.0,
-          "seller_id": "H018",
-          "transaction_id": "p2p-010-00004"
         },
         {
           "buyer_id": "H112",
@@ -1050,7 +1030,17 @@
           "quantity_kwh": 0.15928259433861683,
           "reward_eur": 0.0,
           "seller_id": "H018",
-          "transaction_id": "p2p-010-00005"
+          "transaction_id": "p2p-010-00003"
+        },
+        {
+          "buyer_id": "H012",
+          "hour": 10,
+          "market": "p2p",
+          "price_eur_kwh": 0.13213687140957506,
+          "quantity_kwh": 5.104065264456011,
+          "reward_eur": 0.0,
+          "seller_id": "H018",
+          "transaction_id": "p2p-010-00004"
         },
         {
           "buyer_id": "H133",
@@ -1060,7 +1050,7 @@
           "quantity_kwh": 0.15885702994382236,
           "reward_eur": 0.0,
           "seller_id": "H023",
-          "transaction_id": "p2p-010-00006"
+          "transaction_id": "p2p-010-00005"
         },
         {
           "buyer_id": "H113",
@@ -1070,7 +1060,7 @@
           "quantity_kwh": 0.25206185848670826,
           "reward_eur": 0.0,
           "seller_id": "H023",
-          "transaction_id": "p2p-010-00007"
+          "transaction_id": "p2p-010-00006"
         },
         {
           "buyer_id": "H114",
@@ -1080,7 +1070,7 @@
           "quantity_kwh": 1.4072753357232606,
           "reward_eur": 0.0,
           "seller_id": "H032",
-          "transaction_id": "p2p-010-00008"
+          "transaction_id": "p2p-010-00007"
         },
         {
           "buyer_id": "H135",
@@ -1090,27 +1080,47 @@
           "quantity_kwh": 4.344721350883854,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "p2p-010-00009"
+          "transaction_id": "p2p-010-00008"
         },
         {
           "buyer_id": "H105",
           "hour": 10,
           "market": "p2p",
-          "price_eur_kwh": 0.146609020185303,
+          "price_eur_kwh": 0.13203198345548642,
           "quantity_kwh": 0.22008192083649655,
           "reward_eur": 0.0,
-          "seller_id": "H050",
+          "seller_id": "H049",
+          "transaction_id": "p2p-010-00009"
+        },
+        {
+          "buyer_id": "H126",
+          "hour": 10,
+          "market": "p2p",
+          "price_eur_kwh": 0.13156279096085297,
+          "quantity_kwh": 0.23611470711695365,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
           "transaction_id": "p2p-010-00010"
+        },
+        {
+          "buyer_id": "H136",
+          "hour": 10,
+          "market": "p2p",
+          "price_eur_kwh": 0.13156279096085297,
+          "quantity_kwh": 0.1412870716889052,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-010-00011"
         },
         {
           "buyer_id": "H057",
           "hour": 10,
           "market": "p2p",
           "price_eur_kwh": 0.13156279096085297,
-          "quantity_kwh": 14.614540949376142,
+          "quantity_kwh": 14.237139170570282,
           "reward_eur": 0.0,
           "seller_id": "H051",
-          "transaction_id": "p2p-010-00011"
+          "transaction_id": "p2p-010-00012"
         },
         {
           "buyer_id": "H057",
@@ -1120,37 +1130,17 @@
           "quantity_kwh": 8.601849183884443,
           "reward_eur": 0.0,
           "seller_id": "H059",
-          "transaction_id": "p2p-010-00012"
-        },
-        {
-          "buyer_id": "H126",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.14572939807511587,
-          "quantity_kwh": 0.23611470711695365,
-          "reward_eur": 0.0,
-          "seller_id": "H054",
           "transaction_id": "p2p-010-00013"
-        },
-        {
-          "buyer_id": "H136",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.14572939807511587,
-          "quantity_kwh": 0.1412870716889052,
-          "reward_eur": 0.0,
-          "seller_id": "H054",
-          "transaction_id": "p2p-010-00014"
         },
         {
           "buyer_id": "H137",
           "hour": 10,
           "market": "p2p",
-          "price_eur_kwh": 0.1291617129265426,
+          "price_eur_kwh": 0.1257492425173282,
           "quantity_kwh": 0.19679126161292565,
           "reward_eur": 0.0,
-          "seller_id": "H066",
-          "transaction_id": "p2p-010-00015"
+          "seller_id": "H062",
+          "transaction_id": "p2p-010-00014"
         },
         {
           "buyer_id": "H079",
@@ -1160,7 +1150,7 @@
           "quantity_kwh": 14.574558832540209,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-010-00016"
+          "transaction_id": "p2p-010-00015"
         },
         {
           "buyer_id": "H079",
@@ -1170,7 +1160,7 @@
           "quantity_kwh": 6.881977757253221,
           "reward_eur": 0.0,
           "seller_id": "H072",
-          "transaction_id": "p2p-010-00017"
+          "transaction_id": "p2p-010-00016"
         },
         {
           "buyer_id": "H148",
@@ -1180,7 +1170,7 @@
           "quantity_kwh": 0.20989237645510403,
           "reward_eur": 0.0,
           "seller_id": "H073",
-          "transaction_id": "p2p-010-00018"
+          "transaction_id": "p2p-010-00017"
         },
         {
           "buyer_id": "H108",
@@ -1190,27 +1180,27 @@
           "quantity_kwh": 0.16542655791087948,
           "reward_eur": 0.0,
           "seller_id": "H073",
+          "transaction_id": "p2p-010-00018"
+        },
+        {
+          "buyer_id": "H119",
+          "hour": 10,
+          "market": "p2p",
+          "price_eur_kwh": 0.12062606380829095,
+          "quantity_kwh": 0.1435732457035538,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
           "transaction_id": "p2p-010-00019"
         },
         {
           "buyer_id": "H139",
           "hour": 10,
           "market": "p2p",
-          "price_eur_kwh": 0.12764188007659052,
+          "price_eur_kwh": 0.12062606380829095,
           "quantity_kwh": 0.3396096716935805,
           "reward_eur": 0.0,
-          "seller_id": "H087",
-          "transaction_id": "p2p-010-00020"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.12062606380829095,
-          "quantity_kwh": 2.9640699319498256,
-          "reward_eur": 0.0,
           "seller_id": "H088",
-          "transaction_id": "p2p-010-00021"
+          "transaction_id": "p2p-010-00020"
         },
         {
           "buyer_id": "H109",
@@ -1220,54 +1210,54 @@
           "quantity_kwh": 0.2485038493240732,
           "reward_eur": 0.0,
           "seller_id": "H088",
+          "transaction_id": "p2p-010-00021"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 10,
+          "market": "p2p",
+          "price_eur_kwh": 0.12062606380829095,
+          "quantity_kwh": 2.9640699319498256,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
           "transaction_id": "p2p-010-00022"
         },
         {
-          "buyer_id": "H119",
-          "hour": 10,
-          "market": "p2p",
-          "price_eur_kwh": 0.13859652885479426,
-          "quantity_kwh": 0.1435732457035538,
-          "reward_eur": 0.0,
-          "seller_id": "H085",
-          "transaction_id": "p2p-010-00023"
-        },
-        {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 10,
           "market": "p2p",
           "price_eur_kwh": 0.1379113922078723,
           "quantity_kwh": 11.21242676611432,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-010-00024"
+          "transaction_id": "p2p-010-00023"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 10,
           "market": "p2p",
           "price_eur_kwh": 0.14100190076692848,
           "quantity_kwh": 2.0351718939596175,
           "reward_eur": 0.0,
           "seller_id": "H094",
-          "transaction_id": "p2p-010-00025"
+          "transaction_id": "p2p-010-00024"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 10,
           "market": "p2p",
           "price_eur_kwh": 0.1427603243215428,
           "quantity_kwh": 1.669542911190775,
           "reward_eur": 0.0,
           "seller_id": "H097",
-          "transaction_id": "p2p-010-00026"
+          "transaction_id": "p2p-010-00025"
         },
         {
           "buyer_id": "H120",
           "hour": 10,
           "market": "aggregator",
           "price_eur_kwh": 0.13615517659144863,
-          "quantity_kwh": 0.6162057716952702,
+          "quantity_kwh": 0.13302285429813576,
           "reward_eur": 0.0,
           "seller_id": "H088",
           "transaction_id": "agg-010-00000"
@@ -1287,7 +1277,7 @@
           "hour": 10,
           "market": "aggregator",
           "price_eur_kwh": 0.14185813641504635,
-          "quantity_kwh": 4.149841098426081,
+          "quantity_kwh": 3.9297591775895846,
           "reward_eur": 0.0,
           "seller_id": "H049",
           "transaction_id": "agg-010-00002"
@@ -1297,7 +1287,7 @@
           "hour": 10,
           "market": "aggregator",
           "price_eur_kwh": 0.1419105803920907,
-          "quantity_kwh": 4.319531915253904,
+          "quantity_kwh": 3.0527765358619448,
           "reward_eur": 0.0,
           "seller_id": "H018",
           "transaction_id": "agg-010-00003"
@@ -1317,7 +1307,7 @@
           "hour": 10,
           "market": "aggregator",
           "price_eur_kwh": 0.142885629526736,
-          "quantity_kwh": 3.3425535258848917,
+          "quantity_kwh": 3.0972942209196113,
           "reward_eur": 0.0,
           "seller_id": "H004",
           "transaction_id": "agg-010-00005"
@@ -1357,7 +1347,7 @@
           "hour": 10,
           "market": "aggregator",
           "price_eur_kwh": 0.14914665477995465,
-          "quantity_kwh": 10.9699099070068,
+          "quantity_kwh": 11.189991827843297,
           "reward_eur": 0.0,
           "seller_id": "H050",
           "transaction_id": "agg-010-00009"
@@ -1405,32 +1395,42 @@
       ]
     },
     {
-      "hash": "0001592ab2873d00bf19bbb4c8df0c1fd73cb7b0d317b169538f6f064770f1c8",
+      "hash": "0001c9a4e776511c011a3a5f8727d365a8aa7be5146db6ab740a2f44a3fadce0",
       "hour": 11,
-      "miner_id": "miner-08",
-      "nonce": 25437,
-      "previous_hash": "000010fe5474b53a20fc3906db135567673d9d7a3a7f898011fe89d745c6217a",
+      "miner_id": "miner-05",
+      "nonce": 7074,
+      "previous_hash": "000723536b64c31e4dba396a88a68a61ba747ee2803d8b4f2ab2d89880b2038a",
       "timestamp": "2026-06-15T11:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.14413588081958947,
+          "price_eur_kwh": 0.14011282971186462,
           "quantity_kwh": 0.15444720987156266,
           "reward_eur": 0.0,
-          "seller_id": "H002",
+          "seller_id": "H004",
           "transaction_id": "p2p-011-00000"
+        },
+        {
+          "buyer_id": "H112",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.12741626025100844,
+          "quantity_kwh": 0.17626074157098232,
+          "reward_eur": 0.0,
+          "seller_id": "H019",
+          "transaction_id": "p2p-011-00001"
         },
         {
           "buyer_id": "H142",
           "hour": 11,
           "market": "p2p",
           "price_eur_kwh": 0.12741626025100844,
-          "quantity_kwh": 10.548386831602036,
+          "quantity_kwh": 10.372126090031054,
           "reward_eur": 0.0,
           "seller_id": "H019",
-          "transaction_id": "p2p-011-00001"
+          "transaction_id": "p2p-011-00002"
         },
         {
           "buyer_id": "H142",
@@ -1440,7 +1440,7 @@
           "quantity_kwh": 2.5078816635136336,
           "reward_eur": 0.0,
           "seller_id": "H015",
-          "transaction_id": "p2p-011-00002"
+          "transaction_id": "p2p-011-00003"
         },
         {
           "buyer_id": "H012",
@@ -1450,17 +1450,27 @@
           "quantity_kwh": 8.597935545397874,
           "reward_eur": 0.0,
           "seller_id": "H018",
-          "transaction_id": "p2p-011-00003"
+          "transaction_id": "p2p-011-00004"
         },
         {
-          "buyer_id": "H112",
+          "buyer_id": "H113",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.13807509414829047,
-          "quantity_kwh": 0.17626074157098232,
+          "price_eur_kwh": 0.12711200965223604,
+          "quantity_kwh": 0.20437258144415477,
           "reward_eur": 0.0,
-          "seller_id": "H018",
-          "transaction_id": "p2p-011-00004"
+          "seller_id": "H023",
+          "transaction_id": "p2p-011-00005"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.12711200965223604,
+          "quantity_kwh": 1.255379663180912,
+          "reward_eur": 0.0,
+          "seller_id": "H023",
+          "transaction_id": "p2p-011-00006"
         },
         {
           "buyer_id": "H133",
@@ -1470,57 +1480,17 @@
           "quantity_kwh": 0.15075563428419975,
           "reward_eur": 0.0,
           "seller_id": "H021",
-          "transaction_id": "p2p-011-00005"
-        },
-        {
-          "buyer_id": "H022",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.12711200965223604,
-          "quantity_kwh": 1.4597522446250668,
-          "reward_eur": 0.0,
-          "seller_id": "H023",
-          "transaction_id": "p2p-011-00006"
-        },
-        {
-          "buyer_id": "H113",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.13129562807096817,
-          "quantity_kwh": 0.20437258144415477,
-          "reward_eur": 0.0,
-          "seller_id": "H021",
           "transaction_id": "p2p-011-00007"
         },
         {
-          "buyer_id": "H134",
+          "buyer_id": "H104",
           "hour": 11,
           "market": "p2p",
           "price_eur_kwh": 0.12652197566250356,
-          "quantity_kwh": 0.2196291299283266,
+          "quantity_kwh": 1.5834600809081025,
           "reward_eur": 0.0,
           "seller_id": "H032",
           "transaction_id": "p2p-011-00008"
-        },
-        {
-          "buyer_id": "H114",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.12652197566250356,
-          "quantity_kwh": 1.363830950979776,
-          "reward_eur": 0.0,
-          "seller_id": "H032",
-          "transaction_id": "p2p-011-00009"
-        },
-        {
-          "buyer_id": "H105",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.15319762038506576,
-          "quantity_kwh": 0.15641563281866555,
-          "reward_eur": 0.0,
-          "seller_id": "H050",
-          "transaction_id": "p2p-011-00010"
         },
         {
           "buyer_id": "H135",
@@ -1530,26 +1500,46 @@
           "quantity_kwh": 2.9078874865050985,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "p2p-011-00011"
+          "transaction_id": "p2p-011-00009"
+        },
+        {
+          "buyer_id": "H105",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.13796549253610363,
+          "quantity_kwh": 0.15641563281866555,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
+          "transaction_id": "p2p-011-00010"
         },
         {
           "buyer_id": "H126",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.15415854755813257,
+          "price_eur_kwh": 0.13747521456009967,
           "quantity_kwh": 0.2442930800794544,
           "reward_eur": 0.0,
-          "seller_id": "H060",
-          "transaction_id": "p2p-011-00012"
+          "seller_id": "H051",
+          "transaction_id": "p2p-011-00011"
         },
         {
           "buyer_id": "H136",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.14158822503383606,
+          "price_eur_kwh": 0.13747521456009967,
           "quantity_kwh": 0.18998165073759596,
           "reward_eur": 0.0,
-          "seller_id": "H053",
+          "seller_id": "H051",
+          "transaction_id": "p2p-011-00012"
+        },
+        {
+          "buyer_id": "H057",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.13747521456009967,
+          "quantity_kwh": 15.98144190908539,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
           "transaction_id": "p2p-011-00013"
         },
         {
@@ -1557,60 +1547,20 @@
           "hour": 11,
           "market": "p2p",
           "price_eur_kwh": 0.13969828544468677,
-          "quantity_kwh": 11.72029985125625,
+          "quantity_kwh": 10.763930882756966,
           "reward_eur": 0.0,
           "seller_id": "H059",
           "transaction_id": "p2p-011-00014"
         },
         {
-          "buyer_id": "H057",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.13747521456009967,
-          "quantity_kwh": 15.025072940586107,
-          "reward_eur": 0.0,
-          "seller_id": "H051",
-          "transaction_id": "p2p-011-00015"
-        },
-        {
           "buyer_id": "H137",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.1349662322290652,
+          "price_eur_kwh": 0.1314004056130402,
           "quantity_kwh": 0.1376253422518719,
           "reward_eur": 0.0,
-          "seller_id": "H066",
-          "transaction_id": "p2p-011-00016"
-        },
-        {
-          "buyer_id": "H079",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.14250531830737254,
-          "quantity_kwh": 9.532165976141481,
-          "reward_eur": 0.0,
-          "seller_id": "H072",
-          "transaction_id": "p2p-011-00017"
-        },
-        {
-          "buyer_id": "H079",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.14230682243491152,
-          "quantity_kwh": 15.81332914020285,
-          "reward_eur": 0.0,
-          "seller_id": "H071",
-          "transaction_id": "p2p-011-00018"
-        },
-        {
-          "buyer_id": "H108",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.15435117687807406,
-          "quantity_kwh": 0.16132090868716695,
-          "reward_eur": 0.0,
-          "seller_id": "H073",
-          "transaction_id": "p2p-011-00019"
+          "seller_id": "H062",
+          "transaction_id": "p2p-011-00015"
         },
         {
           "buyer_id": "H148",
@@ -1620,27 +1570,37 @@
           "quantity_kwh": 0.15797912232232245,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-011-00020"
+          "transaction_id": "p2p-011-00016"
         },
         {
-          "buyer_id": "H119",
+          "buyer_id": "H108",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.1333780981858704,
-          "quantity_kwh": 0.11179560025000362,
+          "price_eur_kwh": 0.14230682243491152,
+          "quantity_kwh": 0.16132090868716695,
           "reward_eur": 0.0,
-          "seller_id": "H087",
-          "transaction_id": "p2p-011-00021"
+          "seller_id": "H071",
+          "transaction_id": "p2p-011-00017"
         },
         {
-          "buyer_id": "H109",
+          "buyer_id": "H079",
           "hour": 11,
           "market": "p2p",
-          "price_eur_kwh": 0.12604699157316782,
-          "quantity_kwh": 0.184723412946225,
+          "price_eur_kwh": 0.14230682243491152,
+          "quantity_kwh": 16.804621586108905,
           "reward_eur": 0.0,
-          "seller_id": "H088",
-          "transaction_id": "p2p-011-00022"
+          "seller_id": "H071",
+          "transaction_id": "p2p-011-00018"
+        },
+        {
+          "buyer_id": "H079",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.14250531830737254,
+          "quantity_kwh": 8.540873530235427,
+          "reward_eur": 0.0,
+          "seller_id": "H072",
+          "transaction_id": "p2p-011-00019"
         },
         {
           "buyer_id": "H139",
@@ -1650,47 +1610,37 @@
           "quantity_kwh": 0.21995796060177575,
           "reward_eur": 0.0,
           "seller_id": "H088",
+          "transaction_id": "p2p-011-00020"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.12604699157316782,
+          "quantity_kwh": 2.390929661419294,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
+          "transaction_id": "p2p-011-00021"
+        },
+        {
+          "buyer_id": "H119",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.12604699157316782,
+          "quantity_kwh": 0.11179560025000362,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
+          "transaction_id": "p2p-011-00022"
+        },
+        {
+          "buyer_id": "H109",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.12604699157316782,
+          "quantity_kwh": 0.184723412946225,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
           "transaction_id": "p2p-011-00023"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.1392144977997061,
-          "quantity_kwh": 1.249830822486981,
-          "reward_eur": 0.0,
-          "seller_id": "H083",
-          "transaction_id": "p2p-011-00024"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.14943246860117906,
-          "quantity_kwh": 1.141098838932313,
-          "reward_eur": 0.0,
-          "seller_id": "H086",
-          "transaction_id": "p2p-011-00025"
-        },
-        {
-          "buyer_id": "H110",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.14917596436984457,
-          "quantity_kwh": 0.18395095262652292,
-          "reward_eur": 0.0,
-          "seller_id": "H097",
-          "transaction_id": "p2p-011-00026"
-        },
-        {
-          "buyer_id": "H120",
-          "hour": 11,
-          "market": "p2p",
-          "price_eur_kwh": 0.14917596436984457,
-          "quantity_kwh": 1.717813990457604,
-          "reward_eur": 0.0,
-          "seller_id": "H097",
-          "transaction_id": "p2p-011-00027"
         },
         {
           "buyer_id": "H120",
@@ -1700,7 +1650,7 @@
           "quantity_kwh": 24.45269413861088,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-011-00028"
+          "transaction_id": "p2p-011-00024"
         },
         {
           "buyer_id": "H120",
@@ -1710,14 +1660,24 @@
           "quantity_kwh": 2.4633282137388113,
           "reward_eur": 0.0,
           "seller_id": "H094",
-          "transaction_id": "p2p-011-00029"
+          "transaction_id": "p2p-011-00025"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 11,
+          "market": "p2p",
+          "price_eur_kwh": 0.14917596436984457,
+          "quantity_kwh": 1.9017649430841268,
+          "reward_eur": 0.0,
+          "seller_id": "H097",
+          "transaction_id": "p2p-011-00026"
         },
         {
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
           "price_eur_kwh": 0.14227398171377548,
-          "quantity_kwh": 4.403740904843434,
+          "quantity_kwh": 1.901015643174136,
           "reward_eur": 0.0,
           "seller_id": "H088",
           "transaction_id": "agg-011-00000"
@@ -1727,7 +1687,7 @@
           "hour": 11,
           "market": "aggregator",
           "price_eur_kwh": 0.1449506887337117,
-          "quantity_kwh": 1.6605448599831973,
+          "quantity_kwh": 1.5229195177313262,
           "reward_eur": 0.0,
           "seller_id": "H062",
           "transaction_id": "agg-011-00001"
@@ -1736,30 +1696,30 @@
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
-          "price_eur_kwh": 0.14798809320724143,
-          "quantity_kwh": 1.3906436993163354,
+          "price_eur_kwh": 0.1482332321952434,
+          "quantity_kwh": 7.406839391451761,
           "reward_eur": 0.0,
-          "seller_id": "H051",
+          "seller_id": "H049",
           "transaction_id": "agg-011-00002"
         },
         {
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
-          "price_eur_kwh": 0.1482332321952434,
-          "quantity_kwh": 7.563255024270427,
+          "price_eur_kwh": 0.1482880330013368,
+          "quantity_kwh": 0.8375836718039533,
           "reward_eur": 0.0,
-          "seller_id": "H049",
+          "seller_id": "H018",
           "transaction_id": "agg-011-00003"
         },
         {
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
-          "price_eur_kwh": 0.1482880330013368,
-          "quantity_kwh": 0.6613229302329711,
+          "price_eur_kwh": 0.14885773482704462,
+          "quantity_kwh": 1.249830822486981,
           "reward_eur": 0.0,
-          "seller_id": "H018",
+          "seller_id": "H083",
           "transaction_id": "agg-011-00004"
         },
         {
@@ -1767,10 +1727,20 @@
           "hour": 11,
           "market": "aggregator",
           "price_eur_kwh": 0.1493069007831239,
-          "quantity_kwh": 6.713220688804805,
+          "quantity_kwh": 6.285292454993167,
           "reward_eur": 0.0,
           "seller_id": "H004",
           "transaction_id": "agg-011-00005"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 11,
+          "market": "aggregator",
+          "price_eur_kwh": 0.15050314508087786,
+          "quantity_kwh": 0.9912924459060548,
+          "reward_eur": 0.0,
+          "seller_id": "H072",
+          "transaction_id": "agg-011-00006"
         },
         {
           "buyer_id": "H120",
@@ -1780,7 +1750,7 @@
           "quantity_kwh": 2.900670984629798,
           "reward_eur": 0.0,
           "seller_id": "H029",
-          "transaction_id": "agg-011-00006"
+          "transaction_id": "agg-011-00007"
         },
         {
           "buyer_id": "H120",
@@ -1790,17 +1760,17 @@
           "quantity_kwh": 1.3254858199814978,
           "reward_eur": 0.0,
           "seller_id": "H013",
-          "transaction_id": "agg-011-00007"
+          "transaction_id": "agg-011-00008"
         },
         {
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
           "price_eur_kwh": 0.15396672022778113,
-          "quantity_kwh": 13.713314521337649,
+          "quantity_kwh": 14.854413360269962,
           "reward_eur": 0.0,
           "seller_id": "H086",
-          "transaction_id": "agg-011-00008"
+          "transaction_id": "agg-011-00009"
         },
         {
           "buyer_id": "H120",
@@ -1810,7 +1780,7 @@
           "quantity_kwh": 2.0189491691375387,
           "reward_eur": 0.0,
           "seller_id": "H037",
-          "transaction_id": "agg-011-00009"
+          "transaction_id": "agg-011-00010"
         },
         {
           "buyer_id": "H120",
@@ -1820,37 +1790,37 @@
           "quantity_kwh": 2.1911180674639543,
           "reward_eur": 0.0,
           "seller_id": "H025",
-          "transaction_id": "agg-011-00010"
-        },
-        {
-          "buyer_id": "H120",
-          "hour": 11,
-          "market": "aggregator",
-          "price_eur_kwh": 0.15584929611972448,
-          "quantity_kwh": 12.217301694542888,
-          "reward_eur": 0.0,
-          "seller_id": "H050",
           "transaction_id": "agg-011-00011"
         },
         {
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
-          "price_eur_kwh": 0.15632975970625787,
-          "quantity_kwh": 1.6957490050317663,
+          "price_eur_kwh": 0.15584929611972448,
+          "quantity_kwh": 12.373717327361554,
           "reward_eur": 0.0,
-          "seller_id": "H060",
+          "seller_id": "H050",
           "transaction_id": "agg-011-00012"
         },
         {
           "buyer_id": "H120",
           "hour": 11,
           "market": "aggregator",
+          "price_eur_kwh": 0.15632975970625787,
+          "quantity_kwh": 1.9400420851112208,
+          "reward_eur": 0.0,
+          "seller_id": "H060",
+          "transaction_id": "agg-011-00013"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 11,
+          "market": "aggregator",
           "price_eur_kwh": 0.15642607436622863,
-          "quantity_kwh": 2.0561616310852733,
+          "quantity_kwh": 2.21748253977244,
           "reward_eur": 0.0,
           "seller_id": "H073",
-          "transaction_id": "agg-011-00013"
+          "transaction_id": "agg-011-00014"
         },
         {
           "buyer_id": "H120",
@@ -1860,7 +1830,7 @@
           "quantity_kwh": 1.037212536886976,
           "reward_eur": 0.0,
           "seller_id": "H011",
-          "transaction_id": "agg-011-00014"
+          "transaction_id": "agg-011-00015"
         },
         {
           "buyer_id": "H120",
@@ -1870,16 +1840,16 @@
           "quantity_kwh": 1.3690284619880035,
           "reward_eur": 0.0,
           "seller_id": "H007",
-          "transaction_id": "agg-011-00015"
+          "transaction_id": "agg-011-00016"
         }
       ]
     },
     {
-      "hash": "000feefe47c3ebef66cbb7c96a129b57a85c60cf0836ecf16ac7d677096dc0d7",
+      "hash": "000c89f3c5ea3c6a5af8790d8e517e7afba0d4251eb6c8ea339611d1279d9482",
       "hour": 12,
-      "miner_id": "miner-03",
-      "nonce": 3932,
-      "previous_hash": "0001592ab2873d00bf19bbb4c8df0c1fd73cb7b0d317b169538f6f064770f1c8",
+      "miner_id": "miner-08",
+      "nonce": 10117,
+      "previous_hash": "0001c9a4e776511c011a3a5f8727d365a8aa7be5146db6ab740a2f44a3fadce0",
       "timestamp": "2026-06-15T12:00:00+02:00",
       "transactions": [
         {
@@ -1893,6 +1863,16 @@
           "transaction_id": "p2p-012-00000"
         },
         {
+          "buyer_id": "H102",
+          "hour": 12,
+          "market": "p2p",
+          "price_eur_kwh": 0.1355524252506307,
+          "quantity_kwh": 12.91713124710784,
+          "reward_eur": 0.0,
+          "seller_id": "H019",
+          "transaction_id": "p2p-012-00001"
+        },
+        {
           "buyer_id": "H112",
           "hour": 12,
           "market": "p2p",
@@ -1900,16 +1880,6 @@
           "quantity_kwh": 0.16050135272382554,
           "reward_eur": 0.0,
           "seller_id": "H015",
-          "transaction_id": "p2p-012-00001"
-        },
-        {
-          "buyer_id": "H142",
-          "hour": 12,
-          "market": "p2p",
-          "price_eur_kwh": 0.1355524252506307,
-          "quantity_kwh": 12.91713124710784,
-          "reward_eur": 0.0,
-          "seller_id": "H019",
           "transaction_id": "p2p-012-00002"
         },
         {
@@ -1923,16 +1893,6 @@
           "transaction_id": "p2p-012-00003"
         },
         {
-          "buyer_id": "H113",
-          "hour": 12,
-          "market": "p2p",
-          "price_eur_kwh": 0.13967951009363944,
-          "quantity_kwh": 0.1667804180794864,
-          "reward_eur": 0.0,
-          "seller_id": "H021",
-          "transaction_id": "p2p-012-00004"
-        },
-        {
           "buyer_id": "H133",
           "hour": 12,
           "market": "p2p",
@@ -1940,27 +1900,47 @@
           "quantity_kwh": 0.15376068649157273,
           "reward_eur": 0.0,
           "seller_id": "H023",
+          "transaction_id": "p2p-012-00004"
+        },
+        {
+          "buyer_id": "H113",
+          "hour": 12,
+          "market": "p2p",
+          "price_eur_kwh": 0.13522874673058694,
+          "quantity_kwh": 0.1667804180794864,
+          "reward_eur": 0.0,
+          "seller_id": "H023",
           "transaction_id": "p2p-012-00005"
         },
         {
-          "buyer_id": "H114",
+          "buyer_id": "H134",
           "hour": 12,
           "market": "p2p",
           "price_eur_kwh": 0.13460103612182334,
-          "quantity_kwh": 1.991604562482011,
+          "quantity_kwh": 0.1688216416341926,
           "reward_eur": 0.0,
           "seller_id": "H032",
           "transaction_id": "p2p-012-00006"
         },
         {
+          "buyer_id": "H104",
+          "hour": 12,
+          "market": "p2p",
+          "price_eur_kwh": 0.13460103612182334,
+          "quantity_kwh": 1.8227829208478183,
+          "reward_eur": 0.0,
+          "seller_id": "H032",
+          "transaction_id": "p2p-012-00007"
+        },
+        {
           "buyer_id": "H105",
           "hour": 12,
           "market": "p2p",
-          "price_eur_kwh": 0.1629800540756082,
+          "price_eur_kwh": 0.14677527873855975,
           "quantity_kwh": 0.15822590127509728,
           "reward_eur": 0.0,
-          "seller_id": "H050",
-          "transaction_id": "p2p-012-00007"
+          "seller_id": "H049",
+          "transaction_id": "p2p-012-00008"
         },
         {
           "buyer_id": "H135",
@@ -1970,7 +1950,27 @@
           "quantity_kwh": 2.1281723216078703,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "p2p-012-00008"
+          "transaction_id": "p2p-012-00009"
+        },
+        {
+          "buyer_id": "H136",
+          "hour": 12,
+          "market": "p2p",
+          "price_eur_kwh": 0.1462536940635474,
+          "quantity_kwh": 0.16895298721973664,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-012-00010"
+        },
+        {
+          "buyer_id": "H126",
+          "hour": 12,
+          "market": "p2p",
+          "price_eur_kwh": 0.1462536940635474,
+          "quantity_kwh": 0.21757108303334488,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-012-00011"
         },
         {
           "buyer_id": "H057",
@@ -1980,46 +1980,16 @@
           "quantity_kwh": 0.1414458085391459,
           "reward_eur": 0.0,
           "seller_id": "H051",
-          "transaction_id": "p2p-012-00009"
-        },
-        {
-          "buyer_id": "H136",
-          "hour": 12,
-          "market": "p2p",
-          "price_eur_kwh": 0.1486187191342582,
-          "quantity_kwh": 0.16895298721973664,
-          "reward_eur": 0.0,
-          "seller_id": "H059",
-          "transaction_id": "p2p-012-00010"
-        },
-        {
-          "buyer_id": "H126",
-          "hour": 12,
-          "market": "p2p",
-          "price_eur_kwh": 0.16400234125105848,
-          "quantity_kwh": 0.21757108303334488,
-          "reward_eur": 0.0,
-          "seller_id": "H060",
-          "transaction_id": "p2p-012-00011"
+          "transaction_id": "p2p-012-00012"
         },
         {
           "buyer_id": "H137",
           "hour": 12,
           "market": "p2p",
-          "price_eur_kwh": 0.15025749538076733,
+          "price_eur_kwh": 0.13979097820541483,
           "quantity_kwh": 0.1809546878699548,
           "reward_eur": 0.0,
-          "seller_id": "H067",
-          "transaction_id": "p2p-012-00012"
-        },
-        {
-          "buyer_id": "H078",
-          "hour": 12,
-          "market": "p2p",
-          "price_eur_kwh": 0.15160499507381014,
-          "quantity_kwh": 9.674985568023018,
-          "reward_eur": 0.0,
-          "seller_id": "H072",
+          "seller_id": "H062",
           "transaction_id": "p2p-012-00013"
         },
         {
@@ -2063,23 +2033,23 @@
           "transaction_id": "p2p-012-00017"
         },
         {
-          "buyer_id": "H129",
+          "buyer_id": "H078",
           "hour": 12,
           "market": "p2p",
-          "price_eur_kwh": 0.15407285130816506,
-          "quantity_kwh": 3.0352264211964757,
+          "price_eur_kwh": 0.15160499507381014,
+          "quantity_kwh": 9.674985568023018,
           "reward_eur": 0.0,
-          "seller_id": "H085",
+          "seller_id": "H072",
           "transaction_id": "p2p-012-00018"
         },
         {
-          "buyer_id": "H139",
+          "buyer_id": "H129",
           "hour": 12,
           "market": "p2p",
-          "price_eur_kwh": 0.14189495633284674,
-          "quantity_kwh": 0.14545238448949355,
+          "price_eur_kwh": 0.13409572192457656,
+          "quantity_kwh": 3.0352264211964757,
           "reward_eur": 0.0,
-          "seller_id": "H087",
+          "seller_id": "H088",
           "transaction_id": "p2p-012-00019"
         },
         {
@@ -2093,6 +2063,16 @@
           "transaction_id": "p2p-012-00020"
         },
         {
+          "buyer_id": "H139",
+          "hour": 12,
+          "market": "p2p",
+          "price_eur_kwh": 0.13409572192457656,
+          "quantity_kwh": 0.14545238448949355,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
+          "transaction_id": "p2p-012-00021"
+        },
+        {
           "buyer_id": "H119",
           "hour": 12,
           "market": "p2p",
@@ -2100,7 +2080,7 @@
           "quantity_kwh": 0.11231869571970922,
           "reward_eur": 0.0,
           "seller_id": "H088",
-          "transaction_id": "p2p-012-00021"
+          "transaction_id": "p2p-012-00022"
         },
         {
           "buyer_id": "H150",
@@ -2110,7 +2090,7 @@
           "quantity_kwh": 46.31553174378559,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-012-00022"
+          "transaction_id": "p2p-012-00023"
         },
         {
           "buyer_id": "H150",
@@ -2120,7 +2100,7 @@
           "quantity_kwh": 2.9663554815328785,
           "reward_eur": 0.0,
           "seller_id": "H094",
-          "transaction_id": "p2p-012-00023"
+          "transaction_id": "p2p-012-00024"
         },
         {
           "buyer_id": "H150",
@@ -2130,14 +2110,14 @@
           "quantity_kwh": 2.331644258976747,
           "reward_eur": 0.0,
           "seller_id": "H097",
-          "transaction_id": "p2p-012-00024"
+          "transaction_id": "p2p-012-00025"
         },
         {
           "buyer_id": "H120",
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.1513588864825713,
-          "quantity_kwh": 6.5413300534541605,
+          "quantity_kwh": 3.360651247768191,
           "reward_eur": 0.0,
           "seller_id": "H088",
           "transaction_id": "agg-012-00000"
@@ -2147,7 +2127,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.1519253988855765,
-          "quantity_kwh": 1.7204255884278579,
+          "quantity_kwh": 1.5536451703483714,
           "reward_eur": 0.0,
           "seller_id": "H023",
           "transaction_id": "agg-012-00001"
@@ -2157,7 +2137,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.15420651462299045,
-          "quantity_kwh": 8.035632120603754,
+          "quantity_kwh": 4.977349554733756,
           "reward_eur": 0.0,
           "seller_id": "H062",
           "transaction_id": "agg-012-00002"
@@ -2167,7 +2147,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.1574378725520567,
-          "quantity_kwh": 20.323368502660202,
+          "quantity_kwh": 19.93684443240712,
           "reward_eur": 0.0,
           "seller_id": "H051",
           "transaction_id": "agg-012-00003"
@@ -2177,7 +2157,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.1576986648895629,
-          "quantity_kwh": 11.601690876524572,
+          "quantity_kwh": 11.443464975249475,
           "reward_eur": 0.0,
           "seller_id": "H049",
           "transaction_id": "agg-012-00004"
@@ -2207,7 +2187,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.1586203850874121,
-          "quantity_kwh": 2.4614319340774635,
+          "quantity_kwh": 2.6303849212971997,
           "reward_eur": 0.0,
           "seller_id": "H059",
           "transaction_id": "agg-012-00007"
@@ -2227,7 +2207,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.15943977321066669,
-          "quantity_kwh": 0.13106321486449612,
+          "quantity_kwh": 0.31201790273445074,
           "reward_eur": 0.0,
           "seller_id": "H067",
           "transaction_id": "agg-012-00009"
@@ -2247,7 +2227,7 @@
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.1601135230571881,
-          "quantity_kwh": 1.0283083791232943,
+          "quantity_kwh": 1.0283083791232936,
           "reward_eur": 0.0,
           "seller_id": "H072",
           "transaction_id": "agg-012-00011"
@@ -2256,21 +2236,41 @@
           "buyer_id": "H120",
           "hour": 12,
           "market": "aggregator",
+          "price_eur_kwh": 0.1609808640959941,
+          "quantity_kwh": 0.1660397041169821,
+          "reward_eur": 0.0,
+          "seller_id": "H002",
+          "transaction_id": "agg-012-00012"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 12,
+          "market": "aggregator",
+          "price_eur_kwh": 0.16134745117436555,
+          "quantity_kwh": 0.5043352945035973,
+          "reward_eur": 0.0,
+          "seller_id": "H085",
+          "transaction_id": "agg-012-00013"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 12,
+          "market": "aggregator",
           "price_eur_kwh": 0.16272382692744153,
-          "quantity_kwh": 4.450158771262696,
+          "quantity_kwh": 10.380367858716049,
           "reward_eur": 0.0,
           "seller_id": "H029",
-          "transaction_id": "agg-012-00012"
+          "transaction_id": "agg-012-00014"
         },
         {
           "buyer_id": "H150",
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.15880930475127636,
-          "quantity_kwh": 12.361619544634731,
+          "quantity_kwh": 6.431410457181379,
           "reward_eur": 0.0,
           "seller_id": "H029",
-          "transaction_id": "agg-012-00013"
+          "transaction_id": "agg-012-00015"
         },
         {
           "buyer_id": "H150",
@@ -2280,50 +2280,40 @@
           "quantity_kwh": 1.4538564714254807,
           "reward_eur": 0.0,
           "seller_id": "H013",
-          "transaction_id": "agg-012-00014"
+          "transaction_id": "agg-012-00016"
         },
         {
           "buyer_id": "H150",
           "hour": 12,
           "market": "aggregator",
           "price_eur_kwh": 0.15988374261081195,
-          "quantity_kwh": 14.796406461026814,
+          "quantity_kwh": 18.43656850831648,
           "reward_eur": 0.0,
           "seller_id": "H086",
-          "transaction_id": "agg-012-00015"
-        },
-        {
-          "buyer_id": "H110",
-          "hour": 12,
-          "market": "aggregator",
-          "price_eur_kwh": 0.1597693157794729,
-          "quantity_kwh": 0.11969750480760567,
-          "reward_eur": 0.0,
-          "seller_id": "H086",
-          "transaction_id": "agg-012-00016"
+          "transaction_id": "agg-012-00017"
         }
       ]
     },
     {
-      "hash": "000f1940c450c674eaf86d1e52e7b2f1271e90ab1a42ded0f608547417427e1b",
+      "hash": "0003885682558df4423f1414bdce0f8b1f007554869f7647555fb820ce5c0d28",
       "hour": 13,
-      "miner_id": "miner-10",
-      "nonce": 4379,
-      "previous_hash": "000feefe47c3ebef66cbb7c96a129b57a85c60cf0836ecf16ac7d677096dc0d7",
+      "miner_id": "miner-02",
+      "nonce": 211,
+      "previous_hash": "000c89f3c5ea3c6a5af8790d8e517e7afba0d4251eb6c8ea339611d1279d9482",
       "timestamp": "2026-06-15T13:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.17492780161600346,
+          "price_eur_kwh": 0.1588554820909832,
           "quantity_kwh": 0.23711102909053436,
           "reward_eur": 0.0,
-          "seller_id": "H001",
+          "seller_id": "H004",
           "transaction_id": "p2p-013-00000"
         },
         {
-          "buyer_id": "H102",
+          "buyer_id": "H142",
           "hour": 13,
           "market": "p2p",
           "price_eur_kwh": 0.14446051435852314,
@@ -2333,16 +2323,6 @@
           "transaction_id": "p2p-013-00001"
         },
         {
-          "buyer_id": "H112",
-          "hour": 13,
-          "market": "p2p",
-          "price_eur_kwh": 0.15654516214390057,
-          "quantity_kwh": 0.18567858657675304,
-          "reward_eur": 0.0,
-          "seller_id": "H018",
-          "transaction_id": "p2p-013-00002"
-        },
-        {
           "buyer_id": "H142",
           "hour": 13,
           "market": "p2p",
@@ -2350,17 +2330,17 @@
           "quantity_kwh": 3.0625576859734753,
           "reward_eur": 0.0,
           "seller_id": "H015",
-          "transaction_id": "p2p-013-00003"
+          "transaction_id": "p2p-013-00002"
         },
         {
-          "buyer_id": "H133",
+          "buyer_id": "H112",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.14411556468015427,
-          "quantity_kwh": 0.164512846548383,
+          "price_eur_kwh": 0.15654516214390057,
+          "quantity_kwh": 0.18567858657675304,
           "reward_eur": 0.0,
-          "seller_id": "H023",
-          "transaction_id": "p2p-013-00004"
+          "seller_id": "H018",
+          "transaction_id": "p2p-013-00003"
         },
         {
           "buyer_id": "H113",
@@ -2370,10 +2350,20 @@
           "quantity_kwh": 0.2185034728172898,
           "reward_eur": 0.0,
           "seller_id": "H023",
+          "transaction_id": "p2p-013-00004"
+        },
+        {
+          "buyer_id": "H133",
+          "hour": 13,
+          "market": "p2p",
+          "price_eur_kwh": 0.14411556468015427,
+          "quantity_kwh": 0.164512846548383,
+          "reward_eur": 0.0,
+          "seller_id": "H023",
           "transaction_id": "p2p-013-00005"
         },
         {
-          "buyer_id": "H104",
+          "buyer_id": "H114",
           "hour": 13,
           "market": "p2p",
           "price_eur_kwh": 0.1434466028578731,
@@ -2383,16 +2373,6 @@
           "transaction_id": "p2p-013-00006"
         },
         {
-          "buyer_id": "H105",
-          "hour": 13,
-          "market": "p2p",
-          "price_eur_kwh": 0.16678126057081336,
-          "quantity_kwh": 0.13261802606756262,
-          "reward_eur": 0.0,
-          "seller_id": "H048",
-          "transaction_id": "p2p-013-00007"
-        },
-        {
           "buyer_id": "H135",
           "hour": 13,
           "market": "p2p",
@@ -2400,36 +2380,46 @@
           "quantity_kwh": 2.373039983180144,
           "reward_eur": 0.0,
           "seller_id": "H049",
+          "transaction_id": "p2p-013-00007"
+        },
+        {
+          "buyer_id": "H105",
+          "hour": 13,
+          "market": "p2p",
+          "price_eur_kwh": 0.1564208993124547,
+          "quantity_kwh": 0.13261802606756262,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
           "transaction_id": "p2p-013-00008"
-        },
-        {
-          "buyer_id": "H057",
-          "hour": 13,
-          "market": "p2p",
-          "price_eur_kwh": 0.1583854849497791,
-          "quantity_kwh": 12.030587526582735,
-          "reward_eur": 0.0,
-          "seller_id": "H059",
-          "transaction_id": "p2p-013-00009"
-        },
-        {
-          "buyer_id": "H126",
-          "hour": 13,
-          "market": "p2p",
-          "price_eur_kwh": 0.17478007146920976,
-          "quantity_kwh": 0.2564004126402526,
-          "reward_eur": 0.0,
-          "seller_id": "H060",
-          "transaction_id": "p2p-013-00010"
         },
         {
           "buyer_id": "H136",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.1726484970276731,
+          "price_eur_kwh": 0.15586503769437973,
           "quantity_kwh": 0.16003857395846358,
           "reward_eur": 0.0,
-          "seller_id": "H054",
+          "seller_id": "H051",
+          "transaction_id": "p2p-013-00009"
+        },
+        {
+          "buyer_id": "H057",
+          "hour": 13,
+          "market": "p2p",
+          "price_eur_kwh": 0.15586503769437973,
+          "quantity_kwh": 12.030587526582735,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-013-00010"
+        },
+        {
+          "buyer_id": "H126",
+          "hour": 13,
+          "market": "p2p",
+          "price_eur_kwh": 0.15586503769437973,
+          "quantity_kwh": 0.2564004126402526,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
           "transaction_id": "p2p-013-00011"
         },
         {
@@ -2456,40 +2446,40 @@
           "buyer_id": "H108",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.17499846848215347,
+          "price_eur_kwh": 0.161342961449158,
           "quantity_kwh": 0.15236299835699507,
           "reward_eur": 0.0,
-          "seller_id": "H073",
+          "seller_id": "H071",
           "transaction_id": "p2p-013-00014"
-        },
-        {
-          "buyer_id": "H139",
-          "hour": 13,
-          "market": "p2p",
-          "price_eur_kwh": 0.1512198571056393,
-          "quantity_kwh": 0.1964282642126623,
-          "reward_eur": 0.0,
-          "seller_id": "H087",
-          "transaction_id": "p2p-013-00015"
         },
         {
           "buyer_id": "H129",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.16419804594059242,
+          "price_eur_kwh": 0.14290808096339602,
           "quantity_kwh": 2.6787806907978644,
           "reward_eur": 0.0,
-          "seller_id": "H085",
+          "seller_id": "H088",
+          "transaction_id": "p2p-013-00015"
+        },
+        {
+          "buyer_id": "H139",
+          "hour": 13,
+          "market": "p2p",
+          "price_eur_kwh": 0.14290808096339602,
+          "quantity_kwh": 0.1964282642126623,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
           "transaction_id": "p2p-013-00016"
         },
         {
           "buyer_id": "H119",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.1512198571056393,
+          "price_eur_kwh": 0.14290808096339602,
           "quantity_kwh": 0.13480767324640158,
           "reward_eur": 0.0,
-          "seller_id": "H087",
+          "seller_id": "H088",
           "transaction_id": "p2p-013-00017"
         },
         {
@@ -2513,7 +2503,7 @@
           "transaction_id": "p2p-013-00019"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 13,
           "market": "p2p",
           "price_eur_kwh": 0.15719373270822815,
@@ -2523,17 +2513,17 @@
           "transaction_id": "p2p-013-00020"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.16913097669279545,
-          "quantity_kwh": 2.330387380876925,
+          "price_eur_kwh": 0.1633863510189632,
+          "quantity_kwh": 38.80719803454102,
           "reward_eur": 0.0,
-          "seller_id": "H097",
+          "seller_id": "H091",
           "transaction_id": "p2p-013-00021"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 13,
           "market": "p2p",
           "price_eur_kwh": 0.16704773756704447,
@@ -2543,13 +2533,13 @@
           "transaction_id": "p2p-013-00022"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 13,
           "market": "p2p",
-          "price_eur_kwh": 0.1633863510189632,
-          "quantity_kwh": 38.80719803454102,
+          "price_eur_kwh": 0.16913097669279545,
+          "quantity_kwh": 2.330387380876925,
           "reward_eur": 0.0,
-          "seller_id": "H091",
+          "seller_id": "H097",
           "transaction_id": "p2p-013-00023"
         },
         {
@@ -2557,7 +2547,7 @@
           "hour": 13,
           "market": "aggregator",
           "price_eur_kwh": 0.1613057276812082,
-          "quantity_kwh": 8.14437060607995,
+          "quantity_kwh": 5.134353977823021,
           "reward_eur": 0.0,
           "seller_id": "H088",
           "transaction_id": "agg-013-00000"
@@ -2587,7 +2577,7 @@
           "hour": 13,
           "market": "aggregator",
           "price_eur_kwh": 0.16546161575232984,
-          "quantity_kwh": 0.43813815228218767,
+          "quantity_kwh": 1.366231746174329,
           "reward_eur": 0.0,
           "seller_id": "H087",
           "transaction_id": "agg-013-00003"
@@ -2597,7 +2587,7 @@
           "hour": 13,
           "market": "aggregator",
           "price_eur_kwh": 0.1663619037544194,
-          "quantity_kwh": 7.721794337318266,
+          "quantity_kwh": 10.736747557570178,
           "reward_eur": 0.0,
           "seller_id": "H066",
           "transaction_id": "agg-013-00004"
@@ -2617,60 +2607,70 @@
           "hour": 13,
           "market": "aggregator",
           "price_eur_kwh": 0.16778420604670008,
-          "quantity_kwh": 3.443564555086073,
+          "quantity_kwh": 7.028909709832136,
           "reward_eur": 0.0,
           "seller_id": "H051",
           "transaction_id": "agg-013-00006"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 13,
           "market": "aggregator",
-          "price_eur_kwh": 0.16361243349455956,
-          "quantity_kwh": 16.032371667927514,
+          "price_eur_kwh": 0.16806213685573756,
+          "quantity_kwh": 12.203353675392373,
           "reward_eur": 0.0,
-          "seller_id": "H051",
+          "seller_id": "H049",
           "transaction_id": "agg-013-00007"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 13,
           "market": "aggregator",
-          "price_eur_kwh": 0.16389036430359705,
-          "quantity_kwh": 12.335971701459936,
-          "reward_eur": 0.0,
-          "seller_id": "H049",
-          "transaction_id": "agg-013-00008"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 13,
-          "market": "aggregator",
-          "price_eur_kwh": 0.16395249571931997,
+          "price_eur_kwh": 0.1681242682714605,
           "quantity_kwh": 11.69051369011179,
           "reward_eur": 0.0,
           "seller_id": "H018",
-          "transaction_id": "agg-013-00009"
+          "transaction_id": "agg-013-00008"
         },
         {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 13,
           "market": "aggregator",
-          "price_eur_kwh": 0.1645984055789455,
+          "price_eur_kwh": 0.16877017813108602,
           "quantity_kwh": 1.596408025673179,
           "reward_eur": 0.0,
           "seller_id": "H083",
+          "transaction_id": "agg-013-00009"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 13,
+          "market": "aggregator",
+          "price_eur_kwh": 0.16904442967439975,
+          "quantity_kwh": 3.9425249749491815,
+          "reward_eur": 0.0,
+          "seller_id": "H059",
           "transaction_id": "agg-013-00010"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 13,
+          "market": "aggregator",
+          "price_eur_kwh": 0.1692794282450018,
+          "quantity_kwh": 18.147156393463398,
+          "reward_eur": 0.0,
+          "seller_id": "H004",
+          "transaction_id": "agg-013-00011"
         },
         {
           "buyer_id": "H150",
           "hour": 13,
           "market": "aggregator",
           "price_eur_kwh": 0.1651076556928613,
-          "quantity_kwh": 22.02735476247802,
+          "quantity_kwh": 3.6430873399240866,
           "reward_eur": 0.0,
           "seller_id": "H004",
-          "transaction_id": "agg-013-00011"
+          "transaction_id": "agg-013-00012"
         },
         {
           "buyer_id": "H150",
@@ -2680,7 +2680,7 @@
           "quantity_kwh": 2.9425294522800867,
           "reward_eur": 0.0,
           "seller_id": "H067",
-          "transaction_id": "agg-013-00012"
+          "transaction_id": "agg-013-00013"
         },
         {
           "buyer_id": "H150",
@@ -2690,7 +2690,7 @@
           "quantity_kwh": 2.152667788815078,
           "reward_eur": 0.0,
           "seller_id": "H035",
-          "transaction_id": "agg-013-00013"
+          "transaction_id": "agg-013-00014"
         },
         {
           "buyer_id": "H150",
@@ -2700,56 +2700,66 @@
           "quantity_kwh": 3.094335161872444,
           "reward_eur": 0.0,
           "seller_id": "H063",
-          "transaction_id": "agg-013-00014"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 13,
-          "market": "aggregator",
-          "price_eur_kwh": 0.16594403390186804,
-          "quantity_kwh": 1.6219880425953643,
-          "reward_eur": 0.0,
-          "seller_id": "H053",
           "transaction_id": "agg-013-00015"
         },
         {
           "buyer_id": "H150",
           "hour": 13,
           "market": "aggregator",
+          "price_eur_kwh": 0.16594403390186804,
+          "quantity_kwh": 2.103969114920683,
+          "reward_eur": 0.0,
+          "seller_id": "H053",
+          "transaction_id": "agg-013-00016"
+        },
+        {
+          "buyer_id": "H150",
+          "hour": 13,
+          "market": "aggregator",
           "price_eur_kwh": 0.16635139537194868,
-          "quantity_kwh": 5.997736471594837,
+          "quantity_kwh": 8.095920012942244,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "agg-013-00016"
+          "transaction_id": "agg-013-00017"
+        },
+        {
+          "buyer_id": "H150",
+          "hour": 13,
+          "market": "aggregator",
+          "price_eur_kwh": 0.16646391953400333,
+          "quantity_kwh": 5.36103579383051,
+          "reward_eur": 0.0,
+          "seller_id": "H072",
+          "transaction_id": "agg-013-00018"
         }
       ]
     },
     {
-      "hash": "000f550b0349ec7695c9a0a96421035db1fbadef95e91a18a22e21ed7a5fe405",
+      "hash": "00075b573ccb035443d70fd655b543623a79307cc251165540d34bb0db9db94c",
       "hour": 14,
-      "miner_id": "miner-08",
-      "nonce": 397,
-      "previous_hash": "000f1940c450c674eaf86d1e52e7b2f1271e90ab1a42ded0f608547417427e1b",
+      "miner_id": "miner-10",
+      "nonce": 3159,
+      "previous_hash": "0003885682558df4423f1414bdce0f8b1f007554869f7647555fb820ce5c0d28",
       "timestamp": "2026-06-15T14:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.19300732962935727,
+          "price_eur_kwh": 0.17527386791648714,
           "quantity_kwh": 0.24531919155146187,
           "reward_eur": 0.0,
-          "seller_id": "H001",
+          "seller_id": "H004",
           "transaction_id": "p2p-014-00000"
         },
         {
-          "buyer_id": "H112",
+          "buyer_id": "H102",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.17522265895969144,
-          "quantity_kwh": 0.17732452842404983,
+          "price_eur_kwh": 0.1593911193969476,
+          "quantity_kwh": 12.121968282847572,
           "reward_eur": 0.0,
-          "seller_id": "H014",
+          "seller_id": "H019",
           "transaction_id": "p2p-014-00001"
         },
         {
@@ -2763,24 +2773,14 @@
           "transaction_id": "p2p-014-00002"
         },
         {
-          "buyer_id": "H142",
+          "buyer_id": "H112",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.1593911193969476,
-          "quantity_kwh": 12.121968282847572,
+          "price_eur_kwh": 0.17272476663323483,
+          "quantity_kwh": 0.17732452842404983,
           "reward_eur": 0.0,
-          "seller_id": "H019",
+          "seller_id": "H018",
           "transaction_id": "p2p-014-00003"
-        },
-        {
-          "buyer_id": "H133",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.15901051771063232,
-          "quantity_kwh": 0.2545710530831319,
-          "reward_eur": 0.0,
-          "seller_id": "H023",
-          "transaction_id": "p2p-014-00004"
         },
         {
           "buyer_id": "H113",
@@ -2790,26 +2790,36 @@
           "quantity_kwh": 0.26275642616363265,
           "reward_eur": 0.0,
           "seller_id": "H023",
+          "transaction_id": "p2p-014-00004"
+        },
+        {
+          "buyer_id": "H133",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.15901051771063232,
+          "quantity_kwh": 0.2545710530831319,
+          "reward_eur": 0.0,
+          "seller_id": "H023",
           "transaction_id": "p2p-014-00005"
+        },
+        {
+          "buyer_id": "H134",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.15827241585518279,
+          "quantity_kwh": 0.25563809308844687,
+          "reward_eur": 0.0,
+          "seller_id": "H032",
+          "transaction_id": "p2p-014-00006"
         },
         {
           "buyer_id": "H114",
           "hour": 14,
           "market": "p2p",
           "price_eur_kwh": 0.15827241585518279,
-          "quantity_kwh": 2.0289017933733677,
+          "quantity_kwh": 1.7732637002849208,
           "reward_eur": 0.0,
           "seller_id": "H032",
-          "transaction_id": "p2p-014-00006"
-        },
-        {
-          "buyer_id": "H105",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.19164226099573514,
-          "quantity_kwh": 0.17136415023441456,
-          "reward_eur": 0.0,
-          "seller_id": "H050",
           "transaction_id": "p2p-014-00007"
         },
         {
@@ -2823,34 +2833,44 @@
           "transaction_id": "p2p-014-00008"
         },
         {
+          "buyer_id": "H105",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.1725876607126894,
+          "quantity_kwh": 0.17136415023441456,
+          "reward_eur": 0.0,
+          "seller_id": "H049",
+          "transaction_id": "p2p-014-00009"
+        },
+        {
           "buyer_id": "H136",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.19284433094718667,
+          "price_eur_kwh": 0.17197434844581708,
           "quantity_kwh": 0.2144291680173751,
           "reward_eur": 0.0,
-          "seller_id": "H060",
-          "transaction_id": "p2p-014-00009"
+          "seller_id": "H051",
+          "transaction_id": "p2p-014-00010"
         },
         {
           "buyer_id": "H126",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.17711951078387922,
+          "price_eur_kwh": 0.17197434844581708,
           "quantity_kwh": 0.20510757011492503,
           "reward_eur": 0.0,
-          "seller_id": "H053",
-          "transaction_id": "p2p-014-00010"
+          "seller_id": "H051",
+          "transaction_id": "p2p-014-00011"
         },
         {
           "buyer_id": "H137",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.1766822713960314,
+          "price_eur_kwh": 0.1643750781777452,
           "quantity_kwh": 0.22086155378518557,
           "reward_eur": 0.0,
-          "seller_id": "H067",
-          "transaction_id": "p2p-014-00011"
+          "seller_id": "H062",
+          "transaction_id": "p2p-014-00012"
         },
         {
           "buyer_id": "H078",
@@ -2860,17 +2880,17 @@
           "quantity_kwh": 0.08319962921434865,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-014-00012"
+          "transaction_id": "p2p-014-00013"
         },
         {
-          "buyer_id": "H079",
+          "buyer_id": "H108",
           "hour": 14,
           "market": "p2p",
           "price_eur_kwh": 0.1780184387851211,
-          "quantity_kwh": 11.375952446494964,
+          "quantity_kwh": 0.23305695602323928,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-014-00013"
+          "transaction_id": "p2p-014-00014"
         },
         {
           "buyer_id": "H148",
@@ -2880,17 +2900,37 @@
           "quantity_kwh": 0.23342189161114305,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-014-00014"
+          "transaction_id": "p2p-014-00015"
         },
         {
-          "buyer_id": "H108",
+          "buyer_id": "H079",
           "hour": 14,
           "market": "p2p",
-          "price_eur_kwh": 0.1930853002149525,
-          "quantity_kwh": 0.23305695602323928,
+          "price_eur_kwh": 0.1780184387851211,
+          "quantity_kwh": 11.375952446494964,
           "reward_eur": 0.0,
-          "seller_id": "H073",
-          "transaction_id": "p2p-014-00015"
+          "seller_id": "H071",
+          "transaction_id": "p2p-014-00016"
+        },
+        {
+          "buyer_id": "H119",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.15767823544566661,
+          "quantity_kwh": 0.2259242898749004,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
+          "transaction_id": "p2p-014-00017"
+        },
+        {
+          "buyer_id": "H139",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.15767823544566661,
+          "quantity_kwh": 0.17563034782648526,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
+          "transaction_id": "p2p-014-00018"
         },
         {
           "buyer_id": "H129",
@@ -2900,7 +2940,7 @@
           "quantity_kwh": 3.9503909863062714,
           "reward_eur": 0.0,
           "seller_id": "H088",
-          "transaction_id": "p2p-014-00016"
+          "transaction_id": "p2p-014-00019"
         },
         {
           "buyer_id": "H109",
@@ -2910,76 +2950,46 @@
           "quantity_kwh": 0.36771550342712817,
           "reward_eur": 0.0,
           "seller_id": "H088",
-          "transaction_id": "p2p-014-00017"
-        },
-        {
-          "buyer_id": "H139",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.16684906880017786,
-          "quantity_kwh": 0.17563034782648526,
-          "reward_eur": 0.0,
-          "seller_id": "H087",
-          "transaction_id": "p2p-014-00018"
-        },
-        {
-          "buyer_id": "H119",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.1811686083320271,
-          "quantity_kwh": 0.2259242898749004,
-          "reward_eur": 0.0,
-          "seller_id": "H085",
-          "transaction_id": "p2p-014-00019"
-        },
-        {
-          "buyer_id": "H110",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.18027302130783715,
-          "quantity_kwh": 0.11262873408117545,
-          "reward_eur": 0.0,
-          "seller_id": "H091",
           "transaction_id": "p2p-014-00020"
         },
         {
-          "buyer_id": "H150",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.18027302130783715,
-          "quantity_kwh": 51.99663803983327,
-          "reward_eur": 0.0,
-          "seller_id": "H091",
-          "transaction_id": "p2p-014-00021"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.18431282763855003,
-          "quantity_kwh": 2.929483150454333,
-          "reward_eur": 0.0,
-          "seller_id": "H094",
-          "transaction_id": "p2p-014-00022"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 14,
-          "market": "p2p",
-          "price_eur_kwh": 0.18661137833733046,
-          "quantity_kwh": 2.220989755136398,
-          "reward_eur": 0.0,
-          "seller_id": "H097",
-          "transaction_id": "p2p-014-00023"
-        },
-        {
-          "buyer_id": "H150",
+          "buyer_id": "H120",
           "hour": 14,
           "market": "p2p",
           "price_eur_kwh": 0.17344036970799284,
           "quantity_kwh": 9.960407559856044,
           "reward_eur": 0.0,
           "seller_id": "H099",
+          "transaction_id": "p2p-014-00021"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.18027302130783715,
+          "quantity_kwh": 52.10926677391445,
+          "reward_eur": 0.0,
+          "seller_id": "H091",
+          "transaction_id": "p2p-014-00022"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.18431282763855003,
+          "quantity_kwh": 2.929483150454333,
+          "reward_eur": 0.0,
+          "seller_id": "H094",
+          "transaction_id": "p2p-014-00023"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 14,
+          "market": "p2p",
+          "price_eur_kwh": 0.18661137833733046,
+          "quantity_kwh": 2.220989755136398,
+          "reward_eur": 0.0,
+          "seller_id": "H097",
           "transaction_id": "p2p-014-00024"
         },
         {
@@ -2987,7 +2997,7 @@
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.17797735674980344,
-          "quantity_kwh": 1.7678122660567468,
+          "quantity_kwh": 1.3662576283553618,
           "reward_eur": 0.0,
           "seller_id": "H088",
           "transaction_id": "agg-014-00000"
@@ -2997,7 +3007,7 @@
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.17864349788228628,
-          "quantity_kwh": 1.3565303756341784,
+          "quantity_kwh": 1.3565303756341787,
           "reward_eur": 0.0,
           "seller_id": "H023",
           "transaction_id": "agg-014-00001"
@@ -3007,7 +3017,7 @@
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.18132577811584272,
-          "quantity_kwh": 15.92853595678263,
+          "quantity_kwh": 15.707674402997444,
           "reward_eur": 0.0,
           "seller_id": "H062",
           "transaction_id": "agg-014-00002"
@@ -3017,7 +3027,7 @@
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.18256277342705907,
-          "quantity_kwh": 2.4738063366810725,
+          "quantity_kwh": 2.649436684507558,
           "reward_eur": 0.0,
           "seller_id": "H087",
           "transaction_id": "agg-014-00003"
@@ -3047,120 +3057,130 @@
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.1851254132498787,
-          "quantity_kwh": 18.401822687285115,
+          "quantity_kwh": 15.852070479587676,
           "reward_eur": 0.0,
           "seller_id": "H051",
           "transaction_id": "agg-014-00006"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18543206938331486,
-          "quantity_kwh": 12.040659047351326,
+          "price_eur_kwh": 0.18052247036332025,
+          "quantity_kwh": 2.1302154695651385,
           "reward_eur": 0.0,
-          "seller_id": "H049",
+          "seller_id": "H051",
           "transaction_id": "agg-014-00007"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18550062234358755,
-          "quantity_kwh": 9.964954768911454,
+          "price_eur_kwh": 0.18082912649675642,
+          "quantity_kwh": 11.869294897116912,
           "reward_eur": 0.0,
-          "seller_id": "H018",
+          "seller_id": "H049",
           "transaction_id": "agg-014-00008"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18621328971856127,
-          "quantity_kwh": 1.6346830055517554,
+          "price_eur_kwh": 0.18089767945702911,
+          "quantity_kwh": 9.787630240487404,
           "reward_eur": 0.0,
-          "seller_id": "H083",
+          "seller_id": "H018",
           "transaction_id": "agg-014-00009"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.1865158863186026,
-          "quantity_kwh": 3.013152757367312,
+          "price_eur_kwh": 0.18161034683200283,
+          "quantity_kwh": 1.6346830055517554,
           "reward_eur": 0.0,
-          "seller_id": "H059",
+          "seller_id": "H083",
           "transaction_id": "agg-014-00010"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.1867751729852137,
-          "quantity_kwh": 20.627613577099346,
+          "price_eur_kwh": 0.18191294343204417,
+          "quantity_kwh": 6.285311199550804,
           "reward_eur": 0.0,
-          "seller_id": "H004",
+          "seller_id": "H059",
           "transaction_id": "agg-014-00011"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18747937472498583,
-          "quantity_kwh": 2.6699865129873763,
+          "price_eur_kwh": 0.1821466256202574,
+          "quantity_kwh": 1.1380356711802808,
           "reward_eur": 0.0,
-          "seller_id": "H067",
+          "seller_id": "H014",
           "transaction_id": "agg-014-00012"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18757073087863776,
-          "quantity_kwh": 2.5329882730998134,
+          "price_eur_kwh": 0.18217223009865527,
+          "quantity_kwh": 20.382294385547883,
           "reward_eur": 0.0,
-          "seller_id": "H035",
+          "seller_id": "H004",
           "transaction_id": "agg-014-00013"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18759968279679645,
-          "quantity_kwh": 2.977177205333059,
+          "price_eur_kwh": 0.1828764318384274,
+          "quantity_kwh": 2.890848066772562,
           "reward_eur": 0.0,
-          "seller_id": "H063",
+          "seller_id": "H067",
           "transaction_id": "agg-014-00014"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18769799441890975,
-          "quantity_kwh": 2.4786625390350827,
+          "price_eur_kwh": 0.18296778799207933,
+          "quantity_kwh": 2.5329882730998134,
           "reward_eur": 0.0,
-          "seller_id": "H053",
+          "seller_id": "H035",
           "transaction_id": "agg-014-00015"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
-          "price_eur_kwh": 0.18827161242956406,
-          "quantity_kwh": 6.283731501267146,
+          "price_eur_kwh": 0.18299673991023802,
+          "quantity_kwh": 2.977177205333059,
           "reward_eur": 0.0,
-          "seller_id": "H072",
+          "seller_id": "H063",
           "transaction_id": "agg-014-00016"
         },
         {
           "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
+          "price_eur_kwh": 0.1830950515323513,
+          "quantity_kwh": 2.6837701091500077,
+          "reward_eur": 0.0,
+          "seller_id": "H053",
+          "transaction_id": "agg-014-00017"
+        },
+        {
+          "buyer_id": "H150",
+          "hour": 14,
+          "market": "aggregator",
           "price_eur_kwh": 0.18366866954300562,
-          "quantity_kwh": 4.414209269356055,
+          "quantity_kwh": 10.697940770623202,
           "reward_eur": 0.0,
           "seller_id": "H072",
-          "transaction_id": "agg-014-00017"
+          "transaction_id": "agg-014-00018"
         },
         {
           "buyer_id": "H150",
@@ -3170,17 +3190,17 @@
           "quantity_kwh": 2.8349155892252282,
           "reward_eur": 0.0,
           "seller_id": "H002",
-          "transaction_id": "agg-014-00018"
+          "transaction_id": "agg-014-00019"
         },
         {
           "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.18511960030642527,
-          "quantity_kwh": 3.1925178719754714,
+          "quantity_kwh": 3.418442161850372,
           "reward_eur": 0.0,
           "seller_id": "H085",
-          "transaction_id": "agg-014-00019"
+          "transaction_id": "agg-014-00020"
         },
         {
           "buyer_id": "H150",
@@ -3190,26 +3210,36 @@
           "quantity_kwh": 2.2379132288679187,
           "reward_eur": 0.0,
           "seller_id": "H048",
-          "transaction_id": "agg-014-00020"
+          "transaction_id": "agg-014-00021"
         },
         {
           "buyer_id": "H150",
           "hour": 14,
           "market": "aggregator",
           "price_eur_kwh": 0.1867380300142521,
-          "quantity_kwh": 9.499322183147802,
+          "quantity_kwh": 5.784936373930174,
           "reward_eur": 0.0,
           "seller_id": "H029",
-          "transaction_id": "agg-014-00021"
+          "transaction_id": "agg-014-00022"
+        },
+        {
+          "buyer_id": "H110",
+          "hour": 14,
+          "market": "aggregator",
+          "price_eur_kwh": 0.18660347970500857,
+          "quantity_kwh": 0.11262873408117545,
+          "reward_eur": 0.0,
+          "seller_id": "H029",
+          "transaction_id": "agg-014-00023"
         }
       ]
     },
     {
-      "hash": "0008b14a9aa521eba8d84c1eb0b6ea01ccce730196ec222a7b9b3f7a5d13ed0e",
+      "hash": "0006ba4c77f12dfb25955068421a0ac12b921405a4a8dc0725537b3f559e0f38",
       "hour": 15,
-      "miner_id": "miner-08",
-      "nonce": 4977,
-      "previous_hash": "000f550b0349ec7695c9a0a96421035db1fbadef95e91a18a22e21ed7a5fe405",
+      "miner_id": "miner-06",
+      "nonce": 2645,
+      "previous_hash": "00075b573ccb035443d70fd655b543623a79307cc251165540d34bb0db9db94c",
       "timestamp": "2026-06-15T15:00:00+02:00",
       "transactions": [
         {
@@ -3223,16 +3253,6 @@
           "transaction_id": "p2p-015-00000"
         },
         {
-          "buyer_id": "H112",
-          "hour": 15,
-          "market": "p2p",
-          "price_eur_kwh": 0.19107002721282887,
-          "quantity_kwh": 0.3067115939383219,
-          "reward_eur": 0.0,
-          "seller_id": "H012",
-          "transaction_id": "p2p-015-00001"
-        },
-        {
           "buyer_id": "H142",
           "hour": 15,
           "market": "p2p",
@@ -3240,7 +3260,7 @@
           "quantity_kwh": 9.60471362110204,
           "reward_eur": 0.0,
           "seller_id": "H019",
-          "transaction_id": "p2p-015-00002"
+          "transaction_id": "p2p-015-00001"
         },
         {
           "buyer_id": "H142",
@@ -3250,16 +3270,26 @@
           "quantity_kwh": 2.668845814958202,
           "reward_eur": 0.0,
           "seller_id": "H015",
+          "transaction_id": "p2p-015-00002"
+        },
+        {
+          "buyer_id": "H112",
+          "hour": 15,
+          "market": "p2p",
+          "price_eur_kwh": 0.1794924309377516,
+          "quantity_kwh": 0.3067115939383219,
+          "reward_eur": 0.0,
+          "seller_id": "H018",
           "transaction_id": "p2p-015-00003"
         },
         {
           "buyer_id": "H133",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.17067937993688312,
+          "price_eur_kwh": 0.16524083329147798,
           "quantity_kwh": 0.31999632622014657,
           "reward_eur": 0.0,
-          "seller_id": "H021",
+          "seller_id": "H023",
           "transaction_id": "p2p-015-00004"
         },
         {
@@ -3273,14 +3303,24 @@
           "transaction_id": "p2p-015-00005"
         },
         {
-          "buyer_id": "H104",
+          "buyer_id": "H134",
           "hour": 15,
           "market": "p2p",
           "price_eur_kwh": 0.16447381128938365,
-          "quantity_kwh": 1.7766167561252124,
+          "quantity_kwh": 0.33910643934630924,
           "reward_eur": 0.0,
           "seller_id": "H032",
           "transaction_id": "p2p-015-00006"
+        },
+        {
+          "buyer_id": "H114",
+          "hour": 15,
+          "market": "p2p",
+          "price_eur_kwh": 0.16447381128938365,
+          "quantity_kwh": 1.4375103167789032,
+          "reward_eur": 0.0,
+          "seller_id": "H032",
+          "transaction_id": "p2p-015-00007"
         },
         {
           "buyer_id": "H135",
@@ -3290,37 +3330,37 @@
           "quantity_kwh": 2.7196347938661307,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "p2p-015-00007"
+          "transaction_id": "p2p-015-00008"
         },
         {
           "buyer_id": "H105",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.19122899414291647,
+          "price_eur_kwh": 0.17934995296279557,
           "quantity_kwh": 0.16821113857760922,
           "reward_eur": 0.0,
-          "seller_id": "H048",
-          "transaction_id": "p2p-015-00008"
+          "seller_id": "H049",
+          "transaction_id": "p2p-015-00009"
         },
         {
           "buyer_id": "H126",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.18405936899952718,
+          "price_eur_kwh": 0.17871261002784394,
           "quantity_kwh": 0.2644965811335578,
           "reward_eur": 0.0,
-          "seller_id": "H053",
-          "transaction_id": "p2p-015-00009"
+          "seller_id": "H051",
+          "transaction_id": "p2p-015-00010"
         },
         {
           "buyer_id": "H136",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.18160251859305504,
+          "price_eur_kwh": 0.17871261002784394,
           "quantity_kwh": 0.32890733638074576,
           "reward_eur": 0.0,
-          "seller_id": "H059",
-          "transaction_id": "p2p-015-00010"
+          "seller_id": "H051",
+          "transaction_id": "p2p-015-00011"
         },
         {
           "buyer_id": "H137",
@@ -3330,37 +3370,17 @@
           "quantity_kwh": 0.22105840152165018,
           "reward_eur": 0.0,
           "seller_id": "H062",
-          "transaction_id": "p2p-015-00011"
-        },
-        {
-          "buyer_id": "H148",
-          "hour": 15,
-          "market": "p2p",
-          "price_eur_kwh": 0.18525155577353677,
-          "quantity_kwh": 0.33609303193411333,
-          "reward_eur": 0.0,
-          "seller_id": "H072",
           "transaction_id": "p2p-015-00012"
         },
         {
           "buyer_id": "H079",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.18525155577353677,
-          "quantity_kwh": 8.86709360425314,
-          "reward_eur": 0.0,
-          "seller_id": "H072",
-          "transaction_id": "p2p-015-00013"
-        },
-        {
-          "buyer_id": "H079",
-          "hour": 15,
-          "market": "p2p",
           "price_eur_kwh": 0.18499351860253999,
-          "quantity_kwh": 6.2802717318803705,
+          "quantity_kwh": 15.147365336133511,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-015-00014"
+          "transaction_id": "p2p-015-00013"
         },
         {
           "buyer_id": "H108",
@@ -3370,57 +3390,57 @@
           "quantity_kwh": 0.2202268361563511,
           "reward_eur": 0.0,
           "seller_id": "H071",
-          "transaction_id": "p2p-015-00015"
+          "transaction_id": "p2p-015-00014"
         },
         {
-          "buyer_id": "H119",
+          "buyer_id": "H148",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.18826711740867344,
-          "quantity_kwh": 0.3285643402332129,
+          "price_eur_kwh": 0.18499351860253999,
+          "quantity_kwh": 0.33609303193411333,
           "reward_eur": 0.0,
-          "seller_id": "H085",
-          "transaction_id": "p2p-015-00016"
+          "seller_id": "H071",
+          "transaction_id": "p2p-015-00015"
         },
         {
           "buyer_id": "H139",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.18097361284440522,
+          "price_eur_kwh": 0.16385634983206926,
           "quantity_kwh": 0.16771066064331053,
           "reward_eur": 0.0,
-          "seller_id": "H083",
+          "seller_id": "H088",
+          "transaction_id": "p2p-015-00016"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 15,
+          "market": "p2p",
+          "price_eur_kwh": 0.16385634983206926,
+          "quantity_kwh": 4.635654497230499,
+          "reward_eur": 0.0,
+          "seller_id": "H088",
           "transaction_id": "p2p-015-00017"
         },
         {
-          "buyer_id": "H109",
+          "buyer_id": "H129",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.16385634983206926,
-          "quantity_kwh": 0.5089819244342121,
+          "price_eur_kwh": 0.17338651278792125,
+          "quantity_kwh": 0.33580833874123517,
           "reward_eur": 0.0,
-          "seller_id": "H088",
+          "seller_id": "H087",
           "transaction_id": "p2p-015-00018"
         },
         {
-          "buyer_id": "H129",
+          "buyer_id": "H119",
           "hour": 15,
           "market": "p2p",
-          "price_eur_kwh": 0.18097361284440522,
-          "quantity_kwh": 1.0374000136463402,
+          "price_eur_kwh": 0.17338651278792125,
+          "quantity_kwh": 0.3285643402332129,
           "reward_eur": 0.0,
-          "seller_id": "H083",
+          "seller_id": "H087",
           "transaction_id": "p2p-015-00019"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 15,
-          "market": "p2p",
-          "price_eur_kwh": 0.16385634983206926,
-          "quantity_kwh": 3.9340628223253944,
-          "reward_eur": 0.0,
-          "seller_id": "H088",
-          "transaction_id": "p2p-015-00020"
         },
         {
           "buyer_id": "H110",
@@ -3430,27 +3450,7 @@
           "quantity_kwh": 0.1588389069178292,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-015-00021"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 15,
-          "market": "p2p",
-          "price_eur_kwh": 0.19392314484659964,
-          "quantity_kwh": 1.9045489116503305,
-          "reward_eur": 0.0,
-          "seller_id": "H097",
-          "transaction_id": "p2p-015-00022"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 15,
-          "market": "p2p",
-          "price_eur_kwh": 0.19153453283339703,
-          "quantity_kwh": 2.7070614692579014,
-          "reward_eur": 0.0,
-          "seller_id": "H094",
-          "transaction_id": "p2p-015-00023"
+          "transaction_id": "p2p-015-00020"
         },
         {
           "buyer_id": "H150",
@@ -3460,37 +3460,47 @@
           "quantity_kwh": 41.614625174828554,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-015-00024"
+          "transaction_id": "p2p-015-00021"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 15,
-          "market": "aggregator",
-          "price_eur_kwh": 0.1849508268998342,
-          "quantity_kwh": 0.3603204111142029,
+          "market": "p2p",
+          "price_eur_kwh": 0.19153453283339703,
+          "quantity_kwh": 2.7070614692579014,
           "reward_eur": 0.0,
-          "seller_id": "H088",
-          "transaction_id": "agg-015-00000"
+          "seller_id": "H094",
+          "transaction_id": "p2p-015-00022"
+        },
+        {
+          "buyer_id": "H150",
+          "hour": 15,
+          "market": "p2p",
+          "price_eur_kwh": 0.19392314484659964,
+          "quantity_kwh": 1.9045489116503305,
+          "reward_eur": 0.0,
+          "seller_id": "H097",
+          "transaction_id": "p2p-015-00023"
         },
         {
           "buyer_id": "H120",
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.18564306862953855,
-          "quantity_kwh": 1.378594599301243,
+          "quantity_kwh": 1.0585982730810963,
           "reward_eur": 0.0,
           "seller_id": "H023",
-          "transaction_id": "agg-015-00001"
+          "transaction_id": "agg-015-00000"
         },
         {
           "buyer_id": "H120",
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.1883623419522411,
-          "quantity_kwh": 0.03203461522343476,
+          "quantity_kwh": 0.8308758506453291,
           "reward_eur": 0.0,
           "seller_id": "H021",
-          "transaction_id": "agg-015-00002"
+          "transaction_id": "agg-015-00001"
         },
         {
           "buyer_id": "H120",
@@ -3500,17 +3510,17 @@
           "quantity_kwh": 13.723559926444969,
           "reward_eur": 0.0,
           "seller_id": "H062",
-          "transaction_id": "agg-015-00003"
+          "transaction_id": "agg-015-00002"
         },
         {
           "buyer_id": "H120",
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.1897159083777602,
-          "quantity_kwh": 2.3242096320921015,
+          "quantity_kwh": 1.6598369531176536,
           "reward_eur": 0.0,
           "seller_id": "H087",
-          "transaction_id": "agg-015-00004"
+          "transaction_id": "agg-015-00003"
         },
         {
           "buyer_id": "H120",
@@ -3520,7 +3530,7 @@
           "quantity_kwh": 0.8297861074156456,
           "reward_eur": 0.0,
           "seller_id": "H039",
-          "transaction_id": "agg-015-00005"
+          "transaction_id": "agg-015-00004"
         },
         {
           "buyer_id": "H120",
@@ -3530,7 +3540,7 @@
           "quantity_kwh": 10.131264618092056,
           "reward_eur": 0.0,
           "seller_id": "H066",
-          "transaction_id": "agg-015-00006"
+          "transaction_id": "agg-015-00005"
         },
         {
           "buyer_id": "H120",
@@ -3540,36 +3550,46 @@
           "quantity_kwh": 2.3971716235273894,
           "reward_eur": 0.0,
           "seller_id": "H070",
-          "transaction_id": "agg-015-00007"
+          "transaction_id": "agg-015-00006"
         },
         {
           "buyer_id": "H120",
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.19237895699772153,
-          "quantity_kwh": 15.823536581860733,
+          "quantity_kwh": 15.230132664346428,
           "reward_eur": 0.0,
           "seller_id": "H051",
-          "transaction_id": "agg-015-00008"
+          "transaction_id": "agg-015-00007"
         },
         {
           "buyer_id": "H120",
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.19269762846519733,
-          "quantity_kwh": 8.212269435282403,
+          "quantity_kwh": 8.044058296704794,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "agg-015-00009"
+          "transaction_id": "agg-015-00008"
         },
         {
           "buyer_id": "H120",
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.19276886745267535,
-          "quantity_kwh": 8.18327205432233,
+          "quantity_kwh": 7.876560460384009,
           "reward_eur": 0.0,
           "seller_id": "H018",
+          "transaction_id": "agg-015-00009"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 15,
+          "market": "aggregator",
+          "price_eur_kwh": 0.19350945840600217,
+          "quantity_kwh": 1.2051106742896507,
+          "reward_eur": 0.0,
+          "seller_id": "H083",
           "transaction_id": "agg-015-00010"
         },
         {
@@ -3577,7 +3597,7 @@
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.19382391128032708,
-          "quantity_kwh": 6.773893084638196,
+          "quantity_kwh": 12.87507349896829,
           "reward_eur": 0.0,
           "seller_id": "H059",
           "transaction_id": "agg-015-00011"
@@ -3587,7 +3607,7 @@
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.19406674955330222,
-          "quantity_kwh": 0.6934715005640983,
+          "quantity_kwh": 1.7369274841225226,
           "reward_eur": 0.0,
           "seller_id": "H014",
           "transaction_id": "agg-015-00012"
@@ -3597,19 +3617,19 @@
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.19409335726081345,
-          "quantity_kwh": 17.69274054626904,
+          "quantity_kwh": 12.747489522237977,
           "reward_eur": 0.0,
           "seller_id": "H004",
           "transaction_id": "agg-015-00013"
         },
         {
-          "buyer_id": "H120",
+          "buyer_id": "H150",
           "hour": 15,
           "market": "aggregator",
-          "price_eur_kwh": 0.19482515088025826,
-          "quantity_kwh": 1.790321217229959,
+          "price_eur_kwh": 0.18931006286545699,
+          "quantity_kwh": 4.945251024031062,
           "reward_eur": 0.0,
-          "seller_id": "H067",
+          "seller_id": "H004",
           "transaction_id": "agg-015-00014"
         },
         {
@@ -3617,7 +3637,7 @@
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.1900418564849018,
-          "quantity_kwh": 0.656328380956841,
+          "quantity_kwh": 2.4466495981868,
           "reward_eur": 0.0,
           "seller_id": "H067",
           "transaction_id": "agg-015-00015"
@@ -3647,10 +3667,20 @@
           "hour": 15,
           "market": "aggregator",
           "price_eur_kwh": 0.1902690420882067,
-          "quantity_kwh": 2.088528079388311,
+          "quantity_kwh": 2.353024660521869,
           "reward_eur": 0.0,
           "seller_id": "H053",
           "transaction_id": "agg-015-00018"
+        },
+        {
+          "buyer_id": "H150",
+          "hour": 15,
+          "market": "aggregator",
+          "price_eur_kwh": 0.1908651354752115,
+          "quantity_kwh": 9.203186636187255,
+          "reward_eur": 0.0,
+          "seller_id": "H072",
+          "transaction_id": "agg-015-00019"
         },
         {
           "buyer_id": "H150",
@@ -3660,80 +3690,60 @@
           "quantity_kwh": 2.671191998703011,
           "reward_eur": 0.0,
           "seller_id": "H002",
-          "transaction_id": "agg-015-00019"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 15,
-          "market": "aggregator",
-          "price_eur_kwh": 0.1923729162927798,
-          "quantity_kwh": 2.7577912115157703,
-          "reward_eur": 0.0,
-          "seller_id": "H085",
           "transaction_id": "agg-015-00020"
         },
         {
           "buyer_id": "H150",
           "hour": 15,
           "market": "aggregator",
-          "price_eur_kwh": 0.19385385465990135,
-          "quantity_kwh": 1.923062598884628,
+          "price_eur_kwh": 0.1923729162927798,
+          "quantity_kwh": 3.086355551748983,
           "reward_eur": 0.0,
-          "seller_id": "H048",
+          "seller_id": "H085",
           "transaction_id": "agg-015-00021"
         },
         {
           "buyer_id": "H150",
           "hour": 15,
           "market": "aggregator",
-          "price_eur_kwh": 0.194054758962028,
-          "quantity_kwh": 13.13028394919555,
+          "price_eur_kwh": 0.19385385465990135,
+          "quantity_kwh": 2.091273737462237,
           "reward_eur": 0.0,
-          "seller_id": "H029",
+          "seller_id": "H048",
           "transaction_id": "agg-015-00022"
         },
         {
           "buyer_id": "H150",
           "hour": 15,
           "market": "aggregator",
-          "price_eur_kwh": 0.19521524275821134,
-          "quantity_kwh": 1.034832293160737,
+          "price_eur_kwh": 0.194054758962028,
+          "quantity_kwh": 6.549188519455956,
           "reward_eur": 0.0,
-          "seller_id": "H013",
+          "seller_id": "H029",
           "transaction_id": "agg-015-00023"
-        },
-        {
-          "buyer_id": "H150",
-          "hour": 15,
-          "market": "aggregator",
-          "price_eur_kwh": 0.1953676529399873,
-          "quantity_kwh": 9.084103214492329,
-          "reward_eur": 0.0,
-          "seller_id": "H086",
-          "transaction_id": "agg-015-00024"
         }
       ]
     },
     {
-      "hash": "0009ce63b3f98a887760bebaff8790201cf504d5ac3ca4b98adfc8b26bec144c",
+      "hash": "00061efba61677b0314427e0a1335c90cf7101fbe72c860a411c3a877624dab2",
       "hour": 16,
-      "miner_id": "miner-01",
-      "nonce": 10380,
-      "previous_hash": "0008b14a9aa521eba8d84c1eb0b6ea01ccce730196ec222a7b9b3f7a5d13ed0e",
+      "miner_id": "miner-07",
+      "nonce": 4666,
+      "previous_hash": "0006ba4c77f12dfb25955068421a0ac12b921405a4a8dc0725537b3f559e0f38",
       "timestamp": "2026-06-15T16:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 16,
           "market": "p2p",
-          "price_eur_kwh": 0.21554045094569327,
+          "price_eur_kwh": 0.1957366520860316,
           "quantity_kwh": 0.6014475265208281,
           "reward_eur": 0.0,
-          "seller_id": "H001",
+          "seller_id": "H004",
           "transaction_id": "p2p-016-00000"
         },
         {
-          "buyer_id": "H102",
+          "buyer_id": "H142",
           "hour": 16,
           "market": "p2p",
           "price_eur_kwh": 0.17799963254002427,
@@ -3743,16 +3753,6 @@
           "transaction_id": "p2p-016-00001"
         },
         {
-          "buyer_id": "H112",
-          "hour": 16,
-          "market": "p2p",
-          "price_eur_kwh": 0.19288994962580092,
-          "quantity_kwh": 0.3572707366770512,
-          "reward_eur": 0.0,
-          "seller_id": "H018",
-          "transaction_id": "p2p-016-00002"
-        },
-        {
           "buyer_id": "H142",
           "hour": 16,
           "market": "p2p",
@@ -3760,6 +3760,16 @@
           "quantity_kwh": 1.8128335559480449,
           "reward_eur": 0.0,
           "seller_id": "H015",
+          "transaction_id": "p2p-016-00002"
+        },
+        {
+          "buyer_id": "H112",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.19288994962580092,
+          "quantity_kwh": 0.3572707366770512,
+          "reward_eur": 0.0,
+          "seller_id": "H018",
           "transaction_id": "p2p-016-00003"
         },
         {
@@ -3783,24 +3793,34 @@
           "transaction_id": "p2p-016-00005"
         },
         {
-          "buyer_id": "H114",
+          "buyer_id": "H134",
           "hour": 16,
           "market": "p2p",
           "price_eur_kwh": 0.17675032316752745,
-          "quantity_kwh": 0.9357164940621909,
+          "quantity_kwh": 0.34275157325532735,
           "reward_eur": 0.0,
           "seller_id": "H032",
           "transaction_id": "p2p-016-00006"
         },
         {
+          "buyer_id": "H114",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.17675032316752745,
+          "quantity_kwh": 0.5929649208068636,
+          "reward_eur": 0.0,
+          "seller_id": "H032",
+          "transaction_id": "p2p-016-00007"
+        },
+        {
           "buyer_id": "H105",
           "hour": 16,
           "market": "p2p",
-          "price_eur_kwh": 0.21401601397520228,
+          "price_eur_kwh": 0.192736836933146,
           "quantity_kwh": 0.22472290216727994,
           "reward_eur": 0.0,
-          "seller_id": "H050",
-          "transaction_id": "p2p-016-00007"
+          "seller_id": "H049",
+          "transaction_id": "p2p-016-00008"
         },
         {
           "buyer_id": "H135",
@@ -3810,36 +3830,26 @@
           "quantity_kwh": 3.373204048513268,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "p2p-016-00008"
-        },
-        {
-          "buyer_id": "H136",
-          "hour": 16,
-          "market": "p2p",
-          "price_eur_kwh": 0.19779776912591981,
-          "quantity_kwh": 0.3190833354257816,
-          "reward_eur": 0.0,
-          "seller_id": "H053",
           "transaction_id": "p2p-016-00009"
         },
         {
           "buyer_id": "H126",
           "hour": 16,
           "market": "p2p",
-          "price_eur_kwh": 0.19515753661769283,
+          "price_eur_kwh": 0.19205192199843316,
           "quantity_kwh": 0.6150429296409139,
           "reward_eur": 0.0,
-          "seller_id": "H059",
+          "seller_id": "H051",
           "transaction_id": "p2p-016-00010"
         },
         {
-          "buyer_id": "H057",
+          "buyer_id": "H136",
           "hour": 16,
           "market": "p2p",
-          "price_eur_kwh": 0.19515753661769283,
-          "quantity_kwh": 6.340861702266542,
+          "price_eur_kwh": 0.19205192199843316,
+          "quantity_kwh": 0.3190833354257816,
           "reward_eur": 0.0,
-          "seller_id": "H059",
+          "seller_id": "H051",
           "transaction_id": "p2p-016-00011"
         },
         {
@@ -3847,10 +3857,20 @@
           "hour": 16,
           "market": "p2p",
           "price_eur_kwh": 0.19205192199843316,
-          "quantity_kwh": 8.27279101751585,
+          "quantity_kwh": 7.338664752449154,
           "reward_eur": 0.0,
           "seller_id": "H051",
           "transaction_id": "p2p-016-00012"
+        },
+        {
+          "buyer_id": "H057",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.19515753661769283,
+          "quantity_kwh": 6.9559046319074564,
+          "reward_eur": 0.0,
+          "seller_id": "H059",
+          "transaction_id": "p2p-016-00013"
         },
         {
           "buyer_id": "H137",
@@ -3860,16 +3880,6 @@
           "quantity_kwh": 0.5197289436369675,
           "reward_eur": 0.0,
           "seller_id": "H062",
-          "transaction_id": "p2p-016-00013"
-        },
-        {
-          "buyer_id": "H078",
-          "hour": 16,
-          "market": "p2p",
-          "price_eur_kwh": 0.19907894207333512,
-          "quantity_kwh": 4.472080988089637,
-          "reward_eur": 0.0,
-          "seller_id": "H072",
           "transaction_id": "p2p-016-00014"
         },
         {
@@ -3883,6 +3893,16 @@
           "transaction_id": "p2p-016-00015"
         },
         {
+          "buyer_id": "H078",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.19907894207333512,
+          "quantity_kwh": 4.472080988089637,
+          "reward_eur": 0.0,
+          "seller_id": "H072",
+          "transaction_id": "p2p-016-00016"
+        },
+        {
           "buyer_id": "H148",
           "hour": 16,
           "market": "p2p",
@@ -3890,7 +3910,7 @@
           "quantity_kwh": 0.5209645459085444,
           "reward_eur": 0.0,
           "seller_id": "H073",
-          "transaction_id": "p2p-016-00016"
+          "transaction_id": "p2p-016-00017"
         },
         {
           "buyer_id": "H108",
@@ -3900,16 +3920,6 @@
           "quantity_kwh": 0.4858386393259991,
           "reward_eur": 0.0,
           "seller_id": "H073",
-          "transaction_id": "p2p-016-00017"
-        },
-        {
-          "buyer_id": "H139",
-          "hour": 16,
-          "market": "p2p",
-          "price_eur_kwh": 0.1863282788178074,
-          "quantity_kwh": 0.346046683199654,
-          "reward_eur": 0.0,
-          "seller_id": "H087",
           "transaction_id": "p2p-016-00018"
         },
         {
@@ -3917,20 +3927,10 @@
           "hour": 16,
           "market": "p2p",
           "price_eur_kwh": 0.1863282788178074,
-          "quantity_kwh": 1.1247800668158248,
+          "quantity_kwh": 1.4708267500154788,
           "reward_eur": 0.0,
           "seller_id": "H087",
           "transaction_id": "p2p-016-00019"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 16,
-          "market": "p2p",
-          "price_eur_kwh": 0.20231958865021912,
-          "quantity_kwh": 2.146796129194711,
-          "reward_eur": 0.0,
-          "seller_id": "H085",
-          "transaction_id": "p2p-016-00020"
         },
         {
           "buyer_id": "H129",
@@ -3940,6 +3940,16 @@
           "quantity_kwh": 0.8544543739833665,
           "reward_eur": 0.0,
           "seller_id": "H083",
+          "transaction_id": "p2p-016-00020"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 16,
+          "market": "p2p",
+          "price_eur_kwh": 0.20231958865021912,
+          "quantity_kwh": 2.146796129194711,
+          "reward_eur": 0.0,
+          "seller_id": "H085",
           "transaction_id": "p2p-016-00021"
         },
         {
@@ -3947,7 +3957,7 @@
           "hour": 16,
           "market": "p2p",
           "price_eur_kwh": 0.2087561230266768,
-          "quantity_kwh": 3.9021235687827005,
+          "quantity_kwh": 3.556076885583047,
           "reward_eur": 0.0,
           "seller_id": "H086",
           "transaction_id": "p2p-016-00022"
@@ -3966,20 +3976,20 @@
           "buyer_id": "H150",
           "hour": 16,
           "market": "p2p",
-          "price_eur_kwh": 0.2058308876692851,
-          "quantity_kwh": 1.9757798561197024,
+          "price_eur_kwh": 0.20131944408873684,
+          "quantity_kwh": 19.29925764608337,
           "reward_eur": 0.0,
-          "seller_id": "H094",
+          "seller_id": "H091",
           "transaction_id": "p2p-016-00024"
         },
         {
           "buyer_id": "H150",
           "hour": 16,
           "market": "p2p",
-          "price_eur_kwh": 0.20131944408873684,
-          "quantity_kwh": 19.29925764608337,
+          "price_eur_kwh": 0.2058308876692851,
+          "quantity_kwh": 1.9757798561197024,
           "reward_eur": 0.0,
-          "seller_id": "H091",
+          "seller_id": "H094",
           "transaction_id": "p2p-016-00025"
         },
         {
@@ -4057,7 +4067,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.20708079807863133,
-          "quantity_kwh": 4.237625296943344,
+          "quantity_kwh": 4.012902394776063,
           "reward_eur": 0.0,
           "seller_id": "H049",
           "transaction_id": "agg-016-00006"
@@ -4087,7 +4097,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.20858070565507414,
-          "quantity_kwh": 11.82334361200299,
+          "quantity_kwh": 11.221896085482161,
           "reward_eur": 0.0,
           "seller_id": "H004",
           "transaction_id": "agg-016-00009"
@@ -4127,7 +4137,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.20961126417501824,
-          "quantity_kwh": 1.3565782603509382,
+          "quantity_kwh": 1.6756615957767198,
           "reward_eur": 0.0,
           "seller_id": "H053",
           "transaction_id": "agg-016-00013"
@@ -4177,7 +4187,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.21509044112539671,
-          "quantity_kwh": 4.915677608982931,
+          "quantity_kwh": 5.261724292182585,
           "reward_eur": 0.0,
           "seller_id": "H086",
           "transaction_id": "agg-016-00018"
@@ -4217,7 +4227,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.21772038659965948,
-          "quantity_kwh": 6.178912726153496,
+          "quantity_kwh": 6.403635628320776,
           "reward_eur": 0.0,
           "seller_id": "H050",
           "transaction_id": "agg-016-00022"
@@ -4247,7 +4257,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.21848260508490497,
-          "quantity_kwh": 0.8074187019133527,
+          "quantity_kwh": 1.4088662284341809,
           "reward_eur": 0.0,
           "seller_id": "H001",
           "transaction_id": "agg-016-00025"
@@ -4267,7 +4277,7 @@
           "hour": 16,
           "market": "aggregator",
           "price_eur_kwh": 0.21903560550881238,
-          "quantity_kwh": 3.402839546687663,
+          "quantity_kwh": 2.737709528062236,
           "reward_eur": 0.0,
           "seller_id": "H011",
           "transaction_id": "agg-016-00027"
@@ -4275,32 +4285,22 @@
       ]
     },
     {
-      "hash": "000a2e0d62ddf7bc5ebe1da8d7219b1ba86c0fc812b63275e04e6ed6a883cc76",
+      "hash": "000aebfb5c20527242522ee8453e48edf55567509033ecc020f8353109b1684d",
       "hour": 17,
-      "miner_id": "miner-05",
-      "nonce": 1634,
-      "previous_hash": "0009ce63b3f98a887760bebaff8790201cf504d5ac3ca4b98adfc8b26bec144c",
+      "miner_id": "miner-02",
+      "nonce": 791,
+      "previous_hash": "00061efba61677b0314427e0a1335c90cf7101fbe72c860a411c3a877624dab2",
       "timestamp": "2026-06-15T17:00:00+02:00",
       "transactions": [
         {
           "buyer_id": "H131",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.22362362646617334,
-          "quantity_kwh": 0.8689713714867264,
+          "price_eur_kwh": 0.20307714760629553,
+          "quantity_kwh": 1.0079413881628787,
           "reward_eur": 0.0,
-          "seller_id": "H001",
+          "seller_id": "H004",
           "transaction_id": "p2p-017-00000"
-        },
-        {
-          "buyer_id": "H131",
-          "hour": 17,
-          "market": "p2p",
-          "price_eur_kwh": 0.20890808932170596,
-          "quantity_kwh": 0.13897001667615227,
-          "reward_eur": 0.0,
-          "seller_id": "H002",
-          "transaction_id": "p2p-017-00001"
         },
         {
           "buyer_id": "H010",
@@ -4310,7 +4310,7 @@
           "quantity_kwh": 2.7527126691147785,
           "reward_eur": 0.0,
           "seller_id": "H004",
-          "transaction_id": "p2p-017-00002"
+          "transaction_id": "p2p-017-00001"
         },
         {
           "buyer_id": "H112",
@@ -4320,7 +4320,7 @@
           "quantity_kwh": 0.49813841622481386,
           "reward_eur": 0.0,
           "seller_id": "H015",
-          "transaction_id": "p2p-017-00003"
+          "transaction_id": "p2p-017-00002"
         },
         {
           "buyer_id": "H142",
@@ -4330,16 +4330,26 @@
           "quantity_kwh": 0.7732224959805587,
           "reward_eur": 0.0,
           "seller_id": "H015",
-          "transaction_id": "p2p-017-00004"
+          "transaction_id": "p2p-017-00003"
         },
         {
-          "buyer_id": "H113",
+          "buyer_id": "H133",
           "hour": 17,
           "market": "p2p",
           "price_eur_kwh": 0.18423398056954762,
           "quantity_kwh": 0.5485826743695587,
           "reward_eur": 0.0,
           "seller_id": "H023",
+          "transaction_id": "p2p-017-00004"
+        },
+        {
+          "buyer_id": "H133",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.19029764580917227,
+          "quantity_kwh": 0.32395924405392584,
+          "reward_eur": 0.0,
+          "seller_id": "H021",
           "transaction_id": "p2p-017-00005"
         },
         {
@@ -4347,30 +4357,20 @@
           "hour": 17,
           "market": "p2p",
           "price_eur_kwh": 0.19029764580917227,
-          "quantity_kwh": 0.13583756450058326,
+          "quantity_kwh": 0.37845178652862965,
           "reward_eur": 0.0,
           "seller_id": "H021",
           "transaction_id": "p2p-017-00006"
         },
         {
-          "buyer_id": "H133",
-          "hour": 17,
-          "market": "p2p",
-          "price_eur_kwh": 0.19029764580917227,
-          "quantity_kwh": 0.5665734660819722,
-          "reward_eur": 0.0,
-          "seller_id": "H021",
-          "transaction_id": "p2p-017-00007"
-        },
-        {
-          "buyer_id": "H114",
+          "buyer_id": "H134",
           "hour": 17,
           "market": "p2p",
           "price_eur_kwh": 0.18337879536008433,
           "quantity_kwh": 0.5423417449617653,
           "reward_eur": 0.0,
           "seller_id": "H032",
-          "transaction_id": "p2p-017-00008"
+          "transaction_id": "p2p-017-00007"
         },
         {
           "buyer_id": "H135",
@@ -4380,7 +4380,7 @@
           "quantity_kwh": 2.6572046252303965,
           "reward_eur": 0.0,
           "seller_id": "H049",
-          "transaction_id": "p2p-017-00009"
+          "transaction_id": "p2p-017-00008"
         },
         {
           "buyer_id": "H105",
@@ -4390,27 +4390,27 @@
           "quantity_kwh": 0.4544826462095168,
           "reward_eur": 0.0,
           "seller_id": "H048",
-          "transaction_id": "p2p-017-00010"
-        },
-        {
-          "buyer_id": "H126",
-          "hour": 17,
-          "market": "p2p",
-          "price_eur_kwh": 0.19925423315509866,
-          "quantity_kwh": 0.8223929391721024,
-          "reward_eur": 0.0,
-          "seller_id": "H051",
-          "transaction_id": "p2p-017-00011"
+          "transaction_id": "p2p-017-00009"
         },
         {
           "buyer_id": "H136",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.22070981657915312,
+          "price_eur_kwh": 0.19925423315509866,
           "quantity_kwh": 0.5321187740632006,
           "reward_eur": 0.0,
-          "seller_id": "H054",
-          "transaction_id": "p2p-017-00012"
+          "seller_id": "H051",
+          "transaction_id": "p2p-017-00010"
+        },
+        {
+          "buyer_id": "H057",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.19925423315509866,
+          "quantity_kwh": 1.7197311573745067,
+          "reward_eur": 0.0,
+          "seller_id": "H051",
+          "transaction_id": "p2p-017-00011"
         },
         {
           "buyer_id": "H057",
@@ -4420,36 +4420,46 @@
           "quantity_kwh": 4.419419259179693,
           "reward_eur": 0.0,
           "seller_id": "H059",
-          "transaction_id": "p2p-017-00013"
+          "transaction_id": "p2p-017-00012"
         },
         {
-          "buyer_id": "H057",
+          "buyer_id": "H126",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.19925423315509866,
-          "quantity_kwh": 1.4294569922656049,
+          "price_eur_kwh": 0.2052155604425346,
+          "quantity_kwh": 0.8223929391721024,
           "reward_eur": 0.0,
-          "seller_id": "H051",
-          "transaction_id": "p2p-017-00014"
+          "seller_id": "H053",
+          "transaction_id": "p2p-017-00013"
         },
         {
           "buyer_id": "H137",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.19846905857171881,
+          "price_eur_kwh": 0.19044950859305113,
           "quantity_kwh": 0.5655392627350947,
           "reward_eur": 0.0,
-          "seller_id": "H070",
-          "transaction_id": "p2p-017-00015"
+          "seller_id": "H062",
+          "transaction_id": "p2p-017-00014"
         },
         {
           "buyer_id": "H108",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.22539664696879258,
+          "price_eur_kwh": 0.20625708326944345,
           "quantity_kwh": 0.6130870815239743,
           "reward_eur": 0.0,
-          "seller_id": "H079",
+          "seller_id": "H071",
+          "transaction_id": "p2p-017-00015"
+        },
+        {
+          "buyer_id": "H148",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.20625708326944345,
+          "quantity_kwh": 0.6387457401316551,
+          "reward_eur": 0.0,
+          "seller_id": "H071",
           "transaction_id": "p2p-017-00016"
         },
         {
@@ -4457,40 +4467,50 @@
           "hour": 17,
           "market": "p2p",
           "price_eur_kwh": 0.20625708326944345,
-          "quantity_kwh": 7.154620922272613,
+          "quantity_kwh": 5.902788100616984,
           "reward_eur": 0.0,
           "seller_id": "H071",
           "transaction_id": "p2p-017-00017"
         },
         {
-          "buyer_id": "H148",
+          "buyer_id": "H139",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.2237139653416035,
-          "quantity_kwh": 0.6387457401316551,
+          "price_eur_kwh": 0.19331594250462392,
+          "quantity_kwh": 0.35450904438469555,
           "reward_eur": 0.0,
-          "seller_id": "H073",
+          "seller_id": "H087",
           "transaction_id": "p2p-017-00018"
         },
         {
           "buyer_id": "H119",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.20177512064202663,
-          "quantity_kwh": 0.1983291079043018,
+          "price_eur_kwh": 0.19331594250462392,
+          "quantity_kwh": 0.6368478698472831,
           "reward_eur": 0.0,
-          "seller_id": "H083",
+          "seller_id": "H087",
           "transaction_id": "p2p-017-00019"
         },
         {
           "buyer_id": "H119",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.19331594250462392,
-          "quantity_kwh": 0.46522485309095596,
+          "price_eur_kwh": 0.20177512064202663,
+          "quantity_kwh": 0.02670609114797462,
           "reward_eur": 0.0,
-          "seller_id": "H087",
+          "seller_id": "H083",
           "transaction_id": "p2p-017-00020"
+        },
+        {
+          "buyer_id": "H129",
+          "hour": 17,
+          "market": "p2p",
+          "price_eur_kwh": 0.20177512064202663,
+          "quantity_kwh": 0.17162301675632718,
+          "reward_eur": 0.0,
+          "seller_id": "H083",
+          "transaction_id": "p2p-017-00021"
         },
         {
           "buyer_id": "H129",
@@ -4500,16 +4520,6 @@
           "quantity_kwh": 1.475070171885588,
           "reward_eur": 0.0,
           "seller_id": "H085",
-          "transaction_id": "p2p-017-00021"
-        },
-        {
-          "buyer_id": "H129",
-          "hour": 17,
-          "market": "p2p",
-          "price_eur_kwh": 0.19331594250462392,
-          "quantity_kwh": 0.5261320611410227,
-          "reward_eur": 0.0,
-          "seller_id": "H087",
           "transaction_id": "p2p-017-00022"
         },
         {
@@ -4523,13 +4533,13 @@
           "transaction_id": "p2p-017-00023"
         },
         {
-          "buyer_id": "H110",
+          "buyer_id": "H150",
           "hour": 17,
           "market": "p2p",
-          "price_eur_kwh": 0.21621310052723258,
-          "quantity_kwh": 0.38789836242834413,
+          "price_eur_kwh": 0.20886930489265962,
+          "quantity_kwh": 4.995077248157386,
           "reward_eur": 0.0,
-          "seller_id": "H097",
+          "seller_id": "H091",
           "transaction_id": "p2p-017-00024"
         },
         {
@@ -4537,7 +4547,7 @@
           "hour": 17,
           "market": "p2p",
           "price_eur_kwh": 0.20886930489265962,
-          "quantity_kwh": 46.517024308856755,
+          "quantity_kwh": 41.52194706069937,
           "reward_eur": 0.0,
           "seller_id": "H091",
           "transaction_id": "p2p-017-00025"
@@ -4557,7 +4567,7 @@
           "hour": 17,
           "market": "p2p",
           "price_eur_kwh": 0.21621310052723258,
-          "quantity_kwh": 0.365545112147818,
+          "quantity_kwh": 0.7534434745761621,
           "reward_eur": 0.0,
           "seller_id": "H097",
           "transaction_id": "p2p-017-00027"
@@ -4567,7 +4577,7 @@
           "hour": 17,
           "market": "aggregator",
           "price_eur_kwh": 0.21008905802662223,
-          "quantity_kwh": 2.4458335521929486,
+          "quantity_kwh": 1.8802942894578538,
           "reward_eur": 0.0,
           "seller_id": "H062",
           "transaction_id": "agg-017-00000"
@@ -4597,7 +4607,7 @@
           "hour": 17,
           "market": "aggregator",
           "price_eur_kwh": 0.21409883301595606,
-          "quantity_kwh": 0.43341221209604364,
+          "quantity_kwh": 0.9989514748311383,
           "reward_eur": 0.0,
           "seller_id": "H070",
           "transaction_id": "agg-017-00003"
@@ -4627,7 +4637,7 @@
           "hour": 17,
           "market": "aggregator",
           "price_eur_kwh": 0.21640287753324444,
-          "quantity_kwh": 2.0581343688646765,
+          "quantity_kwh": 1.050192980701798,
           "reward_eur": 0.0,
           "seller_id": "H004",
           "transaction_id": "agg-017-00006"
@@ -4667,7 +4677,7 @@
           "hour": 17,
           "market": "aggregator",
           "price_eur_kwh": 0.21747208395136397,
-          "quantity_kwh": 0.9223655065290008,
+          "quantity_kwh": 0.09997256735689841,
           "reward_eur": 0.0,
           "seller_id": "H053",
           "transaction_id": "agg-017-00010"
@@ -4677,7 +4687,7 @@
           "hour": 17,
           "market": "aggregator",
           "price_eur_kwh": 0.21931834839094966,
-          "quantity_kwh": 1.1003228779012753,
+          "quantity_kwh": 1.2392928945774275,
           "reward_eur": 0.0,
           "seller_id": "H002",
           "transaction_id": "agg-017-00011"
@@ -4717,7 +4727,7 @@
           "hour": 17,
           "market": "aggregator",
           "price_eur_kwh": 0.2252192120196732,
-          "quantity_kwh": 0.5822556645764799,
+          "quantity_kwh": 1.1143744386396806,
           "reward_eur": 0.0,
           "seller_id": "H054",
           "transaction_id": "agg-017-00015"
@@ -4756,21 +4766,31 @@
           "buyer_id": "H120",
           "hour": 17,
           "market": "aggregator",
-          "price_eur_kwh": 0.22672128640089842,
-          "quantity_kwh": 0.37705024215846794,
+          "price_eur_kwh": 0.22667611696318335,
+          "quantity_kwh": 0.8689713714867264,
           "reward_eur": 0.0,
-          "seller_id": "H073",
+          "seller_id": "H001",
           "transaction_id": "agg-017-00019"
         },
         {
           "buyer_id": "H120",
           "hour": 17,
           "market": "aggregator",
+          "price_eur_kwh": 0.22672128640089842,
+          "quantity_kwh": 1.015795982290123,
+          "reward_eur": 0.0,
+          "seller_id": "H073",
+          "transaction_id": "agg-017-00020"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 17,
+          "market": "aggregator",
           "price_eur_kwh": 0.22756262721449294,
-          "quantity_kwh": 25.514745937382212,
+          "quantity_kwh": 26.127833018906188,
           "reward_eur": 0.0,
           "seller_id": "H079",
-          "transaction_id": "agg-017-00020"
+          "transaction_id": "agg-017-00021"
         },
         {
           "buyer_id": "H120",
@@ -4780,7 +4800,7 @@
           "quantity_kwh": 0.10409879934432797,
           "reward_eur": 0.0,
           "seller_id": "H024",
-          "transaction_id": "agg-017-00021"
+          "transaction_id": "agg-017-00022"
         },
         {
           "buyer_id": "H120",
@@ -4790,7 +4810,7 @@
           "quantity_kwh": 3.985640106840947,
           "reward_eur": 0.0,
           "seller_id": "H045",
-          "transaction_id": "agg-017-00022"
+          "transaction_id": "agg-017-00023"
         },
         {
           "buyer_id": "H120",
@@ -4800,16 +4820,16 @@
           "quantity_kwh": 0.5516805427263954,
           "reward_eur": 0.0,
           "seller_id": "H007",
-          "transaction_id": "agg-017-00023"
+          "transaction_id": "agg-017-00024"
         }
       ]
     },
     {
-      "hash": "0001b9e5bb8ffb412c8ff99c2c29ed3304e4acc703ae94fef6a262afc80ce6f8",
+      "hash": "0002ed01ce416141f7ae9fa787e44e0e96d69d455d94e86c96ba1adb65786f38",
       "hour": 18,
-      "miner_id": "miner-01",
-      "nonce": 2050,
-      "previous_hash": "000a2e0d62ddf7bc5ebe1da8d7219b1ba86c0fc812b63275e04e6ed6a883cc76",
+      "miner_id": "miner-10",
+      "nonce": 5249,
+      "previous_hash": "000aebfb5c20527242522ee8453e48edf55567509033ecc020f8353109b1684d",
       "timestamp": "2026-06-15T18:00:00+02:00",
       "transactions": [
         {
@@ -4833,24 +4853,34 @@
           "transaction_id": "p2p-018-00001"
         },
         {
-          "buyer_id": "H112",
-          "hour": 18,
-          "market": "p2p",
-          "price_eur_kwh": 0.21324817588377176,
-          "quantity_kwh": 0.060887914639244145,
-          "reward_eur": 0.0,
-          "seller_id": "H014",
-          "transaction_id": "p2p-018-00002"
-        },
-        {
-          "buyer_id": "H112",
+          "buyer_id": "H018",
           "hour": 18,
           "market": "p2p",
           "price_eur_kwh": 0.19945031140271585,
           "quantity_kwh": 0.18445497464120908,
           "reward_eur": 0.0,
           "seller_id": "H015",
+          "transaction_id": "p2p-018-00002"
+        },
+        {
+          "buyer_id": "H018",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.21324817588377176,
+          "quantity_kwh": 0.060887914639244145,
+          "reward_eur": 0.0,
+          "seller_id": "H014",
           "transaction_id": "p2p-018-00003"
+        },
+        {
+          "buyer_id": "H022",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.1935177964393689,
+          "quantity_kwh": 0.1365694496926836,
+          "reward_eur": 0.0,
+          "seller_id": "H023",
+          "transaction_id": "p2p-018-00004"
         },
         {
           "buyer_id": "H113",
@@ -4860,16 +4890,6 @@
           "quantity_kwh": 0.094243556851061,
           "reward_eur": 0.0,
           "seller_id": "H021",
-          "transaction_id": "p2p-018-00004"
-        },
-        {
-          "buyer_id": "H113",
-          "hour": 18,
-          "market": "p2p",
-          "price_eur_kwh": 0.1935177964393689,
-          "quantity_kwh": 0.1365694496926836,
-          "reward_eur": 0.0,
-          "seller_id": "H023",
           "transaction_id": "p2p-018-00005"
         },
         {
@@ -4973,17 +4993,17 @@
           "transaction_id": "p2p-018-00015"
         },
         {
-          "buyer_id": "H108",
+          "buyer_id": "H078",
           "hour": 18,
           "market": "p2p",
-          "price_eur_kwh": 0.23675470893794953,
-          "quantity_kwh": 0.6678835043829467,
+          "price_eur_kwh": 0.21665067503248445,
+          "quantity_kwh": 0.540894842303091,
           "reward_eur": 0.0,
-          "seller_id": "H079",
+          "seller_id": "H071",
           "transaction_id": "p2p-018-00016"
         },
         {
-          "buyer_id": "H148",
+          "buyer_id": "H108",
           "hour": 18,
           "market": "p2p",
           "price_eur_kwh": 0.234987234557838,
@@ -4993,23 +5013,23 @@
           "transaction_id": "p2p-018-00017"
         },
         {
-          "buyer_id": "H148",
+          "buyer_id": "H108",
           "hour": 18,
           "market": "p2p",
           "price_eur_kwh": 0.23675470893794953,
-          "quantity_kwh": 0.5035911971422826,
+          "quantity_kwh": 0.48733277085021787,
           "reward_eur": 0.0,
           "seller_id": "H079",
           "transaction_id": "p2p-018-00018"
         },
         {
-          "buyer_id": "H078",
+          "buyer_id": "H148",
           "hour": 18,
           "market": "p2p",
-          "price_eur_kwh": 0.21665067503248445,
-          "quantity_kwh": 0.540894842303091,
+          "price_eur_kwh": 0.23675470893794953,
+          "quantity_kwh": 0.6841419306750115,
           "reward_eur": 0.0,
-          "seller_id": "H071",
+          "seller_id": "H079",
           "transaction_id": "p2p-018-00019"
         },
         {
@@ -5033,6 +5053,16 @@
           "transaction_id": "p2p-018-00021"
         },
         {
+          "buyer_id": "H150",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2193945302690337,
+          "quantity_kwh": 5.93104416023427,
+          "reward_eur": 0.0,
+          "seller_id": "H091",
+          "transaction_id": "p2p-018-00022"
+        },
+        {
           "buyer_id": "H110",
           "hour": 18,
           "market": "p2p",
@@ -5040,7 +5070,17 @@
           "quantity_kwh": 0.5229551293529884,
           "reward_eur": 0.0,
           "seller_id": "H091",
-          "transaction_id": "p2p-018-00022"
+          "transaction_id": "p2p-018-00023"
+        },
+        {
+          "buyer_id": "H120",
+          "hour": 18,
+          "market": "p2p",
+          "price_eur_kwh": 0.2193945302690337,
+          "quantity_kwh": 20.251506039970245,
+          "reward_eur": 0.0,
+          "seller_id": "H091",
+          "transaction_id": "p2p-018-00024"
         },
         {
           "buyer_id": "H120",
@@ -5050,17 +5090,7 @@
           "quantity_kwh": 0.43146179533726314,
           "reward_eur": 0.0,
           "seller_id": "H094",
-          "transaction_id": "p2p-018-00023"
-        },
-        {
-          "buyer_id": "H120",
-          "hour": 18,
-          "market": "p2p",
-          "price_eur_kwh": 0.2193945302690337,
-          "quantity_kwh": 26.182550200204517,
-          "reward_eur": 0.0,
-          "seller_id": "H091",
-          "transaction_id": "p2p-018-00024"
+          "transaction_id": "p2p-018-00025"
         },
         {
           "buyer_id": "H126",
@@ -5095,11 +5125,11 @@
       ]
     },
     {
-      "hash": "0008be1d5285e33268eaf4f0e6290db1299813f6b33274f35c3d8d82ebc53ccb",
+      "hash": "0007002426c6eaf55859236337c7ccc75b63b23b7078dd0a7e332d2fd8389082",
       "hour": 19,
       "miner_id": "miner-02",
-      "nonce": 6611,
-      "previous_hash": "0001b9e5bb8ffb412c8ff99c2c29ed3304e4acc703ae94fef6a262afc80ce6f8",
+      "nonce": 371,
+      "previous_hash": "0002ed01ce416141f7ae9fa787e44e0e96d69d455d94e86c96ba1adb65786f38",
       "timestamp": "2026-06-15T19:00:00+02:00",
       "transactions": [
         {
@@ -5175,11 +5205,11 @@
       ]
     },
     {
-      "hash": "0007f4ef47292acf863442a7c4fc32c821f984ae3b9c5d2b32d5e9275680343d",
+      "hash": "000f9f81e3a89e48ab17e66e7c8175fe1e279e0cb82ac633b7d7a8c817833ec3",
       "hour": 20,
-      "miner_id": "miner-08",
-      "nonce": 457,
-      "previous_hash": "0008be1d5285e33268eaf4f0e6290db1299813f6b33274f35c3d8d82ebc53ccb",
+      "miner_id": "miner-05",
+      "nonce": 1714,
+      "previous_hash": "0007002426c6eaf55859236337c7ccc75b63b23b7078dd0a7e332d2fd8389082",
       "timestamp": "2026-06-15T20:00:00+02:00",
       "transactions": [
         {
@@ -5195,44 +5225,44 @@
       ]
     },
     {
-      "hash": "0002b13f0166374ca22ac191747a3038cea2403e5f473907ae2e4da465177402",
+      "hash": "0009db229df68c59113a4e041f793a2060ac3ecbde46f0ec22f130d67be9a4ce",
       "hour": 21,
-      "miner_id": "miner-04",
-      "nonce": 3933,
-      "previous_hash": "0007f4ef47292acf863442a7c4fc32c821f984ae3b9c5d2b32d5e9275680343d",
+      "miner_id": "miner-06",
+      "nonce": 3085,
+      "previous_hash": "000f9f81e3a89e48ab17e66e7c8175fe1e279e0cb82ac633b7d7a8c817833ec3",
       "timestamp": "2026-06-15T21:00:00+02:00",
       "transactions": []
     },
     {
-      "hash": "00099f08d0f6bec46092672b853aeff72c9be065a6072d83167555395944cd72",
+      "hash": "000187bcf29c7b73102df7a604a2468ce5281fc3cb2d4c47a9133f73b0e992b1",
       "hour": 22,
-      "miner_id": "miner-10",
-      "nonce": 7029,
-      "previous_hash": "0002b13f0166374ca22ac191747a3038cea2403e5f473907ae2e4da465177402",
+      "miner_id": "miner-01",
+      "nonce": 170,
+      "previous_hash": "0009db229df68c59113a4e041f793a2060ac3ecbde46f0ec22f130d67be9a4ce",
       "timestamp": "2026-06-15T22:00:00+02:00",
       "transactions": []
     },
     {
-      "hash": "0001b7129159dbc49e54c8b9f66bd872fcae1f8017af403144d1073443b18756",
+      "hash": "000d3df34198b462debdd32ff55029b5c769e3d904c8cb90ff0c068137a04a6c",
       "hour": 23,
-      "miner_id": "miner-08",
-      "nonce": 14327,
-      "previous_hash": "00099f08d0f6bec46092672b853aeff72c9be065a6072d83167555395944cd72",
+      "miner_id": "miner-09",
+      "nonce": 4858,
+      "previous_hash": "000187bcf29c7b73102df7a604a2468ce5281fc3cb2d4c47a9133f73b0e992b1",
       "timestamp": "2026-06-15T23:00:00+02:00",
       "transactions": []
     }
   ],
   "miner_attempts": {
-    "miner-01": 11116,
-    "miner-02": 11113,
-    "miner-03": 11111,
-    "miner-04": 11110,
-    "miner-05": 11109,
-    "miner-06": 11107,
-    "miner-07": 11105,
-    "miner-08": 11103,
-    "miner-09": 11097,
-    "miner-10": 11095
+    "miner-01": 7057,
+    "miner-02": 7054,
+    "miner-03": 7049,
+    "miner-04": 7049,
+    "miner-05": 7049,
+    "miner-06": 7046,
+    "miner-07": 7042,
+    "miner-08": 7039,
+    "miner-09": 7038,
+    "miner-10": 7036
   },
   "miner_ids": [
     "miner-01",

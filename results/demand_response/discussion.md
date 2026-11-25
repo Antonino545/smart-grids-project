@@ -4,41 +4,41 @@ These are model outputs for the recorded inputs and assumptions, not evidence of
 
 | Scenario | P2P kWh | P2P share % | Imports kWh | Exports kWh | Household net cost EUR |
 |---|---:|---:|---:|---:|---:|
-| A | 683.957 | 18.376 | 17138.740 | 2203.822 | 5009.393 |
-| B | 2029.321 | 54.522 | 16228.097 | 1293.179 | 4925.465 |
-| C | 914.790 | 19.261 | 17544.591 | 2864.308 | 5091.519 |
-| D | 2676.823 | 56.361 | 16293.871 | 1613.587 | 4916.884 |
-| E | 896.146 | 18.868 | 17022.480 | 2156.253 | 4977.369 |
-| F | 2646.458 | 55.721 | 15836.542 | 1064.544 | 4803.172 |
-| G | 1930.747 | 51.873 | 16313.623 | 1378.705 | 4827.849 |
-| H | 2132.428 | 57.292 | 16044.243 | 1109.325 | 4807.382 |
-| I | 1781.825 | 47.872 | 16445.847 | 1510.928 | 4844.332 |
-| J | 2029.321 | 54.522 | 16228.097 | 1293.179 | 4790.838 |
-| K | 2204.632 | 59.232 | 16056.453 | 1121.534 | 4809.391 |
-| L | 2665.327 | 56.119 | 15829.845 | 1052.674 | 4746.839 |
+| A | 681.362 | 18.306 | 17139.405 | 2204.487 | 5009.552 |
+| B | 1969.772 | 52.922 | 16290.799 | 1355.881 | 4942.958 |
+| C | 910.217 | 19.165 | 17531.581 | 2851.297 | 5088.396 |
+| D | 2608.465 | 54.921 | 16386.604 | 1706.320 | 4942.362 |
+| E | 891.311 | 18.767 | 17029.496 | 2173.045 | 4978.466 |
+| F | 2589.059 | 54.513 | 15948.910 | 1177.392 | 4833.511 |
+| G | 1898.355 | 51.003 | 16351.202 | 1416.284 | 4837.028 |
+| H | 2112.323 | 56.752 | 16092.680 | 1157.761 | 4819.093 |
+| I | 1726.712 | 46.392 | 16472.425 | 1537.506 | 4851.221 |
+| J | 1969.772 | 52.922 | 16290.799 | 1355.881 | 4805.887 |
+| K | 2164.392 | 58.151 | 16084.903 | 1149.985 | 4816.208 |
+| L | 2629.188 | 55.358 | 15897.842 | 1120.463 | 4763.269 |
 
 ## Regulation comparisons
-- B versus A: regulation increased P2P energy (difference +1345.365 kWh).
-- D versus C: regulation increased P2P energy (difference +1762.033 kWh).
-- F versus E: regulation increased P2P energy (difference +1750.312 kWh).
+- B versus A: regulation increased P2P energy (difference +1288.410 kWh).
+- D versus C: regulation increased P2P energy (difference +1698.248 kWh).
+- F versus E: regulation increased P2P energy (difference +1697.748 kWh).
 
 ## Regulator policy variants (each compared with B)
 
 | Scenario | Change | P2P kWh vs B | Fees EUR | Rewards EUR | Refunds EUR | Fund left EUR | Household cost vs B EUR |
 |---|---|---:|---:|---:|---:|---:|---:|
-| B | reference | +0.000 | 175.21 | 40.59 | 0.00 | 134.63 | +0.00 |
-| G | B with a lower grid fee (EUR 0.0025/kWh) | -98.575 | 44.23 | 27.75 | 0.00 | 16.48 | -97.62 |
-| H | B with a bigger reward (EUR 0.075/kWh upper tier, 0.0375 lower) | +103.107 | 171.54 | 110.87 | 0.00 | 60.67 | -118.08 |
-| I | B, fee only on grid energy a neighbour could have traded | -247.496 | 14.45 | 13.21 | 0.00 | 1.23 | -81.13 |
-| J | B, leftover fund refunded to P2P traders at day end | +0.000 | 175.21 | 40.59 | 134.63 | 0.00 | -134.63 |
-| K | B, reward rate sized each hour to spend the fund | +175.310 | 171.78 | 112.03 | 0.00 | 59.75 | -116.07 |
+| B | reference | +0.000 | 176.47 | 39.40 | 0.00 | 137.07 | +0.00 |
+| G | B with a lower grid fee (EUR 0.0025/kWh) | -71.417 | 44.42 | 27.77 | 0.00 | 16.64 | -105.93 |
+| H | B with a bigger reward (EUR 0.075/kWh upper tier, 0.0375 lower) | +142.551 | 172.50 | 111.75 | 0.00 | 60.75 | -123.87 |
+| I | B, fee only on grid energy a neighbour could have traded | -243.060 | 15.60 | 13.86 | 0.00 | 1.74 | -91.74 |
+| J | B, leftover fund refunded to P2P traders at day end | +0.000 | 176.47 | 39.40 | 137.07 | 0.00 | -137.07 |
+| K | B, reward rate sized each hour to spend the fund | +194.620 | 172.35 | 112.61 | 0.00 | 59.74 | -126.75 |
 
 ## Combined scenario L (F battery order + K fund-sized reward)
 
 | Compared with | P2P kWh change | Meter cost change EUR | Meters + regulator change EUR | Final storage change kWh |
 |---|---:|---:|---:|---:|
-| F | +18.869 | -56.33 | -1.30 | +3.613 |
-| K | +460.695 | -62.55 | -63.85 | -128.611 |
+| F | +40.130 | -70.24 | -11.90 | +4.877 |
+| K | +464.796 | -52.94 | -54.35 | -127.409 |
 
 Price guidance and funded discounts can make more offers compatible. A reward cannot create PV surplus or demand, and does not guarantee improvement for other seeds or inputs.
 

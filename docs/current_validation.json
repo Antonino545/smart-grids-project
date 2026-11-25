@@ -1,7 +1,7 @@
 {
  "automated_tests": {
-  "passed": 110,
-  "duration_seconds": 40.67
+  "passed": 111,
+  "duration_seconds": 39.31
  },
  "input_sha256": "0b12fcba9568c0b3b5c4aa1c400101f366c37cfd48fe4f6bac7d4e6627c680fc",
  "model": "100 prosumer + 50 consumer aggregate building meters in Turin; scenarios A-F, regulator policy variants G-K and combined scenario L",
@@ -9,13 +9,13 @@
  "scenarios": {
   "A": {
    "hours": 24,
-   "internal_trades": 435,
+   "internal_trades": 436,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "B": {
    "hours": 24,
-   "internal_trades": 834,
+   "internal_trades": 809,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
@@ -27,7 +27,7 @@
   },
   "D": {
    "hours": 24,
-   "internal_trades": 1055,
+   "internal_trades": 1040,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
@@ -39,43 +39,43 @@
   },
   "F": {
    "hours": 24,
-   "internal_trades": 1027,
+   "internal_trades": 1013,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "G": {
    "hours": 24,
-   "internal_trades": 791,
+   "internal_trades": 770,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "H": {
    "hours": 24,
-   "internal_trades": 828,
+   "internal_trades": 815,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "I": {
    "hours": 24,
-   "internal_trades": 709,
+   "internal_trades": 692,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "J": {
    "hours": 24,
-   "internal_trades": 834,
+   "internal_trades": 809,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "K": {
    "hours": 24,
-   "internal_trades": 855,
+   "internal_trades": 841,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   },
   "L": {
    "hours": 24,
-   "internal_trades": 1045,
+   "internal_trades": 1027,
    "blockchain_valid": true,
    "cash_and_energy_valid": true
   }
@@ -91,67 +91,67 @@
    },
    "B": {
     "hours": 24,
-    "internal_trades": 822,
+    "internal_trades": 799,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "C": {
     "hours": 24,
-    "internal_trades": 538,
+    "internal_trades": 549,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "D": {
     "hours": 24,
-    "internal_trades": 1064,
+    "internal_trades": 1037,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "E": {
     "hours": 24,
-    "internal_trades": 499,
+    "internal_trades": 502,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "F": {
     "hours": 24,
-    "internal_trades": 1035,
+    "internal_trades": 1010,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "G": {
     "hours": 24,
-    "internal_trades": 782,
+    "internal_trades": 762,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "H": {
     "hours": 24,
-    "internal_trades": 825,
+    "internal_trades": 822,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "I": {
     "hours": 24,
-    "internal_trades": 702,
+    "internal_trades": 681,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "J": {
     "hours": 24,
-    "internal_trades": 822,
+    "internal_trades": 799,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "K": {
     "hours": 24,
-    "internal_trades": 850,
+    "internal_trades": 841,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    },
    "L": {
     "hours": 24,
-    "internal_trades": 1040,
+    "internal_trades": 1047,
     "blockchain_valid": true,
     "cash_and_energy_valid": true
    }

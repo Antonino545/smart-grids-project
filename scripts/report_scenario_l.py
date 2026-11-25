@@ -68,7 +68,7 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
       "offered surplus and shortage. With available fund A_h (fees collected up to the previous hour, minus rewards paid), "
       f"r_h = min(r_max, A_h / P_h), r_max = EUR {config['regulator']['max_reward_eur_kwh']:.2f}/kWh; r_h = 0 when P_h = 0.<br/>"
       "<b>3. Guide and match.</b> Bid b' = (1-g) b + g 1.04 pi_h; ask a' = max(p_min + r_h/2, (1-g) a + g 0.96 pi_h), g = 0.65, "
-      "pi_h = reference price. A buyer meets a seller in random order inside the group when b' >= a' - r_h/2. The buyer pays "
+      "pi_h = reference price. Inside the group, buyers take turns in random order; each buys from the cheapest seller first, then the next, while b' >= a' - r_h/2. The buyer pays "
       "a' - r_h/2; the seller also receives r_h x q from the fund, reserved before the trade and only if fully funded.<br/>"
       "<b>4. Store what is left.</b> Unsold owner PV charges the battery: E_next = E + eta_c c, within SOC 10-90% and the power limit. "
       "Then the aggregator and the grid clear the rest.<br/>"
@@ -184,8 +184,8 @@ def append_scenario_l(results: Path, m: dict, config: dict, p, title, sub, table
                             for c in ("fixed", "demand_response")) if robust_path.exists() else "-"])
     table(rows, [150, 110, 110, 137])
     sub("Trade-offs")
-    p("<b>D</b> (no storage, regulated) pushes the most PV to neighbours but wastes the storage the community owns: it exports "
-      "more and imports more than F or L. <b>F and L</b> trade almost as much as D while also storing unsold PV, so they import least. "
+    p("<b>D</b> (no storage, regulated) trades about as much P2P as F and L but wastes the storage the community owns: it exports "
+      "more and imports more than F or L. <b>F and L</b> sell PV to neighbours first and then store what is left, so they import least. "
       "<b>K</b> is the best variant of the self-consumption-first order, but storing PV before trading caps its P2P volume. "
       "Lower meter cost under larger rewards is mainly money moved from the regulator to the meters; the meters-plus-regulator cost, "
       "corrected for energy left in storage, is the fair economic comparison. Demand response lowers cost in every scenario but "

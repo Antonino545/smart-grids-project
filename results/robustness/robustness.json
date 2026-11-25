@@ -9,11 +9,11 @@
       "condition": "fixed",
       "higher_is_better": true,
       "kpi": "p2p_energy_kwh",
-      "l_better_pct": 60.0,
-      "l_worse_pct": 40.0,
-      "mean_difference": 14.326951602316353,
+      "l_better_pct": 75.0,
+      "l_worse_pct": 25.0,
+      "mean_difference": 51.56864130580749,
       "runs": 20,
-      "std_difference": 93.47162708702947,
+      "std_difference": 102.37866586179292,
       "tie_pct": 0.0
     },
     {
@@ -21,11 +21,11 @@
       "condition": "fixed",
       "higher_is_better": true,
       "kpi": "p2p_share_of_pv_pct",
-      "l_better_pct": 60.0,
-      "l_worse_pct": 40.0,
-      "mean_difference": 0.1395280977113183,
+      "l_better_pct": 75.0,
+      "l_worse_pct": 25.0,
+      "mean_difference": 0.44638922039058915,
       "runs": 20,
-      "std_difference": 0.7816589611822818,
+      "std_difference": 0.8732404775477315,
       "tie_pct": 0.0
     },
     {
@@ -33,11 +33,11 @@
       "condition": "fixed",
       "higher_is_better": false,
       "kpi": "grid_imports_kwh",
-      "l_better_pct": 75.0,
-      "l_worse_pct": 25.0,
-      "mean_difference": -39.02601337201486,
+      "l_better_pct": 85.0,
+      "l_worse_pct": 15.0,
+      "mean_difference": -70.39616912479369,
       "runs": 20,
-      "std_difference": 84.89259470521327,
+      "std_difference": 85.65998090989575,
       "tie_pct": 0.0
     },
     {
@@ -45,11 +45,11 @@
       "condition": "fixed",
       "higher_is_better": false,
       "kpi": "grid_exports_kwh",
-      "l_better_pct": 75.0,
-      "l_worse_pct": 25.0,
-      "mean_difference": -42.87365714510334,
+      "l_better_pct": 85.0,
+      "l_worse_pct": 15.0,
+      "mean_difference": -72.51049996636846,
       "runs": 20,
-      "std_difference": 79.2637076225336,
+      "std_difference": 79.88753425773054,
       "tie_pct": 0.0
     },
     {
@@ -59,9 +59,9 @@
       "kpi": "household_net_cost_eur",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -68.99408621747607,
+      "mean_difference": -79.58160255150378,
       "runs": 20,
-      "std_difference": 29.31807032805623,
+      "std_difference": 29.791132002387766,
       "tie_pct": 0.0
     },
     {
@@ -69,11 +69,11 @@
       "condition": "fixed",
       "higher_is_better": false,
       "kpi": "community_including_regulator_net_cost_eur",
-      "l_better_pct": 75.0,
-      "l_worse_pct": 25.0,
-      "mean_difference": -9.135384582897904,
+      "l_better_pct": 85.0,
+      "l_worse_pct": 15.0,
+      "mean_difference": -16.768220739455636,
       "runs": 20,
-      "std_difference": 20.772116035549626,
+      "std_difference": 20.94583311272678,
       "tie_pct": 0.0
     },
     {
@@ -81,11 +81,11 @@
       "condition": "fixed",
       "higher_is_better": false,
       "kpi": "community_cost_storage_adjusted_eur",
-      "l_better_pct": 75.0,
-      "l_worse_pct": 25.0,
-      "mean_difference": -9.569056027216401,
+      "l_better_pct": 85.0,
+      "l_worse_pct": 15.0,
+      "mean_difference": -16.930710221515618,
       "runs": 20,
-      "std_difference": 19.372332189672257,
+      "std_difference": 19.590308370368668,
       "tie_pct": 0.0
     },
     {
@@ -95,9 +95,9 @@
       "kpi": "p2p_energy_kwh",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": 497.2686875863071,
+      "mean_difference": 486.3238714003246,
       "runs": 20,
-      "std_difference": 73.81530447360892,
+      "std_difference": 86.14473766819856,
       "tie_pct": 0.0
     },
     {
@@ -107,9 +107,9 @@
       "kpi": "p2p_share_of_pv_pct",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": 4.023117613311119,
+      "mean_difference": 3.9410858205215673,
       "runs": 20,
-      "std_difference": 0.8164823955841501,
+      "std_difference": 0.9145617176139287,
       "tie_pct": 0.0
     },
     {
@@ -119,9 +119,9 @@
       "kpi": "grid_imports_kwh",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -188.05907434497766,
+      "mean_difference": -167.9963377296711,
       "runs": 20,
-      "std_difference": 57.246080408633894,
+      "std_difference": 54.69261279387468,
       "tie_pct": 0.0
     },
     {
@@ -129,11 +129,11 @@
       "condition": "fixed",
       "higher_is_better": false,
       "kpi": "grid_exports_kwh",
-      "l_better_pct": 30.0,
-      "l_worse_pct": 70.0,
-      "mean_difference": 13.047807274717503,
+      "l_better_pct": 25.0,
+      "l_worse_pct": 75.0,
+      "mean_difference": 29.063719051905075,
       "runs": 20,
-      "std_difference": 64.02663545239197,
+      "std_difference": 51.231111566091194,
       "tie_pct": 0.0
     },
     {
@@ -143,9 +143,9 @@
       "kpi": "household_net_cost_eur",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -56.51946275608302,
+      "mean_difference": -51.394533399027615,
       "runs": 20,
-      "std_difference": 15.580731741267554,
+      "std_difference": 15.378579482711169,
       "tie_pct": 0.0
     },
     {
@@ -155,9 +155,9 @@
       "kpi": "community_including_regulator_net_cost_eur",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -57.20059073997627,
+      "mean_difference": -52.14272446201521,
       "runs": 20,
-      "std_difference": 14.640771890848232,
+      "std_difference": 14.584188548237078,
       "tie_pct": 0.0
     },
     {
@@ -165,11 +165,11 @@
       "condition": "fixed",
       "higher_is_better": false,
       "kpi": "community_cost_storage_adjusted_eur",
-      "l_better_pct": 75.0,
-      "l_worse_pct": 25.0,
-      "mean_difference": -10.846988671690951,
+      "l_better_pct": 70.0,
+      "l_worse_pct": 30.0,
+      "mean_difference": -7.607251382659706,
       "runs": 20,
-      "std_difference": 13.177105178695221,
+      "std_difference": 11.180506465015409,
       "tie_pct": 0.0
     },
     {
@@ -177,11 +177,11 @@
       "condition": "demand_response",
       "higher_is_better": true,
       "kpi": "p2p_energy_kwh",
-      "l_better_pct": 70.0,
-      "l_worse_pct": 30.0,
-      "mean_difference": 28.122377805203133,
+      "l_better_pct": 80.0,
+      "l_worse_pct": 20.0,
+      "mean_difference": 65.24715819784515,
       "runs": 20,
-      "std_difference": 82.48522397662872,
+      "std_difference": 96.3958741181411,
       "tie_pct": 0.0
     },
     {
@@ -189,11 +189,11 @@
       "condition": "demand_response",
       "higher_is_better": true,
       "kpi": "p2p_share_of_pv_pct",
-      "l_better_pct": 70.0,
-      "l_worse_pct": 30.0,
-      "mean_difference": 0.24852581421192052,
+      "l_better_pct": 80.0,
+      "l_worse_pct": 20.0,
+      "mean_difference": 0.5524932235220323,
       "runs": 20,
-      "std_difference": 0.6961602599322333,
+      "std_difference": 0.8238781087591655,
       "tie_pct": 0.0
     },
     {
@@ -203,9 +203,9 @@
       "kpi": "grid_imports_kwh",
       "l_better_pct": 80.0,
       "l_worse_pct": 20.0,
-      "mean_difference": -50.26030799409373,
+      "mean_difference": -81.12209510249632,
       "runs": 20,
-      "std_difference": 74.74903338339435,
+      "std_difference": 79.93610624961029,
       "tie_pct": 0.0
     },
     {
@@ -215,9 +215,9 @@
       "kpi": "grid_exports_kwh",
       "l_better_pct": 85.0,
       "l_worse_pct": 15.0,
-      "mean_difference": -51.26154942819578,
+      "mean_difference": -81.42544860199618,
       "runs": 20,
-      "std_difference": 68.89126875471075,
+      "std_difference": 73.72622502783966,
       "tie_pct": 0.0
     },
     {
@@ -227,9 +227,9 @@
       "kpi": "household_net_cost_eur",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -73.29921697064201,
+      "mean_difference": -83.47195098710532,
       "runs": 20,
-      "std_difference": 26.66385594887905,
+      "std_difference": 28.31030083103323,
       "tie_pct": 0.0
     },
     {
@@ -239,9 +239,9 @@
       "kpi": "community_including_regulator_net_cost_eur",
       "l_better_pct": 80.0,
       "l_worse_pct": 20.0,
-      "mean_difference": -12.002399432536413,
+      "mean_difference": -19.451101614629216,
       "runs": 20,
-      "std_difference": 18.35363249670077,
+      "std_difference": 19.608110891349128,
       "tie_pct": 0.0
     },
     {
@@ -251,9 +251,9 @@
       "kpi": "community_cost_storage_adjusted_eur",
       "l_better_pct": 85.0,
       "l_worse_pct": 15.0,
-      "mean_difference": -11.788771737321031,
+      "mean_difference": -19.227576829079,
       "runs": 20,
-      "std_difference": 16.810910615036033,
+      "std_difference": 18.11240288966648,
       "tie_pct": 0.0
     },
     {
@@ -263,9 +263,9 @@
       "kpi": "p2p_energy_kwh",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": 499.9032853630492,
+      "mean_difference": 490.4989289275625,
       "runs": 20,
-      "std_difference": 85.79592729070413,
+      "std_difference": 94.66808305668124,
       "tie_pct": 0.0
     },
     {
@@ -275,9 +275,9 @@
       "kpi": "p2p_share_of_pv_pct",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": 4.0484893221737,
+      "mean_difference": 3.978659271930501,
       "runs": 20,
-      "std_difference": 0.896330438289151,
+      "std_difference": 0.970882697114799,
       "tie_pct": 0.0
     },
     {
@@ -287,9 +287,9 @@
       "kpi": "grid_imports_kwh",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -188.70308071774508,
+      "mean_difference": -166.56191409883667,
       "runs": 20,
-      "std_difference": 63.95174931271185,
+      "std_difference": 59.513343445007735,
       "tie_pct": 0.0
     },
     {
@@ -297,11 +297,11 @@
       "condition": "demand_response",
       "higher_is_better": false,
       "kpi": "grid_exports_kwh",
-      "l_better_pct": 30.0,
-      "l_worse_pct": 70.0,
-      "mean_difference": 16.01169596783523,
+      "l_better_pct": 25.0,
+      "l_worse_pct": 75.0,
+      "mean_difference": 34.320163648157404,
       "runs": 20,
-      "std_difference": 63.527837433356765,
+      "std_difference": 49.52292382237543,
       "tie_pct": 0.0
     },
     {
@@ -311,9 +311,9 @@
       "kpi": "household_net_cost_eur",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -56.88796314765627,
+      "mean_difference": -51.14395761186406,
       "runs": 20,
-      "std_difference": 17.41411383852622,
+      "std_difference": 16.760829360234304,
       "tie_pct": 0.0
     },
     {
@@ -323,9 +323,9 @@
       "kpi": "community_including_regulator_net_cost_eur",
       "l_better_pct": 100.0,
       "l_worse_pct": 0.0,
-      "mean_difference": -57.57162597339361,
+      "mean_difference": -52.02778404854043,
       "runs": 20,
-      "std_difference": 16.602905037230023,
+      "std_difference": 16.037409618543986,
       "tie_pct": 0.0
     },
     {
@@ -333,11 +333,11 @@
       "condition": "demand_response",
       "higher_is_better": false,
       "kpi": "community_cost_storage_adjusted_eur",
-      "l_better_pct": 80.0,
-      "l_worse_pct": 20.0,
-      "mean_difference": -10.488318249174199,
+      "l_better_pct": 70.0,
+      "l_worse_pct": 30.0,
+      "mean_difference": -6.699946411757855,
       "runs": 20,
-      "std_difference": 13.351570755210833,
+      "std_difference": 11.117073645226034,
       "tie_pct": 0.0
     }
   ],
@@ -382,82 +382,82 @@
     {
       "condition": "fixed",
       "kpi": "p2p_energy_kwh",
-      "max": 1108.060430860736,
-      "mean": 493.4645916201317,
-      "min": 211.73330647906963,
+      "max": 1107.03553861768,
+      "mean": 487.2617597441365,
+      "min": 211.90553463043148,
       "runs": 20,
       "scenario": "A",
-      "std": 216.66250638967864
+      "std": 215.40335891319862
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 7.790606072204306,
-      "mean": 3.865647486050997,
-      "min": 1.9618499583284192,
+      "max": 7.783400209139685,
+      "mean": 3.817681122531961,
+      "min": 1.9634457667403833,
       "runs": 20,
       "scenario": "A",
-      "std": 1.4786405479492104
+      "std": 1.4702993525244659
     },
     {
       "condition": "fixed",
       "kpi": "grid_imports_kwh",
-      "max": 21332.779048272205,
-      "mean": 18054.549331432096,
-      "min": 15274.906295570232,
+      "max": 21340.441272688255,
+      "mean": 18063.710492748578,
+      "min": 15292.644657412568,
       "runs": 20,
       "scenario": "A",
-      "std": 1510.1834409684066
+      "std": 1504.6874388242736
     },
     {
       "condition": "fixed",
       "kpi": "grid_exports_kwh",
-      "max": 2865.036319674208,
-      "mean": 1934.696174549856,
-      "min": 1202.2968048626583,
+      "max": 2866.7008387641963,
+      "mean": 1943.8573358663411,
+      "min": 1207.4882933728202,
       "runs": 20,
       "scenario": "A",
-      "std": 499.42385840428733
+      "std": 502.83757832047473
     },
     {
       "condition": "fixed",
       "kpi": "household_net_cost_eur",
-      "max": 6288.848286733825,
-      "mean": 5300.283028956636,
-      "min": 4507.557025384511,
+      "max": 6290.687220593677,
+      "mean": 5302.481707672593,
+      "min": 4511.814232226671,
       "runs": 20,
       "scenario": "A",
-      "std": 459.1861887019012
+      "std": 457.83148221812473
     },
     {
       "condition": "fixed",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 6288.848286733825,
-      "mean": 5300.283028956636,
-      "min": 4507.557025384511,
+      "max": 6290.687220593677,
+      "mean": 5302.481707672593,
+      "min": 4511.814232226671,
       "runs": 20,
       "scenario": "A",
-      "std": 459.1861887019012
+      "std": 457.83148221812473
     },
     {
       "condition": "fixed",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 6255.526833490919,
-      "mean": 5270.300336189825,
-      "min": 4473.439182980925,
+      "max": 6257.3657673507705,
+      "mean": 5272.499014905781,
+      "min": 4477.696389823085,
       "runs": 20,
       "scenario": "A",
-      "std": 460.1802757560398
+      "std": 458.83031338622243
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 29.7438552657918,
-      "mean": 16.86737427418552,
-      "min": 9.656794834151354,
+      "max": 29.716343908386133,
+      "mean": 16.662222587688618,
+      "min": 9.623377209777582,
       "runs": 20,
       "scenario": "A",
-      "std": 5.6552473684533995
+      "std": 5.6279638376778705
     },
     {
       "condition": "fixed",
@@ -512,112 +512,112 @@
     {
       "condition": "fixed",
       "kpi": "p2p_energy_kwh",
-      "max": 2437.150765493605,
-      "mean": 1850.1427475955536,
-      "min": 1383.2504460825137,
+      "max": 2372.9943562885787,
+      "mean": 1809.6633084756243,
+      "min": 1319.6267300647348,
       "runs": 20,
       "scenario": "B",
-      "std": 299.20806266292715
+      "std": 298.6949771915479
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 17.13524012204184,
-      "mean": 14.71129995228116,
-      "min": 12.191743498022195,
+      "max": 16.68416606759226,
+      "mean": 14.386491497447798,
+      "min": 11.963918392997517,
       "runs": 20,
       "scenario": "B",
-      "std": 1.5130979289031883
+      "std": 1.5397578198000506
     },
     {
       "condition": "fixed",
       "kpi": "grid_imports_kwh",
-      "max": 19906.604949893397,
-      "mean": 16981.790511733554,
-      "min": 14592.31362026877,
+      "max": 19988.722991150084,
+      "mean": 17066.59611662783,
+      "min": 14673.648485762775,
       "runs": 20,
       "scenario": "B",
-      "std": 1441.975561210062
+      "std": 1438.1128753914968
     },
     {
       "condition": "fixed",
       "kpi": "grid_exports_kwh",
-      "max": 1698.3770727527801,
-      "mean": 861.9373548513164,
-      "min": 340.3333260574173,
+      "max": 1844.0127932044538,
+      "mean": 946.7429597455891,
+      "min": 418.9733518211455,
       "runs": 20,
       "scenario": "B",
-      "std": 409.83263085276855
+      "std": 423.95001494800186
     },
     {
       "condition": "fixed",
       "kpi": "household_net_cost_eur",
-      "max": 6105.996339848596,
-      "mean": 5184.255335942925,
-      "min": 4446.597521616489,
+      "max": 6127.612171344102,
+      "mean": 5207.114381997834,
+      "min": 4481.883186283758,
       "runs": 20,
       "scenario": "B",
-      "std": 458.35270508305337
+      "std": 457.14324737336574
     },
     {
       "condition": "fixed",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5946.566503122912,
-      "mean": 5042.820912228987,
-      "min": 4319.8081576821605,
+      "max": 5966.274833024517,
+      "mean": 5063.1742574036125,
+      "min": 4354.760730590562,
       "runs": 20,
       "scenario": "B",
-      "std": 444.44014633825714
+      "std": 443.3469889380198
     },
     {
       "condition": "fixed",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5913.245049880005,
-      "mean": 5012.838219462175,
-      "min": 4287.595994914295,
+      "max": 5932.95337978161,
+      "mean": 5033.191564636802,
+      "min": 4322.548567822697,
       "runs": 20,
       "scenario": "B",
-      "std": 445.57132510170914
+      "std": 444.38669780808937
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 78.31475264480737,
-      "mean": 65.48607012497612,
-      "min": 48.597606144074575,
+      "max": 77.44448132377222,
+      "mean": 64.03736690910826,
+      "min": 46.764981566522714,
       "runs": 20,
       "scenario": "B",
-      "std": 9.0384321970285
+      "std": 9.002304484849024
     },
     {
       "condition": "fixed",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 203.3018798064519,
-      "mean": 178.4372786658487,
-      "min": 151.58301999743296,
+      "max": 204.9442406315856,
+      "mean": 180.13339076373416,
+      "min": 153.20971730731304,
       "runs": 20,
       "scenario": "B",
-      "std": 13.052171499044654
+      "std": 13.057119569834713
     },
     {
       "condition": "fixed",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 48.74301530987209,
-      "mean": 37.002854951911075,
-      "min": 27.665008921650276,
+      "max": 47.45988712577157,
+      "mean": 36.19326616951248,
+      "min": 26.392534601294695,
       "runs": 20,
       "scenario": "B",
-      "std": 5.9841612532585415
+      "std": 5.973899543830958
     },
     {
       "condition": "fixed",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 174.48113988735622,
-      "mean": 141.4344237139376,
-      "min": 116.84269186696727,
+      "max": 177.57675226630784,
+      "mean": 143.9401245942217,
+      "min": 118.62803525303704,
       "runs": 20,
       "scenario": "B",
-      "std": 15.21142294441809
+      "std": 15.14787856163092
     },
     {
       "condition": "fixed",
@@ -642,112 +642,112 @@
     {
       "condition": "fixed",
       "kpi": "p2p_energy_kwh",
-      "max": 3027.726737165686,
-      "mean": 2472.4214193765506,
-      "min": 1960.5846067196715,
+      "max": 2946.166676611357,
+      "mean": 2418.9775164547264,
+      "min": 1892.1545932313222,
       "runs": 20,
       "scenario": "D",
-      "std": 318.4369224912699
+      "std": 321.29755161331303
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 23.411775009477854,
-      "mean": 19.733054200068974,
-      "min": 16.562870747207928,
+      "max": 23.195754153635765,
+      "mean": 19.305420133599227,
+      "min": 16.148446846209772,
       "runs": 20,
       "scenario": "D",
-      "std": 1.8302680253927002
+      "std": 1.8897335277160423
     },
     {
       "condition": "fixed",
       "kpi": "grid_imports_kwh",
-      "max": 19926.32246484002,
-      "mean": 17129.709984508314,
-      "min": 14694.670001322875,
+      "max": 20093.25319036448,
+      "mean": 17233.66082431938,
+      "min": 14814.039143094415,
       "runs": 20,
       "scenario": "D",
-      "std": 1377.4791493131504
+      "std": 1379.9558319163273
     },
     {
       "condition": "fixed",
       "kpi": "grid_exports_kwh",
-      "max": 2195.645683858825,
-      "mean": 1208.3022244370768,
-      "min": 570.3901559632701,
+      "max": 2389.0686096921168,
+      "mean": 1312.2530642481447,
+      "min": 634.4721699238271,
       "runs": 20,
       "scenario": "D",
-      "std": 523.8392181900667
+      "std": 533.4408063808268
     },
     {
       "condition": "fixed",
       "kpi": "household_net_cost_eur",
-      "max": 6084.745250995617,
-      "mean": 5200.346555588192,
-      "min": 4466.323407214785,
+      "max": 6128.6337197270595,
+      "mean": 5228.442651997506,
+      "min": 4498.134772839825,
       "runs": 20,
       "scenario": "D",
-      "std": 440.0765129429028
+      "std": 440.44335142268426
     },
     {
       "condition": "fixed",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5938.028306874609,
-      "mean": 5066.414861886269,
-      "min": 4356.125122779438,
+      "max": 5978.091681000479,
+      "mean": 5091.3630634409255,
+      "min": 4384.773716804609,
       "runs": 20,
       "scenario": "D",
-      "std": 428.3465768634871
+      "std": 428.7497128977993
     },
     {
       "condition": "fixed",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5938.028306874609,
-      "mean": 5066.414861886269,
-      "min": 4356.125122779438,
+      "max": 5978.091681000479,
+      "mean": 5091.3630634409255,
+      "min": 4384.773716804609,
       "runs": 20,
       "scenario": "D",
-      "std": 428.3465768634871
+      "std": 428.7497128977993
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 76.5314699589024,
-      "mean": 64.5407334109106,
-      "min": 48.585698089097406,
+      "max": 75.8253127524248,
+      "mean": 63.14613552615989,
+      "min": 46.97259125734765,
       "runs": 20,
       "scenario": "D",
-      "std": 8.509914945974321
+      "std": 8.582702979456318
     },
     {
       "condition": "fixed",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 205.90796341129962,
-      "mean": 183.3801220894539,
-      "min": 155.65934628279936,
+      "max": 209.2465779217888,
+      "mean": 185.45913888567526,
+      "min": 158.04672911823016,
       "runs": 20,
       "scenario": "D",
-      "std": 12.33127996321697
+      "std": 12.468225104655662
     },
     {
       "condition": "fixed",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 60.55453474331372,
-      "mean": 49.44842838753102,
-      "min": 39.21169213439343,
+      "max": 58.92333353222715,
+      "mean": 48.37955032909452,
+      "min": 37.843091864626444,
       "runs": 20,
       "scenario": "D",
-      "std": 6.368738449825398
+      "std": 6.42595103226626
     },
     {
       "condition": "fixed",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 165.74351097476097,
-      "mean": 133.9316937019229,
-      "min": 110.19828443534657,
+      "max": 169.77664168066877,
+      "mean": 137.07958855658075,
+      "min": 113.36105603521646,
       "runs": 20,
       "scenario": "D",
-      "std": 13.896252181899552
+      "std": 14.005204769449776
     },
     {
       "condition": "fixed",
@@ -772,242 +772,242 @@
     {
       "condition": "fixed",
       "kpi": "p2p_energy_kwh",
-      "max": 2993.629982046066,
-      "mean": 2453.7273608533687,
-      "min": 1961.269769062174,
+      "max": 2925.8138635594623,
+      "mean": 2400.283120525686,
+      "min": 1872.1403705186492,
       "runs": 20,
       "scenario": "F",
-      "std": 312.30541265189896
+      "std": 319.8356946010264
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 23.42693976751498,
-      "mean": 19.589829658103156,
-      "min": 16.344188700038682,
+      "max": 23.202003245954657,
+      "mean": 19.15920394279729,
+      "min": 15.846937387255307,
       "runs": 20,
       "scenario": "F",
-      "std": 1.8408712983646036
+      "std": 1.9181044321909273
     },
     {
       "condition": "fixed",
       "kpi": "grid_imports_kwh",
-      "max": 19513.474255401998,
-      "mean": 16706.484733217952,
-      "min": 14331.115160050935,
+      "max": 19677.845673741944,
+      "mean": 16813.62632713079,
+      "min": 14473.548787678266,
       "runs": 20,
       "scenario": "F",
-      "std": 1413.660272663898
+      "std": 1409.2889079665092
     },
     {
       "condition": "fixed",
       "kpi": "grid_exports_kwh",
-      "max": 1643.7999960752052,
-      "mean": 791.5861017284996,
-      "min": 305.68481225656814,
+      "max": 1788.0376631956008,
+      "mean": 892.9475578717023,
+      "min": 413.39224482985657,
       "runs": 20,
       "scenario": "F",
-      "std": 387.35310040556914
+      "std": 401.3693220726661
     },
     {
       "condition": "fixed",
       "kpi": "household_net_cost_eur",
-      "max": 5975.093580812842,
-      "mean": 5090.356414994073,
-      "min": 4371.916267697532,
+      "max": 6018.9549863257225,
+      "mean": 5119.571121106446,
+      "min": 4409.241118577241,
       "runs": 20,
       "scenario": "F",
-      "std": 448.6550708671977
+      "std": 447.41401735234115
     },
     {
       "condition": "fixed",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5835.7011878852045,
-      "mean": 4964.450253861676,
-      "min": 4259.910417306692,
+      "max": 5875.844008570363,
+      "mean": 4990.511044666934,
+      "min": 4297.567202719884,
       "runs": 20,
       "scenario": "F",
-      "std": 435.9960376662819
+      "std": 434.94201769956015
     },
     {
       "condition": "fixed",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5866.661322432556,
-      "mean": 4981.254834607468,
-      "min": 4262.255411359109,
+      "max": 5902.047204698881,
+      "mean": 5005.226314461538,
+      "min": 4297.654916502045,
       "runs": 20,
       "scenario": "F",
-      "std": 443.9844498014861
+      "std": 442.34901017111247
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 76.58104250193608,
-      "mean": 64.08413600917477,
-      "min": 48.41384807111766,
+      "max": 75.84574060212351,
+      "mean": 62.67131435145851,
+      "min": 46.879755084819806,
       "runs": 20,
       "scenario": "F",
-      "std": 8.596363711123814
+      "std": 8.658816978315606
     },
     {
       "condition": "fixed",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 199.0680836251936,
-      "mean": 174.98070834946455,
-      "min": 148.44923720986066,
+      "max": 201.36340566278935,
+      "mean": 177.06573885002493,
+      "min": 151.3924486404323,
       "runs": 20,
       "scenario": "F",
-      "std": 12.688444237242509
+      "std": 12.649863426241591
     },
     {
       "condition": "fixed",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 59.87259964092132,
-      "mean": 49.074547217067376,
-      "min": 39.22539538124348,
+      "max": 58.516277271189246,
+      "mean": 48.00566241051372,
+      "min": 37.442807410372986,
       "runs": 20,
       "scenario": "F",
-      "std": 6.2461082530379795
+      "std": 6.396713892020528
     },
     {
       "condition": "fixed",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 159.8426882439503,
-      "mean": 125.90616113239717,
-      "min": 103.41023333835976,
+      "max": 163.72091571461127,
+      "mean": 129.06007643951122,
+      "min": 107.11824685565887,
       "runs": 20,
       "scenario": "F",
-      "std": 14.36719414018649
+      "std": 14.280405222106067
     },
     {
       "condition": "fixed",
       "kpi": "battery_final_stored_kwh",
-      "max": 352.46562720842644,
-      "mean": 269.4365587866942,
-      "min": 181.69390890380978,
+      "max": 360.6545512005387,
+      "mean": 276.76747440489925,
+      "min": 177.70781816039099,
       "runs": 20,
       "scenario": "F",
-      "std": 50.710096039465945
+      "std": 49.06739181622903
     },
     {
       "condition": "fixed",
       "kpi": "battery_loss_kwh",
-      "max": 78.08661789803206,
-      "mean": 52.45431263152316,
-      "min": 32.03328114832807,
+      "max": 77.3331215661886,
+      "mean": 50.903534782951596,
+      "min": 32.23532789172262,
       "runs": 20,
       "scenario": "F",
-      "std": 13.757353708202285
+      "std": 13.292317337816973
     },
     {
       "condition": "fixed",
       "kpi": "p2p_energy_kwh",
-      "max": 2472.4147198017895,
-      "mean": 1970.7856248693781,
-      "min": 1578.1785666528685,
+      "max": 2447.3687025124436,
+      "mean": 1965.527890431169,
+      "min": 1561.463872092151,
       "runs": 20,
       "scenario": "K",
-      "std": 245.16066830116475
+      "std": 240.97557051864592
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 17.383175675836384,
-      "mean": 15.706240142503354,
-      "min": 13.741640133887833,
+      "max": 17.27987948878253,
+      "mean": 15.664507342666312,
+      "min": 13.781082742115125,
       "runs": 20,
       "scenario": "K",
-      "std": 1.0018276901175127
+      "std": 0.9619525965463323
     },
     {
       "condition": "fixed",
       "kpi": "grid_imports_kwh",
-      "max": 19836.891909898477,
-      "mean": 16855.517794190917,
-      "min": 14567.351302144678,
+      "max": 19909.539992835063,
+      "mean": 16911.226495735667,
+      "min": 14623.063495677774,
       "runs": 20,
       "scenario": "K",
-      "std": 1406.4529192665766
+      "std": 1406.2166650956433
     },
     {
       "condition": "fixed",
       "kpi": "grid_exports_kwh",
-      "max": 1526.6924347396985,
-      "mean": 735.6646373086787,
-      "min": 220.8976138563249,
+      "max": 1582.4046282727948,
+      "mean": 791.3733388534288,
+      "min": 276.90256520390915,
       "runs": 20,
       "scenario": "K",
-      "std": 409.64034867259716
+      "std": 412.3968852715173
     },
     {
       "condition": "fixed",
       "kpi": "household_net_cost_eur",
-      "max": 6005.128756106383,
-      "mean": 5077.88179153268,
-      "min": 4335.126176456568,
+      "max": 6022.838128484473,
+      "mean": 5091.38405195397,
+      "min": 4348.2294223514045,
       "runs": 20,
       "scenario": "K",
-      "std": 440.79120745841664
+      "std": 440.77280597220255
     },
     {
       "condition": "fixed",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5929.835373524131,
-      "mean": 5012.515460018754,
-      "min": 4278.603844559021,
+      "max": 5947.270913428912,
+      "mean": 5025.885548389494,
+      "min": 4291.974771006964,
       "runs": 20,
       "scenario": "K",
-      "std": 436.1697902479356
+      "std": 436.0775292539737
     },
     {
       "condition": "fixed",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5896.513920281224,
-      "mean": 4982.5327672519425,
-      "min": 4246.391681791156,
+      "max": 5913.949460186005,
+      "mean": 4995.902855622682,
+      "min": 4259.762608239099,
       "runs": 20,
       "scenario": "K",
-      "std": 437.2703912945879
+      "std": 437.14902965753254
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 84.60932010173237,
-      "mean": 70.14897994864013,
-      "min": 52.613157505234064,
+      "max": 83.71321178270365,
+      "mean": 69.96974633306311,
+      "min": 53.45240298249246,
       "runs": 20,
       "scenario": "K",
-      "std": 9.763681123852583
+      "std": 9.723398464650957
     },
     {
       "condition": "fixed",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 201.90761900655343,
-      "mean": 175.91182431499595,
-      "min": 151.38299840145302,
+      "max": 203.3605806652852,
+      "mean": 177.02599834589097,
+      "min": 152.60318268168916,
       "runs": 20,
       "scenario": "K",
-      "std": 12.251160182918802
+      "std": 12.264225209428888
     },
     {
       "condition": "fixed",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 126.61423642430148,
-      "mean": 110.54549280107008,
-      "min": 91.19592536613712,
+      "max": 127.79336560972453,
+      "mean": 111.52749478141543,
+      "min": 92.07524975057682,
       "runs": 20,
       "scenario": "K",
-      "std": 8.220077942209619
+      "std": 8.255366844552986
     },
     {
       "condition": "fixed",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 75.29338258225201,
-      "mean": 65.36633151392589,
-      "min": 56.52233189754691,
+      "max": 75.56721505556067,
+      "mean": 65.49850356447554,
+      "min": 56.25465134444041,
       "runs": 20,
       "scenario": "K",
-      "std": 5.326482080976802
+      "std": 5.448628430241128
     },
     {
       "condition": "fixed",
@@ -1032,212 +1032,212 @@
     {
       "condition": "fixed",
       "kpi": "p2p_energy_kwh",
-      "max": 2932.5544638048336,
-      "mean": 2468.0543124556852,
-      "min": 2077.69091462253,
+      "max": 2934.833740756291,
+      "mean": 2451.8517618314936,
+      "min": 2060.2989915470816,
       "runs": 20,
       "scenario": "L",
-      "std": 252.7702935584803
+      "std": 250.25655916327077
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 22.9254934684109,
-      "mean": 19.729357755814473,
-      "min": 16.678683792122936,
+      "max": 23.169114458532615,
+      "mean": 19.60559316318788,
+      "min": 16.45447924141172,
       "runs": 20,
       "scenario": "L",
-      "std": 1.4565840375145687
+      "std": 1.5231772439448226
     },
     {
       "condition": "fixed",
       "kpi": "grid_imports_kwh",
-      "max": 19596.189743028306,
-      "mean": 16667.458719845938,
-      "min": 14337.10475082306,
+      "max": 19741.1868195316,
+      "mean": 16743.230158005998,
+      "min": 14448.978759897744,
       "runs": 20,
       "scenario": "L",
-      "std": 1399.7867469760129
+      "std": 1396.168811567366
     },
     {
       "condition": "fixed",
       "kpi": "grid_exports_kwh",
-      "max": 1580.6546610366784,
-      "mean": 748.7124445833963,
-      "min": 279.2682132323665,
+      "max": 1684.8107117360564,
+      "mean": 820.4370579053339,
+      "min": 302.61401980805516,
       "runs": 20,
       "scenario": "L",
-      "std": 372.4867927056663
+      "std": 390.9543410690534
     },
     {
       "condition": "fixed",
       "kpi": "household_net_cost_eur",
-      "max": 5931.268364875891,
-      "mean": 5021.362328776597,
-      "min": 4308.576688197928,
+      "max": 5967.362054608566,
+      "mean": 5039.989518554942,
+      "min": 4335.636857788657,
       "runs": 20,
       "scenario": "L",
-      "std": 437.43849947397393
+      "std": 436.5962710122581
     },
     {
       "condition": "fixed",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5856.054559914573,
-      "mean": 4955.314869278778,
-      "min": 4250.574187336784,
+      "max": 5891.488148651277,
+      "mean": 4973.742823927479,
+      "min": 4277.908684354675,
       "runs": 20,
       "scenario": "L",
-      "std": 432.75446875726595
+      "std": 431.79400774058126
     },
     {
       "condition": "fixed",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5885.2824779335215,
-      "mean": 4971.685778580251,
-      "min": 4249.339720811196,
+      "max": 5916.415985959864,
+      "mean": 4988.295604240023,
+      "min": 4274.6888675808195,
       "runs": 20,
       "scenario": "L",
-      "std": 441.4720307573764
+      "std": 439.9557754245049
     },
     {
       "condition": "fixed",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 76.70359302904546,
-      "mean": 64.6097330055306,
-      "min": 48.00532361422632,
+      "max": 76.06152303673673,
+      "mean": 64.21932703632292,
+      "min": 47.36000818365515,
       "runs": 20,
       "scenario": "L",
-      "std": 8.40514989473311
+      "std": 8.599901845789814
     },
     {
       "condition": "fixed",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 199.76229126260304,
-      "mean": 174.16171164429335,
-      "min": 148.39916360796008,
+      "max": 202.5565177300163,
+      "mean": 175.63667215911332,
+      "min": 150.7467505532728,
       "runs": 20,
       "scenario": "L",
-      "std": 12.323421566641658
+      "std": 12.332979078856727
     },
     {
       "condition": "fixed",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 124.54848630128421,
-      "mean": 108.11425214647419,
-      "min": 89.8021747410666,
+      "max": 126.6826117727277,
+      "mean": 109.38997753165008,
+      "min": 91.39746839177982,
       "runs": 20,
       "scenario": "L",
-      "std": 7.964278269617929
+      "std": 7.916342482596515
     },
     {
       "condition": "fixed",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 75.30788233341121,
-      "mean": 66.04745949781916,
-      "min": 58.002500861143965,
+      "max": 75.87390595728864,
+      "mean": 66.24669462746323,
+      "min": 57.72817343398197,
       "runs": 20,
       "scenario": "L",
-      "std": 5.240123294788291
+      "std": 5.386013636127372
     },
     {
       "condition": "fixed",
       "kpi": "battery_final_stored_kwh",
-      "max": 350.33146149329286,
-      "mean": 270.9582129772854,
-      "min": 189.25725774760218,
+      "max": 357.2976027152823,
+      "mean": 277.3376129384424,
+      "min": 179.7381981966031,
       "runs": 20,
       "scenario": "L",
-      "std": 50.416456682726405
+      "std": 48.79845480957736
     },
     {
       "condition": "fixed",
       "kpi": "battery_loss_kwh",
-      "max": 81.80529919289586,
-      "mean": 54.78030221402088,
-      "min": 33.301575245901226,
+      "max": 78.59294124763782,
+      "mean": 52.44772709098351,
+      "min": 34.4909915021586,
       "runs": 20,
       "scenario": "L",
-      "std": 13.986407355267135
+      "std": 13.491526397987034
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_energy_kwh",
-      "max": 1058.4697075925758,
-      "mean": 461.1744496324057,
-      "min": 189.04396133208763,
+      "max": 1057.215466978193,
+      "mean": 455.75816799059686,
+      "min": 189.0274232855352,
       "runs": 20,
       "scenario": "A",
-      "std": 207.59731461364817
+      "std": 207.09446169490738
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 7.441941162730169,
-      "mean": 3.6080340246702054,
-      "min": 1.7516180795025629,
+      "max": 7.433122785794874,
+      "mean": 3.566139680098038,
+      "min": 1.7514648434978963,
       "runs": 20,
       "scenario": "A",
-      "std": 1.407415016305441
+      "std": 1.405029840029149
     },
     {
       "condition": "demand_response",
       "kpi": "grid_imports_kwh",
-      "max": 21223.982309513136,
-      "mean": 17876.36579666498,
-      "min": 15130.475679318692,
+      "max": 21229.19797689694,
+      "mean": 17884.279646629522,
+      "min": 15131.912670746222,
       "runs": 20,
       "scenario": "A",
-      "std": 1525.5101806262066
+      "std": 1523.1567675371875
     },
     {
       "condition": "demand_response",
       "kpi": "grid_exports_kwh",
-      "max": 2604.439804140545,
-      "mean": 1756.512639782742,
-      "min": 1050.2040222314479,
+      "max": 2616.371539381613,
+      "mean": 1764.4264897472851,
+      "min": 1055.2748370357178,
       "runs": 20,
       "scenario": "A",
-      "std": 464.3690831096344
+      "std": 468.1874073797508
     },
     {
       "condition": "demand_response",
       "kpi": "household_net_cost_eur",
-      "max": 6262.737069431649,
-      "mean": 5257.518980612529,
-      "min": 4472.89367748414,
+      "max": 6263.988829603762,
+      "mean": 5259.41830460402,
+      "min": 4473.238555426748,
       "runs": 20,
       "scenario": "A",
-      "std": 463.34483089970996
+      "std": 462.73164266421804
     },
     {
       "condition": "demand_response",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 6262.737069431649,
-      "mean": 5257.518980612529,
-      "min": 4472.89367748414,
+      "max": 6263.988829603762,
+      "mean": 5259.41830460402,
+      "min": 4473.238555426748,
       "runs": 20,
       "scenario": "A",
-      "std": 463.34483089970996
+      "std": 462.73164266421804
     },
     {
       "condition": "demand_response",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 6229.415616188742,
-      "mean": 5227.536287845718,
-      "min": 4438.775835080554,
+      "max": 6230.667376360855,
+      "mean": 5229.435611837208,
+      "min": 4439.120713023161,
       "runs": 20,
       "scenario": "A",
-      "std": 464.4318530805246
+      "std": 463.8168981845628
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 30.329455326044894,
-      "mean": 17.083389436961376,
-      "min": 9.955619145201823,
+      "max": 30.29351623925841,
+      "mean": 16.887092468326458,
+      "min": 9.954748202317843,
       "runs": 20,
       "scenario": "A",
-      "std": 5.691208201857755
+      "std": 5.686757768755368
     },
     {
       "condition": "demand_response",
@@ -1292,112 +1292,112 @@
     {
       "condition": "demand_response",
       "kpi": "p2p_energy_kwh",
-      "max": 2298.424509184724,
-      "mean": 1729.9451213011412,
-      "min": 1281.575206688104,
+      "max": 2266.699996149859,
+      "mean": 1696.6095788216085,
+      "min": 1225.0157665313097,
       "runs": 20,
       "scenario": "B",
-      "std": 292.6736160245139
+      "std": 295.30947640773405
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 16.15987669900668,
-      "mean": 13.746433708460707,
-      "min": 11.380413334978744,
+      "max": 15.936826423946185,
+      "mean": 13.476387367001074,
+      "min": 11.165925134057728,
       "runs": 20,
       "scenario": "B",
-      "std": 1.492689552783788
+      "std": 1.5284901594448255
     },
     {
       "condition": "demand_response",
       "kpi": "grid_imports_kwh",
-      "max": 19842.99927274808,
-      "mean": 16883.166963188432,
-      "min": 14525.675293709708,
+      "max": 19947.783913560223,
+      "mean": 16959.490693851258,
+      "min": 14590.661562011439,
       "runs": 20,
       "scenario": "B",
-      "std": 1453.743679616025
+      "std": 1457.6428169038495
     },
     {
       "condition": "demand_response",
       "kpi": "grid_exports_kwh",
-      "max": 1530.7754395371915,
-      "mean": 763.3138063061954,
-      "min": 289.9687473431781,
+      "max": 1650.743107508885,
+      "mean": 839.6375369690209,
+      "min": 362.7889396495182,
       "runs": 20,
       "scenario": "B",
-      "std": 376.731756950022
+      "std": 387.2740781075681
     },
     {
       "condition": "demand_response",
       "kpi": "household_net_cost_eur",
-      "max": 6091.648979014337,
-      "mean": 5161.017165847082,
-      "min": 4405.357111468289,
+      "max": 6119.15849237513,
+      "mean": 5181.5280466690065,
+      "min": 4437.396228469733,
       "runs": 20,
       "scenario": "B",
-      "std": 461.62225151452446
+      "std": 462.49299527111543
     },
     {
       "condition": "demand_response",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5931.301140608035,
-      "mean": 5019.151260578158,
-      "min": 4279.583765710419,
+      "max": 5956.44945440295,
+      "mean": 5037.468955937236,
+      "min": 4308.376006023626,
       "runs": 20,
       "scenario": "B",
-      "std": 447.6108998246162
+      "std": 448.39365611277793
     },
     {
       "condition": "demand_response",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5897.9796873651285,
-      "mean": 4989.168567811346,
-      "min": 4247.371602942554,
+      "max": 5923.128001160044,
+      "mean": 5007.4862631704245,
+      "min": 4276.163843255761,
       "runs": 20,
       "scenario": "B",
-      "std": 448.80690267406845
+      "std": 449.5171421577012
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 79.64312887392806,
-      "mean": 66.59707921547866,
-      "min": 49.10758585738,
+      "max": 78.16259168725985,
+      "mean": 65.2705965068757,
+      "min": 47.92683979915369,
       "runs": 20,
       "scenario": "B",
-      "std": 9.23981753750906
+      "std": 9.148479765909391
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 202.02976626354547,
-      "mean": 176.4648076949463,
-      "min": 150.25025346625173,
+      "max": 204.12545907978838,
+      "mean": 177.9912823082028,
+      "min": 151.5499788322863,
       "runs": 20,
       "scenario": "B",
-      "std": 13.11363490784903
+      "std": 13.260794795253034
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 45.96849018369448,
-      "mean": 34.598902426022825,
-      "min": 25.63150413376208,
+      "max": 45.33399992299719,
+      "mean": 33.93219157643217,
+      "min": 24.500315330626194,
       "runs": 20,
       "scenario": "B",
-      "std": 5.853472320490277
+      "std": 5.906189528154681
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 174.63144077631063,
-      "mean": 141.86590526892346,
-      "min": 118.7906439256513,
+      "max": 177.54001632603573,
+      "mean": 144.05909073177062,
+      "min": 120.22121597443325,
       "runs": 20,
       "scenario": "B",
-      "std": 15.172826444980371
+      "std": 15.308214637768605
     },
     {
       "condition": "demand_response",
@@ -1422,112 +1422,112 @@
     {
       "condition": "demand_response",
       "kpi": "p2p_energy_kwh",
-      "max": 2896.212773945887,
-      "mean": 2359.943884612939,
-      "min": 1870.0970724482916,
+      "max": 2841.3958319844533,
+      "mean": 2310.8890046385504,
+      "min": 1795.6822058398745,
       "runs": 20,
       "scenario": "D",
-      "std": 315.2213624375578
+      "std": 321.0508970463104
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 22.69920515247523,
-      "mean": 18.82880634927603,
-      "min": 15.846806259995722,
+      "max": 22.459573092372445,
+      "mean": 18.43750362830697,
+      "min": 15.363560834818799,
       "runs": 20,
       "scenario": "D",
-      "std": 1.8037122730664388
+      "std": 1.9030218023528855
     },
     {
       "condition": "demand_response",
       "kpi": "grid_imports_kwh",
-      "max": 19868.77538560636,
-      "mean": 17016.322087655197,
-      "min": 14578.031466614542,
+      "max": 20031.68255804577,
+      "mean": 17117.338542881695,
+      "min": 14709.435742916832,
       "runs": 20,
       "scenario": "D",
-      "std": 1396.0689694051907
+      "std": 1399.3801019009609
     },
     {
       "condition": "demand_response",
       "kpi": "grid_exports_kwh",
-      "max": 2013.3748879911304,
-      "mean": 1094.91432758396,
-      "min": 516.6863420342287,
+      "max": 2200.3116405630713,
+      "mean": 1195.930782810458,
+      "min": 579.2728013691653,
       "runs": 20,
       "scenario": "D",
-      "std": 476.96315813789624
+      "std": 499.04653112481486
     },
     {
       "condition": "demand_response",
       "kpi": "household_net_cost_eur",
-      "max": 6071.743401931057,
-      "mean": 5173.115253101654,
-      "min": 4439.064085748746,
+      "max": 6114.526931997459,
+      "mean": 5200.360629060031,
+      "min": 4473.792278781601,
       "runs": 20,
       "scenario": "D",
-      "std": 445.35544744660837
+      "std": 445.82761773032655
     },
     {
       "condition": "demand_response",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5924.217007858531,
-      "mean": 5039.201766641521,
-      "min": 4328.131874449439,
+      "max": 5963.314729243989,
+      "mean": 5063.44571589588,
+      "min": 4359.668900761988,
       "runs": 20,
       "scenario": "D",
-      "std": 433.4381726968987
+      "std": 433.84872625728394
     },
     {
       "condition": "demand_response",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5924.217007858531,
-      "mean": 5039.201766641521,
-      "min": 4328.131874449439,
+      "max": 5963.314729243989,
+      "mean": 5063.44571589588,
+      "min": 4359.668900761988,
       "runs": 20,
       "scenario": "D",
-      "std": 433.4381726968987
+      "std": 433.84872625728394
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 77.85672436009273,
-      "mean": 65.47685210247946,
-      "min": 49.42088602726703,
+      "max": 77.03480274980105,
+      "mean": 64.11814537859547,
+      "min": 47.6590630143773,
       "runs": 20,
       "scenario": "D",
-      "std": 8.594238570015394
+      "std": 8.763191153462369
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 204.75702182662644,
-      "mean": 181.11236415239156,
-      "min": 153.32657558863272,
+      "max": 208.01516527541463,
+      "mean": 183.13269325692153,
+      "min": 155.9546611146785,
       "runs": 20,
       "scenario": "D",
-      "std": 12.368899837145317
+      "std": 12.615530937489517
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 57.924255478917736,
-      "mean": 47.19887769225878,
-      "min": 37.401941448965836,
+      "max": 56.827916639689064,
+      "mean": 46.21778009277101,
+      "min": 35.91364411679749,
       "runs": 20,
       "scenario": "D",
-      "std": 6.304427248751155
+      "std": 6.421017940926207
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 165.86865149070596,
-      "mean": 133.91348646013282,
-      "min": 110.93221129930708,
+      "max": 169.65094496846044,
+      "mean": 136.9149131641505,
+      "min": 114.12337801961328,
       "runs": 20,
       "scenario": "D",
-      "std": 13.837869786629877
+      "std": 14.148734114979185
     },
     {
       "condition": "demand_response",
@@ -1552,242 +1552,242 @@
     {
       "condition": "demand_response",
       "kpi": "p2p_energy_kwh",
-      "max": 2884.2765401689785,
-      "mean": 2342.353822006785,
-      "min": 1857.5463387761947,
+      "max": 2821.010716323307,
+      "mean": 2293.491433599521,
+      "min": 1778.0430307096863,
       "runs": 20,
       "scenario": "F",
-      "std": 311.6331310669536
+      "std": 319.5595738177136
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 22.680883255693395,
-      "mean": 18.69381112211584,
-      "min": 15.593422930014864,
+      "max": 22.454229705465494,
+      "mean": 18.301462049119916,
+      "min": 15.062469866360916,
       "runs": 20,
       "scenario": "F",
-      "std": 1.8310903200544202
+      "std": 1.9263580857977973
     },
     {
       "condition": "demand_response",
       "kpi": "grid_imports_kwh",
-      "max": 19462.186000493697,
-      "mean": 16600.615910728804,
-      "min": 14252.557898166539,
+      "max": 19620.249034815148,
+      "mean": 16704.12772133013,
+      "min": 14386.082021015698,
       "runs": 20,
       "scenario": "F",
-      "std": 1433.1853788378096
+      "std": 1427.102573217766
     },
     {
       "condition": "demand_response",
       "kpi": "grid_exports_kwh",
-      "max": 1480.3104375907465,
-      "mean": 686.4787719662478,
-      "min": 254.89765123679427,
+      "max": 1620.962122342509,
+      "mean": 785.4599956943863,
+      "min": 359.7987383833293,
       "runs": 20,
       "scenario": "F",
-      "std": 340.22442890280803
+      "std": 368.04757048182023
     },
     {
       "condition": "demand_response",
       "kpi": "household_net_cost_eur",
-      "max": 5963.77985746867,
-      "mean": 5065.019917287481,
-      "min": 4334.268970522029,
+      "max": 6005.806484126844,
+      "mean": 5093.13676515563,
+      "min": 4374.268720148471,
       "runs": 20,
       "scenario": "F",
-      "std": 454.0808848388541
+      "std": 452.246270528022
     },
     {
       "condition": "demand_response",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5823.361941073901,
-      "mean": 4938.9960469006655,
-      "min": 4221.468227593343,
+      "max": 5862.004121754291,
+      "mean": 4964.110716657376,
+      "min": 4257.168897463693,
       "runs": 20,
       "scenario": "F",
-      "std": 441.18425828450034
+      "std": 439.52821732939475
     },
     {
       "condition": "demand_response",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5854.029498168976,
-      "mean": 4955.883034162858,
-      "min": 4222.862498625922,
+      "max": 5888.207317882809,
+      "mean": 4979.232336741797,
+      "min": 4257.2566112458535,
       "runs": 20,
       "scenario": "F",
-      "std": 449.0426172310565
+      "std": 447.0560810019324
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 77.79388150467487,
-      "mean": 65.0183850750919,
-      "min": 48.95500486368992,
+      "max": 77.01647529741805,
+      "mean": 63.64895948538981,
+      "min": 47.43182574039032,
       "runs": 20,
       "scenario": "F",
-      "std": 8.718526966641408
+      "std": 8.838107541244979
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 197.84652848348296,
-      "mean": 172.87094682695053,
-      "min": 146.95345787256733,
+      "max": 200.2142551298602,
+      "mean": 174.89587717024517,
+      "min": 149.68211736018014,
       "runs": 20,
       "scenario": "F",
-      "std": 12.843265289636978
+      "std": 12.844369791419382
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 57.685530803379564,
-      "mean": 46.847076440135694,
-      "min": 37.15092677552389,
+      "max": 56.420214326466144,
+      "mean": 45.86982867199042,
+      "min": 35.56086061419373,
       "runs": 20,
       "scenario": "F",
-      "std": 6.232662621339073
+      "std": 6.391191476354273
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 160.6956017079591,
-      "mean": 126.02387038681483,
-      "min": 104.9185463831599,
+      "max": 163.77633446412742,
+      "mean": 129.02604849825474,
+      "min": 108.27391149892199,
       "runs": 20,
       "scenario": "F",
-      "std": 14.439896181167416
+      "std": 14.42047984578054
     },
     {
       "condition": "demand_response",
       "kpi": "battery_final_stored_kwh",
-      "max": 343.75831411152313,
-      "mean": 269.14741311511443,
-      "min": 177.93651748316174,
+      "max": 361.03167479660533,
+      "mean": 275.341683914313,
+      "min": 175.96378470152715,
       "runs": 20,
       "scenario": "F",
-      "std": 50.296894138011055
+      "std": 49.614634609864005
     },
     {
       "condition": "demand_response",
       "kpi": "battery_loss_kwh",
-      "max": 79.09144772605255,
-      "mean": 51.981965576204715,
-      "min": 31.819309407137098,
+      "max": 77.19210235361602,
+      "mean": 50.31828165019455,
+      "min": 32.14321732699795,
       "runs": 20,
       "scenario": "F",
-      "std": 14.129335864804563
+      "std": 13.342127168241904
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_energy_kwh",
-      "max": 2352.5668585472445,
-      "mean": 1870.5729144489387,
-      "min": 1508.5517613229838,
+      "max": 2347.493469577567,
+      "mean": 1868.2396628698034,
+      "min": 1495.7062210794213,
       "runs": 20,
       "scenario": "K",
-      "std": 243.29584067047557
+      "std": 242.0887602177297
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 16.54054340630838,
-      "mean": 14.893847614154058,
-      "min": 13.770624322156406,
+      "max": 16.504873172255245,
+      "mean": 14.875296000711446,
+      "min": 13.764835061213661,
       "runs": 20,
       "scenario": "K",
-      "std": 0.9193713925352083
+      "std": 0.9114950240908246
     },
     {
       "condition": "demand_response",
       "kpi": "grid_imports_kwh",
-      "max": 19769.786211349474,
-      "mean": 16739.058683452455,
-      "min": 14348.022892846773,
+      "max": 19860.39331939004,
+      "mean": 16789.567540326472,
+      "min": 14424.098392512089,
       "runs": 20,
       "scenario": "K",
-      "std": 1430.2147336622813
+      "std": 1433.2661173278511
     },
     {
       "condition": "demand_response",
       "kpi": "grid_exports_kwh",
-      "max": 1307.3640254417935,
-      "mean": 619.2055265702168,
-      "min": 137.35313193707432,
+      "max": 1383.4395251071098,
+      "mean": 669.7143834442327,
+      "min": 182.66939430779473,
       "runs": 20,
       "scenario": "K",
-      "std": 364.253489599438
+      "std": 371.38535980166614
     },
     {
       "condition": "demand_response",
       "kpi": "household_net_cost_eur",
-      "max": 5988.009354517237,
-      "mean": 5048.608663464495,
-      "min": 4280.927215887431,
+      "max": 6010.091557913435,
+      "mean": 5060.808771780389,
+      "min": 4299.656811592823,
       "runs": 20,
       "scenario": "K",
-      "std": 447.1140679627025
+      "std": 447.6268595441629
     },
     {
       "condition": "demand_response",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5913.7300058723695,
-      "mean": 4984.5652734415235,
-      "min": 4225.965026327524,
+      "max": 5935.475711802106,
+      "mean": 4996.687399091287,
+      "min": 4244.2231462472,
       "runs": 20,
       "scenario": "K",
-      "std": 442.27027367520145
+      "std": 442.89564382530835
     },
     {
       "condition": "demand_response",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5880.408552629463,
-      "mean": 4954.582580674712,
-      "min": 4193.752863559659,
+      "max": 5902.1542585592,
+      "mean": 4966.704706324475,
+      "min": 4212.010983479335,
       "runs": 20,
       "scenario": "K",
-      "std": 443.4375495952195
+      "std": 444.01519782939096
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 89.05326372731804,
-      "mean": 72.4184493705325,
-      "min": 55.05086058087068,
+      "max": 88.29496208175394,
+      "mean": 72.33495399552014,
+      "min": 55.40408538848439,
       "runs": 20,
       "scenario": "K",
-      "std": 9.95304992425575
+      "std": 9.964425455917038
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 200.56550503557338,
-      "mean": 173.58264210022674,
-      "min": 149.46281874476048,
+      "max": 202.37764719638471,
+      "mean": 174.59281923770703,
+      "min": 150.46546226407207,
       "runs": 20,
       "scenario": "K",
-      "std": 12.511869475291299
+      "std": 12.623141037940272
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 126.28615639070652,
-      "mean": 109.53925207725482,
-      "min": 91.17002578246438,
+      "max": 127.76180108505517,
+      "mean": 110.47144654860485,
+      "min": 91.74008813736916,
       "runs": 20,
       "scenario": "K",
-      "std": 8.165576975809705
+      "std": 8.452428466892314
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 74.2793486448669,
-      "mean": 64.04339002297192,
-      "min": 54.962189559906726,
+      "max": 74.6158461113295,
+      "mean": 64.1213726891022,
+      "min": 55.433665345623034,
       "runs": 20,
       "scenario": "K",
-      "std": 5.504552798885748
+      "std": 5.445964579441982
     },
     {
       "condition": "demand_response",
@@ -1812,132 +1812,132 @@
     {
       "condition": "demand_response",
       "kpi": "p2p_energy_kwh",
-      "max": 2838.4113674524274,
-      "mean": 2370.476199811988,
-      "min": 1988.4394864600713,
+      "max": 2837.4245041313106,
+      "mean": 2358.738591797366,
+      "min": 1977.230523475073,
       "runs": 20,
       "scenario": "L",
-      "std": 255.60738400507623
+      "std": 254.09266645497053
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_pv_pct",
-      "max": 22.245426438764202,
-      "mean": 18.94233693632776,
-      "min": 16.160968560241823,
+      "max": 22.402390759669913,
+      "mean": 18.853955272641947,
+      "min": 15.745959997666008,
       "runs": 20,
       "scenario": "L",
-      "std": 1.4526389776036606
+      "std": 1.5127486618963204
     },
     {
       "condition": "demand_response",
       "kpi": "grid_imports_kwh",
-      "max": 19521.62568611744,
-      "mean": 16550.35560273471,
-      "min": 14241.058217820868,
+      "max": 19670.37301443608,
+      "mean": 16623.005626227634,
+      "min": 14349.405206566022,
       "runs": 20,
       "scenario": "L",
-      "std": 1421.553342324216
+      "std": 1417.865463573218
     },
     {
       "condition": "demand_response",
       "kpi": "grid_exports_kwh",
-      "max": 1396.0952510543577,
-      "mean": 635.2172225380519,
-      "min": 241.1856974566416,
+      "max": 1510.1918819059988,
+      "mean": 704.0345470923901,
+      "min": 241.74222820624445,
       "runs": 20,
       "scenario": "L",
-      "std": 329.52850332948447
+      "std": 354.85547438940046
     },
     {
       "condition": "demand_response",
       "kpi": "household_net_cost_eur",
-      "max": 5912.208925195792,
-      "mean": 4991.720700316839,
-      "min": 4260.096000000355,
+      "max": 5949.399915481156,
+      "mean": 5009.6648141685255,
+      "min": 4291.921085684522,
       "runs": 20,
       "scenario": "L",
-      "std": 443.1201356853445
+      "std": 442.1021825537489
     },
     {
       "condition": "demand_response",
       "kpi": "community_including_regulator_net_cost_eur",
-      "max": 5837.912679352186,
-      "mean": 4926.99364746813,
-      "min": 4203.621559713033,
+      "max": 5874.439180399593,
+      "mean": 4944.659615042747,
+      "min": 4235.481092488667,
       "runs": 20,
       "scenario": "L",
-      "std": 438.32249040799474
+      "std": 437.226284406107
     },
     {
       "condition": "demand_response",
       "kpi": "community_cost_storage_adjusted_eur",
-      "max": 5868.001726539003,
-      "mean": 4944.094262425538,
-      "min": 4204.464940245793,
+      "max": 5899.36701770818,
+      "mean": 4960.004759912717,
+      "min": 4232.599335363066,
       "runs": 20,
       "scenario": "L",
-      "std": 447.2785957114081
+      "std": 445.7518499207044
     },
     {
       "condition": "demand_response",
       "kpi": "p2p_share_of_surplus_pct",
-      "max": 78.36334101794074,
-      "mean": 65.96418243261739,
-      "min": 49.287008957207185,
+      "max": 77.92160175716262,
+      "mean": 65.67849287976397,
+      "min": 48.02133415159481,
       "runs": 20,
       "scenario": "L",
-      "std": 8.595221925648891
+      "std": 8.839223316144428
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_fee_revenue_eur",
-      "max": 198.3120946083487,
-      "mean": 171.85572825272763,
-      "min": 146.5770526631309,
+      "max": 201.14918413289934,
+      "mean": 173.27040173320026,
+      "min": 148.82690935229286,
       "runs": 20,
       "scenario": "L",
-      "std": 12.575730439526815
+      "std": 12.620549224833079
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_reward_expenditure_eur",
-      "max": 124.01584876474321,
-      "mean": 107.12867540401834,
-      "min": 89.41689536013376,
+      "max": 126.18844905133632,
+      "mean": 108.2652026074217,
+      "min": 91.15153151757073,
       "runs": 20,
       "scenario": "L",
-      "std": 8.003738798379814
+      "std": 8.086214121473978
     },
     {
       "condition": "demand_response",
       "kpi": "regulator_remaining_funds_eur",
-      "max": 74.29624584360545,
-      "mean": 64.72705284870929,
-      "min": 56.474440287322516,
+      "max": 74.96073508156304,
+      "mean": 65.00519912577855,
+      "min": 56.439993195855315,
       "runs": 20,
       "scenario": "L",
-      "std": 5.262520622981567
+      "std": 5.4364332348177165
     },
     {
       "condition": "demand_response",
       "kpi": "battery_final_stored_kwh",
-      "max": 343.04077006049215,
-      "mean": 268.39784225470925,
-      "min": 181.33613777563482,
+      "max": 356.11142851088107,
+      "mean": 274.55738642115466,
+      "min": 178.21397932805615,
       "runs": 20,
       "scenario": "L",
-      "std": 50.99498751149772
+      "std": 49.99011520656295
     },
     {
       "condition": "demand_response",
       "kpi": "battery_loss_kwh",
-      "max": 82.03459324852467,
-      "mean": 53.73277787071176,
-      "min": 33.62919775603721,
+      "max": 77.50024849972552,
+      "mean": 51.40593264285289,
+      "min": 33.380877018885606,
       "runs": 20,
       "scenario": "L",
-      "std": 14.202514745008367
+      "std": 13.75574530048703
     }
   ]
 }

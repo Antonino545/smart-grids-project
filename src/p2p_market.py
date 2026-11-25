@@ -1,4 +1,5 @@
-"""Random matching within neighborhoods; each buyer tries every eligible seller."""
+"""Neighbourhood P2P: buyers take turns in seeded random order; each buys from the cheapest
+seller of its group first, then the next cheapest, until its need is met or prices no longer match."""
 
 from random import Random
 from typing import TYPE_CHECKING
@@ -15,11 +16,11 @@ def trade_p2p(offers: list[Offer], hour: int, rng: Random,
     for group in sorted({offer.group_id for offer in offers}):
         buyers = [o for o in offers if o.group_id == group and o.balance_kwh < -TOLERANCE]
         sellers = [o for o in offers if o.group_id == group and o.balance_kwh > TOLERANCE]
-        rng.shuffle(buyers)
+        rng.shuffle(buyers)  # who negotiates first is random (seeded)
+        # Cheapest ask first; the household ID only breaks exact price ties reproducibly.
+        sellers.sort(key=lambda o: (o.ask_eur_kwh, o.household_id))
         for buyer in buyers:
-            candidates = sellers.copy()
-            rng.shuffle(candidates)
-            for seller in candidates:
+            for seller in sellers:
                 quantity = min(-buyer.balance_kwh, seller.balance_kwh)
                 if quantity <= TOLERANCE:
                     continue

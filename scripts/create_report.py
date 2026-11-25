@@ -173,7 +173,7 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
 
     title(5,"Trading, regulation and transaction record")
     sub("Settlement sequence")
-    p("<b>Self-balancing:</b> owner PV serves demand, with eligible battery operations. Consumers have demand only.<br/><b>P2P:</b> seeded buyer/seller encounters within each 15-member mixed group, at the seller ask.<br/><b>Aggregator:</b> lowest asks and highest bids across groups, at midpoint prices.<br/><b>External grid:</b> remaining demand imports at EUR 0.30/kWh and surplus exports at EUR 0.06/kWh. Consumers can buy but never supply electricity. Each trade updates remaining energy.")
+    p("<b>Self-balancing:</b> owner PV serves demand, with eligible battery operations. Consumers have demand only.<br/><b>P2P:</b> inside each 15-member mixed group, buyers take turns in seeded random order; each buys from the cheapest seller first, then the next, at the seller ask (simple price sorting, as suggested in the course brief, instead of an optimizer).<br/><b>Aggregator:</b> lowest asks and highest bids across groups, at midpoint prices.<br/><b>External grid:</b> remaining demand imports at EUR 0.30/kWh and surplus exports at EUR 0.06/kWh. Consumers can buy but never supply electricity. Each trade updates remaining energy.")
     sub("Guidance and funded rewards")
     table([["Opening regulator funds","P2P seller reward"],["Below EUR 1","EUR 0/kWh"],
            ["EUR 1 to below EUR 5","EUR 0.01/kWh"],["EUR 5 or above","EUR 0.02/kWh"]],[280,227])

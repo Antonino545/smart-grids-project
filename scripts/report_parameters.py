@@ -7,7 +7,7 @@ COMMUNITY = [
     ("simulation.battery_household_count", "owners", "Exact number of battery-owning meters. IDs are selected with the seed and spread evenly across groups. C/D disable operation, not ownership."),
     ("simulation.hours", "one-hour steps", "Length of the run. 24 covers one day; 168 covers a week and exposes weekend effects. Longer runs do not add holiday logic."),
     ("simulation.timestep_hours", "hours per step", "This implementation supports exactly 1. Do not change it to 0.5: the hourly input generator rejects other durations."),
-    ("simulation.random_seed", "integer", "Controls randomized ownership, type positions, building attributes, cloud factors, demand variation and encounter order through separate seeded streams."),
+    ("simulation.random_seed", "integer", "Controls randomized ownership, type positions, building attributes, cloud factors, demand variation and buyer turn order through separate seeded streams."),
     ("simulation.log_level", "logging level", "Console verbosity: DEBUG, INFO, WARNING, ERROR or CRITICAL. Does not change energy or prices."),
     ("buildings.enabled", "boolean", "true selects the mixed-building model. false selects the original individual-house model; type geometry and type battery scales are then unused."),
     ("buildings.consumer_count", "additional meters", "Extra consumer-only buildings with zero PV and no battery. Types follow the same shares; additions split equally across groups. Total meters = household_count + consumer_count."),

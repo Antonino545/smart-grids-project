@@ -32,3 +32,11 @@ def test_overtrading_and_negative_quantities_rejected():
     for quantity in (-1, 0, 2, float("nan")):
         with pytest.raises(ValueError):
             transfer_energy(buyer, seller, quantity)
+
+
+def test_buyer_takes_the_cheapest_seller_first():
+    offers = [Offer("B", 1, -3, .25, .3), Offer("dear", 1, 5, .1, .20),
+              Offer("cheap", 1, 2, .1, .12), Offer("mid", 1, 2, .1, .15)]
+    trades = trade_p2p(offers, 0, Random(1))
+    assert [(t.seller_id, t.quantity_kwh) for t in trades] == [("cheap", 2), ("mid", 1)]
+    assert [t.price_eur_kwh for t in trades] == [.12, .15]

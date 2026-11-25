@@ -87,8 +87,8 @@ first), each with **one** regulator rule changed. Their settings are in
 | J | Whole fund returned at day end, split by each meter's P2P kWh | `refund_leftover: true` |
 | K | Hourly reward = fund / possible P2P kWh, capped at EUR 0.10/kWh | `reward_mode: "budget_sized"` |
 
-Why: in B the fee hits every grid kWh, day and night (about 17,700 kWh), while
-the reward only reaches P2P kWh (about 2,130), so most fees stay in the fund.
+Why: in B the fee hits every grid kWh, day and night (about 18,000 kWh), while
+the reward only reaches P2P kWh (about 2,060), so most fees stay in the fund.
 On the default day, G's smaller fee leaves too little money for afternoon
 rewards, so it trades less than B; H and K trade more, and K, which sizes each
 hour's reward to the money in the fund (high in the morning, lower after the fund
@@ -129,21 +129,21 @@ and scenario), `summary.csv` (mean, sample standard deviation, min, max),
 "Storage-adjusted" cost subtracts the change in stored energy valued at
 import tariff x discharge efficiency (EUR 0.285/kWh).
 
-Recorded result (default day, seed 42, fixed demand): L trades 2,758 kWh P2P against
-F's 2,739 and K's 2,297; meters + regulator cost EUR 4,731.02 (F 4,735.46, K 4,777.87).
-With demand response L trades 2,665 kWh against F's 2,646. Over 20 seeds (paired
+Recorded result (default day, seed 42, fixed demand): L trades 2,712 kWh P2P against
+F's 2,682 and K's 2,254; meters + regulator cost EUR 4,743.53 (F 4,753.21, K 4,795.67).
+With demand response L trades 2,629 kWh against F's 2,589. Over 20 seeds (paired
 differences, mean ± sd across seeds, share of seeds in which L is better):
 
 | L minus | Condition | P2P kWh | Meter cost EUR | Storage-adjusted meters + regulator EUR |
 |---|---|---:|---:|---:|
-| F | fixed | +14 ± 93 (60%) | -69.0 ± 29.3 (100%) | -9.6 ± 19.4 (75%) |
-| F | demand response | +28 ± 82 (70%) | -73.3 ± 26.7 (100%) | -11.8 ± 16.8 (85%) |
-| K | fixed | +497 ± 74 (100%) | -56.5 ± 15.6 (100%) | -10.8 ± 13.2 (75%) |
-| K | demand response | +500 ± 86 (100%) | -56.9 ± 17.4 (100%) | -10.5 ± 13.4 (80%) |
+| F | fixed | +52 ± 102 (75%) | -79.6 ± 29.8 (100%) | -16.9 ± 19.6 (85%) |
+| F | demand response | +65 ± 96 (80%) | -83.5 ± 28.3 (100%) | -19.2 ± 18.1 (85%) |
+| K | fixed | +486 ± 86 (100%) | -51.4 ± 15.4 (100%) | -7.6 ± 11.2 (70%) |
+| K | demand response | +490 ± 95 (100%) | -51.1 ± 16.8 (100%) | -6.7 ± 11.1 (70%) |
 
 L clearly beats K in P2P, because F's battery order leaves more PV for neighbours.
-Against F, L is slightly cheaper for the community (about EUR 10/day, 0.2% of the
-bill, beyond two standard errors of the paired mean) and trades about as much P2P.
+Against F, L is slightly cheaper for the community (about EUR 17-19/day, 0.4% of the
+bill, beyond two standard errors of the paired mean) and trades slightly more P2P.
 The gain is small because K's rule spends the whole fund in the current hour: under
 P2P-first ordering the fund runs low before the midday peak, where L pays less than
 F's fixed EUR 0.02/kWh; L wins it back in the morning and late afternoon. Most of L's
@@ -155,8 +155,9 @@ and per participant group, the share of meters paying less than in A, and five k
 messages for the slides.
 
 These results changed when house PV was resized to typical Italian systems (mean about
-4 kWp instead of 6.3) and synthetic clouds were made daily instead of hourly: with
-the earlier, larger house PV, L and F were economically indistinguishable.
+4 kWp instead of 6.3), synthetic clouds were made daily instead of hourly, and P2P
+buyers were made to take the cheapest seller first: with the earlier, larger house PV
+and random seller order, L and F were economically indistinguishable.
 
 Each hour has a deterministic matching stream, separate from community and data
 generation. Same inputs, seed, code and environment reproduce the transaction
@@ -287,8 +288,10 @@ choices, not separately verified professor requirements.
   bid/ask parameter, clipped to configurable limits. Default offer bounds are
   EUR 0.06–0.30/kWh, equal to external export/import tariffs. Negative historical
   reference prices are valid inputs but behavioral offers remain within bounds.
-- Neighborhood buyers and their seller encounter orders are shuffled. Every
-  buyer can try every seller in its group. P2P pays the seller ask. The aggregator
+- Neighborhood buyers take turns in seeded random order. Each buyer buys from the
+  cheapest seller in its group first, then the next cheapest, until its need is met
+  or the next ask is above its bid (simple price sorting, as suggested in the brief).
+  P2P pays the seller ask. The aggregator
   sorts ascending asks and descending bids, with household ID as a tie-breaker,
   and pays the midpoint. Remaining balances settle with the grid.
 - The regulator blends original offers toward `1.04 × reference` for bids and
