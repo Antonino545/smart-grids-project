@@ -4,17 +4,33 @@ These are model outputs for the recorded inputs and assumptions, not evidence of
 
 | Scenario | P2P kWh | P2P share % | Imports kWh | Exports kWh | Household net cost EUR |
 |---|---:|---:|---:|---:|---:|
-| A | 863.982 | 13.985 | 18268.301 | 4495.218 | 5210.777 |
-| B | 2858.451 | 46.269 | 16721.153 | 2948.070 | 4978.985 |
-| C | 1047.066 | 14.188 | 19029.806 | 5440.493 | 5382.512 |
-| D | 3523.217 | 47.741 | 17074.078 | 3484.765 | 5048.262 |
-| E | 1030.768 | 13.967 | 18215.841 | 4481.092 | 5195.887 |
-| F | 3473.971 | 47.074 | 16447.048 | 2846.534 | 4886.779 |
+| A | 740.067 | 18.278 | 17785.533 | 2443.123 | 5189.073 |
+| B | 2349.577 | 58.030 | 16704.619 | 1362.209 | 5063.330 |
+| C | 962.592 | 19.114 | 18148.926 | 3060.965 | 5261.020 |
+| D | 2958.634 | 58.747 | 16674.797 | 1586.837 | 5030.673 |
+| E | 953.911 | 18.941 | 17705.956 | 2442.330 | 5165.247 |
+| F | 2941.264 | 58.403 | 16263.184 | 1084.672 | 4928.528 |
+| G | 2189.921 | 54.086 | 16834.677 | 1492.266 | 4977.751 |
+| H | 2374.048 | 58.634 | 16583.259 | 1240.848 | 4962.689 |
+| I | 1998.394 | 49.356 | 16981.230 | 1638.820 | 4997.342 |
+| J | 2349.577 | 58.030 | 16704.619 | 1362.209 | 4929.653 |
+| K | 2470.890 | 61.026 | 16546.269 | 1203.858 | 4953.249 |
 
 ## Regulation comparisons
-- B versus A: regulation increased P2P energy (difference +1994.469 kWh).
-- D versus C: regulation increased P2P energy (difference +2476.151 kWh).
-- F versus E: regulation increased P2P energy (difference +2443.203 kWh).
+- B versus A: regulation increased P2P energy (difference +1609.510 kWh).
+- D versus C: regulation increased P2P energy (difference +1996.041 kWh).
+- F versus E: regulation increased P2P energy (difference +1987.353 kWh).
+
+## Regulator policy variants (each compared with B)
+
+| Scenario | Change | P2P kWh vs B | Fees EUR | Rewards EUR | Refunds EUR | Fund left EUR | Household cost vs B EUR |
+|---|---|---:|---:|---:|---:|---:|---:|
+| B | reference | +0.000 | 180.67 | 46.99 | 0.00 | 133.68 | +0.00 |
+| G | B with a lower grid fee (EUR 0.0025/kWh) | -159.656 | 45.82 | 28.93 | 0.00 | 16.88 | -85.58 |
+| H | B with a bigger reward (EUR 0.075/kWh upper tier, 0.0375 lower) | +24.472 | 178.24 | 116.08 | 0.00 | 62.16 | -100.64 |
+| I | B, fee only on grid energy a neighbour could have traded | -351.183 | 16.46 | 15.16 | 0.00 | 1.30 | -65.99 |
+| J | B, leftover fund refunded to P2P traders at day end | +0.000 | 180.67 | 46.99 | 133.68 | 0.00 | -133.68 |
+| K | B, reward rate sized each hour to spend the fund | +121.313 | 177.50 | 115.90 | 0.00 | 61.60 | -110.08 |
 
 Price guidance and funded discounts can make more offers compatible. A reward cannot create PV surplus or demand, and does not guarantee improvement for other seeds or inputs.
 

@@ -15,10 +15,12 @@ timestamp,irradiance_w_m2
 2026-06-15T01:00:00+02:00,0
 ```
 
-Supply one row for **every simulation hour**. Irradiance is nonnegative and finite.
-Duplicate instants and missing hours fail validation. Nighttime irradiance must
-be zero according to configured sunrise/sunset. Update these settings for the
-chosen season/location. PV output is capped at installed power times one hour.
+Supply one row for **every simulation hour**. `irradiance_w_m2` is the hourly mean
+**horizontal** light (GHI), as weather stations and PVGIS report it; the simulator
+moves it onto each building's panel tilt with the clear-sky panel/horizontal ratio.
+Irradiance is nonnegative and finite. Duplicate instants and missing hours fail
+validation. Light while the sun is below the horizon at the configured site
+(`forecast.latitude_deg`, `longitude_deg`; default Turin) is rejected. PV output is capped at installed power times one hour.
 Weather rows must represent forecasts available at forecast issuance, or clearly
 labeled hindcast inputs. The code cannot determine whether a supplied weather
 CSV secretly contains future actual measurements. Record source, retrieval date,

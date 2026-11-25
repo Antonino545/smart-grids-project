@@ -20,6 +20,31 @@ SCENARIOS = {
     "D": (False, True, "self_consumption_first"),
     "E": (True, False, "p2p_priority"),
     "F": (True, True, "p2p_priority"),
+    # Regulator policy variants of B (batteries on, regulated, self-consumption first).
+    "G": (True, True, "self_consumption_first"),
+    "H": (True, True, "self_consumption_first"),
+    "I": (True, True, "self_consumption_first"),
+    "J": (True, True, "self_consumption_first"),
+    "K": (True, True, "self_consumption_first"),
+}
+PRIORITY_SCENARIOS = ["E", "F"]
+POLICY_SCENARIOS = ["G", "H", "I", "J", "K"]
+# Each policy scenario changes one regulator rule relative to B. G and H are sized so that,
+# on the default Turin day, fees and rewards would roughly balance (B: 18,067 grid kWh,
+# 2,350 P2P kWh): fee 0.01 x 18,067 / 2,350 / 0.02 -> fee 0.0025; or reward 0.075.
+REGULATOR_OVERRIDES = {
+    "G": {"grid_fee_eur_kwh": 0.0025},                                   # lower fee
+    "H": {"lower_reward_eur_kwh": 0.0375, "upper_reward_eur_kwh": 0.075},  # bigger reward
+    "I": {"fee_scope": "missed_local"},                                  # fee only on missed local trades
+    "J": {"refund_leftover": True},                                      # end-of-day refund to P2P traders
+    "K": {"reward_mode": "budget_sized"},                                # reward sized to the fund
+}
+SCENARIO_DESCRIPTIONS = {
+    "G": "B with a lower grid fee (EUR 0.0025/kWh)",
+    "H": "B with a bigger reward (EUR 0.075/kWh upper tier, 0.0375 lower)",
+    "I": "B, fee only on grid energy a neighbour could have traded",
+    "J": "B, leftover fund refunded to P2P traders at day end",
+    "K": "B, reward rate sized each hour to spend the fund",
 }
 
 
@@ -45,21 +70,24 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
     results, summaries = [], []
     for name in scenario_names:
         battery, regulated, strategy = SCENARIOS[name]
+        overrides = REGULATOR_OVERRIDES.get(name, {})
+        regulator_settings = replace(config["regulator"], **overrides)
         result = run_simulation(
             households, inputs, replace(settings, household_count=len(households)), config["market"], name,
             batteries_enabled=battery, regulation_enabled=regulated,
-            regulator_settings=config["regulator"], blockchain_settings=config["blockchain"],
+            regulator_settings=regulator_settings, blockchain_settings=config["blockchain"],
             battery_strategy=strategy)
         configuration = {key: asdict(value) for key, value in config.items()}
+        configuration["regulator"] = asdict(regulator_settings)
         configuration["experiment"] = {"batteries_enabled": battery, "regulation_enabled": regulated,
-                                        "battery_strategy": strategy}
+                                        "battery_strategy": strategy, "regulator_overrides": overrides}
         summaries.append(export_result(result, inputs, output / name, configuration))
         results.append(result)
     if len({s["input_sha256"] for s in summaries}) != 1:
         raise ValueError("Scenarios do not share identical hourly inputs.")
     from collections import Counter
     community = {"participant_unit": "aggregated_building_meter" if config["buildings"].enabled else "household",
-                 "participant_count": len(households), "dwelling_count": sum(h.dwelling_units for h in households),
+                 "participant_count": len(households), "home_count": sum(h.homes for h in households),
                  "building_type_counts": dict(Counter(h.building_type for h in households)),
                  "battery_owner_count": sum(h.has_battery for h in households)}
     community["prosumer_count"] = sum(h.participant_role == "prosumer" for h in households)
@@ -72,6 +100,7 @@ def run_experiments(config: dict, output: Path, scenario_names: list[str], chart
                             "Building archetypes and parameter ranges are illustrative engineering assumptions.",
                             "C and D retain ownership metadata but disable all battery operations.",
                             "E and F sell PV via P2P before charging remaining owner PV.",
+                            *(f"{name}: {SCENARIO_DESCRIPTIONS[name]}." for name in scenario_names if name in SCENARIO_DESCRIPTIONS),
                             "P2P-priority denominator is surplus available before P2P, before deferred charging.",
                             "Costs exclude battery capital/degradation and inventory valuation; initial/final stored energy is reported."]}
     write_json(output / "comparison.json", comparison)
@@ -99,6 +128,16 @@ def write_discussion(comparison: dict, path: Path) -> None:
             delta = metrics[regulated]["p2p_energy_kwh"] - metrics[base]["p2p_energy_kwh"]
             direction = "increased" if delta > 1e-9 else "decreased" if delta < -1e-9 else "did not change"
             lines.append(f"- {regulated} versus {base}: regulation {direction} P2P energy (difference {delta:+.3f} kWh).")
+    policy = [name for name in POLICY_SCENARIOS if name in metrics]
+    if policy and "B" in metrics:
+        lines += ["", "## Regulator policy variants (each compared with B)", "",
+                  "| Scenario | Change | P2P kWh vs B | Fees EUR | Rewards EUR | Refunds EUR | Fund left EUR | Household cost vs B EUR |",
+                  "|---|---|---:|---:|---:|---:|---:|---:|"]
+        for name in ["B"] + policy:
+            m, b = metrics[name], metrics["B"]
+            lines.append(f'| {name} | {SCENARIO_DESCRIPTIONS.get(name, "reference")} | {m["p2p_energy_kwh"] - b["p2p_energy_kwh"]:+.3f} | '
+                         f'{m["regulator_fee_revenue_eur"]:.2f} | {m["regulator_reward_expenditure_eur"]:.2f} | {m["regulator_refund_eur"]:.2f} | '
+                         f'{m["regulator_remaining_funds_eur"]:.2f} | {m["household_net_cost_eur"] - b["household_net_cost_eur"]:+.2f} |')
     lines += ["", "Price guidance and funded discounts can make more offers compatible. A reward cannot create PV surplus or demand, and does not guarantee improvement for other seeds or inputs.",
               "", "## Battery interpretation", "",
               "Self-consumption-first batteries remove PV surplus before trading and reduce later demand. Compare absolute P2P energy alongside its changing denominator. E/F defer charging until after P2P, so their offered-surplus denominator includes PV subsequently stored. Compare raw PV surplus as well.",

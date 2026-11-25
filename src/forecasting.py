@@ -1,4 +1,4 @@
-"""Simple PV model and hourly historical price means with a strict forecast cutoff."""
+"""Site-based PV model (sun geometry + panel tilt) and hourly price means with a strict forecast cutoff."""
 
 import csv
 from dataclasses import asdict, dataclass
@@ -9,6 +9,7 @@ from random import Random
 
 from config.settings import ForecastSettings, SimulationSettings
 from src.households import Household
+from src.solar import hourly_clear_sky
 
 
 @dataclass(frozen=True)
@@ -118,18 +119,33 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
         # Advance absolute time so DST transitions do not duplicate/miss instants.
         timestamp = (start.astimezone(timezone.utc) + timedelta(hours=hour)).astimezone(start.tzinfo)
         clock_hour = timestamp.hour
-        daylight = forecast.sunrise_hour < clock_hour < forecast.sunset_hour
+        # One shared sky per hour: cloud factor (synthetic) or measured horizontal irradiance (CSV).
         if weather is None:
-            irradiance = (forecast.peak_irradiance_w_m2
-                          * sin(pi * (clock_hour - forecast.sunrise_hour)
-                                / (forecast.sunset_hour - forecast.sunrise_hour))
-                          * rng.uniform(forecast.cloud_factor_min, forecast.cloud_factor_max)) if daylight else 0.0
+            sky = rng.uniform(forecast.cloud_factor_min, forecast.cloud_factor_max)
         else:
             if timestamp not in weather:
                 raise ValueError(f"Missing weather for {timestamp.isoformat()}")
-            irradiance = weather[timestamp]
-            if not daylight and irradiance > 1e-9:
-                raise ValueError("Nonzero nighttime irradiance: check timezone/daylight settings.")
+            sky = weather[timestamp]
+        plane_cache = {}
+
+        def plane_irradiance(household: Household) -> float:
+            orientation = (household.panel_tilt_deg, household.panel_azimuth_deg)
+            if orientation not in plane_cache:
+                clear_plane, clear_horizontal = hourly_clear_sky(
+                    timestamp, forecast.latitude_deg, forecast.longitude_deg, forecast.site_altitude_m,
+                    forecast.clear_sky_transmittance, forecast.ground_albedo, *orientation)
+                if weather is None:
+                    plane_cache[orientation] = clear_plane * sky
+                elif clear_horizontal < 1.0:
+                    if sky > 1.0:
+                        raise ValueError("Nonzero irradiance while the sun is below the horizon: "
+                                         "check timezone/site settings.")
+                    plane_cache[orientation] = 0.0
+                else:
+                    # Measured horizontal value, moved onto the panel plane with the clear-sky ratio.
+                    plane_cache[orientation] = sky * min(clear_plane / clear_horizontal, 2.0)
+            return plane_cache[orientation]
+
         for household in households:
             if demands is None:
                 profile = (household.weekend_demand_profile_kwh
@@ -146,6 +162,7 @@ def generate_inputs(households: list[Household], settings: SimulationSettings,
                 if key not in demands:
                     raise ValueError(f"Missing demand for {key}")
                 demand = demands[key]
+            irradiance = plane_irradiance(household)
             records.append(HourlyInput(
                 hour, timestamp.isoformat(), household.household_id, irradiance,
                 pv_forecast(household.pv_capacity_kw, irradiance, forecast.performance_factor, 1),

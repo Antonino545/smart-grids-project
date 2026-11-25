@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage[margin=20mm]{geometry}
-\usepackage{graphicx,longtable,array,booktabs,ragged2e,seqsplit,listings}
+\usepackage{graphicx,longtable,array,booktabs,ragged2e,listings}
 \usepackage{xcolor,hyperref}
 \definecolor{navy}{HTML}{19364F}
 \hypersetup{colorlinks=true,linkcolor=navy,urlcolor=navy,pdftitle={Smart Grids Team Guide}}
@@ -21,13 +21,13 @@
 {\LARGE\bfseries Prosumer community simulator\newline{}with heterogeneous buildings\par}\medskip
 \par\medskip
 
-{\small 24 October 2026\par}
+{\small 25 November 2026\par}
 \par\medskip
 
-The design contains \textbf{150 aggregate building meters: 100 prosumers and 50 consumers}. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are 75 small houses, 45 blocks, 15 supermarkets and 15 schools, including \textbf{972 residential dwelling units}. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.
+The design contains \textbf{150 aggregate building meters: 100 prosumers and 50 consumers}. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are 84 small houses, 45 blocks, 15 supermarkets and 6 schools, including \textbf{1005 homes}. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.
 \par\medskip
 
-{\small \textbf{For the team:} sections 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on sections 23-25 when that experiment is present.\par}
+{\small \textbf{For the team:} sections 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on sections 23-25 when that experiment is present. section 26 compares the regulator policy variants G-K when they were run.\par}
 \par\medskip
 
 \subsection*{Objective and experiment}
@@ -57,7 +57,7 @@ F & 55 owners & On & P2P before charging \\ \addlinespace[3pt]
 \subsection*{Actual result for the new community}
 \par\medskip
 
-With storage, regulation changes P2P energy from \textbf{863.982 to 2,858.451 kWh}, and its share from 13.985\% to 46.269\%. Cost effects differ by scenario and accounting boundary; all values below come from the recorded execution.
+With storage, regulation changes P2P energy from \textbf{740.067 to 2,349.577 kWh}, and its share from 18.278\% to 58.030\%. Cost effects differ by scenario and accounting boundary; all values below come from the recorded execution.
 \par\medskip
 
 \textbf{Evidence boundary:} geometry, demand profiles, weather and price history are synthetic engineering assumptions. They are not measured building data. This mixed community is a new experiment and cannot be treated as a like-for-like improvement over the previous residential-only community.
@@ -84,7 +84,7 @@ Every neighborhood has five or six battery owners. IDs, types and ownership stay
 \section*{03  Building geometry and physical sizing}
 \par\medskip
 
-Type ranges are configurable in \textbf{config/buildings.py} and the buildings section of JSON. The following are proposed engineering defaults, not professor requirements or calibrated building-stock data.
+Type ranges are configurable in \textbf{config/buildings.py} and the buildings section of JSON. Defaults describe a Turin neighbourhood, based on JRC PVGIS (sun), ISTAT (home size) and ARERA (household use) where data exist; the rest are engineering estimates, not a survey of real buildings.
 \par\medskip
 
 \begingroup\small
@@ -95,10 +95,10 @@ Type ranges are configurable in \textbf{config/buildings.py} and the buildings s
 \toprule
 \textbf{Type} & \textbf{Count} & \textbf{Single roof m2} & \textbf{Floors} & \textbf{Daily energy basis} \\ \midrule
 \endhead
-Small house & 75 & 70-150 & 1-2 & 8-24 kWh per dwelling \\ \addlinespace[3pt]
-Apartment block & 45 & 180-360 & 4-10 & 8-20 kWh per dwelling \\ \addlinespace[3pt]
-Supermarket & 15 & 600-1400 & 1 & 0.5-1.1 kWh per m2 \\ \addlinespace[3pt]
-School & 15 & 700-1600 & 2-3 & 0.08-0.18 kWh per m2 \\ \addlinespace[3pt]
+Small house & 84 & 80-140 & 1-2 & 7-12 kWh per home \\ \addlinespace[3pt]
+Apartment block & 45 & 250-500 & 4-8 & 5-8 kWh per home \\ \addlinespace[3pt]
+Supermarket & 15 & 800-1600 & 1 & 0.8-1.3 kWh per m2 \\ \addlinespace[3pt]
+School & 6 & 700-1600 & 2-4 & 0.08-0.15 kWh per m2 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -106,14 +106,30 @@ School & 15 & 700-1600 & 2-3 & 0.08-0.18 kWh per m2 \\ \addlinespace[3pt]
 \subsection*{One roof, regardless of height}
 \par\medskip
 
-Total floor area = roof footprint x floors. Blocks contain 2-4 dwelling units per floor. Their demand basis scales with the total number of units. Commercial/school demand scales with total floor area. Small houses represent one dwelling even when they have two floors.
+Floor area = roof x floors. A \textbf{home} is one flat or house where one family lives. Block homes per floor = 80\% of the footprint / home size (70-110 m2; Italian city average 93.5 m2). Shop/school demand scales with floor area.
 \par\medskip
 
 \begin{lstlisting}
-Prosumers: PV kW = min(roof m2 x usable share x density, type PV limit). Consumers: PV = 0; battery = none.
+Prosumers: PV kW = min(roof m2 x panel coverage x density, type PV limit). Consumers: PV = 0; battery = none.
 \end{lstlisting}
 
-Usable roof fraction is 35-65\% and PV density is 0.20 kW/m2. Installed limits are 12 kW for houses, 100 kW for blocks, and 300 kW for supermarkets/schools. Floors and flats do not appear in the PV formula. Adding floors increases the demand basis without creating extra roof area.
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.207101\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.122288\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.157791\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.177515\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.128205\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.207101\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Type} & \textbf{Panel tilt} & \textbf{Roof covered} & \textbf{Roof-based kW} & \textbf{Limit kW} & \textbf{Limit never binds} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Type} & \textbf{Panel tilt} & \textbf{Roof covered} & \textbf{Roof-based kW} & \textbf{Limit kW} & \textbf{Limit never binds} \\ \midrule
+\endhead
+Small house & 20 deg & 22-35\% & 3.5-9.8 & 10 & yes \\ \addlinespace[3pt]
+Apartment block & 15 deg & 30-45\% & 15.0-45.0 & 50 & yes \\ \addlinespace[3pt]
+Supermarket & 10 deg & 40-55\% & 64.0-176.0 & 200 & yes \\ \addlinespace[3pt]
+School & 15 deg & 30-45\% & 42.0-144.0 & 150 & yes \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+Roof covered = share of the footprint under modules after setbacks, chimneys, lift rooms and row gaps; modules give 0.2 kW/m2. The roof sets the size; the limit is only a cap.
 \par\medskip
 
 \subsection*{Actual seeded attributes, averaged per building}
@@ -122,15 +138,15 @@ Usable roof fraction is 35-65\% and PV density is 0.20 kW/m2. Installed limits a
 \begingroup\small
 \begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.246548\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.177515\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.157791\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.216963\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.201183\linewidth-2\tabcolsep\relax}}
 \toprule
-\textbf{Type} & \textbf{Battery owners} & \textbf{Dwellings} & \textbf{Mean roof m2} & \textbf{Mean PV kW} \\ \midrule
+\textbf{Type} & \textbf{Battery owners} & \textbf{Homes} & \textbf{Mean roof m2} & \textbf{Mean PV kW} \\ \midrule
 \endfirsthead
 \toprule
-\textbf{Type} & \textbf{Battery owners} & \textbf{Dwellings} & \textbf{Mean roof m2} & \textbf{Mean PV kW} \\ \midrule
+\textbf{Type} & \textbf{Battery owners} & \textbf{Homes} & \textbf{Mean roof m2} & \textbf{Mean PV kW} \\ \midrule
 \endhead
-Apartment block & 17 & 897 & 263.714 & 17.409 \\ \addlinespace[3pt]
-School & 4 & 0 & 1,138.681 & 68.299 \\ \addlinespace[3pt]
-Small house & 30 & 75 & 110.259 & 6.743 \\ \addlinespace[3pt]
-Supermarket & 4 & 0 & 996.938 & 64.792 \\ \addlinespace[3pt]
+Apartment block & 16 & 921 & 383.194 & 19.463 \\ \addlinespace[3pt]
+School & 2 & 0 & 1,221.448 & 62.121 \\ \addlinespace[3pt]
+Small house & 33 & 84 & 111.181 & 4.197 \\ \addlinespace[3pt]
+Supermarket & 4 & 0 & 1,237.115 & 77.744 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -160,7 +176,14 @@ Each building receives a seeded daily multiplier within +/-8\%. Geometry stays f
 \subsection*{PV and reference prices}
 \par\medskip
 
-PV kWh = installed kW x irradiance / 1000 x performance factor x hourly duration, capped at installed capacity. Nighttime production is zero. The default illustrative day starts 15 June 2026 at UTC+02:00, using a daylight curve and seeded cloud factors. Reference prices use only pre-start hourly observations; the default 14-day price history is synthetic. Forecast adapters reject missing coverage, duplicate keys and non-finite inputs.
+The area is Turin (45.07 N, 7.686 E, 240 m). Each hour the simulator computes the sun position and the clear-sky light reaching each panel, using its tilt (houses 20 deg flush on tiled roofs, blocks/schools 15 deg and supermarkets 10 deg on flat-roof racks, all facing south). A seeded cloud factor (0.65-1, mean 0.825) reproduces the PVGIS ratio between an average and a clear June day in Turin (6.54 / 7.90 = 0.83).
+\par\medskip
+
+\begin{lstlisting}
+PV kWh = installed kW x panel irradiance / 1000 x performance factor x hourly duration, capped at installed capacity. Nighttime production is zero.
+\end{lstlisting}
+
+Performance factor 0.75 = PVGIS June output / panel irradiance for Turin (4.87 / 6.54 kWh), covering cable/inverter losses (14\%), hot-module losses and reflection. Expected June yield is about 4.9 kWh per installed kW per day, matching PVGIS. The optimum fixed tilt in Turin is 40 deg (1,368 kWh/kW per year), but in June flatter panels yield slightly more, and flat-roof racks at 10-15 deg allow closer rows. The default day starts 15 June 2026 at UTC+02:00. Reference prices use only pre-start hourly observations; the default 14-day price history is synthetic. Forecast adapters reject missing coverage, duplicate keys and non-finite inputs.
 \par\medskip
 
 \clearpage
@@ -192,7 +215,7 @@ EUR 5 or above & EUR 0.02/kWh \\ \addlinespace[3pt]
 \end{longtable}
 \endgroup
 
-The fund starts at EUR 0. Guidance blends original offers toward 1.04 x reference for bids and 0.96 x reference for asks, with strength 0.65. Only P2P receives guidance. A full reward reservation is required before a discounted quote. Adjusted ask = guided ask - 50\% of reward rate. A successful seller receives trading payment plus full reward. Unaffordable quotes retry original offers without reward; rejected reservations are released.
+The fund starts at EUR 0. Guidance blends original offers toward 1.04 x reference for bids and 0.96 x reference for asks, with strength 0.65. Only P2P receives guidance. A full reward reservation is required before a discounted quote. Adjusted ask = guided ask - 50\% of reward rate. A successful seller receives trading payment plus full reward. Unaffordable quotes keep the guided prices but carry no reward; rejected reservations are released.
 \par\medskip
 
 Regulated grid purchases and sales each pay EUR 0.01/kWh, collected after trading. New fees become available in the following hour. Opening funds fix that hour's reward tier. There are no internal fees or aggregator/grid seller rewards.
@@ -225,12 +248,12 @@ PV + discharge + purchases = demand + charge + sales.\newline{}Stored energy evo
 \toprule
 \textbf{Scenario} & \textbf{P2P kWh} & \textbf{Share \%} & \textbf{Available surplus kWh} & \textbf{P2P trades} \\ \midrule
 \endhead
-A & 863.982 & 13.985 & 6,177.944 & 269 \\ \addlinespace[3pt]
-B & 2,858.451 & 46.269 & 6,177.944 & 856 \\ \addlinespace[3pt]
-C & 1,047.066 & 14.188 & 7,379.848 & 327 \\ \addlinespace[3pt]
-D & 3,523.217 & 47.741 & 7,379.848 & 999 \\ \addlinespace[3pt]
-E & 1,030.768 & 13.967 & 7,379.848 & 311 \\ \addlinespace[3pt]
-F & 3,473.971 & 47.074 & 7,379.848 & 988 \\ \addlinespace[3pt]
+A & 740.067 & 18.278 & 4,048.927 & 276 \\ \addlinespace[3pt]
+B & 2,349.577 & 58.030 & 4,048.927 & 851 \\ \addlinespace[3pt]
+C & 962.592 & 19.114 & 5,036.189 & 335 \\ \addlinespace[3pt]
+D & 2,958.634 & 58.747 & 5,036.189 & 1005 \\ \addlinespace[3pt]
+E & 953.911 & 18.941 & 5,036.189 & 329 \\ \addlinespace[3pt]
+F & 2,941.264 & 58.403 & 5,036.189 & 1012 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -238,13 +261,13 @@ F & 3,473.971 & 47.074 & 7,379.848 & 988 \\ \addlinespace[3pt]
 Primary KPI = 100 x P2P energy / surplus offered after self-balancing. In E/F the denominator includes PV subsequently stored after P2P, so compare absolute energy and raw PV surplus as well as shares. Zero denominators are undefined, not fabricated zeros.
 \par\medskip
 
-B minus A: P2P energy difference \textbf{+1994.469 kWh}.
+B minus A: P2P energy difference \textbf{+1609.510 kWh}.
 \par\medskip
 
-D minus C: P2P energy difference \textbf{+2476.151 kWh}.
+D minus C: P2P energy difference \textbf{+1996.041 kWh}.
 \par\medskip
 
-F minus E: P2P energy difference \textbf{+2443.203 kWh}.
+F minus E: P2P energy difference \textbf{+1987.353 kWh}.
 \par\medskip
 
 These differences describe the selected day and heuristic. Guidance cannot create surplus or demand, and no improvement is forced for other settings.
@@ -268,7 +291,7 @@ These differences describe the selected day and heuristic. Guidance cannot creat
 Meter net cost = purchases - sale revenue + fees - rewards. Internal P2P/aggregator payments cancel over meters. Including the regulator subtracts the change in retained funds and equals net external-grid payments. Battery capital, aging, taxes and inventory valuation are excluded.
 \par\medskip
 
-A to B: meter cost EUR 5210.78 to 4978.98; meters plus regulator EUR 5210.78 to 4839.46. C to D: meter cost EUR 5382.51 to 5048.26. Cost effects need not have the same sign in every pair.
+A to B: meter cost EUR 5189.07 to 5063.33; meters plus regulator EUR 5189.07 to 4929.65. C to D: meter cost EUR 5261.02 to 5030.67. Cost effects need not have the same sign in every pair.
 \par\medskip
 
 \clearpage
@@ -286,7 +309,7 @@ A to B: meter cost EUR 5210.78 to 4978.98; meters plus regulator EUR 5210.78 to 
 {\small Figure 7. End-of-hour SOC of the 55 owners in scenario A. Capacity and power differ by building type, while allowed SOC remains 10-90\%.\par}
 \par\medskip
 
-In A, AC charging is 1,201.904 kWh, discharge 1,018.134 kWh and conversion losses 113.681 kWh. Initial stored energy is 324.000 kWh and final storage 394.088 kWh. Initial inventory is exogenous; final inventory is reported without a monetary valuation.
+In A, AC charging is 987.262 kWh, discharge 732.812 kWh and conversion losses 87.932 kWh. Initial stored energy is 298.000 kWh and final storage 464.518 kWh. Initial inventory is exogenous; final inventory is reported without a monetary valuation.
 \par\medskip
 
 The global identity includes PV, demand, imports/exports, initial/final storage and explicit losses. It is checked independently of internal trading payments.
@@ -310,9 +333,9 @@ The global identity includes PV, demand, imports/exports, initial/final storage 
 \toprule
 \textbf{Scenario} & \textbf{Fees EUR} & \textbf{Rewards EUR} & \textbf{Closing fund EUR} \\ \midrule
 \endhead
-B & 196.692 & 57.169 & 139.523 \\ \addlinespace[3pt]
-D & 205.588 & 70.464 & 135.124 \\ \addlinespace[3pt]
-F & 192.936 & 69.479 & 123.456 \\ \addlinespace[3pt]
+B & 180.668 & 46.992 & 133.677 \\ \addlinespace[3pt]
+D & 182.616 & 59.173 & 123.444 \\ \addlinespace[3pt]
+F & 173.479 & 58.825 & 114.653 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -323,7 +346,7 @@ Closing fund = opening fund + grid fees - eligible P2P rewards. Every movement h
 Retained fees are a transfer from building meters to the regulator, not money destruction or an external resource cost. They can offset savings from better matching at the meter boundary. Accounts may pay for energy without a starting-cash restriction; only regulator guarantees are constrained by available funding.
 \par\medskip
 
-No end-of-day rebate is assumed. Changes to fees, reward tiers or guidance require a separately recorded configuration and rerun. The mixed-building outcomes cannot be attributed solely to regulation by comparing them with the old, physically different residential community.
+B, D and F keep the fund at the end of the day; scenario J tests an end-of-day refund (section 26). Changes to fees, reward tiers or guidance require a separately recorded configuration and rerun. The mixed-building outcomes cannot be attributed solely to regulation by comparing them with the old, physically different residential community.
 \par\medskip
 
 \clearpage
@@ -334,10 +357,10 @@ No end-of-day rebate is assumed. Changes to fees, reward tiers or guidance requi
 \subsection*{Recorded checks}
 \par\medskip
 
-The recorded full suite passed \textbf{85 tests} on 21 October 2026. All six saved scenarios passed independent energy, cash and blockchain verification. Tests include unchanged battery ownership, type allocation, one-roof sizing, increased block demand with floors, school weekend reduction, commercial night load, losses/SOC, rewards and forecast cutoff.
+The recorded full suite passed \textbf{102 tests} on 25 November 2026. All 11 saved scenarios passed independent energy, cash and blockchain verification. Tests include unchanged battery ownership, type allocation, one-roof sizing, increased block demand with floors, school weekend reduction, commercial night load, losses/SOC, rewards and forecast cutoff.
 \par\medskip
 
-Maximum absolute community energy residual: 3.64e-12 kWh. Maximum financial residual: 0 EUR. Numerical residuals are checked at explicit tolerances.
+Maximum absolute community energy residual: 4.43e-12 kWh. Maximum financial residual: 9.09e-13 EUR. Numerical residuals are checked at explicit tolerances.
 \par\medskip
 
 \subsection*{Run and rebuild}
@@ -346,7 +369,7 @@ Maximum absolute community energy residual: 3.64e-12 kWh. Maximum financial resi
 \begin{lstlisting}
 python -m pip install -r requirements.txt
 python -m pytest -q
-python main.py --include-priority
+python main.py --include-priority --include-policy
 python scripts/verify_results.py
 python -m pip install -r requirements-report.txt
 python scripts/create_report.py
@@ -364,7 +387,7 @@ The model has no physical feeder limits, voltage/power-flow equations, land parc
 {\small Sources: supplied project brief and accepted building-meter revision; config/default.json; docs/building\_model.md; results/comparison.json and saved chart data; docs/current\_validation.json. The original residential comparison and report are preserved as a separate baseline.\par}
 \par\medskip
 
-{\small Input SHA-256: \texttt{\seqsplit{c42ebb8f3997ab181b6835907386d76365d642c4798b3b5b5a3752dd80e04e9b}}\par}
+{\small Input SHA-256: \texttt{c62c1db5\allowbreak{}de5f6d96\allowbreak{}d26a6554\allowbreak{}518ac538\allowbreak{}fa8a9558\allowbreak{}d3772c0a\allowbreak{}35b12731\allowbreak{}a4ce8d10}\par}
 \par\medskip
 
 \clearpage
@@ -372,7 +395,7 @@ The model has no physical feeder limits, voltage/power-flow equations, land parc
 \section*{11  Team guide: how to read the simulation}
 \par\medskip
 
-The next sections explain \textbf{all 166 configurable values} in the recorded experiment. Values come from scenario A's saved configuration in results/comparison.json, not from a possibly edited live JSON file. Other scenarios reuse the same base inputs and differ in their recorded storage/regulation switches.
+The next sections explain \textbf{all 180 configurable values} in the recorded experiment. Values come from scenario A's saved configuration in results/comparison.json, not from a possibly edited live JSON file. Other scenarios reuse the same base inputs and differ in their recorded storage/regulation switches.
 \par\medskip
 
 \begingroup\small
@@ -407,7 +430,7 @@ kWh & Energy accumulated over a step or stored in a battery. Sum hourly energy t
 EUR/kWh & Price per energy unit. Quantity x price gives the trading payment. EUR/MWh source data must be divided by 1000. \\ \addlinespace[3pt]
 SOC & Stored energy / nominal battery capacity. 0.20 means 20\%, not 0.20 kWh. \\ \addlinespace[3pt]
 Building / meter & One trading participant. A block aggregates its flats at one meter and shares one roof. \\ \addlinespace[3pt]
-Dwelling unit & One residential flat/home inside a building. It is not automatically a separate P2P participant. \\ \addlinespace[3pt]
+Home & One flat or house where one family lives. A block holds many homes behind one meter; a home is not a separate P2P participant. \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -451,7 +474,7 @@ buildings.\allowbreak{}pv\_\allowbreak{}density\_\allowbreak{}kw\_\allowbreak{}m
 \end{longtable}
 \endgroup
 
-Constraints: equal neighborhood sizes; battery owners between zero and meter count; positive duration; currently one-hour steps only. Shares are rounded separately within each group, so small custom groups may not reproduce exact requested type percentages.
+Constraints: equal neighborhood sizes; battery owners between zero and meter count; positive duration; currently one-hour steps only. Shares are rounded over the whole community and then spread evenly across groups, so a type can have fewer buildings than there are groups.
 \par\medskip
 
 The seed is held fixed across scenarios. Changing it creates a different realization and should be recorded as a new experiment, rather than interpreted as the effect of one policy switch.
@@ -473,17 +496,19 @@ Prefix: buildings.types.<type>., where type is small\_house, apartment\_block, s
 \toprule
 \textbf{Key under each type} & \textbf{House} & \textbf{Block} & \textbf{Market} & \textbf{School} & \textbf{Units and meaning} \\ \midrule
 \endhead
-share & 0.5 & 0.3 & 0.1 & 0.1 & fraction. Type fraction; four shares sum to 1. Prosumers round within each group; consumers round across their full pool, then shuffle into equal group additions. \\ \addlinespace[3pt]
-roof\_\allowbreak{}min\_\allowbreak{}m2 & 70 & 180 & 600 & 700 & m2. Lower bound of the sampled single roof footprint; higher area permits more PV and increases the area-based commercial/school load basis. \\ \addlinespace[3pt]
-roof\_\allowbreak{}max\_\allowbreak{}m2 & 150 & 360 & 1400 & 1600 & m2. Upper bound of that roof draw. One roof per building, regardless of floor count. \\ \addlinespace[3pt]
-floors\_\allowbreak{}min & 1 & 4 & 1 & 2 & floors. Lower bound of the integer floor draw. Raises block dwelling counts and school floor area, without adding PV roofs. \\ \addlinespace[3pt]
-floors\_\allowbreak{}max & 2 & 10 & 1 & 3 & floors. Upper floor-count bound. Total floor area = roof footprint x sampled floors. \\ \addlinespace[3pt]
-units\_\allowbreak{}per\_\allowbreak{}floor\_\allowbreak{}min & 1 & 2 & 1 & 1 & flats per floor. Lower integer bound, used to calculate block flats. Small houses always have one dwelling; schools/shops have zero residential dwellings. \\ \addlinespace[3pt]
-units\_\allowbreak{}per\_\allowbreak{}floor\_\allowbreak{}max & 1 & 4 & 1 & 1 & flats per floor. Upper bound for block flats per floor. More flats increase aggregate residential demand, not roof size. \\ \addlinespace[3pt]
-roof\_\allowbreak{}usable\_\allowbreak{}fraction\_\allowbreak{}min & 0.35 & 0.35 & 0.35 & 0.35 & fraction. Lower bound of the usable roof share for PV. Excludes the rest of the roof from installed-panel area. \\ \addlinespace[3pt]
-roof\_\allowbreak{}usable\_\allowbreak{}fraction\_\allowbreak{}max & 0.65 & 0.65 & 0.65 & 0.65 & fraction.\allowbreak{} Upper usable-share bound.\allowbreak{} Capacity = min(roof x usable share x density, pv\_\allowbreak{}limit\_\allowbreak{}kw).\allowbreak{} \\ \addlinespace[3pt]
-pv\_\allowbreak{}limit\_\allowbreak{}kw & 12 & 100 & 300 & 300 & kW. Upper installed-PV limit for one building. Raising it matters only where the roof-based capacity would exceed the old limit. \\ \addlinespace[3pt]
-battery\_\allowbreak{}scale & 1 & 4 & 10 & 6 & multiplier. For owners, multiplies base storage capacity and both power limits. Does not change owner count, SOC fractions or efficiency. \\ \addlinespace[3pt]
+share & 0.56 & 0.3 & 0.1 & 0.04 & fraction. Type fraction; shares sum to 1. Rounded over each pool, then spread evenly over groups. \\ \addlinespace[3pt]
+roof\_\allowbreak{}min\_\allowbreak{}m2 & 80 & 250 & 800 & 700 & m2. Smallest roof footprint. More roof allows more PV and raises area-based shop/school load. \\ \addlinespace[3pt]
+roof\_\allowbreak{}max\_\allowbreak{}m2 & 140 & 500 & 1600 & 1600 & m2. Largest roof footprint. One roof per building, whatever the floor count. \\ \addlinespace[3pt]
+floors\_\allowbreak{}min & 1 & 4 & 1 & 2 & floors. Fewest floors. More floors mean more homes in blocks and more school floor area, never more roof. \\ \addlinespace[3pt]
+floors\_\allowbreak{}max & 2 & 8 & 1 & 4 & floors. Most floors. Total floor area = roof footprint x floors. \\ \addlinespace[3pt]
+home\_\allowbreak{}area\_\allowbreak{}m2\_\allowbreak{}min & 70 & 70 & 70 & 70 & m2 per home. Smallest block home. Homes per floor = 80\% of footprint / home size. \\ \addlinespace[3pt]
+home\_\allowbreak{}area\_\allowbreak{}m2\_\allowbreak{}max & 110 & 110 & 110 & 110 & m2 per home. Largest block home (Italian city average 93.5 m2, ISTAT). Houses are one home; shops/schools none. \\ \addlinespace[3pt]
+roof\_\allowbreak{}usable\_\allowbreak{}fraction\_\allowbreak{}min & 0.22 & 0.3 & 0.4 & 0.3 & fraction. Least roof share covered by panels, after setbacks, chimneys, lift rooms and row gaps. \\ \addlinespace[3pt]
+roof\_\allowbreak{}usable\_\allowbreak{}fraction\_\allowbreak{}max & 0.35 & 0.45 & 0.55 & 0.45 & fraction.\allowbreak{} Most roof covered.\allowbreak{} PV kW = min(roof x coverage x density, pv\_\allowbreak{}limit\_\allowbreak{}kw).\allowbreak{} \\ \addlinespace[3pt]
+pv\_\allowbreak{}limit\_\allowbreak{}kw & 10 & 50 & 200 & 150 & kW. Safety cap per building; defaults sit above the largest roof-based size. \\ \addlinespace[3pt]
+panel\_\allowbreak{}tilt\_\allowbreak{}deg & 20 & 15 & 10 & 15 & degrees. Panel angle from flat. Houses 20 (tiled roof), blocks/schools 15, shops 10 (racks). Turin yearly best: 40. \\ \addlinespace[3pt]
+panel\_\allowbreak{}azimuth\_\allowbreak{}deg & 0 & 0 & 0 & 0 & degrees. Panel direction: 0 south, -90 east, 90 west. \\ \addlinespace[3pt]
+battery\_\allowbreak{}scale & 1 & 4 & 10 & 6 & multiplier. For owners, multiplies base storage capacity and both power limits; not owner count or efficiency. \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -507,9 +532,9 @@ Prefix: buildings.types.<type>. Daily energy is drawn first, then distributed ov
 \toprule
 \textbf{Key under each type} & \textbf{House} & \textbf{Block} & \textbf{Market} & \textbf{School} & \textbf{Units and meaning} \\ \midrule
 \endhead
-daily\_\allowbreak{}energy\_\allowbreak{}min & 8 & 8 & 0.5 & 0.08 & basis-dependent.\allowbreak{} Lower base energy draw: kWh/dwelling/day for per\_\allowbreak{}dwelling, or kWh/m2/day for per\_\allowbreak{}floor\_\allowbreak{}area.\allowbreak{} Before weekend/day multipliers.\allowbreak{} \\ \addlinespace[3pt]
-daily\_\allowbreak{}energy\_\allowbreak{}max & 24 & 20 & 1.1 & 0.18 & basis-dependent. Upper energy draw. Multiply by dwelling count or total floor area to obtain the building weekday daily baseline. \\ \addlinespace[3pt]
-energy\_\allowbreak{}basis & per\_\allowbreak{}dwelling & per\_\allowbreak{}dwelling & per\_\allowbreak{}floor\_\allowbreak{}area & per\_\allowbreak{}floor\_\allowbreak{}area & enum.\allowbreak{} per\_\allowbreak{}dwelling uses dwelling count; per\_\allowbreak{}floor\_\allowbreak{}area uses roof x floors.\allowbreak{} Keep houses/blocks on dwelling basis and nonresidential buildings on area basis.\allowbreak{} \\ \addlinespace[3pt]
+daily\_\allowbreak{}energy\_\allowbreak{}min & 7 & 5 & 0.8 & 0.08 & basis-dependent.\allowbreak{} Lower base energy draw: kWh/home/day for per\_\allowbreak{}home, or kWh/m2/day for per\_\allowbreak{}floor\_\allowbreak{}area.\allowbreak{} Before weekend/day multipliers.\allowbreak{} \\ \addlinespace[3pt]
+daily\_\allowbreak{}energy\_\allowbreak{}max & 12 & 8 & 1.3 & 0.15 & basis-dependent. Upper energy draw. Multiply by home count or total floor area to obtain the building weekday daily baseline. \\ \addlinespace[3pt]
+energy\_\allowbreak{}basis & per\_\allowbreak{}home & per\_\allowbreak{}home & per\_\allowbreak{}floor\_\allowbreak{}area & per\_\allowbreak{}floor\_\allowbreak{}area & enum.\allowbreak{} per\_\allowbreak{}home uses the number of homes; per\_\allowbreak{}floor\_\allowbreak{}area uses roof x floors.\allowbreak{} Keep houses/blocks on home basis and nonresidential buildings on area basis.\allowbreak{} \\ \addlinespace[3pt]
 profile & residential & residential & commercial & school & enum. residential uses morning/evening peaks. commercial and school use a base plus an opening-hour load. Type name alone does not override this field. \\ \addlinespace[3pt]
 opening\_\allowbreak{}hour & 7 & 7 & 7 & 8 & local hour. Start of operating activity, inclusive. Used by nonresidential profiles; ignored by residential profiles. \\ \addlinespace[3pt]
 closing\_\allowbreak{}hour & 22 & 22 & 22 & 17 & local hour. End of operating activity, exclusive. A school closing at 17 has no operating component in the 17:00-18:00 step. \\ \addlinespace[3pt]
@@ -580,24 +605,26 @@ Prefix: forecast. CSV paths replace only the corresponding synthetic input. null
 \textbf{Exact JSON key} & \textbf{Value used / units} & \textbf{Meaning and effect of changing it} \\ \midrule
 \endhead
 forecast.\allowbreak{}start\_\allowbreak{}timestamp & 2026-06-15T00:00:00+02:00 (ISO datetime + offset) & First hour of the run and the strict historical-price cutoff. Its weekday chooses school/weekend demand behavior. Offset is fixed; no named-zone DST calendar. \\ \addlinespace[3pt]
-forecast.\allowbreak{}sunrise\_\allowbreak{}hour & 6 (local hour) & Start boundary of synthetic daylight. Generation is zero at and before this hour; configure for the modeled season. \\ \addlinespace[3pt]
-forecast.\allowbreak{}sunset\_\allowbreak{}hour & 20 (local hour) & End boundary of synthetic daylight. Generation is zero at and after this hour; supplied weather is checked against these bounds. \\ \addlinespace[3pt]
-forecast.\allowbreak{}peak\_\allowbreak{}irradiance\_\allowbreak{}w\_\allowbreak{}m2 & 900 (W per m2) & Peak of the synthetic daylight curve before cloud scaling. Higher values raise PV energy, not installed PV capacity. \\ \addlinespace[3pt]
-forecast.\allowbreak{}performance\_\allowbreak{}factor & 0.85 (fraction) & Converts irradiance and installed power to PV output, representing aggregate system losses. Applied to both synthetic and CSV weather. \\ \addlinespace[3pt]
-forecast.\allowbreak{}cloud\_\allowbreak{}factor\_\allowbreak{}min & 0.65 (fraction) & Lower synthetic hourly multiplier on clear-day irradiance.\allowbreak{} Unused when weather\_\allowbreak{}csv is supplied.\allowbreak{} \\ \addlinespace[3pt]
-forecast.\allowbreak{}cloud\_\allowbreak{}factor\_\allowbreak{}max & 1 (fraction) & Upper synthetic cloud multiplier. Both cloud factors lie between 0 and 1; the default never exceeds the clear-day curve. \\ \addlinespace[3pt]
+forecast.\allowbreak{}latitude\_\allowbreak{}deg & 45.07 (deg north) & Site latitude (Turin 45.07): sun height and day length. \\ \addlinespace[3pt]
+forecast.\allowbreak{}longitude\_\allowbreak{}deg & 7.686 (deg east) & Site longitude (Turin 7.686): solar noon about 13:30 in summer time. \\ \addlinespace[3pt]
+forecast.\allowbreak{}site\_\allowbreak{}altitude\_\allowbreak{}m & 240 (m) & Site altitude (Turin about 240 m); thinner air gives slightly more sun. \\ \addlinespace[3pt]
+forecast.\allowbreak{}clear\_\allowbreak{}sky\_\allowbreak{}transmittance & 0.66 (fraction) & Air clearness on a cloudless day; 0.66 matches PVGIS clear June days in Turin. \\ \addlinespace[3pt]
+forecast.\allowbreak{}ground\_\allowbreak{}albedo & 0.2 (fraction) & Ground reflection onto tilted panels; 0.20 is typical for cities. \\ \addlinespace[3pt]
+forecast.\allowbreak{}performance\_\allowbreak{}factor & 0.75 (fraction) & Panel light to AC output after all losses; 0.75 = PVGIS June ratio for Turin. \\ \addlinespace[3pt]
+forecast.\allowbreak{}cloud\_\allowbreak{}factor\_\allowbreak{}min & 0.65 (fraction) & Lowest hourly multiplier on clear-sky light.\allowbreak{} Unused with weather\_\allowbreak{}csv.\allowbreak{} \\ \addlinespace[3pt]
+forecast.\allowbreak{}cloud\_\allowbreak{}factor\_\allowbreak{}max & 1 (fraction) & Highest multiplier. Mean 0.825 matches PVGIS average/clear June ratio (0.83). \\ \addlinespace[3pt]
 forecast.\allowbreak{}historical\_\allowbreak{}days & 14 (days) & Number of synthetic pre-start price days. Unused when a historical price CSV is supplied; not a rolling actual-data update during simulation. \\ \addlinespace[3pt]
 forecast.\allowbreak{}price\_\allowbreak{}base\_\allowbreak{}eur\_\allowbreak{}kwh & 0.17 (EUR per kWh) & Level of synthetic historical prices before the hourly sine component and random noise. Unused with a price CSV. \\ \addlinespace[3pt]
 forecast.\allowbreak{}price\_\allowbreak{}amplitude\_\allowbreak{}eur\_\allowbreak{}kwh & 0.045 (EUR per kWh) & Amplitude of the synthetic hourly price pattern around its base. The forecast then averages earlier observations by clock hour. \\ \addlinespace[3pt]
 forecast.\allowbreak{}historical\_\allowbreak{}price\_\allowbreak{}noise\_\allowbreak{}eur\_\allowbreak{}kwh & 0.01 (EUR per kWh) & Symmetric +/- noise for synthetic historical prices. A seeded draw, not a measured forecast error or uncertainty interval. \\ \addlinespace[3pt]
-forecast.\allowbreak{}weather\_\allowbreak{}csv & null (path or null) & Optional timestamp,irradiance\_\allowbreak{}w\_\allowbreak{}m2 forecast file.\allowbreak{} null uses synthetic weather.\allowbreak{} Must cover the run and represent information available at issuance.\allowbreak{} \\ \addlinespace[3pt]
+forecast.\allowbreak{}weather\_\allowbreak{}csv & null (path or null) & Optional timestamp,irradiance\_\allowbreak{}w\_\allowbreak{}m2 file of horizontal (GHI) light; it is moved onto each panel tilt.\allowbreak{} null uses synthetic weather.\allowbreak{} Must cover the run and represent information available at issuance.\allowbreak{} \\ \addlinespace[3pt]
 forecast.\allowbreak{}demand\_\allowbreak{}csv & null (path or null) & Optional timestamp,household\_\allowbreak{}id,demand\_\allowbreak{}kwh file covering every meter/hour.\allowbreak{} Replaces all synthetic load shapes, calendar and daily variation.\allowbreak{} \\ \addlinespace[3pt]
 forecast.\allowbreak{}historical\_\allowbreak{}prices\_\allowbreak{}csv & null (path or null) & Optional timestamp,price\_\allowbreak{}eur\_\allowbreak{}kwh file.\allowbreak{} Only observations strictly before start can affect hourly averages; all 24 clock hours need earlier coverage.\allowbreak{} \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
 
-Past-price forecasting requires earlier observations for every clock hour. Never insert future actual data into a weather/demand file and call it an available forecast. The code cannot infer that provenance from column names alone.
+Past-price forecasting needs earlier observations for every clock hour. Do not put future measured data in a weather/demand file and call it a forecast.
 \par\medskip
 
 \clearpage
@@ -700,6 +727,10 @@ regulator.\allowbreak{}reward\_\allowbreak{}discount\_\allowbreak{}fraction & 0.
 regulator.\allowbreak{}guidance\_\allowbreak{}strength & 0.65 (fraction) & Blend weight: guided = (1-strength) x original + strength x target, then clipped. Zero removes the blend, but leaves reward rules active. \\ \addlinespace[3pt]
 regulator.\allowbreak{}guided\_\allowbreak{}bid\_\allowbreak{}multiplier & 1.04 (multiplier) & Buyer guidance target = reference forecast x this value. Higher targets can make bids more compatible. \\ \addlinespace[3pt]
 regulator.\allowbreak{}guided\_\allowbreak{}ask\_\allowbreak{}multiplier & 0.96 (multiplier) & Seller guidance target = reference forecast x this value. Lower targets can make asks more compatible. \\ \addlinespace[3pt]
+regulator.\allowbreak{}fee\_\allowbreak{}scope & all\_\allowbreak{}grid (enum) & all\_\allowbreak{}grid: every grid kWh pays the fee.\allowbreak{} missed\_\allowbreak{}local: only grid energy a same-group neighbour could have traded that hour (scenario I).\allowbreak{} \\ \addlinespace[3pt]
+regulator.\allowbreak{}reward\_\allowbreak{}mode & tiered (enum) & tiered: fixed tier rates.\allowbreak{} budget\_\allowbreak{}sized: each hour's rate = fund / possible P2P kWh, capped (scenario K).\allowbreak{} \\ \addlinespace[3pt]
+regulator.\allowbreak{}max\_\allowbreak{}reward\_\allowbreak{}eur\_\allowbreak{}kwh & 0.1 (EUR per P2P kWh) & Cap on the budget\_\allowbreak{}sized reward rate.\allowbreak{} Unused with tiered rewards.\allowbreak{} \\ \addlinespace[3pt]
+regulator.\allowbreak{}refund\_\allowbreak{}leftover & false (boolean) & true returns the whole fund at day end, split by each meter's P2P kWh bought or sold (scenario J). \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
@@ -846,7 +877,7 @@ Only the original 45 PV prosumers without batteries are eligible. Consumers and 
 {\small Figure 9. Paired scenarios hold PV, buildings, daily energy and market seeds fixed. Load timing changes only. Direct self-consumption excludes battery flows; meter cost includes fees/rewards. Synthetic simulation outputs.\par}
 \par\medskip
 
-Shifted energy: \textbf{353.804 kWh} across 43 meters. All daily demand is retained; unused flexibility stays at its original time.
+Shifted energy: \textbf{270.070 kWh} across 42 meters. All daily demand is retained; unused flexibility stays at its original time.
 \par\medskip
 
 \begingroup\small
@@ -857,17 +888,17 @@ Shifted energy: \textbf{353.804 kWh} across 43 meters. All daily demand is retai
 \toprule
 \textbf{Scenario} & \textbf{P2P fixed kWh} & \textbf{P2P shifted kWh} & \textbf{Change kWh} \\ \midrule
 \endhead
-A & 863.982 & 847.031 & -16.951 \\ \addlinespace[3pt]
-B & 2,858.451 & 2,699.393 & -159.058 \\ \addlinespace[3pt]
-C & 1,047.066 & 1,004.087 & -42.979 \\ \addlinespace[3pt]
-D & 3,523.217 & 3,357.257 & -165.960 \\ \addlinespace[3pt]
-E & 1,030.768 & 993.673 & -37.095 \\ \addlinespace[3pt]
-F & 3,473.971 & 3,306.066 & -167.905 \\ \addlinespace[3pt]
+A & 740.067 & 717.111 & -22.957 \\ \addlinespace[3pt]
+B & 2,349.577 & 2,233.312 & -116.265 \\ \addlinespace[3pt]
+C & 962.592 & 940.910 & -21.682 \\ \addlinespace[3pt]
+D & 2,958.634 & 2,855.926 & -102.707 \\ \addlinespace[3pt]
+E & 953.911 & 932.281 & -21.630 \\ \addlinespace[3pt]
+F & 2,941.264 & 2,845.301 & -95.963 \\ \addlinespace[3pt]
 \bottomrule
 \end{longtable}
 \endgroup
 
-{\small P2P volume falls in 6 of 6 recorded pairs. Direct own-PV use rises by the shifted energy. Better self-consumption and maximum P2P are different objectives. Run: python main.py --include-priority --compare-demand-response\par}
+{\small P2P volume falls in 6 of 6 recorded A-F pairs (G-K pairs are in demand\_response\_comparison.csv). Direct own-PV use rises by the shifted energy. Better self-consumption and maximum P2P are different objectives. Run: python main.py --include-priority --compare-demand-response\par}
 \par\medskip
 
 \clearpage
@@ -954,5 +985,43 @@ Higher direct self-consumption can leave less PV for neighbors, reducing P2P kWh
 \par\medskip
 
 Fixed outputs remain in results/; shifted outputs are in results/demand\_response/. The paired CSV/JSON is demand\_response\_comparison. Inspect inputs/demand\_shifts.csv and hourly\_inputs\_baseline.csv in the shifted folder to trace each transfer. The model uses supplied forecasts, not future actual measurements; incomplete calendar days remain unchanged.
+\par\medskip
+
+\clearpage
+
+\section*{26  Regulator policy variants G-K}
+\par\medskip
+
+Each variant is scenario B (55 batteries, regulated, self-consumption first) with one regulator rule changed, on identical inputs. In B, the EUR 0.01/kWh fee applies to all 18,000+ grid kWh, day and night, while the EUR 0.02/kWh reward only reaches the roughly 2,350 P2P kWh, so most fees stay in the fund.
+\par\medskip
+
+\begingroup\small
+\begin{longtable}{>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.193294\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.094675\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.102564\linewidth-2\tabcolsep\relax}>{\RaggedRight\arraybackslash}p{\dimexpr0.199211\linewidth-2\tabcolsep\relax}}
+\toprule
+\textbf{Scenario} & \textbf{Change from B} & \textbf{P2P kWh} & \textbf{Fees} & \textbf{Rewards} & \textbf{Refunds} & \textbf{Fund left} & \textbf{Meter cost vs B} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Scenario} & \textbf{Change from B} & \textbf{P2P kWh} & \textbf{Fees} & \textbf{Rewards} & \textbf{Refunds} & \textbf{Fund left} & \textbf{Meter cost vs B} \\ \midrule
+\endhead
+B & reference & 2,350 & 180.67 & 46.99 & 0.00 & 133.68 & +0.00 \\ \addlinespace[3pt]
+G & fee 0.0025 & 2,190 & 45.82 & 28.93 & 0.00 & 16.88 & -85.58 \\ \addlinespace[3pt]
+H & reward 0.075 & 2,374 & 178.24 & 116.08 & 0.00 & 62.16 & -100.64 \\ \addlinespace[3pt]
+I & fee on missed local & 1,998 & 16.46 & 15.16 & 0.00 & 1.30 & -65.99 \\ \addlinespace[3pt]
+J & day-end refund & 2,350 & 180.67 & 46.99 & 133.68 & 0.00 & -133.68 \\ \addlinespace[3pt]
+K & reward sized to fund & 2,471 & 177.50 & 115.90 & 0.00 & 61.60 & -110.08 \\ \addlinespace[3pt]
+\bottomrule
+\end{longtable}
+\endgroup
+
+Amounts in EUR. \textbf{G} lowers the fee to EUR 0.0025/kWh and \textbf{H} raises the reward to EUR 0.075/kWh (0.0375 lower tier); both values would balance fees and rewards on this day. \textbf{I} charges the fee only on grid energy that a neighbour in the same group could have traded in the same hour: min(group imports, group exports), shared pro rata. \textbf{J} returns the whole fund at the end of the day to meters in proportion to the P2P kWh each bought or sold. \textbf{K} sets each hour's reward rate to fund / possible P2P energy (capped at EUR 0.10/kWh).
+\par\medskip
+
+\textbf{What drives P2P is money available when the sun shines.} A reward lowers the seller ask by half its rate, so more bids meet asks. G collects a quarter of B's fees, so its fund runs empty in the afternoon and those trades lose the discount: G trades 2,189.921 kWh (-160 vs B). H pays a larger discount while its fund lasts: 2,374.048 kWh (+24 vs B). K spends the fund evenly over the day: 2,470.890 kWh (+121 vs B). Lowest meters-plus-regulator cost: K (EUR 4891.65). When a reward cannot be funded, the trade keeps the guided prices and only loses the reward.
+\par\medskip
+
+Only 823 kWh per side (export and import) was a missed local trade, so I raises little money and P2P falls. J trades exactly like B (the refund comes after trading) but returns EUR 133.68 to traders, so meter cost falls by the same amount.
+\par\medskip
+
+{\small One synthetic day; results depend on the fund rules and are not a general policy claim. Configure the same rules for any run with regulator.fee\_scope, reward\_mode, max\_reward\_eur\_kwh and refund\_leftover.\par}
 \par\medskip
 \end{document}

@@ -19,7 +19,7 @@ def results():
     return [run_simulation(households, inputs, settings, name=name,
                            batteries_enabled=battery, regulation_enabled=regulated,
                            battery_strategy=strategy, blockchain_enabled=False)
-            for name, (battery, regulated, strategy) in SCENARIOS.items()]
+            for name, (battery, regulated, strategy) in SCENARIOS.items() if name in "ABCDEF"]
 
 
 def test_chart_data_reconciles_with_accounting(results):

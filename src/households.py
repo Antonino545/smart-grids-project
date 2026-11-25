@@ -26,8 +26,10 @@ class Household:
     roof_area_m2: float = 0.0
     floors: int = 1
     floor_area_m2: float = 0.0
-    dwelling_units: int = 1
+    homes: int = 1
     usable_roof_fraction: float = 0.0
+    panel_tilt_deg: float = 20.0
+    panel_azimuth_deg: float = 0.0
     weekend_demand_profile_kwh: tuple[float, ...] | None = None
     daily_variation_fraction: float = 0.0
     participant_role: str = "prosumer"
@@ -122,7 +124,8 @@ def export_households(households: list[Household], path: Path) -> None:
             "participant_role": household.participant_role,
             "building_type": household.building_type, "roof_area_m2": household.roof_area_m2,
             "floors": household.floors, "floor_area_m2": household.floor_area_m2,
-            "dwelling_units": household.dwelling_units, "usable_roof_fraction": household.usable_roof_fraction,
+            "homes": household.homes, "usable_roof_fraction": household.usable_roof_fraction,
+            "panel_tilt_deg": household.panel_tilt_deg, "panel_azimuth_deg": household.panel_azimuth_deg,
             "daily_variation_fraction": household.daily_variation_fraction,
             "weekend_demand_profile_kwh": json.dumps(household.weekend_demand_profile_kwh),
             "pv_capacity_kw": household.pv_capacity_kw, "has_battery": household.has_battery,

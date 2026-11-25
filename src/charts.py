@@ -10,7 +10,8 @@ from src.metrics import calculate_metrics
 from src.simulator import SimulationResult
 
 COLORS = {"A": "#315A86", "B": "#D48B25", "C": "#7C8792", "D": "#758A35",
-          "E": "#4F8791", "F": "#A46483"}
+          "E": "#4F8791", "F": "#A46483", "G": "#C4573A", "H": "#2E7D5B",
+          "I": "#8A6FB0", "J": "#B8A03A", "K": "#3D9FC4"}
 
 
 def generate_charts(results: list[SimulationResult], directory: Path) -> None:
@@ -26,7 +27,8 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
     names = [result.name for result in results]
     x = np.arange(len(results))
     colors = [COLORS.get(name, "#315A86") for name in names]
-    caption = "Identical hourly inputs across scenarios. See summary.json for data sources and seed. A/B: 55 batteries. C/D: none. E/F: P2P priority. B/D/F: regulated."
+    caption = ("Identical hourly inputs across scenarios. A/B: 55 batteries. C/D: none. E/F: P2P priority. B/D/F: regulated."
+               + (" G-K: B with one regulator rule changed." if any(n in names for n in "GHIJK") else ""))
 
     def save(fig, filename):
         fig.text(.02, .015, caption, fontsize=8, color="#555555")
@@ -70,13 +72,14 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
         axes[0].bar(x + offset, [m[key] for m in metrics], width=.35, label=label, color=color)
     axes[0].set(xticks=x, xticklabels=names, ylabel="EUR (net payment)", title="Electricity costs by accounting boundary")
     axes[0].axhline(0, color="#777777", linewidth=.8)
-    axes[0].legend(frameon=False, fontsize=9)
+    axes[0].legend(frameon=True, fontsize=9, loc="lower left", framealpha=.9)
     for offset, key, label, color in (
-        (-.25, "regulator_fee_revenue_eur", "Fees", "#315A86"),
-        (0, "regulator_reward_expenditure_eur", "Rewards", "#D48B25"),
-        (.25, "regulator_remaining_funds_eur", "Closing fund", "#758A35"),
+        (-.3, "regulator_fee_revenue_eur", "Fees", "#315A86"),
+        (-.1, "regulator_reward_expenditure_eur", "Rewards", "#D48B25"),
+        (.1, "regulator_refund_eur", "Refunds", "#A46483"),
+        (.3, "regulator_remaining_funds_eur", "Closing fund", "#758A35"),
     ):
-        axes[1].bar(x + offset, [m[key] for m in metrics], width=.24, label=label, color=color)
+        axes[1].bar(x + offset, [m[key] for m in metrics], width=.19, label=label, color=color)
     axes[1].set(xticks=x, xticklabels=names, ylabel="EUR", title="Regulator cash flows")
     axes[1].legend(frameon=False, fontsize=9)
     save(fig, "financial_comparison")
@@ -87,7 +90,8 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
             history = result.regulator.history
             axis.plot([0] + [h["hour"] + 1 for h in history],
                       [result.regulator.settings.initial_budget_eur] + [h["closing_funds_eur"] for h in history],
-                      label=result.name, color=COLORS[result.name], marker=".", linestyle="--" if result.name == "F" else "-")
+                      label=result.name, color=COLORS.get(result.name, "#315A86"), marker=".",
+                      linestyle="--" if result.name in {"F", "H", "J"} else "-")
     maximum_hour = max(b.hour for result in results for b in result.balances) + 1
     axis.set_xticks(sorted({0, maximum_hour, *range(4, maximum_hour, 4)}))
     axis.axhline(1, color="#999999", linewidth=.8, linestyle=":", label="EUR 1 tier")
@@ -103,7 +107,7 @@ def generate_charts(results: list[SimulationResult], directory: Path) -> None:
         hours = sorted({b.hour for b in result.balances})
         stored = [metric["battery_initial_stored_kwh"]] + [
             sum(b.stored_end_kwh for b in result.balances if b.hour == hour) for hour in hours]
-        axes[0].plot(range(len(stored)), stored, label=result.name, color=COLORS[result.name],
+        axes[0].plot(range(len(stored)), stored, label=result.name, color=COLORS.get(result.name, "#315A86"),
                      linestyle="--" if result.battery_strategy == "p2p_priority" else "-")
     axes[0].set(title="Aggregate battery stored energy", xlabel="Elapsed hours", ylabel="kWh")
     axes[0].legend(frameon=False)

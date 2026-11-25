@@ -1,6 +1,7 @@
 """Hourly simulation engine; components are added in validated development stages."""
 
 from dataclasses import dataclass
+from datetime import datetime, timedelta
 from random import Random
 
 from config.settings import BlockchainSettings, MarketSettings, RegulatorSettings, SimulationSettings
@@ -62,7 +63,7 @@ def run_simulation(households: list[Household], inputs: list[HourlyInput],
         offers = [make_offer(lookup[b.household_id], b.balance_kwh,
                              indexed[(hour, b.household_id)].reference_price_eur_kwh, market) for b in balances]
         if regulator:
-            regulator.begin_hour(hour)
+            regulator.begin_hour(hour, offers)
             regulator.guide(offers, {h.household_id: indexed[(hour, h.household_id)].reference_price_eur_kwh
                                      for h in households}, market)
         # Independent hourly streams prevent scenario-specific trade counts changing later order.
@@ -88,7 +89,10 @@ def run_simulation(households: list[Household], inputs: list[HourlyInput],
         for transaction in trades:
             ledger.record_trade(transaction)
         if regulator:
-            regulator.end_hour([t for t in trades if t.market == "grid"], ledger)
+            # A day ends after the last hour of the run or at local midnight.
+            next_start = datetime.fromisoformat(balances[0].timestamp) + timedelta(hours=settings.timestep_hours)
+            day_end = hour == settings.hours - 1 or next_start.date() != datetime.fromisoformat(balances[0].timestamp).date()
+            regulator.end_hour(trades, ledger, {h.household_id: h.group_id for h in households}, day_end)
             if abs(ledger.balance("regulator") - regulator.funds_eur) > 1e-8:
                 raise ValueError("Regulator fund disagrees with cash ledger.")
         if blockchain:

@@ -38,9 +38,47 @@ def community_layout(households: list[Household]) -> list[dict]:
                 "battery_capacity_kwh": household.battery.capacity_kwh if household.battery else 0.0,
                 "building_type": household.building_type, "floors": household.floors,
                 "roof_area_m2": household.roof_area_m2, "floor_area_m2": household.floor_area_m2,
-                "dwelling_units": household.dwelling_units,
+                "homes": household.homes,
             })
     return cells
+
+
+def draw_building(axis, kind: str, x: float, y: float, fill: str, text_color: str, label: str, floors: int) -> None:
+    """Draw one building with a silhouette unique to its type (cell spans x..x+1, y..y+1)."""
+    from matplotlib.patches import Circle, Polygon, Rectangle
+    edge = {"facecolor": fill, "edgecolor": INK_COLOR, "linewidth": .7}
+    if kind == "apartment_block":
+        # Tall narrow tower with a stepped roof; height grows with floors.
+        height = min(.70, .48 + .025 * floors)
+        axis.add_patch(Rectangle((x + .20, y + .10), .60, height, **edge))
+        axis.add_patch(Rectangle((x + .30, y + .10 + height), .40, .07, **edge))
+        axis.text(x + .5, y + .10 + height - .07, f"BLOCK {floors}F", ha="center", va="center",
+                  color=text_color, fontsize=6.6, fontweight="bold")
+    elif kind == "supermarket":
+        # Wide low hall with a flat roof sign and a sawtooth awning over the front.
+        axis.add_patch(Rectangle((x + .04, y + .10), .92, .50, **edge))
+        teeth = [(x + .04, y + .60)]
+        for step in range(6):
+            left = x + .04 + step * .92 / 6
+            teeth += [(left + .92 / 12, y + .55), (left + .92 / 6, y + .60)]
+        axis.add_patch(Polygon(teeth + [(x + .96, y + .66), (x + .04, y + .66)], closed=True, **edge))
+        axis.add_patch(Rectangle((x + .22, y + .66), .56, .14, **edge))
+        axis.text(x + .5, y + .73, label, ha="center", va="center", color=text_color, fontsize=6.8, fontweight="bold")
+    elif kind == "school":
+        # Two low wings, a central pedimented tower with a clock, and a flag on top.
+        axis.add_patch(Rectangle((x + .04, y + .10), .92, .50, **edge))
+        axis.add_patch(Rectangle((x + .34, y + .60), .32, .14, **edge))
+        axis.add_patch(Polygon([(x + .30, y + .74), (x + .50, y + .85), (x + .70, y + .74)], **edge))
+        axis.plot([x + .50, x + .50], [y + .85, y + .97], color=INK_COLOR, linewidth=.8)
+        axis.add_patch(Polygon([(x + .50, y + .97), (x + .62, y + .94), (x + .50, y + .91)],
+                               facecolor="#C0392B", edgecolor=INK_COLOR, linewidth=.4))
+        axis.add_patch(Circle((x + .50, y + .67), .035, facecolor="white", edgecolor=INK_COLOR, linewidth=.5))
+        axis.text(x + .5, y + .085, label, ha="center", va="top", color=INK_COLOR, fontsize=6.0, fontweight="bold")
+    else:
+        # Small house: square body with a pitched triangular roof.
+        axis.add_patch(Rectangle((x + .14, y + .10), .72, .52, **edge))
+        axis.add_patch(Polygon([(x + .08, y + .62), (x + .50, y + .90), (x + .92, y + .62)], **edge))
+        axis.text(x + .5, y + .71, label, ha="center", va="center", color=text_color, fontsize=6.6, fontweight="bold")
 
 
 def generate_community_map(households: list[Household], directory: Path) -> None:
@@ -63,7 +101,7 @@ def generate_community_map(households: list[Household], directory: Path) -> None
                        "battery_count": battery_count, "pv_only_count": len(members) - battery_count - consumer_count,
                        "consumer_count": consumer_count, "prosumer_count": len(members) - consumer_count,
                        "pv_capacity_kw": sum(cell["pv_capacity_kw"] for cell in members),
-                 "dwelling_units": sum(cell["dwelling_units"] for cell in members)}
+                 "homes": sum(cell["homes"] for cell in members)}
         for kind in TYPE_SHORT_LABELS:
             group[f"{kind}_count"] = sum(cell["building_type"] == kind for cell in members)
         groups.append(group)
@@ -91,25 +129,7 @@ def generate_community_map(households: list[Household], directory: Path) -> None
         text_color = "#FFFFFF" if battery else INK_COLOR
         kind = cell["building_type"]
         label = TYPE_SHORT_LABELS[kind]
-        if kind == "apartment_block":
-            height = min(.78, .48 + .03 * cell["floors"])
-            axis.add_patch(Rectangle((x + .18, y + .10), .64, height,
-                                     facecolor=fill, edgecolor=INK_COLOR, linewidth=.7))
-            axis.plot([x + .18, x + .82], [y + .58, y + .58], color=text_color, linewidth=.6)
-            axis.text(x + .5, y + .10 + height - .07, f"BLOCK {cell['floors']}F", ha="center", va="center",
-                      color=text_color, fontsize=6.8, fontweight="bold")
-        elif kind == "supermarket":
-            axis.add_patch(Rectangle((x + .05, y + .10), .90, .53,
-                                     facecolor=fill, edgecolor=INK_COLOR, linewidth=.7))
-            axis.add_patch(Rectangle((x + .04, y + .63), .92, .15,
-                                     facecolor=fill, edgecolor=INK_COLOR, linewidth=.7))
-            axis.text(x + .5, y + .71, label, ha="center", va="center", color=text_color, fontsize=7.2, fontweight="bold")
-        else:
-            axis.add_patch(Rectangle((x + .10, y + .10), .80, .52,
-                                     facecolor=fill, edgecolor=INK_COLOR, linewidth=.65))
-            axis.add_patch(Polygon([(x + .07, y + .62), (x + .50, y + .91), (x + .93, y + .62)],
-                                   facecolor=fill, edgecolor=INK_COLOR, linewidth=.65))
-            axis.text(x + .5, y + .72, label, ha="center", va="center", color=text_color, fontsize=6.6, fontweight="bold")
+        draw_building(axis, kind, x, y, fill, text_color, label, cell["floors"])
         axis.text(x + .5, y + .48, cell["household_id"], ha="center", va="center",
                   color=text_color, fontsize=8.7, fontweight="bold")
         axis.text(x + .5, y + .28, "CONSUMER" if consumer else f'PV {cell["pv_capacity_kw"]:.1f} kW', ha="center", va="center",
@@ -125,7 +145,8 @@ def generate_community_map(households: list[Household], directory: Path) -> None
                      label=f"PV only: {len(cells) - owner_count - consumer_count} buildings"),
                Patch(facecolor=CONSUMER_COLOR, edgecolor=INK_COLOR,
                      label=f"Consumer only: {consumer_count} buildings (no PV/storage)")]
-    fig.text(.5, .09, "HOUSE = small house   BLOCK = apartment block (F = floors)   SHOP = supermarket   SCHOOL = school",
+    fig.text(.5, .09, "Shapes: HOUSE = pitched roof   BLOCK = tall tower with stepped top (F = floors)   "
+             "SHOP = wide hall with sawtooth awning   SCHOOL = wings + central bell tower and flag",
              ha="center", fontsize=9, color=INK_COLOR)
     fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(.52, .055), ncol=3,
                frameon=False, fontsize=11)

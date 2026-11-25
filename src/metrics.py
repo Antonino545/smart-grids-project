@@ -15,6 +15,7 @@ def calculate_metrics(result: SimulationResult) -> dict:
     grid_net_cost = result.ledger.balance(GRID_ACCOUNT)
     fees = sum(m.amount_eur for m in result.ledger.movements if m.kind == "grid_fee")
     rewards = sum(m.amount_eur for m in result.ledger.movements if m.kind == "reward")
+    refunds = sum(m.amount_eur for m in result.ledger.movements if m.kind == "refund")
     initial_fund = result.regulator.settings.initial_budget_eur if result.regulator else 0.0
     closing_fund = result.regulator.funds_eur if result.regulator else 0.0
     first_hour, last_hour = min(b.hour for b in result.balances), max(b.hour for b in result.balances)
@@ -24,7 +25,7 @@ def calculate_metrics(result: SimulationResult) -> dict:
     demand = sum(b.demand_kwh for b in result.balances)
     losses = sum(b.battery_loss_kwh for b in result.balances)
     energy_error = pv + imports + initial_storage - demand - exports - final_storage - losses
-    money_error = household_cost - (grid_net_cost + fees - rewards)
+    money_error = household_cost - (grid_net_cost + fees - rewards - refunds)
     if abs(energy_error) > 1e-7 or abs(money_error) > 1e-7:
         raise ValueError("Community energy or financial reconciliation failed.")
     return {
@@ -40,6 +41,7 @@ def calculate_metrics(result: SimulationResult) -> dict:
         "external_grid_net_cost_eur": grid_net_cost,
         "community_including_regulator_net_cost_eur": household_cost - (closing_fund - initial_fund),
         "regulator_fee_revenue_eur": fees, "regulator_reward_expenditure_eur": rewards,
+        "regulator_refund_eur": refunds,
         "regulator_initial_funds_eur": initial_fund, "regulator_remaining_funds_eur": closing_fund,
         "battery_charge_kwh": sum(b.charge_kwh for b in result.balances),
         "battery_discharge_kwh": sum(b.discharge_kwh for b in result.balances),

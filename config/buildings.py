@@ -1,4 +1,15 @@
-"""Illustrative building archetypes, not measured or professor-mandated values."""
+"""Building archetypes for a Turin (Torino) neighbourhood.
+
+Sources behind the defaults (see docs/building_model.md for detail):
+- PV yield and panel tilt: JRC PVGIS 5.2 for 45.07 N, 7.69 E (optimum fixed tilt 40 deg south;
+  June yield is highest at 10-15 deg). Tiled roofs in northern Italy are pitched at 35-45 %
+  (about 19-24 deg), so house panels lie flush at 20 deg.
+- Home size: ISTAT 2023, occupied homes in Italian cities average 93.5 m2.
+- Home electricity: ARERA reference 2,200-2,700 kWh/year (2-3 people); Piedmont households
+  average 2.1 people.
+Roof ranges, panel coverage and PV limits are chosen so roof x coverage x density never
+exceeds the limit with the default 0.20 kW/m2 modules: the limit is a cap, not the usual size.
+"""
 
 from dataclasses import dataclass, field, replace
 from math import isfinite
@@ -11,11 +22,11 @@ class BuildingTypeSettings:
     roof_max_m2: float
     floors_min: int
     floors_max: int
-    units_per_floor_min: int = 1
-    units_per_floor_max: int = 1
-    daily_energy_min: float = 8.0
-    daily_energy_max: float = 24.0
-    energy_basis: str = "per_dwelling"
+    home_area_m2_min: float = 70.0
+    home_area_m2_max: float = 110.0
+    daily_energy_min: float = 7.0
+    daily_energy_max: float = 12.0
+    energy_basis: str = "per_home"
     profile: str = "residential"
     opening_hour: int = 7
     closing_hour: int = 22
@@ -23,9 +34,11 @@ class BuildingTypeSettings:
     operating_load_weight: float = 1.0
     weekend_multiplier: float = 1.05
     weekend_open: bool = True
-    roof_usable_fraction_min: float = 0.35
-    roof_usable_fraction_max: float = 0.65
-    pv_limit_kw: float = 12.0
+    roof_usable_fraction_min: float = 0.22
+    roof_usable_fraction_max: float = 0.35
+    pv_limit_kw: float = 10.0
+    panel_tilt_deg: float = 20.0
+    panel_azimuth_deg: float = 0.0
     battery_scale: float = 1.0
     daily_variation_fraction: float = 0.08
 
@@ -33,21 +46,24 @@ class BuildingTypeSettings:
         for name in ("share", "roof_min_m2", "roof_max_m2", "daily_energy_min", "daily_energy_max",
                      "base_load_weight", "operating_load_weight", "weekend_multiplier",
                      "roof_usable_fraction_min", "roof_usable_fraction_max", "pv_limit_kw",
-                     "battery_scale", "daily_variation_fraction"):
+                     "battery_scale", "daily_variation_fraction", "home_area_m2_min", "home_area_m2_max",
+                     "panel_tilt_deg"):
             value = getattr(self, name)
             if not isfinite(value) or value < 0:
                 raise ValueError(f"Invalid building parameter: {name}")
         for lower, upper in ((self.roof_min_m2, self.roof_max_m2),
-                             (self.daily_energy_min, self.daily_energy_max)):
+                             (self.daily_energy_min, self.daily_energy_max),
+                             (self.home_area_m2_min, self.home_area_m2_max)):
             if not 0 < lower <= upper:
-                raise ValueError("Building roof/energy ranges must be positive and ordered.")
-        for lower, upper in ((self.floors_min, self.floors_max),
-                             (self.units_per_floor_min, self.units_per_floor_max)):
-            if type(lower) is not int or type(upper) is not int or not 1 <= lower <= upper:
-                raise ValueError("Building floor/unit counts must be positive ordered integers.")
+                raise ValueError("Building roof/energy/home-size ranges must be positive and ordered.")
+        if (type(self.floors_min) is not int or type(self.floors_max) is not int
+                or not 1 <= self.floors_min <= self.floors_max):
+            raise ValueError("Building floor counts must be positive ordered integers.")
+        if not 0 <= self.panel_tilt_deg <= 90 or not -180 <= self.panel_azimuth_deg <= 180:
+            raise ValueError("Panel tilt must be 0-90 deg and azimuth -180..180 deg (0 = south).")
         if not 0 < self.roof_usable_fraction_min <= self.roof_usable_fraction_max <= 1:
             raise ValueError("Usable roof fractions must be in (0, 1].")
-        if self.energy_basis not in {"per_dwelling", "per_floor_area"}:
+        if self.energy_basis not in {"per_home", "per_floor_area"}:
             raise ValueError("Unknown building energy basis.")
         if self.profile not in {"residential", "commercial", "school"}:
             raise ValueError("Unknown building profile.")
@@ -62,18 +78,31 @@ class BuildingTypeSettings:
 
 def default_types() -> dict[str, BuildingTypeSettings]:
     return {
-        "small_house": BuildingTypeSettings(.50, 70, 150, 1, 2),
+        # Detached house (villetta): one home, panels flush on the south pitch of a tiled roof.
+        # 80-140 m2 x 22-35 % coverage x 0.20 kW/m2 = 3.5-9.8 kW (Italian homes: mostly 3-6 kW).
+        "small_house": BuildingTypeSettings(
+            .56, 80, 140, 1, 2, daily_energy_min=7, daily_energy_max=12,
+            roof_usable_fraction_min=.22, roof_usable_fraction_max=.35, pv_limit_kw=10,
+            panel_tilt_deg=20),
+        # Condominium: flat roof with lift room and vents; panels on 15 deg racks in rows.
+        # 250-500 m2 x 30-45 % x 0.20 = 15-45 kW. Homes per floor = 80 % of footprint / home size.
         "apartment_block": BuildingTypeSettings(
-            .30, 180, 360, 4, 10, units_per_floor_min=2, units_per_floor_max=4,
-            daily_energy_min=8, daily_energy_max=20, pv_limit_kw=100, battery_scale=4),
+            .30, 250, 500, 4, 8, home_area_m2_min=70, home_area_m2_max=110,
+            daily_energy_min=5, daily_energy_max=8, roof_usable_fraction_min=.30,
+            roof_usable_fraction_max=.45, pv_limit_kw=50, panel_tilt_deg=15, battery_scale=4),
+        # Neighbourhood supermarket: large flat roof, low 10 deg racks for dense coverage.
+        # 800-1600 m2 x 40-55 % x 0.20 = 64-176 kW. Load 0.8-1.3 kWh/m2/day (~290-475 kWh/m2/yr).
         "supermarket": BuildingTypeSettings(
-            .10, 600, 1400, 1, 1, daily_energy_min=.5, daily_energy_max=1.1,
+            .10, 800, 1600, 1, 1, daily_energy_min=.8, daily_energy_max=1.3,
             energy_basis="per_floor_area", profile="commercial", base_load_weight=.45,
-            pv_limit_kw=300, battery_scale=10, weekend_multiplier=.9),
+            roof_usable_fraction_min=.40, roof_usable_fraction_max=.55, pv_limit_kw=200,
+            panel_tilt_deg=10, battery_scale=10, weekend_multiplier=.9),
+        # School: flat roof, 15 deg racks. 700-1600 m2 x 30-45 % x 0.20 = 42-144 kW.
         "school": BuildingTypeSettings(
-            .10, 700, 1600, 2, 3, daily_energy_min=.08, daily_energy_max=.18,
+            .04, 700, 1600, 2, 4, daily_energy_min=.08, daily_energy_max=.15,
             energy_basis="per_floor_area", profile="school", opening_hour=8, closing_hour=17,
-            base_load_weight=.08, pv_limit_kw=300, battery_scale=6,
+            base_load_weight=.08, roof_usable_fraction_min=.30, roof_usable_fraction_max=.45,
+            pv_limit_kw=150, panel_tilt_deg=15, battery_scale=6,
             weekend_multiplier=.15, weekend_open=False),
     }
 

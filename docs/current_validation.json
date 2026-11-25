@@ -1,92 +1,152 @@
 {
-  "automated_tests": {
-    "passed": 85,
-    "duration_seconds": 25.18
+ "automated_tests": {
+  "passed": 102,
+  "duration_seconds": 40.63
+ },
+ "input_sha256": "c62c1db5de5f6d96d26a6554518ac538fa8a9558d3772c0a35b12731a4ce8d10",
+ "model": "100 prosumer + 50 consumer aggregate building meters in Turin; scenarios A-F plus regulator policy variants G-K",
+ "recorded_on": "25 November 2026",
+ "scenarios": {
+  "A": {
+   "hours": 24,
+   "internal_trades": 477,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
   },
-  "input_sha256": "c42ebb8f3997ab181b6835907386d76365d642c4798b3b5b5a3752dd80e04e9b",
-  "model": "100 prosumer + 50 consumer aggregate building meters",
-  "recorded_on": "21 October 2026",
-  "scenarios": {
-    "A": {
-      "hours": 24,
-      "internal_trades": 444,
-      "blockchain_valid": true,
-      "cash_and_energy_valid": true
-    },
-    "B": {
-      "hours": 24,
-      "internal_trades": 932,
-      "blockchain_valid": true,
-      "cash_and_energy_valid": true
-    },
-    "C": {
-      "hours": 24,
-      "internal_trades": 518,
-      "blockchain_valid": true,
-      "cash_and_energy_valid": true
-    },
-    "D": {
-      "hours": 24,
-      "internal_trades": 1078,
-      "blockchain_valid": true,
-      "cash_and_energy_valid": true
-    },
-    "E": {
-      "hours": 24,
-      "internal_trades": 477,
-      "blockchain_valid": true,
-      "cash_and_energy_valid": true
-    },
-    "F": {
-      "hours": 24,
-      "internal_trades": 1062,
-      "blockchain_valid": true,
-      "cash_and_energy_valid": true
-    }
+  "B": {
+   "hours": 24,
+   "internal_trades": 911,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
   },
-  "demand_response": {
-    "input_sha256": "3ab03845a79afff02913d15f8dfb85c07532fd7e3da6f3a2134a8a6712e0da8c",
-    "scenarios": {
-      "A": {
-        "hours": 24,
-        "internal_trades": 445,
-        "blockchain_valid": true,
-        "cash_and_energy_valid": true
-      },
-      "B": {
-        "hours": 24,
-        "internal_trades": 920,
-        "blockchain_valid": true,
-        "cash_and_energy_valid": true
-      },
-      "C": {
-        "hours": 24,
-        "internal_trades": 518,
-        "blockchain_valid": true,
-        "cash_and_energy_valid": true
-      },
-      "D": {
-        "hours": 24,
-        "internal_trades": 1072,
-        "blockchain_valid": true,
-        "cash_and_energy_valid": true
-      },
-      "E": {
-        "hours": 24,
-        "internal_trades": 471,
-        "blockchain_valid": true,
-        "cash_and_energy_valid": true
-      },
-      "F": {
-        "hours": 24,
-        "internal_trades": 1047,
-        "blockchain_valid": true,
-        "cash_and_energy_valid": true
-      }
-    },
-    "eligibility": "PV prosumers without battery ownership, unchanged across A-F",
-    "enabled": true,
-    "shifted_energy_kwh": 353.80444322146525,
-    "shifted_meter_count": 43
+  "C": {
+   "hours": 24,
+   "internal_trades": 566,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "D": {
+   "hours": 24,
+   "internal_trades": 1093,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "E": {
+   "hours": 24,
+   "internal_trades": 530,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "F": {
+   "hours": 24,
+   "internal_trades": 1088,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "G": {
+   "hours": 24,
+   "internal_trades": 859,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "H": {
+   "hours": 24,
+   "internal_trades": 918,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "I": {
+   "hours": 24,
+   "internal_trades": 772,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "J": {
+   "hours": 24,
+   "internal_trades": 911,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
+  },
+  "K": {
+   "hours": 24,
+   "internal_trades": 947,
+   "blockchain_valid": true,
+   "cash_and_energy_valid": true
   }
+ },
+ "demand_response": {
+  "input_sha256": "b6ecfbbc0b166ad22b0e1f3879fcf9d945f85f71a46132fd9210e11c75d09d73",
+  "scenarios": {
+   "A": {
+    "hours": 24,
+    "internal_trades": 476,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "B": {
+    "hours": 24,
+    "internal_trades": 923,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "C": {
+    "hours": 24,
+    "internal_trades": 569,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "D": {
+    "hours": 24,
+    "internal_trades": 1096,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "E": {
+    "hours": 24,
+    "internal_trades": 532,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "F": {
+    "hours": 24,
+    "internal_trades": 1089,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "G": {
+    "hours": 24,
+    "internal_trades": 872,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "H": {
+    "hours": 24,
+    "internal_trades": 931,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "I": {
+    "hours": 24,
+    "internal_trades": 779,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "J": {
+    "hours": 24,
+    "internal_trades": 923,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   },
+   "K": {
+    "hours": 24,
+    "internal_trades": 966,
+    "blockchain_valid": true,
+    "cash_and_energy_valid": true
+   }
+  },
+  "eligibility": "PV prosumers without battery ownership, unchanged across A-F",
+  "enabled": true,
+  "shifted_energy_kwh": 270.069762509257,
+  "shifted_meter_count": 42
+ }
 }

@@ -12,26 +12,36 @@ TYPE_LABELS = {"small_house": "Small house", "apartment_block": "Apartment block
 TYPE_SHORT_LABELS = {"small_house": "HOUSE", "apartment_block": "BLOCK",
                     "supermarket": "SHOP", "school": "SCHOOL", "legacy_house": "HOUSE"}
 
+LIVING_AREA_FRACTION = 0.80
+
 
 def assign_building_types(settings: SimulationSettings, buildings: BuildingSettings) -> list[str]:
-    """Largest-remainder allocation within each group, then a seeded shuffle of positions."""
+    """Community-wide largest-remainder allocation, dealt round-robin across groups.
+
+    Allocating over the whole community lets a type have fewer buildings than there are
+    groups (e.g. 4 schools for 10 groups); round-robin dealing keeps every group at the
+    same size and spreads each type as evenly as possible. Positions are then shuffled.
+    """
     rng = Random(settings.random_seed + 3000)
+    exact = {name: spec.share * settings.household_count for name, spec in buildings.types.items()}
+    counts = {name: int(value) for name, value in exact.items()}
+    remainder = settings.household_count - sum(counts.values())
+    ordered = sorted(exact, key=lambda name: (-(exact[name] - counts[name]), name))
+    for name in ordered[:remainder]:
+        counts[name] += 1
+    pool = [name for name in buildings.types for _ in range(counts[name])]
+    groups = [[] for _ in range(settings.group_count)]
+    for index, name in enumerate(pool):
+        groups[index % settings.group_count].append(name)
     assigned = []
-    for _ in range(settings.group_count):
-        exact = {name: spec.share * settings.households_per_group for name, spec in buildings.types.items()}
-        counts = {name: int(value) for name, value in exact.items()}
-        remainder = settings.households_per_group - sum(counts.values())
-        ordered = sorted(exact, key=lambda name: (-(exact[name] - counts[name]), name))
-        for name in ordered[:remainder]:
-            counts[name] += 1
-        group = [name for name in buildings.types for _ in range(counts[name])]
+    for group in groups:
         rng.shuffle(group)
         assigned.extend(group)
     return assigned
 
 
 def roof_pv_capacity(roof_area_m2: float, usable_fraction: float, density_kw_m2: float, limit_kw: float) -> float:
-    """A building has one roof. Floors and dwelling counts deliberately do not enter."""
+    """A building has one roof. Floors and home counts deliberately do not enter."""
     return min(roof_area_m2 * usable_fraction * density_kw_m2, limit_kw)
 
 
@@ -40,12 +50,17 @@ def building_attributes(kind: str, buildings: BuildingSettings, parameters: Hous
     spec = buildings.types[kind]
     roof_area = rng.uniform(spec.roof_min_m2, spec.roof_max_m2)
     floors = rng.randint(spec.floors_min, spec.floors_max)
-    units_per_floor = rng.randint(spec.units_per_floor_min, spec.units_per_floor_max)
-    units = floors * units_per_floor if kind == "apartment_block" else 1 if kind == "small_house" else 0
+    if kind == "apartment_block":
+        # Homes follow from the footprint: 80 % of each floor is living space, the rest is
+        # walls, stairs and the lift. Each home's size is drawn from the Turin-like range.
+        home_area = rng.uniform(spec.home_area_m2_min, spec.home_area_m2_max)
+        homes = floors * max(1, round(roof_area * LIVING_AREA_FRACTION / home_area))
+    else:
+        homes = 1 if kind == "small_house" else 0
     floor_area = roof_area * floors
     usable_fraction = rng.uniform(spec.roof_usable_fraction_min, spec.roof_usable_fraction_max)
     energy_unit = rng.uniform(spec.daily_energy_min, spec.daily_energy_max)
-    daily_energy = energy_unit * (units if spec.energy_basis == "per_dwelling" else floor_area)
+    daily_energy = energy_unit * (homes if spec.energy_basis == "per_home" else floor_area)
     shift = rng.uniform(-parameters.profile_shift_max_hours, parameters.profile_shift_max_hours)
 
     def weights(weekend: bool):
@@ -70,7 +85,8 @@ def building_attributes(kind: str, buildings: BuildingSettings, parameters: Hous
                       max_discharge_power_kw=base_battery.max_discharge_power_kw * spec.battery_scale) if base_battery else None
     return {
         "building_type": kind, "roof_area_m2": roof_area, "floors": floors,
-        "floor_area_m2": floor_area, "dwelling_units": units, "usable_roof_fraction": usable_fraction,
+        "floor_area_m2": floor_area, "homes": homes, "usable_roof_fraction": usable_fraction,
+        "panel_tilt_deg": spec.panel_tilt_deg, "panel_azimuth_deg": spec.panel_azimuth_deg,
         "pv_capacity_kw": roof_pv_capacity(roof_area, usable_fraction, buildings.pv_density_kw_m2, spec.pv_limit_kw),
         "battery": battery,
         "demand_profile_kwh": tuple(daily_energy * w / sum(weekday_weights) for w in weekday_weights),

@@ -2,68 +2,101 @@
 
 The extended design contains **150 aggregate building meters: 100 original
 prosumers and 50 added consumer-only buildings**, not 150 individual households. Apartment blocks
-represent all their dwelling units at one meter. Commercial buildings and schools
+represent all their homes at one meter. Commercial buildings and schools
 also have one meter each. The identifier `household_id` remains for compatibility.
 H001-H100 identify unchanged prosumers; H101-H150 identify consumers.
 
 ## Initial composition
 
-Each of ten neighborhoods retains five small houses, three apartment blocks,
-one supermarket and one school as prosumers, plus five added consumers. The added
-pool contains 25 houses, 15 blocks, 5 supermarkets and 5 schools. Type counts use
-largest-remainder rounding across the consumer pool; a separate seeded shuffle
-distributes them round-robin, giving every group exactly five consumers.
+The default shares are 56% small houses, 30% apartment blocks, 10% supermarkets
+and 4% schools, giving 56/30/10/4 prosumers and 28/15/5/2 consumers (84 houses,
+45 blocks, 15 supermarkets and 6 schools; 150 in total). Counts are rounded over
+the whole pool (largest remainder), then dealt round-robin over the ten groups, so
+every group has exactly 10 prosumers and 5 consumers and a type with fewer
+buildings than groups (the 4 prosumer schools) lands in different groups.
 Consumers have the same geometry/load rules for their type, but zero installed PV
 and no batteries. They can only buy energy through P2P, aggregator or grid.
-No group is consumer-only or prosumer-only. Positions within each row are shuffled with a
-fixed seed, independently of battery assignment. The defaults give 50/30/10/10
-original prosumers, plus the new 25/15/5/5 consumers. The existing 55 battery-owning IDs remain unchanged: each neighborhood
-has five or six owners. Counterfactual C/D disable storage without changing type,
-roof, identity, dwelling count, demand inputs or battery ownership metadata.
+No group is consumer-only or prosumer-only. Positions within each row are shuffled
+with a fixed seed, independently of battery assignment. The 55 battery-owning IDs
+stay unchanged: each neighborhood has five or six owners. Counterfactual C/D
+disable storage without changing type, roof, identity, home count, demand inputs
+or battery ownership metadata.
 
-Type shares are configurable in the `buildings.types` section of JSON. Within
-each group, fractional counts use largest-remainder rounding. For group sizes
-other than ten, the actual exported composition may differ from the requested
-fractions. Building identities remain fixed across the six experiments.
+## Area: Turin (Torino)
+
+The community is placed in Turin (45.07 N, 7.69 E, about 240 m). Values below come
+from public sources where they exist and are engineering choices otherwise:
+
+| Quantity | Value | Source / reasoning |
+|---|---|---|
+| Best fixed panel tilt, whole year | 40 deg, south, 1,368 kWh/kW/yr | JRC PVGIS 5.2 |
+| June yield at 10 / 20 / 30 deg | 4.92 / 4.87 / 4.75 kWh/kW/day | JRC PVGIS 5.2 |
+| June light on panel, average / clear day (20 deg) | 6.54 / 7.90 kWh/m2/day | JRC PVGIS 5.2 daily profile |
+| Total PV losses (cables, inverter, heat, reflection) | about 22-25% | JRC PVGIS 5.2 (14% system + temperature/angle) |
+| Tiled roof pitch in northern Italy | 35-45% slope = 19-24 deg | Italian roofing guides |
+| Average home size in Italian cities | 93.5 m2 | ISTAT 2023 |
+| Household electricity | 2,200 kWh/yr (2 people) to 2,700 kWh/yr (typical) | ARERA reference values |
+| Household size, Piedmont | 2.1 people | Regione Piemonte |
 
 ## Geometry and sizing assumptions
 
-**All ranges below are synthetic engineering defaults, not measured building
-stock, equipment recommendations or professor requirements.** The selected values
-allow a heterogeneous teaching simulation and must be calibrated for real use.
+A **home** is one flat or house where one family lives. A block holds many homes
+behind one meter.
 
-| Type | Count | Single roof m2 | Floors | Demand basis | Base energy range | Battery capacity / power |
-|---|---:|---:|---:|---|---|---|
-| Small house | 75 | 70-150 | 1-2 | One dwelling | 8-24 kWh/dwelling/day | 10 kWh / 3 kW |
-| Apartment block | 45 | 180-360 | 4-10 | 2-4 dwellings per floor | 8-20 kWh/dwelling/day | 40 kWh / 12 kW |
-| Supermarket | 15 | 600-1400 | 1 | Total floor area | 0.5-1.1 kWh/m2/day | 100 kWh / 30 kW |
-| School | 15 | 700-1600 | 2-3 | Total floor area | 0.08-0.18 kWh/m2/day | 60 kWh / 18 kW |
+| Type | Count | Roof m2 | Floors | Homes | Base energy | Panel tilt | Roof covered | PV kW (roof-based) | PV limit | Battery |
+|---|---:|---:|---:|---|---|---:|---:|---:|---:|---|
+| Small house | 84 | 80-140 | 1-2 | 1 | 7-12 kWh/home/day | 20 deg | 22-35% | 3.5-9.8 | 10 kW | 10 kWh / 3 kW |
+| Apartment block | 45 | 250-500 | 4-8 | 80% of footprint / 70-110 m2, per floor | 5-8 kWh/home/day | 15 deg | 30-45% | 15-45 | 50 kW | 40 kWh / 12 kW |
+| Supermarket | 15 | 800-1600 | 1 | 0 | 0.8-1.3 kWh/m2/day | 10 deg | 40-55% | 64-176 | 200 kW | 100 kWh / 30 kW |
+| School | 6 | 700-1600 | 2-4 | 0 | 0.08-0.15 kWh/m2/day | 15 deg | 30-45% | 42-144 | 150 kW | 60 kWh / 18 kW |
 
-Battery sizes apply only to the original selected owners; new consumers have no
-storage. Configure additions with `buildings.consumer_count` (default JSON: 50),
-which must be a nonnegative multiple of the group count. The old 100-prosumer
-experiment can be rerun with `config/mixed_100_baseline.json`. Its saved input
-tables/comparison are in `docs/baseline/mixed_100/`; its report is preserved in
-`output/pdf/smart_grids_100_prosumer_baseline_report.pdf`. Separate random streams
-preserve all original geometry and multi-day demand inputs when additions change.
+Why these values:
+
+- **Panel tilt.** House panels lie flush on the south pitch of a tiled roof, about
+  20 deg. Flat roofs (blocks, schools, supermarkets) use racks. Low racks (10-15 deg)
+  give the highest June yield in Turin and need less space between rows, so more of
+  the roof can be covered; supermarkets use 10 deg to cover their large roofs densely.
+  For a whole year, 40 deg would be best (PVGIS), about 7-11% more energy per kW.
+- **Roof covered** is the share of the footprint covered by modules after fire
+  setbacks, chimneys, lift rooms, vents and gaps between rows. On a pitched house
+  roof only the south side is used, so it stays below half of the footprint. On
+  flat roofs, rows at 15 deg need about 1.6 module lengths of spacing to avoid
+  winter shading in Turin, so at most about 60% of the free roof is covered.
+- **PV limit** sits just above the largest roof-based size. The roof decides the
+  size; the limit is only a safety cap and never binds with the defaults.
+- **Homes in a block** follow from the footprint: 80% of each floor is living
+  space, divided by a home size drawn between 70 and 110 m2 (city average 93.5 m2).
+  This keeps floor area, home count and demand consistent with each other.
+- **Home demand.** About 1,800-2,900 kWh/yr per flat (5-8 kWh/day) and 2,600-4,400
+  kWh/yr for a detached house (7-12 kWh/day), bracketing the ARERA reference values
+  with some summer cooling.
 
 The roof is an approximate building footprint. Total floor area = roof area x
-floors. For blocks, dwelling count = floors x dwellings per floor. For small
-houses it is one dwelling; schools/supermarkets count zero residential dwellings.
-There are more than 100 dwelling units in the default community because blocks
-contain many apartments. Exported totals describe the actual seeded realization.
-
-Each building has **one roof regardless of its height**. PV installed kW is:
+floors. Each building has **one roof regardless of its height**. PV installed kW is:
 
 ```
 min(single_roof_m2 * usable_roof_fraction * pv_density_kw_m2, type_pv_limit_kw)
 ```
 
-Default usable fraction is 35-65%, density 0.20 kW/m2, PV limits 12 kW for small
-houses, 100 kW for blocks, and 300 kW for supermarkets/schools. Floors and dwelling
-counts do not enter the PV formula. Increasing floors increases the load basis
-without manufacturing extra rooftop area. Identical weather is converted into
-PV generation separately for each building's installed capacity.
+with 0.20 kW per m2 of module (about 20%-efficient panels). Floors and homes do not
+enter the PV formula.
+
+## Solar production
+
+Every hour, `src/solar.py` computes the sun position over Turin (NOAA formulas),
+the clear-sky light (Meinel beam model with air mass and altitude, Liu-Jordan
+diffuse) and the light reaching each panel from its tilt and direction (beam +
+sky diffuse + ground reflection, albedo 0.20), averaged over 5-minute steps.
+`forecast.clear_sky_transmittance = 0.66` makes the clear June day match PVGIS
+within about 1% at 10-30 deg. One seeded cloud factor per hour (0.65-1.0, mean
+0.825) is shared by all buildings and reproduces the PVGIS average/clear June
+ratio (0.83). PV kWh = kW x panel light / 1000 x 0.75, capped at the installed kW;
+0.75 is the PVGIS June output/light ratio for Turin. The expected June yield is
+about 4.9 kWh per installed kW per day, as in PVGIS. On 15 June the sun rises at
+about 05:40 and sets at about 21:15 local time; solar noon is about 13:30.
+
+A `forecast.weather_csv` file gives **horizontal** light (GHI). Each hour it is
+moved onto every panel tilt using the clear-sky ratio of panel to horizontal light.
 
 Battery-owning buildings scale the configured base battery's capacity **and**
 power by 1/4/10/6 for house/block/supermarket/school. All retain 95% efficiency
@@ -73,14 +106,15 @@ The self-consumption/P2P-priority policy and PV-only charging rule are unchanged
 ## Time-dependent electricity demand
 
 - Houses and blocks use household-specific morning and evening peaks. Block
-  demand is the aggregate of its dwelling count, not an independent roof per flat.
+  demand is the sum over its homes, not an independent roof per flat.
 - Supermarkets have a nonzero all-day base load (illustrating refrigeration and
   essential equipment), plus an operating load during 07:00-22:00. Weekend daily
   energy defaults to 90% of weekday energy.
 - Schools have a lower base load and operating activity during 08:00-17:00 on
   weekdays. Weekend operating activity is disabled and total daily energy is 15%
   of the weekday baseline. This is a weekday/weekend calendar, not a holiday or
-  school-term calendar; June school operation is an explicit simplifying choice.
+  school-term calendar. In Piedmont lessons end around 10 June, so a 15 June run
+  overstates school use (exams still keep many schools open); this is a simplification.
 - Within each type, roof size, floor count, daily energy intensity, profile timing
   and hourly variation differ by building. Each calendar day gets a seeded
   multiplier within +/-8%, while retaining its type-specific hourly shape.
@@ -124,11 +158,11 @@ electrical feeder map. All P2P members of a row remain eligible regardless of
 visual distance.
 
 `households.csv` and `community_layout.csv` add building type, roof, floors, floor
-area, dwelling units and type-specific battery attributes. `building_type_summary.csv`
+area, homes, panel tilt/direction and type-specific battery attributes. `building_type_summary.csv`
 and `building_type_hourly.csv` support the automatically generated
 `building_type_profiles.png/.svg`. The latter plots mean demand and PV per building
 in each type, not totals over types with unequal counts. `comparison.json` states
-the participant unit, building counts and total dwelling units.
+the participant unit, building counts and total homes.
 
 The earlier homogeneous-house model remains runnable with:
 

@@ -29,8 +29,11 @@ No network service, GPU, blockchain account, or web interface is required.
 # Include the optional alternative battery strategy, scenarios E and F:
 python main.py --include-priority
 
-# Compare fixed demand against PV-aware demand shifting:
-python main.py --include-priority --compare-demand-response
+# Add the regulator policy variants G-K (variants of B, see below):
+python main.py --include-priority --include-policy
+
+# Compare fixed demand against PV-aware demand shifting (the full report run):
+python main.py --include-priority --include-policy --compare-demand-response
 
 # Run one regulated scenario, or skip charts:
 python main.py --scenario B --output results/single_B
@@ -69,6 +72,29 @@ The community and input data are generated **once**, then reused without mutatio
 C/D disable battery operation while retaining original ownership metadata. E/F
 are optional. Scenario definitions explicitly select their strategy; they override
 the default `simulation.battery.strategy` used by the standalone engine API.
+### Regulator policy variants (G-K)
+
+`--include-policy` adds five copies of B (55 batteries, regulated, self-consumption
+first), each with **one** regulator rule changed. Their settings are in
+`src/experiments.py` (`REGULATOR_OVERRIDES`) and are saved in each scenario's
+`summary.json`.
+
+| Scenario | Change from B | Setting |
+|---|---|---|
+| G | Lower fee: EUR 0.0025/kWh instead of 0.01 | `grid_fee_eur_kwh` |
+| H | Bigger reward: EUR 0.075/kWh (0.0375 lower tier) instead of 0.02 | `upper_/lower_reward_eur_kwh` |
+| I | Fee only on grid energy a same-group neighbour could have traded that hour | `fee_scope: "missed_local"` |
+| J | Whole fund returned at day end, split by each meter's P2P kWh | `refund_leftover: true` |
+| K | Hourly reward = fund / possible P2P kWh, capped at EUR 0.10/kWh | `reward_mode: "budget_sized"` |
+
+Why: in B the fee hits every grid kWh, day and night (about 18,000 kWh), while
+the reward only reaches P2P kWh (about 2,350), so most fees stay in the fund.
+On the default day, G's smaller fee leaves too little money for afternoon
+rewards, so it trades less than B; H and K trade more, and K, which spreads the
+fund over the day, trades the most. J trades like B but returns the fund. When a
+reward cannot be funded, the trade keeps the guided prices and only loses the
+reward. The same switches can be set for any run in the `regulator` section of a JSON config.
+
 Each hour has a deterministic matching stream, separate from community and data
 generation. Same inputs, seed, code and environment reproduce the transaction
 journal and block hashes. Stochastic results can change with another seed.
@@ -97,7 +123,7 @@ compatibility. `simulation.household_count` counts the original prosumers;
 The default JSON is loaded first, then partial overrides are merged recursively.
 The library generator alone retains a zero-addition default unless supplied building settings.
 `comparison.json`
-explicitly records this unit and the number of actual residential dwelling units.
+explicitly records this unit and the number of homes (flats and houses) it contains.
 
 ## Community map
 
@@ -118,7 +144,7 @@ road distances, electrical feeder geometry or distance-based restrictions in thi
 model. Membership defines eligible P2P partners, regardless of positions on this
 schematic. The layout does not change ownership or the simulation results. Other
 configured group sizes render as one row per group and may not form a square.
-Regenerate with `python main.py --include-priority` (unless `--no-charts` is used).
+Regenerate with `python main.py --include-priority --include-policy` (unless `--no-charts` is used).
 
 ## Configuration
 
@@ -148,12 +174,16 @@ All prices are EUR/kWh, quantities kWh, power kW and SOC a fraction of capacity.
 **The shipped experiment uses synthetic data, not real measurements.** No
 historical datasets were supplied. Synthetic weather, synthetic household demand
 and synthetic price history each have explicit source labels in every input row.
-The default day is 15 June 2026 with a fixed UTC+02:00 offset, chosen to demonstrate
-a sunny summer profile; it is not a weather claim about that date or location.
+The area is **Turin (Torino)**, 45.07 N 7.69 E. The default day is 15 June 2026
+with a fixed UTC+02:00 offset. Weather is synthetic but calibrated to JRC PVGIS
+data for Turin; it is not a forecast for that specific date.
 
-PV energy = installed kW × irradiance / 1000 × performance factor × step hours,
-capped at installed capacity × step hours. Synthetic irradiance follows a daylight
-curve with seeded cloud factors. Configured sunrise/sunset determine nighttime.
+Each hour, the sun position over Turin and the clear-sky light on every panel are
+computed from the panel tilt (houses 20°, blocks/schools 15°, supermarkets 10°,
+all facing south). A seeded cloud factor (0.65–1.0) scales the light. PV energy =
+installed kW × panel light / 1000 × 0.75 × step hours, capped at installed
+capacity. This gives about 4.9 kWh per kW per day in June, as PVGIS does for
+Turin. See `docs/building_model.md` for sources.
 Demand depends on building type, size, residential units or floor area, opening
 hours, weekdays/weekends and seeded daily variation. See the building-model guide.
 School holidays and weather-sensitive HVAC demand are not modeled.
@@ -207,7 +237,7 @@ choices, not separately verified professor requirements.
   reward for the proposed feasible quantity must be reserved before a discounted
   quote. The adjusted ask equals guided ask minus 50% of the rate; the seller
   receives trade payment plus the full reward. Guidance leaves price headroom
-  for the discount. Unfunded proposals retry original offers without a reward;
+  for the discount. Unfunded proposals keep the guided prices without a reward;
   there are no partial-quantity subsidies. Rejected proposals release funds.
 - Grid imports and exports each incur EUR 0.01/kWh when regulated. There are no
   internal-market fees. Fees enter the fund after settlement and become usable
@@ -244,7 +274,7 @@ Both household flows and full cash movements must reconcile before outputs pass.
 ## Output files
 
 - `inputs/households.csv`: aggregate meter identities, building types, roof/floor
-  geometry, dwelling counts, groups, PV, ownership, type-specific battery specs,
+  geometry, home counts, panel tilt, groups, PV, ownership, type-specific battery specs,
   weekday/weekend profiles and offer parameters.
 - `inputs/hourly_inputs.csv`: all building-hour records and source labels.
 - `charts/building_type_profiles.png/.svg`: mean hourly demand and PV per building
@@ -259,7 +289,7 @@ Both household flows and full cash movements must reconcile before outputs pass.
   totals equal the surplus offered before P2P. Regulation differences are shown
   only when both members of a scenario pair were run. Household box plots show
   medians/quartiles with 1.5-IQR whiskers. Transaction prices exclude rewards.
-  Regenerate every chart with `python main.py --include-priority`.
+  Regenerate every chart with `python main.py --include-priority --include-policy`.
 - Each scenario folder contains `summary.json`, `household_hourly.csv`,
   `household_costs.csv`, `community_hourly.csv`, `transactions.csv`,
   `cash_ledger.csv`, `regulator_hourly.csv`, `reward_reservations.json`, and
@@ -303,7 +333,7 @@ explicitly flagged. The report builder targets the mixed-building six-scenario
 experiment. Other compositions require reviewing any illustrative narrative
 alongside the exported configuration.
 
-The PDF includes a team parameter guide on pages 11–22: all 166 configuration
+The PDF includes a team parameter guide on pages 11–22: all 180 configuration
 values, units, effects, building-type comparisons, worked examples and a partial
 JSON experiment workflow. Values are read from the saved run configuration.
 `scripts/report_parameters.py` checks that every configuration field is documented;

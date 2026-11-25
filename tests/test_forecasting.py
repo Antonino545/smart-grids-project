@@ -6,6 +6,7 @@ import pytest
 from config.settings import ForecastSettings, SimulationSettings
 from src.forecasting import generate_inputs, hourly_price_forecast
 from src.households import generate_households
+from src.solar import hourly_clear_sky
 
 
 def test_all_hourly_inputs_are_plausible_and_repeatable():
@@ -15,7 +16,8 @@ def test_all_hourly_inputs_are_plausible_and_repeatable():
     records = generate_inputs(households, settings)
     assert records == generate_inputs(households, settings)
     assert len(records) == len({(r.hour, r.household_id) for r in records}) == 2400
-    assert all(r.pv_kwh == 0 for r in records if r.hour <= 6 or r.hour >= 20)
+    # Turin, 15 June: sunrise about 05:40 and sunset about 21:15 local time.
+    assert all(r.pv_kwh == 0 for r in records if r.hour < 5 or r.hour >= 22)
     assert all(0 <= r.pv_kwh <= capacities[r.household_id] for r in records)
     assert all(r.demand_kwh >= 0 and isfinite(r.reference_price_eur_kwh) for r in records)
     assert all("synthetic" in r.weather_source and "synthetic" in r.price_source for r in records)
@@ -49,7 +51,13 @@ def test_real_csv_adapters_and_source_labels(tmp_path):
     with weather.open("w", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(["timestamp", "irradiance_w_m2"])
-        writer.writerows((r.timestamp, r.irradiance_w_m2) for r in reference if r.household_id == "H001")
+        # The CSV holds horizontal light: undo H001's panel transposition with the clear-sky ratio.
+        tilt = households[0].panel_tilt_deg
+        for r in reference:
+            if r.household_id != "H001":
+                continue
+            plane, horizontal = hourly_clear_sky(datetime.fromisoformat(r.timestamp), 45.07, 7.686, 240.0, .66, .2, tilt, 0.0)
+            writer.writerow((r.timestamp, r.irradiance_w_m2 * horizontal / plane if horizontal >= 1 else 0.0))
     demand = tmp_path / "demand.csv"
     with demand.open("w", newline="") as handle:
         writer = csv.writer(handle)
@@ -65,7 +73,7 @@ def test_real_csv_adapters_and_source_labels(tmp_path):
     records = generate_inputs(households, settings, ForecastSettings(
         weather_csv=str(weather), demand_csv=str(demand), historical_prices_csv=str(price)))
     assert all(r.reference_price_eur_kwh == .123 for r in records)
-    assert [r.pv_kwh for r in records] == [r.pv_kwh for r in reference]
+    assert [r.pv_kwh for r in records] == pytest.approx([r.pv_kwh for r in reference], abs=1e-9)
     assert [r.demand_kwh for r in records] == [r.demand_kwh for r in reference]
     assert all("synthetic" not in r.weather_source and "synthetic" not in r.price_source for r in records)
     with price.open("a") as handle:

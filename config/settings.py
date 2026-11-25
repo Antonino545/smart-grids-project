@@ -119,10 +119,13 @@ class HouseholdSettings:
 @dataclass(frozen=True)
 class ForecastSettings:
     start_timestamp: str = "2026-06-15T00:00:00+02:00"
-    sunrise_hour: float = 6.0
-    sunset_hour: float = 20.0
-    peak_irradiance_w_m2: float = 900.0
-    performance_factor: float = 0.85
+    # Site: Turin (Torino), Italy. Values from JRC PVGIS 5.2 for 45.07 N, 7.69 E.
+    latitude_deg: float = 45.07
+    longitude_deg: float = 7.686
+    site_altitude_m: float = 240.0
+    clear_sky_transmittance: float = 0.66
+    ground_albedo: float = 0.20
+    performance_factor: float = 0.75
     historical_days: int = 14
     cloud_factor_min: float = 0.65
     cloud_factor_max: float = 1.0
@@ -136,8 +139,8 @@ class ForecastSettings:
     def __post_init__(self) -> None:
         from datetime import datetime
         from math import isfinite
-        numeric = (self.sunrise_hour, self.sunset_hour, self.peak_irradiance_w_m2,
-                   self.performance_factor, self.cloud_factor_min, self.cloud_factor_max,
+        numeric = (self.latitude_deg, self.longitude_deg, self.site_altitude_m,
+                   self.clear_sky_transmittance, self.ground_albedo, self.performance_factor, self.cloud_factor_min, self.cloud_factor_max,
                    self.historical_price_noise_eur_kwh)
         if not all(isfinite(value) for value in numeric):
             raise ValueError("Forecast parameters must be finite.")
@@ -146,12 +149,12 @@ class ForecastSettings:
         start = datetime.fromisoformat(self.start_timestamp)
         if start.tzinfo is None or start.minute or start.second or start.microsecond:
             raise ValueError("Start must be timezone-aware and aligned to an hour.")
-        if not 0 <= self.sunrise_hour < self.sunset_hour <= 24:
-            raise ValueError("Invalid daylight hours.")
+        if not -90 <= self.latitude_deg <= 90 or not -180 <= self.longitude_deg <= 180:
+            raise ValueError("Site latitude/longitude out of range.")
+        if not 0 < self.clear_sky_transmittance < 1 or not 0 <= self.ground_albedo <= 1:
+            raise ValueError("Clear-sky transmittance must be in (0, 1) and albedo in [0, 1].")
         if not 0 < self.performance_factor <= 1:
             raise ValueError("PV performance factor must be in (0, 1].")
-        if not 0 < self.peak_irradiance_w_m2 <= 1000:
-            raise ValueError("Synthetic irradiance peak must be in (0, 1000].")
         if type(self.historical_days) is not int or self.historical_days < 1:
             raise ValueError("At least one historical day is required.")
         if not all(isfinite(x) for x in (self.price_base_eur_kwh, self.price_amplitude_eur_kwh)):
@@ -188,12 +191,29 @@ class RegulatorSettings:
     guidance_strength: float = 0.65
     guided_bid_multiplier: float = 1.04
     guided_ask_multiplier: float = 0.96
+    # Policy switches (see docs/regulator_policies.md). Defaults reproduce the original rules.
+    # fee_scope: "all_grid" charges every grid kWh; "missed_local" charges only grid energy
+    # that a neighbour in the same group could have traded in the same hour.
+    fee_scope: str = "all_grid"
+    # reward_mode: "tiered" uses the fixed tier rates; "budget_sized" sets each hour's rate
+    # to spend the fund on that hour's possible P2P energy, capped at max_reward_eur_kwh.
+    reward_mode: str = "tiered"
+    max_reward_eur_kwh: float = 0.10
+    # refund_leftover: at the end of each day, return the fund to meters in proportion to
+    # the P2P energy each one bought or sold that day.
+    refund_leftover: bool = False
 
     def __post_init__(self) -> None:
         from dataclasses import fields
         from math import isfinite
-        if not all(isfinite(getattr(self, f.name)) and getattr(self, f.name) >= 0 for f in fields(self)):
+        numeric = [f.name for f in fields(self) if f.name not in {"fee_scope", "reward_mode", "refund_leftover"}]
+        if not all(isinstance(getattr(self, name), (int, float)) and not isinstance(getattr(self, name), bool)
+                   and isfinite(getattr(self, name)) and getattr(self, name) >= 0 for name in numeric):
             raise ValueError("Regulator parameters must be finite and nonnegative.")
+        if self.fee_scope not in {"all_grid", "missed_local"} or self.reward_mode not in {"tiered", "budget_sized"}:
+            raise ValueError("Unknown regulator fee_scope or reward_mode.")
+        if type(self.refund_leftover) is not bool:
+            raise ValueError("refund_leftover must be true or false.")
         if not 0 < self.lower_tier_budget_eur < self.upper_tier_budget_eur:
             raise ValueError("Reward budget thresholds must be positive and ordered.")
         if not self.lower_reward_eur_kwh <= self.upper_reward_eur_kwh:

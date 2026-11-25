@@ -23,7 +23,7 @@ def test_fifty_consumers_are_mixed_and_original_prosumers_are_unchanged():
     consumers = extended[100:]
     assert len(extended) == len({h.household_id for h in extended}) == 150
     assert Counter(h.building_type for h in consumers) == {
-        "small_house": 25, "apartment_block": 15, "supermarket": 5, "school": 5}
+        "small_house": 28, "apartment_block": 15, "supermarket": 5, "school": 2}
     assert all(h.participant_role == "consumer" and h.pv_capacity_kw == 0 and h.battery is None for h in consumers)
     for group in range(1, 11):
         assert Counter(h.participant_role for h in extended if h.group_id == group) == {"prosumer": 10, "consumer": 5}

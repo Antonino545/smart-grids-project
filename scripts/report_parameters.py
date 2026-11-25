@@ -14,22 +14,24 @@ COMMUNITY = [
     ("buildings.pv_density_kw_m2", "kW per usable m2", "Installed PV power per usable roof area. Higher density raises capacity until the type PV limit is reached. It does not multiply roof area by floors."),
 ]
 GEOMETRY = [
-    ("share", "fraction", "Type fraction; four shares sum to 1. Prosumers round within each group; consumers round across their full pool, then shuffle into equal group additions."),
-    ("roof_min_m2", "m2", "Lower bound of the sampled single roof footprint; higher area permits more PV and increases the area-based commercial/school load basis."),
-    ("roof_max_m2", "m2", "Upper bound of that roof draw. One roof per building, regardless of floor count."),
-    ("floors_min", "floors", "Lower bound of the integer floor draw. Raises block dwelling counts and school floor area, without adding PV roofs."),
-    ("floors_max", "floors", "Upper floor-count bound. Total floor area = roof footprint x sampled floors."),
-    ("units_per_floor_min", "flats per floor", "Lower integer bound, used to calculate block flats. Small houses always have one dwelling; schools/shops have zero residential dwellings."),
-    ("units_per_floor_max", "flats per floor", "Upper bound for block flats per floor. More flats increase aggregate residential demand, not roof size."),
-    ("roof_usable_fraction_min", "fraction", "Lower bound of the usable roof share for PV. Excludes the rest of the roof from installed-panel area."),
-    ("roof_usable_fraction_max", "fraction", "Upper usable-share bound. Capacity = min(roof x usable share x density, pv_limit_kw)."),
-    ("pv_limit_kw", "kW", "Upper installed-PV limit for one building. Raising it matters only where the roof-based capacity would exceed the old limit."),
-    ("battery_scale", "multiplier", "For owners, multiplies base storage capacity and both power limits. Does not change owner count, SOC fractions or efficiency."),
+    ("share", "fraction", "Type fraction; shares sum to 1. Rounded over each pool, then spread evenly over groups."),
+    ("roof_min_m2", "m2", "Smallest roof footprint. More roof allows more PV and raises area-based shop/school load."),
+    ("roof_max_m2", "m2", "Largest roof footprint. One roof per building, whatever the floor count."),
+    ("floors_min", "floors", "Fewest floors. More floors mean more homes in blocks and more school floor area, never more roof."),
+    ("floors_max", "floors", "Most floors. Total floor area = roof footprint x floors."),
+    ("home_area_m2_min", "m2 per home", "Smallest block home. Homes per floor = 80% of footprint / home size."),
+    ("home_area_m2_max", "m2 per home", "Largest block home (Italian city average 93.5 m2, ISTAT). Houses are one home; shops/schools none."),
+    ("roof_usable_fraction_min", "fraction", "Least roof share covered by panels, after setbacks, chimneys, lift rooms and row gaps."),
+    ("roof_usable_fraction_max", "fraction", "Most roof covered. PV kW = min(roof x coverage x density, pv_limit_kw)."),
+    ("pv_limit_kw", "kW", "Safety cap per building; defaults sit above the largest roof-based size."),
+    ("panel_tilt_deg", "degrees", "Panel angle from flat. Houses 20 (tiled roof), blocks/schools 15, shops 10 (racks). Turin yearly best: 40."),
+    ("panel_azimuth_deg", "degrees", "Panel direction: 0 south, -90 east, 90 west."),
+    ("battery_scale", "multiplier", "For owners, multiplies base storage capacity and both power limits; not owner count or efficiency."),
 ]
 TYPE_LOAD = [
-    ("daily_energy_min", "basis-dependent", "Lower base energy draw: kWh/dwelling/day for per_dwelling, or kWh/m2/day for per_floor_area. Before weekend/day multipliers."),
-    ("daily_energy_max", "basis-dependent", "Upper energy draw. Multiply by dwelling count or total floor area to obtain the building weekday daily baseline."),
-    ("energy_basis", "enum", "per_dwelling uses dwelling count; per_floor_area uses roof x floors. Keep houses/blocks on dwelling basis and nonresidential buildings on area basis."),
+    ("daily_energy_min", "basis-dependent", "Lower base energy draw: kWh/home/day for per_home, or kWh/m2/day for per_floor_area. Before weekend/day multipliers."),
+    ("daily_energy_max", "basis-dependent", "Upper energy draw. Multiply by home count or total floor area to obtain the building weekday daily baseline."),
+    ("energy_basis", "enum", "per_home uses the number of homes; per_floor_area uses roof x floors. Keep houses/blocks on home basis and nonresidential buildings on area basis."),
     ("profile", "enum", "residential uses morning/evening peaks. commercial and school use a base plus an opening-hour load. Type name alone does not override this field."),
     ("opening_hour", "local hour", "Start of operating activity, inclusive. Used by nonresidential profiles; ignored by residential profiles."),
     ("closing_hour", "local hour", "End of operating activity, exclusive. A school closing at 17 has no operating component in the 17:00-18:00 step."),
@@ -52,17 +54,19 @@ BATTERY = [
 ]
 FORECAST = [
     ("forecast.start_timestamp", "ISO datetime + offset", "First hour of the run and the strict historical-price cutoff. Its weekday chooses school/weekend demand behavior. Offset is fixed; no named-zone DST calendar."),
-    ("forecast.sunrise_hour", "local hour", "Start boundary of synthetic daylight. Generation is zero at and before this hour; configure for the modeled season."),
-    ("forecast.sunset_hour", "local hour", "End boundary of synthetic daylight. Generation is zero at and after this hour; supplied weather is checked against these bounds."),
-    ("forecast.peak_irradiance_w_m2", "W per m2", "Peak of the synthetic daylight curve before cloud scaling. Higher values raise PV energy, not installed PV capacity."),
-    ("forecast.performance_factor", "fraction", "Converts irradiance and installed power to PV output, representing aggregate system losses. Applied to both synthetic and CSV weather."),
-    ("forecast.cloud_factor_min", "fraction", "Lower synthetic hourly multiplier on clear-day irradiance. Unused when weather_csv is supplied."),
-    ("forecast.cloud_factor_max", "fraction", "Upper synthetic cloud multiplier. Both cloud factors lie between 0 and 1; the default never exceeds the clear-day curve."),
+    ("forecast.latitude_deg", "deg north", "Site latitude (Turin 45.07): sun height and day length."),
+    ("forecast.longitude_deg", "deg east", "Site longitude (Turin 7.686): solar noon about 13:30 in summer time."),
+    ("forecast.site_altitude_m", "m", "Site altitude (Turin about 240 m); thinner air gives slightly more sun."),
+    ("forecast.clear_sky_transmittance", "fraction", "Air clearness on a cloudless day; 0.66 matches PVGIS clear June days in Turin."),
+    ("forecast.ground_albedo", "fraction", "Ground reflection onto tilted panels; 0.20 is typical for cities."),
+    ("forecast.performance_factor", "fraction", "Panel light to AC output after all losses; 0.75 = PVGIS June ratio for Turin."),
+    ("forecast.cloud_factor_min", "fraction", "Lowest hourly multiplier on clear-sky light. Unused with weather_csv."),
+    ("forecast.cloud_factor_max", "fraction", "Highest multiplier. Mean 0.825 matches PVGIS average/clear June ratio (0.83)."),
     ("forecast.historical_days", "days", "Number of synthetic pre-start price days. Unused when a historical price CSV is supplied; not a rolling actual-data update during simulation."),
     ("forecast.price_base_eur_kwh", "EUR per kWh", "Level of synthetic historical prices before the hourly sine component and random noise. Unused with a price CSV."),
     ("forecast.price_amplitude_eur_kwh", "EUR per kWh", "Amplitude of the synthetic hourly price pattern around its base. The forecast then averages earlier observations by clock hour."),
     ("forecast.historical_price_noise_eur_kwh", "EUR per kWh", "Symmetric +/- noise for synthetic historical prices. A seeded draw, not a measured forecast error or uncertainty interval."),
-    ("forecast.weather_csv", "path or null", "Optional timestamp,irradiance_w_m2 forecast file. null uses synthetic weather. Must cover the run and represent information available at issuance."),
+    ("forecast.weather_csv", "path or null", "Optional timestamp,irradiance_w_m2 file of horizontal (GHI) light; it is moved onto each panel tilt. null uses synthetic weather. Must cover the run and represent information available at issuance."),
     ("forecast.demand_csv", "path or null", "Optional timestamp,household_id,demand_kwh file covering every meter/hour. Replaces all synthetic load shapes, calendar and daily variation."),
     ("forecast.historical_prices_csv", "path or null", "Optional timestamp,price_eur_kwh file. Only observations strictly before start can affect hourly averages; all 24 clock hours need earlier coverage."),
 ]
@@ -95,6 +99,10 @@ ECONOMICS = [
     ("regulator.guidance_strength", "fraction", "Blend weight: guided = (1-strength) x original + strength x target, then clipped. Zero removes the blend, but leaves reward rules active."),
     ("regulator.guided_bid_multiplier", "multiplier", "Buyer guidance target = reference forecast x this value. Higher targets can make bids more compatible."),
     ("regulator.guided_ask_multiplier", "multiplier", "Seller guidance target = reference forecast x this value. Lower targets can make asks more compatible."),
+    ("regulator.fee_scope", "enum", "all_grid: every grid kWh pays the fee. missed_local: only grid energy a same-group neighbour could have traded that hour (scenario I)."),
+    ("regulator.reward_mode", "enum", "tiered: fixed tier rates. budget_sized: each hour's rate = fund / possible P2P kWh, capped (scenario K)."),
+    ("regulator.max_reward_eur_kwh", "EUR per P2P kWh", "Cap on the budget_sized reward rate. Unused with tiered rewards."),
+    ("regulator.refund_leftover", "boolean", "true returns the whole fund at day end, split by each meter's P2P kWh bought or sold (scenario J).")
 ]
 LEGACY_AND_CHAIN = [
     ("blockchain.miner_count", "simulated miners", "Number of round-robin nonce-search participants in one process. No physical servers, network or miner compensation are modeled."),
@@ -187,7 +195,7 @@ def append_parameter_guide(config, p, title, sub, table, page):
            ["EUR/kWh", "Price per energy unit. Quantity x price gives the trading payment. EUR/MWh source data must be divided by 1000."],
            ["SOC", "Stored energy / nominal battery capacity. 0.20 means 20%, not 0.20 kWh."],
            ["Building / meter", "One trading participant. A block aggregates its flats at one meter and shares one roof."],
-           ["Dwelling unit", "One residential flat/home inside a building. It is not automatically a separate P2P participant."]],[125,382])
+           ["Home", "One flat or house where one family lives. A block holds many homes behind one meter; a home is not a separate P2P participant."]],[125,382])
     sub("Fixed properties versus dynamic values")
     p("Roof area, floors, flat count, PV capacity, offer factors and battery ownership are drawn once per experiment and stay fixed. Hourly PV, demand, SOC, trades, cash and regulator funds evolve through time. Shape weights redistribute a fixed daily energy baseline; they are not independently added kWh.")
     p("Synthetic inputs and sizing ranges are teaching assumptions. A valid conservation check proves accounting consistency, not empirical realism or a guarantee of better economics.")
@@ -196,7 +204,7 @@ def append_parameter_guide(config, p, title, sub, table, page):
     title(12,"Parameters: community, time and randomness")
     p("JSON sections: simulation and buildings. Historical keys containing household now count building meters in the mixed model. A report value is not applied to new runs until it is saved in the chosen configuration.")
     table(scalar_rows(COMMUNITY),[145,105,257])
-    p("Constraints: equal neighborhood sizes; battery owners between zero and meter count; positive duration; currently one-hour steps only. Shares are rounded separately within each group, so small custom groups may not reproduce exact requested type percentages.")
+    p("Constraints: equal neighborhood sizes; battery owners between zero and meter count; positive duration; currently one-hour steps only. Shares are rounded over the whole community and then spread evenly across groups, so a type can have fewer buildings than there are groups.")
     p("The seed is held fixed across scenarios. Changing it creates a different realization and should be recorded as a new experiment, rather than interpreted as the effect of one policy switch.")
 
     page()
@@ -226,7 +234,7 @@ def append_parameter_guide(config, p, title, sub, table, page):
     title(16,"Parameters: weather, prices and input files")
     p("Prefix: forecast. CSV paths replace only the corresponding synthetic input. null means use the fallback. All input types remain explicitly labeled in hourly_inputs.csv.")
     table(scalar_rows(FORECAST),[145,105,257])
-    p("Past-price forecasting requires earlier observations for every clock hour. Never insert future actual data into a weather/demand file and call it an available forecast. The code cannot infer that provenance from column names alone.")
+    p("Past-price forecasting needs earlier observations for every clock hour. Do not put future measured data in a weather/demand file and call it a forecast.")
 
     page()
     title(17,"Parameters: offers and residential profile shape")

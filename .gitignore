@@ -6,3 +6,10 @@ __pycache__/
 htmlcov/
 .DS_Store
 docs/smart_grids_team_guide/images/
+
+# LaTeX build files
+docs/smart_grids_team_guide/*.aux
+docs/smart_grids_team_guide/*.fdb_latexmk
+docs/smart_grids_team_guide/*.fls
+docs/smart_grids_team_guide/*.log
+docs/smart_grids_team_guide/*.out

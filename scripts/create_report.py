@@ -32,8 +32,9 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     if comparison.get("community", {}).get("participant_unit") != "aggregated_building_meter":
         raise ValueError("This report describes the mixed-building model; run that experiment first.")
     summaries = {s["scenario"]: s for s in comparison["scenarios"]}
-    if set(summaries) != set("ABCDEF"):
+    if not set("ABCDEF") <= set(summaries):
         raise ValueError("Run all six scenarios with --include-priority before building this report.")
+    policy = [n for n in "GHIJK" if n in summaries]
     validation = json.loads(validation_path.read_text())
     validation_matches = validation["input_sha256"] == comparison["input_sha256"]
     m = {name:s["metrics"] for name,s in summaries.items()}
@@ -41,6 +42,7 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     community = comparison["community"]
     with (results / "charts/data/building_type_summary.csv").open() as handle:
         type_rows = list(csv.DictReader(handle))
+    type_counts = {r["building_type"]: int(r["count"]) for r in type_rows}
     navy, gold, gray = (colors.HexColor(c) for c in ("#19364F", "#B17922", "#4C5A65"))
     styles = getSampleStyleSheet()
     for name, font, size, leading, color, after in (
@@ -91,8 +93,8 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     p("SMART GRIDS / MIXED BUILDING COMMUNITY","Sub")
     p("Prosumer community simulator<br/>with heterogeneous buildings","Title")
     p(datetime.now(ZoneInfo("Europe/Rome")).strftime("%d %B %Y"),"Caption")
-    p(f'The design contains <b>{community["participant_count"]} aggregate building meters: {community["prosumer_count"]} prosumers and {community["consumer_count"]} consumers</b>. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are 75 small houses, 45 blocks, 15 supermarkets and 15 schools, including <b>{community["dwelling_count"]} residential dwelling units</b>. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.')
-    p("<b>For the team:</b> pages 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on pages 23-25 when that experiment is present.","Caption")
+    p(f'The design contains <b>{community["participant_count"]} aggregate building meters: {community["prosumer_count"]} prosumers and {community["consumer_count"]} consumers</b>. The original PV-equipped buildings remain unchanged; the added consumers have no PV or batteries. There are {type_counts["small_house"]} small houses, {type_counts["apartment_block"]} blocks, {type_counts["supermarket"]} supermarkets and {type_counts["school"]} schools, including <b>{community["home_count"]} homes</b>. Exactly 55 prosumers own batteries. Each block shares one roof and one meter.')
+    p("<b>For the team:</b> pages 11-22 explain every parameter. The demand-response comparison, hourly behavior, worked example and limitations are explained on pages 23-25 when that experiment is present. Page 26 compares the regulator policy variants G-K when they were run.","Caption")
     sub("Objective and experiment")
     p("Encourage neighborhood P2P electricity trading using price guidance and funded seller rewards, then evaluate storage priority and financial outcomes. Self-balancing, P2P, aggregator and grid settlement preserve energy and cash. Every completed internal trade appears in an hourly Proof-of-Work block.")
     table([["Scenario","Storage","Regulation","Charging priority"],
@@ -111,19 +113,38 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     page()
 
     title(3,"Building geometry and physical sizing")
-    p("Type ranges are configurable in <b>config/buildings.py</b> and the buildings section of JSON. The following are proposed engineering defaults, not professor requirements or calibrated building-stock data.")
-    table([["Type","Count","Single roof m2","Floors","Daily energy basis"],
-           ["Small house",75,"70-150","1-2","8-24 kWh per dwelling"],
-           ["Apartment block",45,"180-360","4-10","8-20 kWh per dwelling"],
-           ["Supermarket",15,"600-1400","1","0.5-1.1 kWh per m2"],
-           ["School",15,"700-1600","2-3","0.08-0.18 kWh per m2"]],[105,42,100,60,200])
+    p("Type ranges are configurable in <b>config/buildings.py</b> and the buildings section of JSON. Defaults describe a Turin neighbourhood, based on JRC PVGIS (sun), ISTAT (home size) and ARERA (household use) where data exist; the rest are engineering estimates, not a survey of real buildings.")
+    bt = config["buildings"]["types"]
+    def rng_text(spec, key, digits=0):
+        low, high = spec[key + "_min"], spec[key + "_max"]
+        fmt = (lambda v: f"{v:.{digits}f}") if digits else (lambda v: f"{v:g}")
+        return fmt(low) if low == high else f"{fmt(low)}-{fmt(high)}"
+    def roof_text(spec):
+        return f'{spec["roof_min_m2"]:g}-{spec["roof_max_m2"]:g}'
+    def basis_text(spec):
+        unit = "kWh per home" if spec["energy_basis"] == "per_home" else "kWh per m2"
+        return f'{spec["daily_energy_min"]:g}-{spec["daily_energy_max"]:g} {unit}'
+    order = ["small_house", "apartment_block", "supermarket", "school"]
+    table([["Type","Count","Single roof m2","Floors","Daily energy basis"]]+[
+        [LABELS[k], type_counts[k], roof_text(bt[k]), f'{bt[k]["floors_min"]}-{bt[k]["floors_max"]}' if bt[k]["floors_min"] != bt[k]["floors_max"] else str(bt[k]["floors_min"]), basis_text(bt[k])]
+        for k in order],[105,42,100,60,200])
     sub("One roof, regardless of height")
-    p("Total floor area = roof footprint x floors. Blocks contain 2-4 dwelling units per floor. Their demand basis scales with the total number of units. Commercial/school demand scales with total floor area. Small houses represent one dwelling even when they have two floors.")
-    p("Prosumers: PV kW = min(roof m2 x usable share x density, type PV limit). Consumers: PV = 0; battery = none.","Code")
-    p("Usable roof fraction is 35-65% and PV density is 0.20 kW/m2. Installed limits are 12 kW for houses, 100 kW for blocks, and 300 kW for supermarkets/schools. Floors and flats do not appear in the PV formula. Adding floors increases the demand basis without creating extra roof area.")
+    block = bt["apartment_block"]
+    p(f'Floor area = roof x floors. A <b>home</b> is one flat or house where one family lives. Block homes per floor = 80% of the footprint / home size ({block["home_area_m2_min"]:g}-{block["home_area_m2_max"]:g} m2; Italian city average 93.5 m2). Shop/school demand scales with floor area.')
+    p("Prosumers: PV kW = min(roof m2 x panel coverage x density, type PV limit). Consumers: PV = 0; battery = none.","Code")
+    density = config["buildings"]["pv_density_kw_m2"]
+    sizing = []
+    for k in order:
+        spec = bt[k]
+        low = spec["roof_min_m2"] * spec["roof_usable_fraction_min"] * density
+        high = spec["roof_max_m2"] * spec["roof_usable_fraction_max"] * density
+        sizing.append([LABELS[k], f'{spec["panel_tilt_deg"]:g} deg', f'{100*spec["roof_usable_fraction_min"]:g}-{100*spec["roof_usable_fraction_max"]:g}%',
+                       f"{low:.1f}-{high:.1f}", f'{spec["pv_limit_kw"]:g}', "yes" if high <= spec["pv_limit_kw"] + 1e-9 else "no"])
+    table([["Type","Panel tilt","Roof covered","Roof-based kW","Limit kW","Limit never binds"]]+sizing,[105,62,80,90,65,105])
+    p(f'Roof covered = share of the footprint under modules after setbacks, chimneys, lift rooms and row gaps; modules give {density:g} kW/m2. The roof sets the size; the limit is only a cap.')
     sub("Actual seeded attributes, averaged per building")
-    table([["Type","Battery owners","Dwellings","Mean roof m2","Mean PV kW"]]+[
-        [LABELS[r["building_type"]],r["battery_count"],r["dwelling_units"],f(float(r["mean_roof_m2"])),f(float(r["mean_pv_kw"]))]
+    table([["Type","Battery owners","Homes","Mean roof m2","Mean PV kW"]]+[
+        [LABELS[r["building_type"]],r["battery_count"],r["homes"],f(float(r["mean_roof_m2"])),f(float(r["mean_pv_kw"]))]
         for r in type_rows],[125,90,80,110,102])
     p("Battery capacity and charge/discharge power scale by type: 10 kWh / 3 kW for a house, 40 / 12 for a block, 100 / 30 for a supermarket and 60 / 18 for a school. Efficiency and SOC constraints remain identical. These scales can be overridden without changing ownership.")
     page()
@@ -134,7 +155,10 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     p("Houses and blocks have morning/evening peaks with building-specific timing and hourly variation. Supermarkets retain a base load overnight and add operating load during 07:00-22:00. Schools operate during 08:00-17:00 on weekdays. Weekend daily energy is 105% of weekday baseline for residential types, 90% for supermarkets and 15% for schools; school operating load is disabled on weekends.")
     p("Each building receives a seeded daily multiplier within +/-8%. Geometry stays fixed during the experiment; consumption changes by hour and date. A supplied aggregate demand CSV replaces this synthetic model. Weekends are modeled, but school terms, public holidays and weather-sensitive HVAC loads are not. Weekday school operation in June is an explicit simplification.")
     sub("PV and reference prices")
-    p("PV kWh = installed kW x irradiance / 1000 x performance factor x hourly duration, capped at installed capacity. Nighttime production is zero. The default illustrative day starts 15 June 2026 at UTC+02:00, using a daylight curve and seeded cloud factors. Reference prices use only pre-start hourly observations; the default 14-day price history is synthetic. Forecast adapters reject missing coverage, duplicate keys and non-finite inputs.")
+    fc = config["forecast"]
+    p(f'The area is Turin ({fc["latitude_deg"]:g} N, {fc["longitude_deg"]:g} E, {fc["site_altitude_m"]:g} m). Each hour the simulator computes the sun position and the clear-sky light reaching each panel, using its tilt (houses 20 deg flush on tiled roofs, blocks/schools 15 deg and supermarkets 10 deg on flat-roof racks, all facing south). A seeded cloud factor ({fc["cloud_factor_min"]:g}-{fc["cloud_factor_max"]:g}, mean {(fc["cloud_factor_min"]+fc["cloud_factor_max"])/2:.3f}) reproduces the PVGIS ratio between an average and a clear June day in Turin (6.54 / 7.90 = 0.83).')
+    p("PV kWh = installed kW x panel irradiance / 1000 x performance factor x hourly duration, capped at installed capacity. Nighttime production is zero.","Code")
+    p(f'Performance factor {fc["performance_factor"]:g} = PVGIS June output / panel irradiance for Turin (4.87 / 6.54 kWh), covering cable/inverter losses (14%), hot-module losses and reflection. Expected June yield is about 4.9 kWh per installed kW per day, matching PVGIS. The optimum fixed tilt in Turin is 40 deg (1,368 kWh/kW per year), but in June flatter panels yield slightly more, and flat-roof racks at 10-15 deg allow closer rows. The default day starts 15 June 2026 at UTC+02:00. Reference prices use only pre-start hourly observations; the default 14-day price history is synthetic. Forecast adapters reject missing coverage, duplicate keys and non-finite inputs.')
     page()
 
     title(5,"Trading, regulation and transaction record")
@@ -143,7 +167,7 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
     sub("Guidance and funded rewards")
     table([["Opening regulator funds","P2P seller reward"],["Below EUR 1","EUR 0/kWh"],
            ["EUR 1 to below EUR 5","EUR 0.01/kWh"],["EUR 5 or above","EUR 0.02/kWh"]],[280,227])
-    p("The fund starts at EUR 0. Guidance blends original offers toward 1.04 x reference for bids and 0.96 x reference for asks, with strength 0.65. Only P2P receives guidance. A full reward reservation is required before a discounted quote. Adjusted ask = guided ask - 50% of reward rate. A successful seller receives trading payment plus full reward. Unaffordable quotes retry original offers without reward; rejected reservations are released.")
+    p("The fund starts at EUR 0. Guidance blends original offers toward 1.04 x reference for bids and 0.96 x reference for asks, with strength 0.65. Only P2P receives guidance. A full reward reservation is required before a discounted quote. Adjusted ask = guided ask - 50% of reward rate. A successful seller receives trading payment plus full reward. Unaffordable quotes keep the guided prices but carry no reward; rejected reservations are released.")
     p("Regulated grid purchases and sales each pay EUR 0.01/kWh, collected after trading. New fees become available in the following hour. Opening funds fix that hour's reward tier. There are no internal fees or aggregator/grid seller rewards.")
     sub("Blockchain and conservation")
     p("Ten simulated miners take turns testing SHA-256 nonces inside one process. One block per hour records all completed P2P and aggregator trades exactly once. Each hash begins 000 and references its predecessor; the first references 64 zeros. Validation checks hashes, linkage, transaction contents and journal coverage. The blockchain does not choose energy quantities or prices.")
@@ -182,18 +206,18 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
         [n,f(m[n]["regulator_fee_revenue_eur"]),f(m[n]["regulator_reward_expenditure_eur"]),f(m[n]["regulator_remaining_funds_eur"])] for n in "BDF"],[65,140,140,162])
     p("Closing fund = opening fund + grid fees - eligible P2P rewards. Every movement has a payer and payee. Reservations, releases, reward payments and hourly fund histories are exported. The ledger reconciles with the regulator's fund after each hour.")
     p("Retained fees are a transfer from building meters to the regulator, not money destruction or an external resource cost. They can offset savings from better matching at the meter boundary. Accounts may pay for energy without a starting-cash restriction; only regulator guarantees are constrained by available funding.")
-    p("No end-of-day rebate is assumed. Changes to fees, reward tiers or guidance require a separately recorded configuration and rerun. The mixed-building outcomes cannot be attributed solely to regulation by comparing them with the old, physically different residential community.")
+    p("B, D and F keep the fund at the end of the day; scenario J tests an end-of-day refund (page 26). Changes to fees, reward tiers or guidance require a separately recorded configuration and rerun. The mixed-building outcomes cannot be attributed solely to regulation by comparing them with the old, physically different residential community.")
     page()
 
     title(10,"Verification, reproduction and limits")
     sub("Recorded checks")
     if validation_matches:
-        p(f'The recorded full suite passed <b>{validation["automated_tests"]["passed"]} tests</b> on {escape(validation["recorded_on"])}. All six saved scenarios passed independent energy, cash and blockchain verification. Tests include unchanged battery ownership, type allocation, one-roof sizing, increased block demand with floors, school weekend reduction, commercial night load, losses/SOC, rewards and forecast cutoff.')
+        p(f'The recorded full suite passed <b>{validation["automated_tests"]["passed"]} tests</b> on {escape(validation["recorded_on"])}. All {len(summaries)} saved scenarios passed independent energy, cash and blockchain verification. Tests include unchanged battery ownership, type allocation, one-roof sizing, increased block demand with floors, school weekend reduction, commercial night load, losses/SOC, rewards and forecast cutoff.')
     else:
         p("The validation record does not match these inputs. Rerun tests and exported-result verification before relying on this new report.")
     p(f'Maximum absolute community energy residual: {max(abs(v["energy_reconciliation_error_kwh"]) for v in m.values()):.3g} kWh. Maximum financial residual: {max(abs(v["financial_reconciliation_error_eur"]) for v in m.values()):.3g} EUR. Numerical residuals are checked at explicit tolerances.')
     sub("Run and rebuild")
-    p("python -m pip install -r requirements.txt<br/>python -m pytest -q<br/>python main.py --include-priority<br/>python scripts/verify_results.py<br/>python -m pip install -r requirements-report.txt<br/>python scripts/create_report.py","Code")
+    p("python -m pip install -r requirements.txt<br/>python -m pytest -q<br/>python main.py --include-priority --include-policy<br/>python scripts/verify_results.py<br/>python -m pip install -r requirements-report.txt<br/>python scripts/create_report.py","Code")
     p("The simulator requires Python 3.11+ and was exercised on Python 3.14.7. PDF dependencies are optional. Use --config for JSON overrides, --output for separate experiment folders and --no-charts to skip visual exports. The historical residential model remains available through config/residential_baseline.json.")
     sub("Scope and evidence")
     p("The model has no physical feeder limits, voltage/power-flow equations, land parcels, weather-sensitive HVAC, holiday/term calendar, battery aging or investment analysis. Hourly energy settlement and aggregate building meters are simplifying choices. A single synthetic day supports a demonstration, not a statistical or real-world performance claim. Presentations and ZIP packaging remain deferred.")
@@ -218,9 +242,9 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
         table([["Scenario", "P2P fixed kWh", "P2P shifted kWh", "Change kWh"]]+[
             [n,f(pairs[n,"Fixed demand"]["p2p_energy_kwh"]),f(pairs[n,"Shifted demand"]["p2p_energy_kwh"]),
              f(pairs[n,"Shifted demand"]["p2p_energy_kwh"]-pairs[n,"Fixed demand"]["p2p_energy_kwh"])]
-            for n in summaries],[65,145,145,152])
-        decreases = sum(pairs[n,"Shifted demand"]["p2p_energy_kwh"] < pairs[n,"Fixed demand"]["p2p_energy_kwh"]-1e-9 for n in summaries)
-        p(f"P2P volume falls in {decreases} of {len(summaries)} recorded pairs. Direct own-PV use rises by the shifted energy. Better self-consumption and maximum P2P are different objectives. Run: python main.py --include-priority --compare-demand-response", "Caption")
+            for n in "ABCDEF"],[65,145,145,152])
+        decreases = sum(pairs[n,"Shifted demand"]["p2p_energy_kwh"] < pairs[n,"Fixed demand"]["p2p_energy_kwh"]-1e-9 for n in "ABCDEF")
+        p(f"P2P volume falls in {decreases} of 6 recorded A-F pairs (G-K pairs are in demand_response_comparison.csv). Direct own-PV use rises by the shifted energy. Better self-consumption and maximum P2P are different objectives. Run: python main.py --include-priority --compare-demand-response", "Caption")
         expected_pages += 1
         page()
         title(24,"Team guide: what changes in daily behavior")
@@ -251,6 +275,29 @@ def create_report(results: Path, output: Path, validation_path: Path, output_for
         sub("How to interpret and audit the result")
         p("Higher direct self-consumption can leave less PV for neighbors, reducing P2P kWh even when household imports fall. Always compare absolute P2P volume, its changing surplus denominator, direct own-PV use, grid flows and both cost boundaries. Do not compare a shifted regulated run with an unshifted unregulated run and attribute both changes to regulation.")
         p("Fixed outputs remain in results/; shifted outputs are in results/demand_response/. The paired CSV/JSON is demand_response_comparison. Inspect inputs/demand_shifts.csv and hourly_inputs_baseline.csv in the shifted folder to trace each transfer. The model uses supplied forecasts, not future actual measurements; incomplete calendar days remain unchanged.")
+        expected_pages += 1
+
+    if policy:
+        page()
+        title(26,"Regulator policy variants G-K")
+        p("Each variant is scenario B (55 batteries, regulated, self-consumption first) with one regulator rule changed, on identical inputs. In B, the EUR 0.01/kWh fee applies to all 18,000+ grid kWh, day and night, while the EUR 0.02/kWh reward only reaches the roughly 2,350 P2P kWh, so most fees stay in the fund.")
+        b = m["B"]
+        table([["Scenario","Change from B","P2P kWh","Fees","Rewards","Refunds","Fund left","Meter cost vs B"]]+[
+            [n, {"B":"reference","G":"fee 0.0025","H":"reward 0.075","I":"fee on missed local","J":"day-end refund","K":"reward sized to fund"}[n],
+             f'{m[n]["p2p_energy_kwh"]:,.0f}', f'{m[n]["regulator_fee_revenue_eur"]:.2f}', f'{m[n]["regulator_reward_expenditure_eur"]:.2f}',
+             f'{m[n]["regulator_refund_eur"]:.2f}', f'{m[n]["regulator_remaining_funds_eur"]:.2f}',
+             f'{m[n]["household_net_cost_eur"]-b["household_net_cost_eur"]:+.2f}'] for n in ["B", *policy]],[52,98,52,48,52,52,52,101])
+        p("Amounts in EUR. <b>G</b> lowers the fee to EUR 0.0025/kWh and <b>H</b> raises the reward to EUR 0.075/kWh (0.0375 lower tier); both values would balance fees and rewards on this day. <b>I</b> charges the fee only on grid energy that a neighbour in the same group could have traded in the same hour: min(group imports, group exports), shared pro rata. <b>J</b> returns the whole fund at the end of the day to meters in proportion to the P2P kWh each bought or sold. <b>K</b> sets each hour's reward rate to fund / possible P2P energy (capped at EUR 0.10/kWh).")
+        if {"G","H","K"} <= set(policy):
+            def vs_b(n):
+                d = m[n]["p2p_energy_kwh"] - b["p2p_energy_kwh"]
+                return f'{f(m[n]["p2p_energy_kwh"])} kWh ({d:+,.0f} vs B)'
+            best = min(["B", *policy], key=lambda n: m[n]["community_including_regulator_net_cost_eur"])
+            p(f'<b>What drives P2P is money available when the sun shines.</b> A reward lowers the seller ask by half its rate, so more bids meet asks. G collects a quarter of B\'s fees, so its fund runs empty in the afternoon and those trades lose the discount: G trades {vs_b("G")}. H pays a larger discount while its fund lasts: {vs_b("H")}. K spends the fund evenly over the day: {vs_b("K")}. Lowest meters-plus-regulator cost: {best} (EUR {m[best]["community_including_regulator_net_cost_eur"]:.2f}). When a reward cannot be funded, the trade keeps the guided prices and only loses the reward.')
+        if {"I","J"} <= set(policy):
+            missed = m["I"]["regulator_fee_revenue_eur"] / summaries["I"]["configuration"]["regulator"]["grid_fee_eur_kwh"] / 2
+            p(f'Only {missed:,.0f} kWh per side (export and import) was a missed local trade, so I raises little money and P2P falls. J trades exactly like B (the refund comes after trading) but returns EUR {m["J"]["regulator_refund_eur"]:.2f} to traders, so meter cost falls by the same amount.')
+        p("One synthetic day; results depend on the fund rules and are not a general policy claim. Configure the same rules for any run with regulator.fee_scope, reward_mode, max_reward_eur_kwh and refund_leftover.","Caption")
         expected_pages += 1
 
     if latex:

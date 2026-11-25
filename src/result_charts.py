@@ -48,12 +48,12 @@ def prepare_chart_data(results: list[SimulationResult]) -> dict[str, list[dict]]
             "hour": t.hour, "market": t.market, "quantity_kwh": t.quantity_kwh,
             "price_eur_kwh": t.price_eur_kwh,
         } for t in result.transactions if t.market in {"p2p", "aggregator"})
-    for baseline, regulated in (("A", "B"), ("C", "D"), ("E", "F")):
+    for baseline, regulated in (("A", "B"), ("C", "D"), ("E", "F"), *(("B", n) for n in "GHIJK")):
         if baseline not in metrics or regulated not in metrics:
             continue
         base, reg = metrics[baseline], metrics[regulated]
         data["regulation_effects"].append({
-            "comparison": f"{regulated} minus {baseline}",
+            "comparison": f"{regulated} vs {baseline}",
             "p2p_change_kwh": reg["p2p_energy_kwh"] - base["p2p_energy_kwh"],
             "household_cost_change_eur": reg["household_net_cost_eur"] - base["household_net_cost_eur"],
             "community_cost_change_eur": reg["community_including_regulator_net_cost_eur"] - base["community_including_regulator_net_cost_eur"],
@@ -123,7 +123,7 @@ def generate_additional_charts(results: list[SimulationResult], directory: Path,
         labels = [row["comparison"] for row in rows]
         fig, axes = plt.subplots(1, 2, figsize=(12, 5))
         bars = axes[0].bar(labels, [r["p2p_change_kwh"] for r in rows], color="#315A86")
-        axes[0].bar_label(bars, fmt="%+.2f", padding=4)
+        axes[0].bar_label(bars, fmt="%+.0f", padding=3, fontsize=8)
         axes[0].set(title="Regulation: change in P2P volume", ylabel="kWh difference")
         positions = list(range(len(rows)))
         for offset, key, label, color in (
@@ -131,12 +131,13 @@ def generate_additional_charts(results: list[SimulationResult], directory: Path,
             (.18, "community_cost_change_eur", "Meters + regulator", "#BD7F23"),
         ):
             bars = axes[1].bar([p + offset for p in positions], [r[key] for r in rows], width=.35, label=label, color=color)
-            axes[1].bar_label(bars, fmt="%+.2f", padding=4, fontsize=9)
+            axes[1].bar_label(bars, fmt="%+.0f", padding=3, fontsize=7)
         axes[1].set(xticks=positions, xticklabels=labels, title="Regulation: change in net cost", ylabel="EUR difference")
         axes[1].legend(frameon=False, fontsize=9)
         for axis in axes:
             axis.axhline(0, color="#555555", linewidth=.8)
             axis.margins(y=.25)
+            axis.tick_params(axis="x", labelrotation=45 if len(rows) > 4 else 0, labelsize=9)
         save(fig, "regulation_effects")
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))

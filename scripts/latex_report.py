@@ -54,7 +54,9 @@ class LatexReport:
             return
         value=report_text(text)
         if text.startswith("Input SHA-256: "):
-            value="Input SHA-256: \\texttt{\\seqsplit{"+latex_escape(text.split(": ",1)[1])+"}}"
+            digest=latex_escape(text.split(": ",1)[1])
+            # Break the long hash every 8 characters without needing the seqsplit package.
+            value="Input SHA-256: \\texttt{"+"\\allowbreak{}".join(digest[i:i+8] for i in range(0,len(digest),8))+"}"
         if style=="Title":
             value="{\\LARGE\\bfseries "+value+"\\par}\\medskip"
         elif style=="Heading":
@@ -101,7 +103,7 @@ class LatexReport:
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
 \usepackage[margin=20mm]{geometry}
-\usepackage{graphicx,longtable,array,booktabs,ragged2e,seqsplit,listings}
+\usepackage{graphicx,longtable,array,booktabs,ragged2e,listings}
 \usepackage{xcolor,hyperref}
 \definecolor{navy}{HTML}{19364F}
 \hypersetup{colorlinks=true,linkcolor=navy,urlcolor=navy,pdftitle={Smart Grids Team Guide}}

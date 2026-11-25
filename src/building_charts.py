@@ -27,7 +27,7 @@ def building_chart_data(households, inputs):
                       "prosumer_count": sum(h.participant_role == "prosumer" for h in members),
                       "consumer_count": sum(h.participant_role == "consumer" for h in members),
                       "battery_count": sum(h.has_battery for h in members),
-                      "dwelling_units": sum(h.dwelling_units for h in members),
+                      "homes": sum(h.homes for h in members),
                       "mean_roof_m2": sum(h.roof_area_m2 for h in members) / len(members),
                       "mean_floors": sum(h.floors for h in members) / len(members),
                       "mean_pv_kw": sum(h.pv_capacity_kw for h in members) / len(members),

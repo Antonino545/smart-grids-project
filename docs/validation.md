@@ -54,7 +54,7 @@ validation history rather than the current population.
 
 On 21 October 2026 the accepted model changed from 100 individual households to
 100 aggregate building meters: 50 small houses, 30 blocks, 10 supermarkets and
-10 schools. There are 55 battery owners and 619 residential dwelling units in
+10 schools. There are 55 battery owners and 619 homes (flats and houses) in
 the seeded realization. A block has one roof and one meter aggregating its flats.
 
 The full suite passed **65 tests in 14.93 seconds**. Tests verify the type mix,
